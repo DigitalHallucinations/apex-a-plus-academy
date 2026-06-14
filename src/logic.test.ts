@@ -2,9 +2,10 @@ import { describe, expect, it } from "vitest";
 import {
   pct, formatTime, shuffle, dateKey, questionsToday, applyStudyActivity, recordAnswer,
   scheduleCard, isCardDue, domainMastery, masteredCount, objectiveStats, migrateState,
-  buildNotifications, initialState, SCHEMA_VERSION
+  buildNotifications, initialState, SCHEMA_VERSION,
+  buildWeightedQuestionSet, buildMockExam, gradePbq, scoreMock, type MockItem
 } from "./logic";
-import type { AnsweredStat, LearnerState, Question } from "./types";
+import type { AnsweredStat, Domain, LearnerState, Pbq, Question } from "./types";
 
 const baseState = (over: Partial<LearnerState> = {}): LearnerState => ({ ...initialState, ...over });
 
@@ -160,6 +161,86 @@ describe("migrateState", () => {
     expect(s.answered).toEqual({});
     expect(s.attempts).toEqual([]);
     expect(s.bookmarks).toEqual(["ok"]);
+  });
+});
+
+describe("mock exam: weighted selection", () => {
+  const domains: Domain[] = [
+    { id: "net", exam: "220-1201", name: "Networking", weight: 75, color: "#000", description: "", topics: [] },
+    { id: "hw", exam: "220-1201", name: "Hardware", weight: 25, color: "#000", description: "", topics: [] }
+  ];
+  const questions: Question[] = [
+    ...Array.from({ length: 8 }, (_, i) => q(`n${i}`, "net", "obj")),
+    ...Array.from({ length: 4 }, (_, i) => q(`h${i}`, "hw", "obj"))
+  ];
+  it("distributes questions in proportion to domain weight", () => {
+    const set = buildWeightedQuestionSet(questions, domains, "220-1201", 4);
+    expect(set).toHaveLength(4);
+    expect(set.filter(x => x.domain === "net")).toHaveLength(3); // 75%
+    expect(set.filter(x => x.domain === "hw")).toHaveLength(1); // 25%
+  });
+  it("never exceeds the available pool", () => {
+    expect(buildWeightedQuestionSet(questions, domains, "220-1201", 100)).toHaveLength(12);
+  });
+  it("returns unique questions", () => {
+    const set = buildWeightedQuestionSet(questions, domains, "220-1201", 10);
+    expect(new Set(set.map(x => x.id)).size).toBe(set.length);
+  });
+});
+
+describe("PBQ grading (partial credit)", () => {
+  const matching: Pbq = {
+    id: "m", kind: "matching", exam: "220-1201", domain: "net", difficulty: "Foundation", prompt: "", objective: "", explanation: "",
+    items: [{ id: "a", text: "A" }, { id: "b", text: "B" }, { id: "c", text: "C" }, { id: "d", text: "D" }],
+    targets: [{ id: "1", label: "1" }, { id: "2", label: "2" }, { id: "3", label: "3" }, { id: "4", label: "4" }],
+    answer: { a: "1", b: "2", c: "3", d: "4" }
+  };
+  const ordering: Pbq = {
+    id: "o", kind: "ordering", exam: "220-1201", domain: "net", difficulty: "Foundation", prompt: "", objective: "", explanation: "",
+    steps: [{ id: "s1", text: "1" }, { id: "s2", text: "2" }, { id: "s3", text: "3" }, { id: "s4", text: "4" }],
+    answer: ["s1", "s2", "s3", "s4"]
+  };
+  it("scores matching by fraction correct", () => {
+    expect(gradePbq(matching, { a: "1", b: "2", c: "3", d: "4" })).toBe(1);
+    expect(gradePbq(matching, { a: "1", b: "2", c: "9", d: "9" })).toBe(0.5);
+    expect(gradePbq(matching, {})).toBe(0);
+  });
+  it("scores ordering by correct positions", () => {
+    expect(gradePbq(ordering, ["s1", "s2", "s3", "s4"])).toBe(1);
+    expect(gradePbq(ordering, ["s2", "s1", "s3", "s4"])).toBe(0.5); // last two correct
+    expect(gradePbq(ordering, [])).toBe(0);
+  });
+});
+
+describe("mock exam: scoring and assembly", () => {
+  const pbq: Pbq = {
+    id: "p1", kind: "ordering", exam: "220-1201", domain: "net", difficulty: "Foundation", prompt: "", objective: "", explanation: "",
+    steps: [{ id: "s1", text: "1" }, { id: "s2", text: "2" }], answer: ["s1", "s2"]
+  };
+  const items: MockItem[] = [
+    { type: "mcq", question: q("q1", "net", "obj") },
+    { type: "mcq", question: q("q2", "hw", "obj") },
+    { type: "pbq", pbq }
+  ];
+  it("blends MCQ (1/0) and PBQ (partial) scores and applies the pass line", () => {
+    const g = scoreMock(items, { q1: 0, q2: 1 }, { p1: ["s1", "s2"] }); // q1 correct, q2 wrong, pbq full
+    expect(g.total).toBe(3);
+    expect(g.earned).toBe(2); // 1 + 0 + 1
+    expect(g.pct).toBe(67);
+    expect(g.passed).toBe(false); // below 75%
+    expect(g.domainScores.net.total).toBe(2);
+  });
+  it("passes at or above the threshold", () => {
+    const g = scoreMock(items, { q1: 0, q2: 0 }, { p1: ["s1", "s2"] }); // both MCQ correct + full PBQ = 3/3
+    expect(g.passed).toBe(true);
+    expect(g.pct).toBe(100);
+  });
+  it("places PBQs before MCQs in a built exam", () => {
+    const domains: Domain[] = [{ id: "net", exam: "220-1201", name: "Networking", weight: 100, color: "#000", description: "", topics: [] }];
+    const qs = Array.from({ length: 5 }, (_, i) => q(`q${i}`, "net", "obj"));
+    const exam = buildMockExam(qs, [pbq], domains, "220-1201", 3, 1);
+    expect(exam[0].type).toBe("pbq");
+    expect(exam.filter(i => i.type === "mcq")).toHaveLength(3);
   });
 });
 

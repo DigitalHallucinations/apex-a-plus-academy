@@ -2,24 +2,26 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
 import {
   Activity, BarChart3, Bell, BookOpen, Bookmark, Brain, CalendarDays, Check,
-  ChevronLeft, ChevronRight, CircleHelp, Clock3, Download, Flame, Gauge, GraduationCap, Home,
+  ChevronDown, ChevronLeft, ChevronRight, ChevronUp, CircleHelp, ClipboardCheck, Clock3, Download, Flame, Gauge, GraduationCap, Home,
   Layers3, Menu, Moon, NotebookPen, Play, Plus, RotateCcw, Search, Settings, ShieldCheck,
   Sparkles, Sun, Target, Trash2, Trophy, Upload, X, Zap
 } from "lucide-react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { loadContent, bundledContent, type ContentBundle } from "./content";
 import { ContentProvider, useContent } from "./ContentContext";
-import type { Attempt, ExamCode, LearnerState, Question, View } from "./types";
+import type { Attempt, ExamCode, LearnerState, Pbq, Question, View } from "./types";
 import {
   initialState, pct, shuffle, formatTime, dateKey, questionsToday, applyStudyActivity,
   recordAnswer, scheduleCard, isCardDue, domainMastery, masteredCount, objectiveStats, migrateState,
-  buildNotifications
+  buildNotifications, buildMockExam, scoreMock, gradePbq, MOCK_PASS, MOCK_DEFAULT_QUESTIONS,
+  MOCK_DEFAULT_MINUTES, type MockItem
 } from "./logic";
 
 const nav: { id: View; label: string; icon: typeof Home }[] = [
   { id: "dashboard", label: "Command Center", icon: Home },
   { id: "learn", label: "Learning Paths", icon: BookOpen },
   { id: "practice", label: "Practice Lab", icon: Target },
+  { id: "mock", label: "Mock Exam", icon: ClipboardCheck },
   { id: "flashcards", label: "Recall Deck", icon: Layers3 },
   { id: "analytics", label: "Performance", icon: BarChart3 },
   { id: "notes", label: "Notes & Saves", icon: NotebookPen },
@@ -110,6 +112,7 @@ export default function App() {
         {view === "dashboard" && <Dashboard state={state} setView={setView} />}
         {view === "learn" && <Learn state={state} setState={setState} setView={setView} />}
         {view === "practice" && <Practice state={state} setState={setState} />}
+        {view === "mock" && <MockExam state={state} setState={setState} />}
         {view === "flashcards" && <Flashcards state={state} setState={setState} />}
         {view === "analytics" && <Analytics state={state} />}
         {view === "notes" && <Notes state={state} setState={setState} />}
@@ -244,6 +247,135 @@ function Practice({ state, setState }: { state:LearnerState; setState:React.Disp
   return <div className="exam-shell"><div className="exam-top"><button className="ghost" onClick={()=>setMode("setup")}><X/> Exit</button><div><span>QUESTION {index+1} OF {session.length}</span><div className="exam-progress"><i style={{width:`${pct(index+1,session.length)}%`}}/></div></div><div className="timer"><Clock3/>{formatTime(elapsed)}</div></div><div className="question-card panel"><div className="question-meta"><span>{q.exam}</span><span>{domains.find(d=>d.id===q.domain)?.name}</span><span>{q.difficulty}</span><button className={state.bookmarks.includes(q.id)?"saved":""} aria-label={state.bookmarks.includes(q.id)?"Remove bookmark":"Bookmark this question"} aria-pressed={state.bookmarks.includes(q.id)} onClick={()=>setState(s=>({...s,bookmarks:s.bookmarks.includes(q.id)?s.bookmarks.filter(x=>x!==q.id):[...s.bookmarks,q.id]}))}><Bookmark/></button></div><h2>{q.prompt}</h2><div className="answers">{(order[q.id]||q.options.map((_,i)=>i)).map((oi,k)=>{const opt=q.options[oi];const cls=revealed?(oi===q.answer?"correct":selected===oi?"wrong":""):selected===oi?"selected":"";return <button key={oi} className={cls} disabled={revealed} aria-label={`Option ${String.fromCharCode(65+k)}: ${opt}`} onClick={()=>setAnswers(a=>({...a,[q.id]:oi}))}><span>{String.fromCharCode(65+k)}</span><b>{opt}</b>{revealed&&oi===q.answer&&<Check/>}{revealed&&selected===oi&&oi!==q.answer&&<X/>}</button>})}</div>{revealed&&<div className="explanation"><Sparkles/><div><b>{selected===q.answer?"Exactly right":"Key takeaway"}</b><p>{q.explanation}</p><small>OBJECTIVE · {q.objective}</small></div></div>}<div className="question-actions"><button className="ghost" disabled={index===0} onClick={()=>{setIndex(i=>i-1);setRevealed(false)}}><ChevronLeft/> Previous</button>{!revealed?<button className="primary" disabled={selected===undefined} onClick={()=>setRevealed(true)}>Check answer</button>:<button className="primary" onClick={()=>{if(isLast)finish();else{setIndex(i=>i+1);setRevealed(false)}}}>{isLast?"Finish session":"Next question"}<ChevronRight/></button>}</div></div></div>;
 }
 
+type PbqResponse = Record<string, string> | string[];
+
+function PbqView({ pbq, response, onChange, revealed }: { pbq: Pbq; response: PbqResponse | undefined; onChange: (r: PbqResponse) => void; revealed?: boolean }) {
+  if (pbq.kind === "matching") {
+    const r = (response && !Array.isArray(response) ? response : {}) as Record<string, string>;
+    return <div className="pbq-matching">{pbq.items.map(item => {
+      const sel = r[item.id]; const correct = pbq.answer[item.id];
+      const cls = revealed ? (sel === correct ? "correct" : "wrong") : "";
+      return <div className={`pbq-row ${cls}`} key={item.id}>
+        <b>{item.text}</b>
+        <select value={sel || ""} disabled={revealed} aria-label={`Match ${item.text}`} onChange={e => onChange({ ...r, [item.id]: e.target.value })}>
+          <option value="" disabled>Choose…</option>
+          {pbq.targets.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
+        </select>
+        {revealed && sel !== correct && <small>Correct: {pbq.targets.find(t => t.id === correct)?.label}</small>}
+      </div>;
+    })}</div>;
+  }
+  const list = (Array.isArray(response) ? response : pbq.steps.map(s => s.id));
+  const move = (i: number, dir: number) => { const j = i + dir; if (j < 0 || j >= list.length) return; const next = [...list]; [next[i], next[j]] = [next[j], next[i]]; onChange(next); };
+  return <div className="pbq-ordering">{list.map((sid, i) => {
+    const step = pbq.steps.find(s => s.id === sid);
+    const cls = revealed ? (pbq.answer[i] === sid ? "correct" : "wrong") : "";
+    return <div className={`pbq-step ${cls}`} key={sid}>
+      <span className="pbq-num">{i + 1}</span><b>{step?.text}</b>
+      {!revealed && <span className="pbq-move"><button aria-label={`Move "${step?.text}" up`} disabled={i === 0} onClick={() => move(i, -1)}><ChevronUp/></button><button aria-label={`Move "${step?.text}" down`} disabled={i === list.length - 1} onClick={() => move(i, 1)}><ChevronDown/></button></span>}
+    </div>;
+  })}{revealed && <small className="pbq-correct-order">Correct order: {pbq.answer.map(id => pbq.steps.find(s => s.id === id)?.text).join(" → ")}</small>}</div>;
+}
+
+function MockExam({ state, setState }: { state:LearnerState; setState:React.Dispatch<React.SetStateAction<LearnerState>> }) {
+  const { domains, questions, pbqs } = useContent();
+  const [phase, setPhase] = useState<"setup"|"active"|"results">("setup");
+  const [exam, setExam] = useState<ExamCode>("220-1201");
+  const [qCount, setQCount] = useState(MOCK_DEFAULT_QUESTIONS);
+  const [minutes, setMinutes] = useState(MOCK_DEFAULT_MINUTES);
+  const [items, setItems] = useState<MockItem[]>([]);
+  const [index, setIndex] = useState(0);
+  const [mcqAnswers, setMcqAnswers] = useState<Record<string,number>>({});
+  const [responses, setResponses] = useState<Record<string,PbqResponse>>({});
+  const [order, setOrder] = useState<Record<string,number[]>>({});
+  const [remaining, setRemaining] = useState(0);
+  const [grade, setGrade] = useState<ReturnType<typeof scoreMock>|null>(null);
+
+  const availableMcq = questions.filter(q=>q.exam===exam).length;
+  const pbqCount = Math.min(pbqs.filter(p=>p.exam===exam).length, 3);
+  const plannedQ = Math.min(qCount, availableMcq);
+
+  const finish = () => {
+    const g = scoreMock(items, mcqAnswers, responses);
+    const mcqItems = items.filter(it=>it.type==="mcq");
+    const attempt: Attempt = { id: crypto.randomUUID(), date: new Date().toISOString(), exam, score: Math.round(g.earned), total: g.total, durationSec: minutes*60 - remaining, domainScores: g.domainScores, kind: "mock", passed: g.passed };
+    setState(s=>{
+      const answered={...s.answered};
+      mcqItems.forEach(it=>{ if(it.type==="mcq") answered[it.question.id]=recordAnswer(answered[it.question.id], mcqAnswers[it.question.id]===it.question.answer); });
+      return {...s, answered, attempts:[...s.attempts, attempt], ...applyStudyActivity(s, mcqItems.length)};
+    });
+    setGrade(g); setPhase("results");
+  };
+  const finishRef = useRef(finish); finishRef.current = finish;
+
+  useEffect(()=>{ if(phase!=="active") return; const t=setInterval(()=>setRemaining(r=>Math.max(0,r-1)),1000); return ()=>clearInterval(t); },[phase]);
+  useEffect(()=>{ if(phase==="active" && remaining<=0) finishRef.current(); },[phase,remaining]);
+
+  const start = () => {
+    const built = buildMockExam(questions, pbqs, domains, exam, plannedQ, pbqCount);
+    const ord:Record<string,number[]>={}; const resp:Record<string,PbqResponse>={};
+    built.forEach(it=>{
+      if(it.type==="mcq") ord[it.question.id]=shuffle(it.question.options.map((_,i)=>i));
+      else if(it.pbq.kind==="ordering") resp[it.pbq.id]=shuffle(it.pbq.steps.map(s=>s.id));
+      else resp[it.pbq.id]={};
+    });
+    setItems(built); setOrder(ord); setResponses(resp); setMcqAnswers({}); setIndex(0); setRemaining(minutes*60); setGrade(null); setPhase("active");
+  };
+
+  const answeredCount = items.filter(it=> it.type==="mcq" ? mcqAnswers[it.question.id]!==undefined : true).length;
+
+  if(phase==="setup") return <>
+    <PageHead eyebrow="EXAM SIMULATION" title="Mock exam" subtitle="A full-length, timed, domain-weighted exam. No feedback until you submit — just like the real thing."/>
+    <div className="setup-grid"><div className="panel setup-main"><h3>Configure your exam</h3>
+      <label>Exam core</label><div className="option-grid">{(["220-1201","220-1202"] as const).map(x=><button key={x} className={exam===x?"selected":""} onClick={()=>setExam(x)}><span>{x==="220-1201"?<Activity/>:<ShieldCheck/>}</span><b>{x}</b><small>{x==="220-1201"?"Core 1":"Core 2"}</small></button>)}</div>
+      <label>Questions</label><div className="count-picker">{[30,60,90].map(x=><button key={x} className={qCount===x?"selected":""} onClick={()=>setQCount(x)}>{x}</button>)}</div>
+      <label>Time limit (minutes)</label><div className="count-picker">{[30,60,90].map(x=><button key={x} className={minutes===x?"selected":""} onClick={()=>setMinutes(x)}>{x}</button>)}</div>
+      <button className="primary wide launch" onClick={start}><ClipboardCheck/> Begin mock exam</button></div>
+      <div className="panel setup-side"><span className="pill purple"><Sparkles/> EXAM PREVIEW</span><h2>{plannedQ} questions</h2>
+        <div className="preview-row"><Clock3/><div><b>Time limit</b><small>{minutes} minutes, counts down</small></div></div>
+        <div className="preview-row"><ClipboardCheck/><div><b>Performance-based</b><small>{pbqCount ? `${pbqCount} PBQ${pbqCount>1?"s":""} first, then multiple choice` : "Multiple choice"}</small></div></div>
+        <div className="preview-row"><Target/><div><b>Domain-weighted</b><small>Questions mirror exam objective weights</small></div></div>
+        <div className="preview-row"><Gauge/><div><b>Passing score</b><small>{Math.round(MOCK_PASS*100)}% to pass</small></div></div>
+      </div></div>
+  </>;
+
+  if(phase==="results" && grade) {
+    const rows = Object.entries(grade.domainScores).map(([id,v])=>({ name: domains.find(d=>d.id===id)?.name.split(" ")[0]||id, score: pct(Math.round(v.correct), v.total), color: domains.find(d=>d.id===id)?.color||"#55a8ff" }));
+    return <>
+      <PageHead eyebrow="EXAM COMPLETE" title={grade.passed?"Passed":"Not yet"} subtitle="A full breakdown of your performance, domain by domain."/>
+      <div className="results panel"><div className={`result-ring ${grade.passed?"pass":""}`}><b>{grade.pct}%</b><span>{Math.round(grade.earned)} / {grade.total}</span></div>
+        <h2>{grade.passed?"You cleared the passing bar.":`${Math.round(MOCK_PASS*100)}% needed to pass.`}</h2>
+        <p>{grade.passed?"Keep this consistency and you're exam ready.":"Review the misses below and drill your weakest domains."}</p>
+        <div className="result-actions"><button className="primary" onClick={()=>setPhase("setup")}><RotateCcw/> New exam</button></div>
+      </div>
+      <div className="panel chart-panel"><div className="panel-title"><div><span>DOMAIN BREAKDOWN</span><h3>Score by domain</h3></div></div><ResponsiveContainer width="100%" height={Math.max(160, rows.length*42)}><BarChart data={rows} layout="vertical" margin={{left:15}}><CartesianGrid strokeDasharray="3 3" stroke="var(--line)"/><XAxis type="number" domain={[0,100]} stroke="var(--muted)"/><YAxis dataKey="name" type="category" width={80} stroke="var(--muted)"/><Tooltip contentStyle={{background:"var(--panel)",border:"1px solid var(--line)"}}/><Bar dataKey="score" radius={[0,6,6,0]}>{rows.map(r=><Cell key={r.name} fill={r.color}/>)}</Bar></BarChart></ResponsiveContainer></div>
+      <div className="review-list">{items.map((it,i)=>{
+        if(it.type==="mcq"){ const q=it.question; const ok=mcqAnswers[q.id]===q.answer; return <div className={`panel review ${ok?"correct":"wrong"}`} key={q.id}><span>{ok?<Check/>:<X/>}</span><div><small>QUESTION {i+1} · {q.objective}</small><b>{q.prompt}</b><p><strong>Your answer:</strong> {q.options[mcqAnswers[q.id]]||"Unanswered"}</p>{!ok&&<p><strong>Correct:</strong> {q.options[q.answer]}</p>}<em>{q.explanation}</em></div></div>; }
+        const p=it.pbq; const frac=gradePbq(p, responses[p.id]); const ok=frac===1; return <div className={`panel review ${ok?"correct":"wrong"}`} key={p.id}><span>{ok?<Check/>:<X/>}</span><div><small>PBQ {i+1} · {p.objective} · {Math.round(frac*100)}% credit</small><b>{p.prompt}</b><PbqView pbq={p} response={responses[p.id]} onChange={()=>{}} revealed/><em>{p.explanation}</em></div></div>;
+      })}</div>
+    </>;
+  }
+
+  const item = items[index]; const isLast = index===items.length-1;
+  return <div className="exam-shell"><div className="exam-top">
+    <button className="ghost" onClick={()=>{ if(window.confirm("End the exam now? It will be scored as-is.")) finish(); }}><X/> End</button>
+    <div><span>{item.type==="pbq"?"PERFORMANCE-BASED":"QUESTION"} {index+1} OF {items.length} · {answeredCount} answered</span><div className="exam-progress"><i style={{width:`${pct(index+1,items.length)}%`}}/></div></div>
+    <div className={`timer ${remaining<=60?"low":""}`}><Clock3/>{formatTime(remaining)}</div>
+  </div>
+  <div className="question-card panel">
+    {item.type==="mcq" ? (()=>{ const q=item.question; const selected=mcqAnswers[q.id]; return <>
+      <div className="question-meta"><span>{q.exam}</span><span>{domains.find(d=>d.id===q.domain)?.name}</span><span>{q.difficulty}</span></div>
+      <h2>{q.prompt}</h2>
+      <div className="answers">{(order[q.id]||q.options.map((_,i)=>i)).map((oi,k)=>{const cls=selected===oi?"selected":"";return <button key={oi} className={cls} aria-label={`Option ${String.fromCharCode(65+k)}: ${q.options[oi]}`} onClick={()=>setMcqAnswers(a=>({...a,[q.id]:oi}))}><span>{String.fromCharCode(65+k)}</span><b>{q.options[oi]}</b></button>})}</div>
+    </>; })() : <>
+      <div className="question-meta"><span>{item.pbq.exam}</span><span>{domains.find(d=>d.id===item.pbq.domain)?.name}</span><span className="pbq-tag">PBQ</span></div>
+      <h2>{item.pbq.prompt}</h2>
+      <PbqView pbq={item.pbq} response={responses[item.pbq.id]} onChange={r=>setResponses(prev=>({...prev,[item.pbq.id]:r}))}/>
+    </>}
+    <div className="question-actions"><button className="ghost" disabled={index===0} onClick={()=>setIndex(i=>i-1)}><ChevronLeft/> Previous</button>{isLast?<button className="primary" onClick={()=>{ if(window.confirm("Submit the exam for scoring?")) finish(); }}>Submit exam</button>:<button className="primary" onClick={()=>setIndex(i=>i+1)}>Next<ChevronRight/></button>}</div>
+  </div></div>;
+}
+
 function Flashcards({ state, setState }: { state:LearnerState; setState:React.Dispatch<React.SetStateAction<LearnerState>> }) {
   const { domains, flashcards } = useContent();
   const due=flashcards.filter(f=>isCardDue(state.cardRatings[f.id]));
@@ -257,7 +389,7 @@ function Analytics({ state }: { state:LearnerState }) {
   const rows=domains.map(d=>({name:d.name.split(" ")[0],full:d.name,score:domainMastery(questions.filter(q=>q.domain===d.id),state.answered),color:d.color}));
   const objectives=objectiveStats(questions,state.answered).slice(0,6);
   const history=state.attempts.slice(-10).map((a,i)=>({name:`#${i+1}`,score:pct(a.score,a.total)}));
-  return <><PageHead eyebrow="INSIGHT ENGINE" title="Performance analytics" subtitle="See the pattern behind your scores and put study time where it matters."/><div className="analytics-grid"><div className="panel"><div className="panel-title"><div><span>DOMAIN MASTERY</span><h3>Coverage by domain</h3></div></div><ResponsiveContainer width="100%" height={310}><BarChart data={rows} layout="vertical" margin={{left:15}}><CartesianGrid strokeDasharray="3 3" stroke="var(--line)"/><XAxis type="number" domain={[0,100]} stroke="var(--muted)"/><YAxis dataKey="name" type="category" width={80} stroke="var(--muted)"/><Tooltip contentStyle={{background:"var(--panel)",border:"1px solid var(--line)"}}/><Bar dataKey="score" radius={[0,6,6,0]}>{rows.map(r=><Cell key={r.full} fill={r.color}/>)}</Bar></BarChart></ResponsiveContainer></div><div className="panel readiness-card"><span>READINESS SIGNAL</span><div className="big-score">{state.attempts.length?Math.round(state.attempts.reduce((x,a)=>x+pct(a.score,a.total),0)/state.attempts.length):0}<sup>%</sup></div><p>Based on completed practice sessions. Aim for consistent 85%+ results across every domain.</p><div className="readiness-bands"><i/><i/><i/><i/></div><small>Building foundation · Developing · Ready · Strong</small></div></div><div className="panel chart-panel"><div className="panel-title"><div><span>RECENT SESSIONS</span><h3>Score trajectory</h3></div></div>{history.length?<ResponsiveContainer width="100%" height={260}><AreaChart data={history}><CartesianGrid strokeDasharray="3 3" stroke="var(--line)"/><XAxis dataKey="name" stroke="var(--muted)"/><YAxis domain={[0,100]} stroke="var(--muted)"/><Tooltip contentStyle={{background:"var(--panel)",border:"1px solid var(--line)"}}/><Area dataKey="score" stroke="#36d6b5" fill="#36d6b533" strokeWidth={3}/></AreaChart></ResponsiveContainer>:<Empty message="Your score history will appear after your first session."/>}</div><div className="history-list panel"><div className="panel-title"><div><span>WEAKEST OBJECTIVES</span><h3>Where to focus next</h3></div></div>{objectives.length?objectives.map(o=><div key={o.objective}><span className={o.mastery>=75?"pass":""}>{o.mastery}%</span><div><b>{o.objective}</b><small>{o.mastered}/{o.total} questions mastered</small></div><strong>{domains.find(d=>d.id===o.domain)?.name.split(" ")[0]}</strong></div>):<Empty message="Answer practice questions to surface your weakest objectives."/>}</div><div className="history-list panel"><div className="panel-title"><div><span>ATTEMPT LOG</span><h3>Recent activity</h3></div></div>{state.attempts.length?state.attempts.slice().reverse().map(a=><div key={a.id}><span className={pct(a.score,a.total)>=75?"pass":""}>{pct(a.score,a.total)}%</span><div><b>{a.exam} practice</b><small>{new Date(a.date).toLocaleDateString()} · {a.score}/{a.total} correct</small></div><strong>{formatTime(a.durationSec)}</strong></div>):<Empty message="No attempts recorded yet."/>}</div></>;
+  return <><PageHead eyebrow="INSIGHT ENGINE" title="Performance analytics" subtitle="See the pattern behind your scores and put study time where it matters."/><div className="analytics-grid"><div className="panel"><div className="panel-title"><div><span>DOMAIN MASTERY</span><h3>Coverage by domain</h3></div></div><ResponsiveContainer width="100%" height={310}><BarChart data={rows} layout="vertical" margin={{left:15}}><CartesianGrid strokeDasharray="3 3" stroke="var(--line)"/><XAxis type="number" domain={[0,100]} stroke="var(--muted)"/><YAxis dataKey="name" type="category" width={80} stroke="var(--muted)"/><Tooltip contentStyle={{background:"var(--panel)",border:"1px solid var(--line)"}}/><Bar dataKey="score" radius={[0,6,6,0]}>{rows.map(r=><Cell key={r.full} fill={r.color}/>)}</Bar></BarChart></ResponsiveContainer></div><div className="panel readiness-card"><span>READINESS SIGNAL</span><div className="big-score">{state.attempts.length?Math.round(state.attempts.reduce((x,a)=>x+pct(a.score,a.total),0)/state.attempts.length):0}<sup>%</sup></div><p>Based on completed practice sessions. Aim for consistent 85%+ results across every domain.</p><div className="readiness-bands"><i/><i/><i/><i/></div><small>Building foundation · Developing · Ready · Strong</small></div></div><div className="panel chart-panel"><div className="panel-title"><div><span>RECENT SESSIONS</span><h3>Score trajectory</h3></div></div>{history.length?<ResponsiveContainer width="100%" height={260}><AreaChart data={history}><CartesianGrid strokeDasharray="3 3" stroke="var(--line)"/><XAxis dataKey="name" stroke="var(--muted)"/><YAxis domain={[0,100]} stroke="var(--muted)"/><Tooltip contentStyle={{background:"var(--panel)",border:"1px solid var(--line)"}}/><Area dataKey="score" stroke="#36d6b5" fill="#36d6b533" strokeWidth={3}/></AreaChart></ResponsiveContainer>:<Empty message="Your score history will appear after your first session."/>}</div><div className="history-list panel"><div className="panel-title"><div><span>WEAKEST OBJECTIVES</span><h3>Where to focus next</h3></div></div>{objectives.length?objectives.map(o=><div key={o.objective}><span className={o.mastery>=75?"pass":""}>{o.mastery}%</span><div><b>{o.objective}</b><small>{o.mastered}/{o.total} questions mastered</small></div><strong>{domains.find(d=>d.id===o.domain)?.name.split(" ")[0]}</strong></div>):<Empty message="Answer practice questions to surface your weakest objectives."/>}</div><div className="history-list panel"><div className="panel-title"><div><span>ATTEMPT LOG</span><h3>Recent activity</h3></div></div>{state.attempts.length?state.attempts.slice().reverse().map(a=><div key={a.id}><span className={pct(a.score,a.total)>=75?"pass":""}>{pct(a.score,a.total)}%</span><div><b>{a.exam} {a.kind==="mock"?"mock exam":"practice"}{a.kind==="mock"?(a.passed?" · PASS":" · FAIL"):""}</b><small>{new Date(a.date).toLocaleDateString()} · {a.score}/{a.total} correct</small></div><strong>{formatTime(a.durationSec)}</strong></div>):<Empty message="No attempts recorded yet."/>}</div></>;
 }
 
 function Notes({ state, setState }: { state:LearnerState; setState:React.Dispatch<React.SetStateAction<LearnerState>> }) {
@@ -291,7 +423,7 @@ function Preferences({ state, update, setState }: { state:LearnerState; update:(
     if (isTauri()) { try { await invoke("reset_state"); } catch { /* file may not exist yet */ } }
     setState(migrateState({}));
   };
-  return <><PageHead eyebrow="MAKE IT YOURS" title="Preferences" subtitle="Tune your study target, daily rhythm, and workspace."/><div className="settings-grid"><div className="panel settings-card"><div className="setting-icon"><GraduationCap/></div><div><h3>Learner profile</h3><p>This name appears throughout your workspace.</p><label>Display name<input value={state.name} onChange={e=>update({name:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><CalendarDays/></div><div><h3>Exam target</h3><p>Set a date to add a countdown to your dashboard.</p><label>Target date<input type="date" value={state.targetDate} onChange={e=>update({targetDate:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Target/></div><div><h3>Daily mission</h3><p>Choose a realistic question goal you can sustain.</p><label>Questions per day<input type="number" min="5" max="100" value={state.dailyGoal} onChange={e=>update({dailyGoal:Number(e.target.value)})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Moon/></div><div><h3>Appearance</h3><p>Switch the complete interface theme.</p><div className="theme-toggle"><button className={state.theme==="dark"?"active":""} onClick={()=>update({theme:"dark"})}><Moon/> Dark</button><button className={state.theme==="light"?"active":""} onClick={()=>update({theme:"light"})}><Sun/> Light</button></div></div></div><div className="panel settings-card"><div className="setting-icon"><ShieldCheck/></div><div><h3>Data & backup</h3><p>Export your progress to a file, restore it on another machine, or start fresh. Everything stays on your computer.</p><div className="theme-toggle"><button onClick={()=>exportData(state)}><Download/> Export backup</button><button onClick={()=>fileRef.current?.click()}><Upload/> Import backup</button><button className="danger" onClick={onReset}><Trash2/> Reset progress</button></div><input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={onImport}/></div></div><div className="panel about-card"><div className="brand-mark"><Zap/></div><div><h3>Apex A+ Academy</h3><p>Version 1.0.0 · Offline-first desktop edition</p><small>Your progress is stored locally on this computer. This independent educational app is not affiliated with or endorsed by CompTIA.</small></div></div></div></>;
+  return <><PageHead eyebrow="MAKE IT YOURS" title="Preferences" subtitle="Tune your study target, daily rhythm, and workspace."/><div className="settings-grid"><div className="panel settings-card"><div className="setting-icon"><GraduationCap/></div><div><h3>Learner profile</h3><p>This name appears throughout your workspace.</p><label>Display name<input value={state.name} onChange={e=>update({name:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><CalendarDays/></div><div><h3>Exam target</h3><p>Set a date to add a countdown to your dashboard.</p><label>Target date<input type="date" value={state.targetDate} onChange={e=>update({targetDate:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Target/></div><div><h3>Daily mission</h3><p>Choose a realistic question goal you can sustain.</p><label>Questions per day<input type="number" min="5" max="100" value={state.dailyGoal} onChange={e=>update({dailyGoal:Number(e.target.value)})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Moon/></div><div><h3>Appearance</h3><p>Switch the complete interface theme.</p><div className="theme-toggle"><button className={state.theme==="dark"?"active":""} onClick={()=>update({theme:"dark"})}><Moon/> Dark</button><button className={state.theme==="light"?"active":""} onClick={()=>update({theme:"light"})}><Sun/> Light</button></div></div></div><div className="panel settings-card"><div className="setting-icon"><ShieldCheck/></div><div><h3>Data & backup</h3><p>Export your progress to a file, restore it on another machine, or start fresh. Everything stays on your computer.</p><div className="theme-toggle"><button onClick={()=>exportData(state)}><Download/> Export backup</button><button onClick={()=>fileRef.current?.click()}><Upload/> Import backup</button><button className="danger" onClick={onReset}><Trash2/> Reset progress</button></div><input ref={fileRef} type="file" accept="application/json,.json" hidden onChange={onImport}/></div></div><div className="panel about-card"><div className="brand-mark"><Zap/></div><div><h3>Apex A+ Academy</h3><p>Version 1.2.0 · Offline-first desktop edition</p><small>Your progress is stored locally on this computer. This independent educational app is not affiliated with or endorsed by CompTIA.</small></div></div></div></>;
 }
 
 function PageHead({eyebrow,title,subtitle}:{eyebrow:string;title:string;subtitle:string}) { return <div className="page-title"><div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{subtitle}</p></div></div>; }

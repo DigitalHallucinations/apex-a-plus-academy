@@ -1,9 +1,10 @@
-import type { Domain, Flashcard, Question } from "../types";
+import type { Domain, Flashcard, Pbq, Question } from "../types";
 
 export interface ContentBundle {
   domains: Domain[];
   questions: Question[];
   flashcards: Flashcard[];
+  pbqs: Pbq[];
 }
 
 const EXAM_CODES = ["220-1201", "220-1202"];
@@ -19,10 +20,11 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
   const errors: string[] = [];
   if (!content || typeof content !== "object") return ["Content is not an object"];
 
-  const { domains, questions, flashcards } = content;
+  const { domains, questions, flashcards, pbqs } = content;
   if (!Array.isArray(domains) || domains.length === 0) errors.push("domains must be a non-empty array");
   if (!Array.isArray(questions) || questions.length === 0) errors.push("questions must be a non-empty array");
   if (!Array.isArray(flashcards) || flashcards.length === 0) errors.push("flashcards must be a non-empty array");
+  if (pbqs !== undefined && !Array.isArray(pbqs)) errors.push("pbqs must be an array when present");
   if (errors.length) return errors;
 
   const domainIds = new Set((domains as Domain[]).map(d => d.id));
@@ -55,6 +57,34 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
     if (!domainIds.has(f.domain)) errors.push(`Flashcard ${f.id}: unknown domain "${f.domain}"`);
     if (!f.front?.trim()) errors.push(`Flashcard ${f.id}: empty front`);
     if (!f.back?.trim()) errors.push(`Flashcard ${f.id}: empty back`);
+  }
+
+  const seenP = new Set<string>();
+  for (const p of (pbqs ?? []) as Pbq[]) {
+    if (seenP.has(p.id)) errors.push(`Duplicate PBQ id: ${p.id}`);
+    seenP.add(p.id);
+    if (!domainIds.has(p.domain)) errors.push(`PBQ ${p.id}: unknown domain "${p.domain}"`);
+    if (!EXAM_CODES.includes(p.exam)) errors.push(`PBQ ${p.id}: invalid exam "${p.exam}"`);
+    if (!p.prompt?.trim()) errors.push(`PBQ ${p.id}: empty prompt`);
+    if (!p.explanation?.trim()) errors.push(`PBQ ${p.id}: empty explanation`);
+    if (p.kind === "matching") {
+      const itemIds = new Set(p.items?.map(i => i.id));
+      const targetIds = new Set(p.targets?.map(t => t.id));
+      if (!p.items?.length || !p.targets?.length) errors.push(`PBQ ${p.id}: matching needs items and targets`);
+      for (const id of itemIds) if (!(id in (p.answer || {}))) errors.push(`PBQ ${p.id}: item "${id}" has no answer`);
+      for (const [item, target] of Object.entries(p.answer || {})) {
+        if (!itemIds.has(item)) errors.push(`PBQ ${p.id}: answer references unknown item "${item}"`);
+        if (!targetIds.has(target)) errors.push(`PBQ ${p.id}: answer references unknown target "${target}"`);
+      }
+    } else if (p.kind === "ordering") {
+      const stepIds = new Set(p.steps?.map(s => s.id));
+      if (!p.steps?.length) errors.push(`PBQ ${p.id}: ordering needs steps`);
+      if (p.answer?.length !== p.steps?.length) errors.push(`PBQ ${p.id}: answer length must match steps`);
+      for (const id of p.answer || []) if (!stepIds.has(id)) errors.push(`PBQ ${p.id}: answer references unknown step "${id}"`);
+    } else {
+      const bad = p as { id: string; kind?: string };
+      errors.push(`PBQ ${bad.id}: unknown kind "${bad.kind}"`);
+    }
   }
 
   return errors;

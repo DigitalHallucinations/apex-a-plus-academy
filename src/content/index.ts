@@ -1,9 +1,10 @@
 import { invoke } from "@tauri-apps/api/core";
-import type { Domain, Flashcard, Question } from "../types";
+import type { Domain, Flashcard, Pbq, Question } from "../types";
 import { validateContent, type ContentBundle } from "./validate";
 import domainsJson from "./domains.json";
 import questionsJson from "./questions.json";
 import flashcardsJson from "./flashcards.json";
+import pbqsJson from "./pbqs.json";
 
 export type { ContentBundle } from "./validate";
 
@@ -14,7 +15,8 @@ export type { ContentBundle } from "./validate";
 export const bundledContent: ContentBundle = {
   domains: domainsJson as Domain[],
   questions: questionsJson as Question[],
-  flashcards: flashcardsJson as Flashcard[]
+  flashcards: flashcardsJson as Flashcard[],
+  pbqs: pbqsJson as Pbq[]
 };
 
 function isTauri() {
@@ -37,7 +39,8 @@ export async function loadContent(): Promise<ContentBundle> {
       console.warn("Backend content failed validation; using bundled content.", errors);
       return bundledContent;
     }
-    return remote as ContentBundle;
+    // A backend that predates PBQs may omit them; fall back to the bundled set.
+    return { pbqs: bundledContent.pbqs, ...remote } as ContentBundle;
   } catch (err) {
     console.warn("Could not load backend content; using bundled content.", err);
     return bundledContent;

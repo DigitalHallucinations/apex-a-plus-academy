@@ -70,10 +70,13 @@ fn load_content(app: AppHandle) -> Result<Value, String> {
         let raw = fs::read_to_string(dir.join(name)).map_err(|e| format!("{name}: {e}"))?;
         serde_json::from_str(&raw).map_err(|e| format!("{name}: {e}"))
     };
+    // PBQs are optional so older content directories still load.
+    let pbqs = read("pbqs.json").unwrap_or_else(|_| json!([]));
     Ok(json!({
         "domains": read("domains.json")?,
         "questions": read("questions.json")?,
-        "flashcards": read("flashcards.json")?
+        "flashcards": read("flashcards.json")?,
+        "pbqs": pbqs
     }))
 }
 

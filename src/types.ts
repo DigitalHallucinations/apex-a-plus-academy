@@ -1,5 +1,6 @@
 export type ExamCode = "220-1201" | "220-1202";
-export type View = "dashboard" | "learn" | "practice" | "flashcards" | "analytics" | "notes" | "settings";
+export type View = "dashboard" | "learn" | "practice" | "mock" | "flashcards" | "analytics" | "notes" | "settings";
+export type Difficulty = "Foundation" | "Intermediate" | "Advanced";
 
 export interface Domain {
   id: string;
@@ -15,13 +16,42 @@ export interface Question {
   id: string;
   exam: ExamCode;
   domain: string;
-  difficulty: "Foundation" | "Intermediate" | "Advanced";
+  difficulty: Difficulty;
   prompt: string;
   options: string[];
   answer: number;
   explanation: string;
   objective: string;
 }
+
+interface PbqBase {
+  id: string;
+  exam: ExamCode;
+  domain: string;
+  difficulty: Difficulty;
+  prompt: string;
+  objective: string;
+  explanation: string;
+}
+
+/** Assign each item to the correct category/target (e.g. port -> protocol). */
+export interface MatchingPbq extends PbqBase {
+  kind: "matching";
+  items: { id: string; text: string }[];
+  targets: { id: string; label: string }[];
+  /** itemId -> correct targetId */
+  answer: Record<string, string>;
+}
+
+/** Put the steps in the correct order (e.g. troubleshooting sequence). */
+export interface OrderingPbq extends PbqBase {
+  kind: "ordering";
+  steps: { id: string; text: string }[];
+  /** step ids in their correct order */
+  answer: string[];
+}
+
+export type Pbq = MatchingPbq | OrderingPbq;
 
 export interface Flashcard {
   id: string;
@@ -38,6 +68,10 @@ export interface Attempt {
   total: number;
   durationSec: number;
   domainScores: Record<string, { correct: number; total: number }>;
+  /** "practice" (default) or "mock" for full-length timed exams. */
+  kind?: "practice" | "mock";
+  /** Whether a mock exam met the pass threshold. */
+  passed?: boolean;
 }
 
 export interface AnsweredStat {

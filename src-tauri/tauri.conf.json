@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Apex A+ Academy",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "identifier": "com.apexlearning.aplusacademy",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -30,7 +30,8 @@
     "resources": {
       "../src/content/domains.json": "content/domains.json",
       "../src/content/questions.json": "content/questions.json",
-      "../src/content/flashcards.json": "content/flashcards.json"
+      "../src/content/flashcards.json": "content/flashcards.json",
+      "../src/content/pbqs.json": "content/pbqs.json"
     },
     "shortDescription": "Offline-first CompTIA A+ study and exam prep",
     "longDescription": "A focused desktop learning environment with objective tracking, practice exams, spaced repetition, notes, bookmarks, and detailed analytics.",

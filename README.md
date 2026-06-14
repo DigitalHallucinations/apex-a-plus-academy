@@ -49,6 +49,14 @@ Build custom sessions for `220-1201`, `220-1202`, or both cores. Each original q
 - Timed session tracking
 - Detailed post-session review
 
+### Mock Exams
+
+Sit a full-length, timed, domain-weighted exam for `220-1201` or `220-1202`. Questions are drawn in proportion to the real objective weights, the timer counts down and auto-submits at zero, and there is no feedback until you finish — then you get a pass/fail result against a 75% line, a per-domain breakdown, and a full review.
+
+### Performance-Based Questions
+
+Beyond multiple choice, practice interactive **matching** (assign items to categories) and **ordering** (sequence steps) questions, graded with partial credit and presented at the start of mock exams.
+
 ### Spaced-Repetition Flashcards
 
 Rate each recall as Again, Hard, Good, or Easy. Apex automatically schedules the card's next review interval so difficult material returns sooner.

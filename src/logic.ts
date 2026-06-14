@@ -1,4 +1,4 @@
-import type { AnsweredStat, CardSchedule, Flashcard, LearnerState, Question, View } from "./types";
+import type { AnsweredStat, CardSchedule, Domain, ExamCode, Flashcard, LearnerState, Pbq, Question, View } from "./types";
 
 export const SCHEMA_VERSION = 2;
 
@@ -160,6 +160,100 @@ export function buildNotifications(state: LearnerState, content: { flashcards: F
   if (state.attempts.length === 0) out.push({ id: "baseline", text: "Take a baseline practice exam to start tracking readiness", view: "practice" });
 
   return out;
+}
+
+// ---------------------------------------------------------------------------
+// Mock exams (full-length, timed, domain-weighted)
+// ---------------------------------------------------------------------------
+
+export const MOCK_PASS = 0.75;
+export const MOCK_DEFAULT_QUESTIONS = 90;
+export const MOCK_DEFAULT_MINUTES = 90;
+
+export type MockItem = { type: "mcq"; question: Question } | { type: "pbq"; pbq: Pbq };
+
+/**
+ * Selects `count` questions for one exam core, distributed across its domains
+ * in proportion to each domain's exam weight (so a 90-question mock mirrors the
+ * real blueprint). Falls back to filling any rounding shortfall from the rest
+ * of the pool, and never returns more than the pool holds.
+ */
+export function buildWeightedQuestionSet(questions: Question[], domains: Domain[], exam: ExamCode, count: number): Question[] {
+  const examDomains = domains.filter(d => d.exam === exam);
+  const pool = questions.filter(q => q.exam === exam);
+  const totalWeight = examDomains.reduce((s, d) => s + d.weight, 0) || 1;
+  const picked: Question[] = [];
+  const used = new Set<string>();
+  for (const d of examDomains) {
+    const target = Math.round((count * d.weight) / totalWeight);
+    for (const q of shuffle(pool.filter(q => q.domain === d.id)).slice(0, target)) {
+      picked.push(q);
+      used.add(q.id);
+    }
+  }
+  if (picked.length < count) {
+    for (const q of shuffle(pool.filter(q => !used.has(q.id)))) {
+      if (picked.length >= count) break;
+      picked.push(q);
+      used.add(q.id);
+    }
+  }
+  return shuffle(picked).slice(0, count);
+}
+
+/** Builds a mock exam: a few PBQs up front (like the real exam), then weighted MCQs. */
+export function buildMockExam(questions: Question[], pbqs: Pbq[], domains: Domain[], exam: ExamCode, mcqCount: number, pbqCount: number): MockItem[] {
+  const examPbqs = shuffle(pbqs.filter(p => p.exam === exam)).slice(0, pbqCount);
+  const mcqs = buildWeightedQuestionSet(questions, domains, exam, mcqCount);
+  return [
+    ...examPbqs.map(pbq => ({ type: "pbq" as const, pbq })),
+    ...mcqs.map(question => ({ type: "mcq" as const, question }))
+  ];
+}
+
+/** Fractional score (0..1) for a PBQ response, supporting partial credit. */
+export function gradePbq(pbq: Pbq, response: unknown): number {
+  if (pbq.kind === "matching") {
+    const r = (response && typeof response === "object" ? response : {}) as Record<string, string>;
+    const total = pbq.items.length;
+    if (!total) return 0;
+    let correct = 0;
+    for (const item of pbq.items) if (r[item.id] === pbq.answer[item.id]) correct++;
+    return correct / total;
+  }
+  const r = Array.isArray(response) ? (response as string[]) : [];
+  const total = pbq.steps.length;
+  if (!total) return 0;
+  let correct = 0;
+  for (let i = 0; i < total; i++) if (r[i] === pbq.answer[i]) correct++;
+  return correct / total;
+}
+
+export interface MockGrade {
+  earned: number;
+  total: number;
+  pct: number;
+  passed: boolean;
+  domainScores: Record<string, { correct: number; total: number }>;
+}
+
+/** Grades a finished mock exam. MCQs score 1/0; PBQs award partial credit. */
+export function scoreMock(items: MockItem[], mcqAnswers: Record<string, number>, pbqResponses: Record<string, unknown>): MockGrade {
+  let earned = 0;
+  const total = items.length;
+  const domainScores: Record<string, { correct: number; total: number }> = {};
+  for (const it of items) {
+    const domain = it.type === "mcq" ? it.question.domain : it.pbq.domain;
+    const frac = it.type === "mcq"
+      ? (mcqAnswers[it.question.id] === it.question.answer ? 1 : 0)
+      : gradePbq(it.pbq, pbqResponses[it.pbq.id]);
+    earned += frac;
+    domainScores[domain] ||= { correct: 0, total: 0 };
+    domainScores[domain].total++;
+    domainScores[domain].correct += frac;
+  }
+  const ratio = total ? earned / total : 0;
+  return { earned, total, pct: Math.round(ratio * 100), passed: total > 0 && ratio >= MOCK_PASS, domainScores };
 }
 
 export interface ObjectiveStat {

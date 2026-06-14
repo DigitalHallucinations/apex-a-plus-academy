@@ -2,6 +2,21 @@
 
 All notable changes to Apex A+ Academy are documented here.
 
+## 1.2.0 - 2026-06-13
+
+Headline: full-length timed mock exams and performance-based questions, deepening the A+ track.
+
+### Added
+
+- Full-length **mock exam** mode: domain-weighted question selection that mirrors the exam blueprint, a countdown timer that auto-submits at zero, no per-question feedback until submission, a 75% pass line, and an end screen with pass/fail, per-domain breakdown, and full review
+- **Performance-based questions (PBQs)**: a new interactive question type with *matching* (assign items to categories) and *ordering* (sequence steps) formats, graded with partial credit, surfaced at the start of mock exams
+- Expanded original A+ question bank to 78 questions plus 6 PBQs, with per-domain depth for realistic weighting
+- Mock attempts are tracked separately in analytics with a PASS/FAIL marker
+
+### Changed
+
+- Content pipeline, validator, and desktop resource loading now cover PBQs
+
 ## 1.1.0 - 2026-06-14
 
 Download: [v1.1.0 release](https://github.com/DigitalHallucinations/apex-a-plus-academy/releases/tag/v1.1.0) (Windows x64 installer + SHA-256 checksum).
