@@ -5,9 +5,10 @@ import {
   buildNotifications, initialState, SCHEMA_VERSION,
   buildWeightedQuestionSet, buildMockExam, gradePbq, scoreMock, type MockItem
 } from "./logic";
-import type { AnsweredStat, Domain, LearnerState, Pbq, Question } from "./types";
+import type { AnsweredStat, CertProgress, Domain, LearnerState, Pbq, Question } from "./types";
 
 const baseState = (over: Partial<LearnerState> = {}): LearnerState => ({ ...initialState, ...over });
+const prog = (over: Partial<CertProgress> = {}): CertProgress => ({ targetDate: "", dailyGoal: 25, streak: 0, lastStudyDate: "", dailyCounts: {}, ...over });
 
 const q = (id: string, domain: string, objective: string, exam: "220-1201" | "220-1202" = "220-1201"): Question => ({
   id, certId: "a-plus", exam, domain, difficulty: "Foundation", prompt: id, options: ["a", "b"], answer: 0, explanation: "x", objective
@@ -38,32 +39,29 @@ describe("shuffle", () => {
 
 describe("streak (applyStudyActivity)", () => {
   it("starts a streak at 1 on first activity", () => {
-    const r = applyStudyActivity(baseState(), 3, "2026-06-13");
+    const r = applyStudyActivity(prog(), 3, "2026-06-13");
     expect(r.streak).toBe(1);
     expect(r.lastStudyDate).toBe("2026-06-13");
     expect(r.dailyCounts["2026-06-13"]).toBe(3);
   });
   it("increments on consecutive days", () => {
-    const s = baseState({ streak: 4, lastStudyDate: "2026-06-12" });
-    expect(applyStudyActivity(s, 1, "2026-06-13").streak).toBe(5);
+    expect(applyStudyActivity(prog({ streak: 4, lastStudyDate: "2026-06-12" }), 1, "2026-06-13").streak).toBe(5);
   });
   it("does not change the streak twice in one day but accumulates count", () => {
-    const s = baseState({ streak: 5, lastStudyDate: "2026-06-13", dailyCounts: { "2026-06-13": 2 } });
-    const r = applyStudyActivity(s, 4, "2026-06-13");
+    const r = applyStudyActivity(prog({ streak: 5, lastStudyDate: "2026-06-13", dailyCounts: { "2026-06-13": 2 } }), 4, "2026-06-13");
     expect(r.streak).toBe(5);
     expect(r.dailyCounts["2026-06-13"]).toBe(6);
   });
   it("resets to 1 after a missed day", () => {
-    const s = baseState({ streak: 9, lastStudyDate: "2026-06-10" });
-    expect(applyStudyActivity(s, 1, "2026-06-13").streak).toBe(1);
+    expect(applyStudyActivity(prog({ streak: 9, lastStudyDate: "2026-06-10" }), 1, "2026-06-13").streak).toBe(1);
   });
 });
 
 describe("questionsToday", () => {
   it("reads the per-day counter", () => {
-    const s = baseState({ dailyCounts: { "2026-06-13": 7 } });
-    expect(questionsToday(s, "2026-06-13")).toBe(7);
-    expect(questionsToday(s, "2026-06-14")).toBe(0);
+    const p = prog({ dailyCounts: { "2026-06-13": 7 } });
+    expect(questionsToday(p, "2026-06-13")).toBe(7);
+    expect(questionsToday(p, "2026-06-14")).toBe(0);
   });
 });
 
@@ -139,7 +137,8 @@ describe("migrateState", () => {
   it("fills defaults for an empty/garbage save", () => {
     const s = migrateState(null);
     expect(s.schemaVersion).toBe(SCHEMA_VERSION);
-    expect(s.streak).toBe(0);
+    expect(s.activeCertId).toBe("a-plus");
+    expect(s.progress["a-plus"].streak).toBe(0);
     expect(s.answered).toEqual({});
     expect(s.theme).toBe("dark");
   });
@@ -155,7 +154,10 @@ describe("migrateState", () => {
     expect(s.answered["aplus-q1"].lastCorrect).toBe(true); // best-effort from correct>0
     expect(s.cardRatings["aplus-f1"].reps).toBe(0);
     expect(s.cardRatings["aplus-f1"].lapses).toBe(0);
-    expect(s.dailyCounts).toEqual({});
+    // legacy top-level cadence folds into the default A+ track
+    expect(s.activeCertId).toBe("a-plus");
+    expect(s.progress["a-plus"].streak).toBe(3);
+    expect(s.progress["a-plus"].dailyCounts).toEqual({});
   });
   it("drops corrupt fields without throwing", () => {
     const s = migrateState({ answered: "nope", attempts: 42, bookmarks: [1, "ok", null] });
@@ -271,7 +273,7 @@ describe("buildNotifications", () => {
   const content = { flashcards: [{ id: "f1", certId: "a-plus", domain: "net", front: "x", back: "y" }] };
   it("reports due cards, remaining goal, countdown, and baseline prompt", () => {
     const now = new Date("2026-06-13T12:00:00Z");
-    const s = baseState({ dailyGoal: 10, targetDate: "2026-06-20" });
+    const s = baseState({ progress: { "a-plus": prog({ dailyGoal: 10, targetDate: "2026-06-20" }) } });
     const notes = buildNotifications(s, content, now);
     const ids = notes.map(n => n.id);
     expect(ids).toContain("cards-due");
@@ -281,7 +283,7 @@ describe("buildNotifications", () => {
   });
   it("clears the daily-goal note once the goal is met", () => {
     const now = new Date("2026-06-13T12:00:00Z");
-    const s = baseState({ dailyGoal: 5, dailyCounts: { [dateKey(now)]: 5 }, attempts: [{ id: "a", date: "", exam: "Mixed", score: 5, total: 5, durationSec: 1, domainScores: {} }] });
+    const s = baseState({ progress: { "a-plus": prog({ dailyGoal: 5, dailyCounts: { [dateKey(now)]: 5 } }) }, attempts: [{ id: "a", certId: "a-plus", date: "", exam: "Mixed", score: 5, total: 5, durationSec: 1, domainScores: {} }] });
     const ids = buildNotifications(s, content, now).map(n => n.id);
     expect(ids).not.toContain("daily-goal");
     expect(ids).not.toContain("baseline");

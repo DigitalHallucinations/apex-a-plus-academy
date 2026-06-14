@@ -1,15 +1,19 @@
-import type { AnsweredStat, Attempt, CardSchedule, Domain, ExamCode, Flashcard, LearnerState, Pbq, Question, View } from "./types";
+import type { AnsweredStat, Attempt, CardSchedule, CertId, CertProgress, Domain, ExamCode, Flashcard, LearnerState, Pbq, Question, View } from "./types";
 
 export const SCHEMA_VERSION = 3;
+export const DEFAULT_CERT_ID = "a-plus";
+export const DEFAULT_DAILY_GOAL = 25;
+
+/** A fresh, empty progress bucket for a certification track. */
+export function defaultProgress(): CertProgress {
+  return { targetDate: "", dailyGoal: DEFAULT_DAILY_GOAL, streak: 0, lastStudyDate: "", dailyCounts: {} };
+}
 
 export const initialState: LearnerState = {
   schemaVersion: SCHEMA_VERSION,
   name: "Future Technician",
-  targetDate: "",
-  dailyGoal: 25,
-  streak: 0,
-  lastStudyDate: "",
-  dailyCounts: {},
+  activeCertId: DEFAULT_CERT_ID,
+  progress: { [DEFAULT_CERT_ID]: defaultProgress() },
   answered: {},
   attempts: [],
   bookmarks: [],
@@ -17,6 +21,17 @@ export const initialState: LearnerState = {
   cardRatings: {},
   theme: "dark"
 };
+
+/** The progress bucket for the track currently in focus. */
+export function activeProgress(state: LearnerState): CertProgress {
+  return state.progress[state.activeCertId] ?? defaultProgress();
+}
+
+/** Returns new state with the active track's progress bucket patched. */
+export function patchProgress(state: LearnerState, patch: Partial<CertProgress>): LearnerState {
+  const next = { ...activeProgress(state), ...patch };
+  return { ...state, progress: { ...state.progress, [state.activeCertId]: next } };
+}
 
 const DAY_MS = 86_400_000;
 
@@ -42,35 +57,35 @@ export function dateKey(d: Date = new Date()): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
-/** Questions answered on the given local day. */
-export function questionsToday(state: LearnerState, today: string = dateKey()): number {
-  return state.dailyCounts[today] || 0;
+/** Questions answered on the given local day, within one track's progress. */
+export function questionsToday(progress: CertProgress, today: string = dateKey()): number {
+  return progress.dailyCounts[today] || 0;
 }
 
 /**
- * Records study activity for a day: advances the streak (consecutive days),
- * resets it after a gap, and increments the day's question counter.
- * Pure — returns only the fields that change.
+ * Records study activity for a day against one track's progress: advances the
+ * streak (consecutive days), resets it after a gap, and increments the day's
+ * question counter. Pure — returns only the fields that change.
  */
 export function applyStudyActivity(
-  state: LearnerState,
+  progress: CertProgress,
   answeredCount: number,
   today: string = dateKey()
-): Pick<LearnerState, "streak" | "lastStudyDate" | "dailyCounts"> {
+): Pick<CertProgress, "streak" | "lastStudyDate" | "dailyCounts"> {
   const yesterday = dateKey(new Date(new Date(`${today}T00:00:00`).getTime() - DAY_MS));
-  let streak = state.streak;
-  if (state.lastStudyDate === today) {
+  let streak = progress.streak;
+  if (progress.lastStudyDate === today) {
     // already studied today; streak unchanged
-    streak = state.streak || 1;
-  } else if (state.lastStudyDate === yesterday) {
-    streak = state.streak + 1;
+    streak = progress.streak || 1;
+  } else if (progress.lastStudyDate === yesterday) {
+    streak = progress.streak + 1;
   } else {
     streak = 1; // first study of a fresh run
   }
   return {
     streak,
     lastStudyDate: today,
-    dailyCounts: { ...state.dailyCounts, [today]: (state.dailyCounts[today] || 0) + answeredCount }
+    dailyCounts: { ...progress.dailyCounts, [today]: (progress.dailyCounts[today] || 0) + answeredCount }
   };
 }
 
@@ -143,21 +158,27 @@ export interface AppNotification {
   view: View;
 }
 
-/** Derives actionable reminders for the header bell from the learner's state. */
+/**
+ * Derives actionable reminders for the header bell, scoped to the active track:
+ * cards-due, daily-goal, and baseline all count only the focused certification.
+ */
 export function buildNotifications(state: LearnerState, content: { flashcards: Flashcard[] }, now: Date = new Date()): AppNotification[] {
   const out: AppNotification[] = [];
-  const due = content.flashcards.filter(f => isCardDue(state.cardRatings[f.id], now)).length;
+  const cert = state.activeCertId;
+  const progress = activeProgress(state);
+
+  const due = content.flashcards.filter(f => f.certId === cert && isCardDue(state.cardRatings[f.id], now)).length;
   if (due > 0) out.push({ id: "cards-due", text: `${due} flashcard${due > 1 ? "s" : ""} due for review`, view: "flashcards" });
 
-  const remaining = state.dailyGoal - questionsToday(state, dateKey(now));
+  const remaining = progress.dailyGoal - questionsToday(progress, dateKey(now));
   if (remaining > 0) out.push({ id: "daily-goal", text: `${remaining} question${remaining > 1 ? "s" : ""} left in today's goal`, view: "practice" });
 
-  if (state.targetDate) {
-    const days = Math.ceil((new Date(state.targetDate).getTime() - now.getTime()) / DAY_MS);
+  if (progress.targetDate) {
+    const days = Math.ceil((new Date(progress.targetDate).getTime() - now.getTime()) / DAY_MS);
     if (days >= 0) out.push({ id: "exam-countdown", text: days === 0 ? "Your exam is today — good luck!" : `${days} day${days > 1 ? "s" : ""} until your exam date`, view: "dashboard" });
   }
 
-  if (state.attempts.length === 0) out.push({ id: "baseline", text: "Take a baseline practice exam to start tracking readiness", view: "practice" });
+  if (state.attempts.filter(a => a.certId === cert).length === 0) out.push({ id: "baseline", text: "Take a baseline practice exam to start tracking readiness", view: "practice" });
 
   return out;
 }
@@ -312,23 +333,52 @@ export function migrateState(raw: unknown): LearnerState {
     if (Number.isFinite(v)) dailyCounts[day] = v;
   }
 
-  // Attempt.domainScores is keyed by domain id, so re-key those too on upgrade.
+  // Attempt.domainScores is keyed by domain id (re-keyed on upgrade); every
+  // attempt also belongs to a track — legacy attempts predate certId, so default
+  // them to the A+ track they were necessarily recorded under.
   const attempts = arr<Attempt>(data.attempts).map(a => {
     if (!a || typeof a !== "object") return a;
     const scores = obj<{ correct: number; total: number }>(a.domainScores);
     const domainScores: Attempt["domainScores"] = {};
     for (const [d, v] of Object.entries(scores)) domainScores[certKey(d)] = v;
-    return { ...a, domainScores };
+    const certId = typeof (a as { certId?: unknown }).certId === "string" ? (a as { certId: string }).certId : DEFAULT_CERT_ID;
+    return { ...a, certId, domainScores };
   });
+
+  // Per-cert progress. Carry forward any existing buckets; otherwise seed the
+  // default track from the pre-Phase-1 top-level streak/goal/date fields so a
+  // returning learner keeps their A+ cadence under the new umbrella.
+  const progress: Record<CertId, CertProgress> = {};
+  for (const [cid, pr] of Object.entries(obj<Partial<CertProgress>>(data.progress))) {
+    if (!pr || typeof pr !== "object") continue;
+    const counts: Record<string, number> = {};
+    for (const [day, n] of Object.entries(obj<unknown>(pr.dailyCounts))) {
+      const v = num(n, NaN);
+      if (Number.isFinite(v)) counts[day] = v;
+    }
+    progress[cid] = {
+      targetDate: str(pr.targetDate, ""),
+      dailyGoal: num(pr.dailyGoal, DEFAULT_DAILY_GOAL),
+      streak: num(pr.streak, 0),
+      lastStudyDate: str(pr.lastStudyDate, ""),
+      dailyCounts: counts
+    };
+  }
+  if (!progress[DEFAULT_CERT_ID]) {
+    progress[DEFAULT_CERT_ID] = {
+      targetDate: str(data.targetDate, ""),
+      dailyGoal: num(data.dailyGoal, DEFAULT_DAILY_GOAL),
+      streak: num(data.streak, 0),
+      lastStudyDate: str(data.lastStudyDate, ""),
+      dailyCounts
+    };
+  }
 
   return {
     schemaVersion: SCHEMA_VERSION,
     name: str(data.name, initialState.name),
-    targetDate: str(data.targetDate, ""),
-    dailyGoal: num(data.dailyGoal, initialState.dailyGoal),
-    streak: num(data.streak, 0),
-    lastStudyDate: str(data.lastStudyDate, ""),
-    dailyCounts,
+    activeCertId: str(data.activeCertId, DEFAULT_CERT_ID),
+    progress,
     answered,
     attempts,
     bookmarks: arr<string>(data.bookmarks).filter(b => typeof b === "string").map(certKey),

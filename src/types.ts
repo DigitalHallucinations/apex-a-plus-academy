@@ -96,6 +96,7 @@ export interface Flashcard {
 
 export interface Attempt {
   id: string;
+  certId: CertId;
   date: string;
   exam: ExamCode | "Mixed";
   score: number;
@@ -125,16 +126,25 @@ export interface CardSchedule {
   lapses: number;
 }
 
-export interface LearnerState {
-  /** Bumped when the persisted shape changes; drives migrate-on-load. */
-  schemaVersion: number;
-  name: string;
+/** Study cadence and exam target for a single certification track. */
+export interface CertProgress {
   targetDate: string;
   dailyGoal: number;
   streak: number;
   lastStudyDate: string;
   /** Questions answered per local day, keyed YYYY-MM-DD. */
   dailyCounts: Record<string, number>;
+}
+
+export interface LearnerState {
+  /** Bumped when the persisted shape changes; drives migrate-on-load. */
+  schemaVersion: number;
+  name: string;
+  /** The certification track currently in focus. */
+  activeCertId: CertId;
+  /** Per-track cadence/streak/goal/exam-date. Keyed by CertId. */
+  progress: Record<CertId, CertProgress>;
+  // Id-keyed maps stay flat; ids are cert-prefixed, so a track's slice is a filter.
   answered: Record<string, AnsweredStat>;
   attempts: Attempt[];
   bookmarks: string[];

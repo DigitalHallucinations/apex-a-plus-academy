@@ -173,9 +173,10 @@ The top-level `streak`/`lastStudyDate`/`dailyGoal`/`dailyCounts`/`targetDate` fr
 `progress["a-plus"]`. `Attempt` ([src/types.ts:63](../src/types.ts)) gains `certId: CertId`; its
 `exam: ExamCode | "Mixed"` becomes `exam: ExamId | "Mixed"`.
 
-> **Status:** the id re-key half of the v3 migration is **done** (§2.3). The per-cert progress
-> restructure above is **not yet implemented** — it lands in Phase 1. Because v3 is unreleased,
-> both halves ship as a single v2→v3 migration; users upgrade once.
+> **Status:** DONE. Both halves of the v3 migration shipped — the id re-key (§2.3) and this
+> per-cert `progress` restructure. `LearnerState` now carries `activeCertId` + `progress`, each
+> `Attempt` carries `certId`, and the dashboard/notifications/analytics are cert-scoped. Because
+> v3 was unreleased, it all lands as a single v2→v3 migration; users upgrade once.
 
 ### Derived views: per-cert and all-tracks
 
@@ -201,7 +202,7 @@ const certKey = (id) => (fromVersion < 3 && !id.startsWith("aplus-") ? `aplus-${
 // applied to answered keys, cardRatings keys, bookmarks, and attempts[].domainScores keys
 ```
 
-**Pending — per-cert fold-in** (Phase 1, same v3):
+**Done — per-cert fold-in** (Phase 1, same v3):
 
 ```ts
 const activeCertId = str(data.activeCertId, "a-plus");
@@ -219,8 +220,8 @@ if (!progress["a-plus"]) progress["a-plus"] = {
 
 - **Backups:** [backup.ts](../src/backup.ts) encrypts the serialized state and import routes
   through `migrateState`, so existing encrypted *and* legacy-JSON backups upgrade for free.
-- `SCHEMA_VERSION` is already `3` ([logic.ts:3](../src/logic.ts)). `initialState` updates land
-  with Phase 1 (`activeCertId: "a-plus"`, `progress: {}`, drop the top-level streak/goal/date).
+- `SCHEMA_VERSION` is `3` ([logic.ts:3](../src/logic.ts)); `initialState` carries
+  `activeCertId: "a-plus"` and a seeded `progress["a-plus"]` bucket.
 
 ---
 
@@ -229,7 +230,7 @@ if (!progress["a-plus"]) progress["a-plus"] = {
 | Phase | Scope | Key files |
 | --- | --- | --- |
 | **0 — Scaffold** ✅ **DONE** | Added manifest + cert types; moved A+ banks into `a-plus/` (stamped `certId`); Rust loader walks cert dirs; bundled fallback imports per-cert; validation is manifest-driven (cert/exam refs + prefix + uniqueness). A+ is still the only track and the app behaves identically. | `types.ts`, `content/index.ts`, `content/validate.ts`, `lib.rs`, `scripts/validate-content.mjs`, `certifications.json`, `tauri.conf.json` |
-| **1 — State** | Migrate to schema v3; add `activeCertId`/`certSettings`; cert-scope dashboard, analytics, notifications. | `logic.ts`, `App.tsx`, `Analytics.tsx`, `logic.test.ts` |
+| **1 — State** ✅ **DONE** | Migrated to schema v3 `progress` buckets + `activeCertId`; `Attempt.certId`; per-cert `applyStudyActivity`/`questionsToday`; cert-scoped dashboard, notifications, analytics; all-tracks overview panel. A+ still the only track. | `logic.ts`, `App.tsx`, `Analytics.tsx`, `logic.test.ts`, `types.ts` |
 | **2 — UI** | New track-picker entry surface; exam toggles + mock defaults read from manifest (kill hardcoded `["220-1201","220-1202"]` arrays). `View` type unchanged. | `App.tsx`, `styles.css` |
 | **3 — Content + brand** | Author Network+ (`N10-009`) and Security+ (`SY0-701`) banks; brand pass: product name, window title ([lib.rs:97](../src-tauri/src/lib.rs)), `tauri.conf.json`, README, icon. | `content/network-plus/*`, `content/security-plus/*`, README, Tauri config |
 

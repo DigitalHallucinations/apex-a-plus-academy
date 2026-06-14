@@ -13,7 +13,8 @@ import { decryptBackup, encryptBackup } from "./backup";
 import type { Attempt, ExamCode, LearnerState, Pbq, Question, View } from "./types";
 import {
   initialState, pct, shuffle, formatTime, dateKey, questionsToday, applyStudyActivity,
-  recordAnswer, scheduleCard, isCardDue, domainMastery, masteredCount, migrateState,
+  recordAnswer, scheduleCard, isCardDue, domainMastery, migrateState,
+  activeProgress, patchProgress,
   buildNotifications, buildMockExam, scoreMock, gradePbq, MOCK_PASS, MOCK_DEFAULT_QUESTIONS,
   MOCK_DEFAULT_MINUTES, type MockItem
 } from "./logic";
@@ -85,7 +86,7 @@ export default function App() {
   const update = (next: Partial<LearnerState>) => setState(s => ({ ...s, ...next }));
   // Navigate, and on a phone-width screen dismiss the slide-over drawer after picking.
   const selectView = (v: View) => { setView(v); if (typeof window !== "undefined" && window.innerWidth <= 760) setSidebar(false); };
-  const attempts = state.attempts;
+  const attempts = state.attempts.filter(a => a.certId === state.activeCertId);
   const avg = attempts.length ? Math.round(attempts.reduce((a, x) => a + pct(x.score, x.total), 0) / attempts.length) : 0;
   const notifications = buildNotifications(state, content);
   const contentRef = useRef<HTMLElement>(null);
@@ -170,13 +171,19 @@ function CommandPalette({ onClose, onPick }: { onClose: () => void; onPick: (v: 
 
 function Dashboard({ state, setView }: { state: LearnerState; setView: (v: View) => void }) {
   const { domains, questions, flashcards } = useContent();
-  const attempted = Object.keys(state.answered).length;
-  const mastered = masteredCount(state.answered);
-  const todayCount = questionsToday(state);
-  const avg = state.attempts.length ? Math.round(state.attempts.reduce((a, x) => a + pct(x.score, x.total), 0) / state.attempts.length) : 0;
-  const trend = state.attempts.slice(-7).map((a, i) => ({ name: `Test ${i + 1}`, score: pct(a.score, a.total) }));
-  const days = state.targetDate ? Math.max(0, Math.ceil((new Date(state.targetDate).getTime() - Date.now()) / 86400000)) : null;
-  const domainData = domains.map(d => ({ ...d, mastery: domainMastery(questions.filter(q => q.domain === d.id), state.answered) }));
+  const cert = state.activeCertId;
+  const progress = activeProgress(state);
+  const certDomains = domains.filter(d => d.certId === cert);
+  const certQuestions = questions.filter(q => q.certId === cert);
+  const certFlashcards = flashcards.filter(f => f.certId === cert);
+  const certAttempts = state.attempts.filter(a => a.certId === cert);
+  const attempted = certQuestions.filter(q => state.answered[q.id]?.attempts).length;
+  const mastered = certQuestions.filter(q => state.answered[q.id]?.lastCorrect).length;
+  const todayCount = questionsToday(progress);
+  const avg = certAttempts.length ? Math.round(certAttempts.reduce((a, x) => a + pct(x.score, x.total), 0) / certAttempts.length) : 0;
+  const trend = certAttempts.slice(-7).map((a, i) => ({ name: `Test ${i + 1}`, score: pct(a.score, a.total) }));
+  const days = progress.targetDate ? Math.max(0, Math.ceil((new Date(progress.targetDate).getTime() - Date.now()) / 86400000)) : null;
+  const domainData = certDomains.map(d => ({ ...d, mastery: domainMastery(certQuestions.filter(q => q.domain === d.id), state.answered) }));
   const nextDomain = [...domainData].sort((a,b) => a.mastery - b.mastery)[0];
 
   return <>
@@ -186,13 +193,13 @@ function Dashboard({ state, setView }: { state: LearnerState; setView: (v: View)
         <div className="hero-copy"><span className="pill teal"><Sparkles/> SMART RECOMMENDATION</span><h2>Strengthen {nextDomain.name}</h2><p>Your current activity suggests this is the best place to earn the next chunk of exam readiness.</p><button className="primary" onClick={() => setView("practice")}><Play/> Start focused drill</button></div>
         <div className="hero-visual"><div className="orb"><Brain/><span>{nextDomain.mastery}%</span><small>mastery</small></div></div>
       </div>
-      <div className="goal-card panel"><div className="panel-heading"><span>DAILY MISSION</span><Flame/></div><div className="goal-number"><b>{Math.min(todayCount, state.dailyGoal)}</b><span>/ {state.dailyGoal} today</span></div><div className="progress"><i style={{width:`${Math.min(100,pct(todayCount,state.dailyGoal))}%`}}/></div><div className="streak"><Flame/><b>{state.streak === 0 ? "Start your streak" : `${state.streak} day streak`}</b><span>Consistency compounds.</span></div></div>
+      <div className="goal-card panel"><div className="panel-heading"><span>DAILY MISSION</span><Flame/></div><div className="goal-number"><b>{Math.min(todayCount, progress.dailyGoal)}</b><span>/ {progress.dailyGoal} today</span></div><div className="progress"><i style={{width:`${Math.min(100,pct(todayCount,progress.dailyGoal))}%`}}/></div><div className="streak"><Flame/><b>{progress.streak === 0 ? "Start your streak" : `${progress.streak} day streak`}</b><span>Consistency compounds.</span></div></div>
     </div>
     <div className="stats-grid">
-      <Stat icon={Gauge} label="Overall readiness" value={`${avg}%`} sub={state.attempts.length ? `${state.attempts.length} exams completed` : "Baseline not taken"} color="blue"/>
+      <Stat icon={Gauge} label="Overall readiness" value={`${avg}%`} sub={certAttempts.length ? `${certAttempts.length} exams completed` : "Baseline not taken"} color="blue"/>
       <Stat icon={CircleHelp} label="Questions explored" value={`${attempted}`} sub={`${mastered} currently mastered`} color="purple"/>
-      <Stat icon={Layers3} label="Cards due" value={`${flashcards.filter(f => isCardDue(state.cardRatings[f.id])).length}`} sub="Spaced recall queue" color="amber"/>
-      <Stat icon={Trophy} label="Best score" value={`${Math.max(0,...state.attempts.map(a => pct(a.score,a.total)))}%`} sub="Personal record" color="teal"/>
+      <Stat icon={Layers3} label="Cards due" value={`${certFlashcards.filter(f => isCardDue(state.cardRatings[f.id])).length}`} sub="Spaced recall queue" color="amber"/>
+      <Stat icon={Trophy} label="Best score" value={`${Math.max(0,...certAttempts.map(a => pct(a.score,a.total)))}%`} sub="Personal record" color="teal"/>
     </div>
     <div className="two-col">
       <div className="panel chart-panel"><div className="panel-title"><div><span>PERFORMANCE TREND</span><h3>Practice exam scores</h3></div><button className="text-btn" onClick={() => setView("analytics")}>Full report <ChevronRight/></button></div>{trend.length ? <ResponsiveContainer width="100%" height={230}><AreaChart data={trend}><defs><linearGradient id="scoreFill" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#55a8ff" stopOpacity={.45}/><stop offset="95%" stopColor="#55a8ff" stopOpacity={0}/></linearGradient></defs><CartesianGrid strokeDasharray="3 3" stroke="var(--line)"/><XAxis dataKey="name" stroke="var(--muted)"/><YAxis domain={[0,100]} stroke="var(--muted)"/><Tooltip contentStyle={{background:"var(--panel)",border:"1px solid var(--line)"}}/><Area type="monotone" dataKey="score" stroke="#55a8ff" strokeWidth={3} fill="url(#scoreFill)"/></AreaChart></ResponsiveContainer> : <Empty message="Complete a practice session to reveal your trend." action="Start practice" onClick={() => setView("practice")}/>}</div>
@@ -243,11 +250,12 @@ function Practice({ state, setState }: { state:LearnerState; setState:React.Disp
   const finish = () => {
     const score=session.filter(q=>answers[q.id]===q.answer).length;
     const ds:Attempt["domainScores"]={}; session.forEach(q=>{ds[q.domain] ||= {correct:0,total:0};ds[q.domain].total++;if(answers[q.id]===q.answer)ds[q.domain].correct++;});
-    const attempt:Attempt={id:crypto.randomUUID(),date:new Date().toISOString(),exam,score,total:session.length,durationSec:elapsed,domainScores:ds};
+    const attempt:Attempt={id:crypto.randomUUID(),certId:state.activeCertId,date:new Date().toISOString(),exam,score,total:session.length,durationSec:elapsed,domainScores:ds};
     setState(s=>{
       const answered={...s.answered};
       session.forEach(q=>{answered[q.id]=recordAnswer(answered[q.id],answers[q.id]===q.answer);});
-      return {...s,answered,attempts:[...s.attempts,attempt],...applyStudyActivity(s,session.length)};
+      const next=patchProgress(s,applyStudyActivity(activeProgress(s),session.length));
+      return {...next,answered,attempts:[...s.attempts,attempt]};
     });
     setMode("results");
   };
@@ -338,11 +346,12 @@ function MockExam({ state, setState }: { state:LearnerState; setState:React.Disp
   const finish = () => {
     const g = scoreMock(items, mcqAnswers, responses);
     const mcqItems = items.filter(it=>it.type==="mcq");
-    const attempt: Attempt = { id: crypto.randomUUID(), date: new Date().toISOString(), exam, score: Math.round(g.earned), total: g.total, durationSec: minutes*60 - remaining, domainScores: g.domainScores, kind: "mock", passed: g.passed };
+    const attempt: Attempt = { id: crypto.randomUUID(), certId: state.activeCertId, date: new Date().toISOString(), exam, score: Math.round(g.earned), total: g.total, durationSec: minutes*60 - remaining, domainScores: g.domainScores, kind: "mock", passed: g.passed };
     setState(s=>{
       const answered={...s.answered};
       mcqItems.forEach(it=>{ if(it.type==="mcq") answered[it.question.id]=recordAnswer(answered[it.question.id], mcqAnswers[it.question.id]===it.question.answer); });
-      return {...s, answered, attempts:[...s.attempts, attempt], ...applyStudyActivity(s, mcqItems.length)};
+      const next=patchProgress(s,applyStudyActivity(activeProgress(s), mcqItems.length));
+      return {...next, answered, attempts:[...s.attempts, attempt]};
     });
     setGrade(g); setPhase("results");
   };
@@ -439,6 +448,7 @@ function Preferences({ state, update, setState }: { state:LearnerState; update:(
   const fileRef = useRef<HTMLInputElement>(null);
   const [passphrase, setPassphrase] = useState("");
   const [backupNotice, setBackupNotice] = useState("");
+  const progress = activeProgress(state);
   const onExport = async () => {
     try {
       await exportData(state, passphrase);
@@ -468,7 +478,7 @@ function Preferences({ state, update, setState }: { state:LearnerState; update:(
     if (isTauri()) { try { await invoke("reset_state"); } catch { /* file may not exist yet */ } }
     setState(migrateState({}));
   };
-  return <><PageHead eyebrow="MAKE IT YOURS" title="Preferences" subtitle="Tune your study target, daily rhythm, and workspace."/><div className="settings-grid"><div className="panel settings-card"><div className="setting-icon"><GraduationCap/></div><div><h3>Learner profile</h3><p>This name appears throughout your workspace.</p><label>Display name<input value={state.name} onChange={e=>update({name:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><CalendarDays/></div><div><h3>Exam target</h3><p>Set a date to add a countdown to your dashboard.</p><label>Target date<input type="date" value={state.targetDate} onChange={e=>update({targetDate:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Target/></div><div><h3>Daily mission</h3><p>Choose a realistic question goal you can sustain.</p><label>Questions per day<input type="number" min="5" max="100" value={state.dailyGoal} onChange={e=>update({dailyGoal:Number(e.target.value)})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Moon/></div><div><h3>Appearance</h3><p>Switch the complete interface theme.</p><div className="theme-toggle"><button className={state.theme==="dark"?"active":""} aria-pressed={state.theme==="dark"} onClick={()=>update({theme:"dark"})}><Moon/> Dark</button><button className={state.theme==="light"?"active":""} aria-pressed={state.theme==="light"} onClick={()=>update({theme:"light"})}><Sun/> Light</button></div></div></div><div className="panel settings-card"><div className="setting-icon"><ShieldCheck/></div><div><h3>Encrypted backup</h3><p>Use the same passphrase to restore this portable backup on another device. Legacy plain JSON backups can still be imported.</p><label>Backup passphrase<input type="password" minLength={8} autoComplete="new-password" value={passphrase} onChange={e=>setPassphrase(e.target.value)} placeholder="At least 8 characters"/></label><div className="theme-toggle data-actions"><button onClick={onExport}><Download/> Export encrypted</button><button onClick={()=>fileRef.current?.click()}><Upload/> Import backup</button><button className="danger" onClick={onReset}><Trash2/> Reset progress</button></div>{backupNotice&&<span className="setting-notice" role="status">{backupNotice}</span>}<input ref={fileRef} type="file" accept="application/json,.json,.apexbackup" hidden onChange={onImport}/></div></div><div className="panel about-card"><div className="brand-mark"><Zap/></div><div><h3>Apex A+ Academy</h3><p>Version 1.2.1 · Offline-first desktop edition</p><small>Your progress is stored locally on this computer. This independent educational app is not affiliated with or endorsed by CompTIA.</small></div></div></div></>;
+  return <><PageHead eyebrow="MAKE IT YOURS" title="Preferences" subtitle="Tune your study target, daily rhythm, and workspace."/><div className="settings-grid"><div className="panel settings-card"><div className="setting-icon"><GraduationCap/></div><div><h3>Learner profile</h3><p>This name appears throughout your workspace.</p><label>Display name<input value={state.name} onChange={e=>update({name:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><CalendarDays/></div><div><h3>Exam target</h3><p>Set a date to add a countdown to your dashboard.</p><label>Target date<input type="date" value={progress.targetDate} onChange={e=>setState(s=>patchProgress(s,{targetDate:e.target.value}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Target/></div><div><h3>Daily mission</h3><p>Choose a realistic question goal you can sustain.</p><label>Questions per day<input type="number" min="5" max="100" value={progress.dailyGoal} onChange={e=>setState(s=>patchProgress(s,{dailyGoal:Number(e.target.value)}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Moon/></div><div><h3>Appearance</h3><p>Switch the complete interface theme.</p><div className="theme-toggle"><button className={state.theme==="dark"?"active":""} aria-pressed={state.theme==="dark"} onClick={()=>update({theme:"dark"})}><Moon/> Dark</button><button className={state.theme==="light"?"active":""} aria-pressed={state.theme==="light"} onClick={()=>update({theme:"light"})}><Sun/> Light</button></div></div></div><div className="panel settings-card"><div className="setting-icon"><ShieldCheck/></div><div><h3>Encrypted backup</h3><p>Use the same passphrase to restore this portable backup on another device. Legacy plain JSON backups can still be imported.</p><label>Backup passphrase<input type="password" minLength={8} autoComplete="new-password" value={passphrase} onChange={e=>setPassphrase(e.target.value)} placeholder="At least 8 characters"/></label><div className="theme-toggle data-actions"><button onClick={onExport}><Download/> Export encrypted</button><button onClick={()=>fileRef.current?.click()}><Upload/> Import backup</button><button className="danger" onClick={onReset}><Trash2/> Reset progress</button></div>{backupNotice&&<span className="setting-notice" role="status">{backupNotice}</span>}<input ref={fileRef} type="file" accept="application/json,.json,.apexbackup" hidden onChange={onImport}/></div></div><div className="panel about-card"><div className="brand-mark"><Zap/></div><div><h3>Apex A+ Academy</h3><p>Version 1.2.1 · Offline-first desktop edition</p><small>Your progress is stored locally on this computer. This independent educational app is not affiliated with or endorsed by CompTIA.</small></div></div></div></>;
 }
 
 function PageHead({eyebrow,title,subtitle}:{eyebrow:string;title:string;subtitle:string}) { return <div className="page-title"><div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{subtitle}</p></div></div>; }
