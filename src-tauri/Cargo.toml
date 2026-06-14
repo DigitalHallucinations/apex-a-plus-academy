@@ -1,6 +1,6 @@
 [package]
 name = "apex-a-plus"
-version = "1.0.0"
+version = "1.1.0"
 description = "A private, offline-first CompTIA A+ study companion"
 authors = ["Apex Learning Labs"]
 edition = "2021"

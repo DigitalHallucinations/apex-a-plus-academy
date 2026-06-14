@@ -61,6 +61,14 @@ Track score history, domain accuracy, question attempts, session duration, perso
 
 Create a private technical knowledge base for commands, ports, troubleshooting sequences, mnemonics, and concepts that need another pass.
 
+### Global Search and Focused Drills
+
+Press `Ctrl+K` to search domains, objectives, practice explanations, answers, and flashcards. Search results and learning paths can launch drills scoped to a single weak domain.
+
+### Progress Backup
+
+Export learner progress, notes, bookmarks, settings, daily activity, and spaced-repetition scheduling as a portable JSON backup from Preferences.
+
 ### Private by Design
 
 Progress is stored locally through the Rust backend. The app does not require a cloud account or send learner activity to an external service.
@@ -187,7 +195,11 @@ Planned:
 
 - Continue expanding the original question and flashcard banks
 - Add dedicated performance-based question simulations
+<<<<<<< HEAD
 - Add encryption to the backup and restore flow
+=======
+- Support encrypted backup restore and cross-device transfer
+>>>>>>> b8751f2663a3abb74f06d0731838d1920606524b
 - Add configurable full-length mock exams
 - Publish automated Windows release builds and checksums
 - Continue improving keyboard navigation and accessibility coverage
