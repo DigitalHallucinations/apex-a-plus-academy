@@ -27,6 +27,11 @@
   "bundle": {
     "active": true,
     "targets": ["nsis"],
+    "resources": {
+      "../src/content/domains.json": "content/domains.json",
+      "../src/content/questions.json": "content/questions.json",
+      "../src/content/flashcards.json": "content/flashcards.json"
+    },
     "shortDescription": "Offline-first CompTIA A+ study and exam prep",
     "longDescription": "A focused desktop learning environment with objective tracking, practice exams, spaced repetition, notes, bookmarks, and detailed analytics.",
     "category": "Education",

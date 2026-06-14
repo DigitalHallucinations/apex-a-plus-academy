@@ -1,0 +1,250 @@
+import type { AnsweredStat, CardSchedule, Flashcard, LearnerState, Question, View } from "./types";
+
+export const SCHEMA_VERSION = 2;
+
+export const initialState: LearnerState = {
+  schemaVersion: SCHEMA_VERSION,
+  name: "Future Technician",
+  targetDate: "",
+  dailyGoal: 25,
+  streak: 0,
+  lastStudyDate: "",
+  dailyCounts: {},
+  answered: {},
+  attempts: [],
+  bookmarks: [],
+  notes: [],
+  cardRatings: {},
+  theme: "dark"
+};
+
+const DAY_MS = 86_400_000;
+
+export function pct(n: number, d: number): number {
+  return d ? Math.round((n / d) * 100) : 0;
+}
+
+export function formatTime(seconds: number): string {
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
+export function shuffle<T>(items: T[]): T[] {
+  const out = [...items];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
+/** Local calendar day key, e.g. "2026-06-13". */
+export function dateKey(d: Date = new Date()): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+/** Questions answered on the given local day. */
+export function questionsToday(state: LearnerState, today: string = dateKey()): number {
+  return state.dailyCounts[today] || 0;
+}
+
+/**
+ * Records study activity for a day: advances the streak (consecutive days),
+ * resets it after a gap, and increments the day's question counter.
+ * Pure — returns only the fields that change.
+ */
+export function applyStudyActivity(
+  state: LearnerState,
+  answeredCount: number,
+  today: string = dateKey()
+): Pick<LearnerState, "streak" | "lastStudyDate" | "dailyCounts"> {
+  const yesterday = dateKey(new Date(new Date(`${today}T00:00:00`).getTime() - DAY_MS));
+  let streak = state.streak;
+  if (state.lastStudyDate === today) {
+    // already studied today; streak unchanged
+    streak = state.streak || 1;
+  } else if (state.lastStudyDate === yesterday) {
+    streak = state.streak + 1;
+  } else {
+    streak = 1; // first study of a fresh run
+  }
+  return {
+    streak,
+    lastStudyDate: today,
+    dailyCounts: { ...state.dailyCounts, [today]: (state.dailyCounts[today] || 0) + answeredCount }
+  };
+}
+
+/** Folds one graded question into its cumulative answered stat. */
+export function recordAnswer(prev: AnsweredStat | undefined, correct: boolean): AnsweredStat {
+  return {
+    correct: (prev?.correct || 0) + (correct ? 1 : 0),
+    attempts: (prev?.attempts || 0) + 1,
+    lastCorrect: correct
+  };
+}
+
+/**
+ * SM-2 style spaced-repetition scheduler. Ratings: 1 Again, 2 Hard, 3 Good,
+ * 4 Easy. The ease factor actually drives the interval, and a lapse resets the
+ * repetition count — unlike the previous fixed-multiplier version.
+ */
+export function scheduleCard(
+  prev: CardSchedule | undefined,
+  rating: 1 | 2 | 3 | 4,
+  now: number = Date.now()
+): CardSchedule {
+  const quality = rating === 1 ? 2 : rating === 2 ? 3 : rating === 3 ? 4 : 5;
+  let ease = prev?.ease ?? 2.5;
+  let reps = prev?.reps ?? 0;
+  let interval = prev?.interval ?? 0;
+  let lapses = prev?.lapses ?? 0;
+
+  ease = Math.max(1.3, ease + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
+
+  if (quality < 3) {
+    reps = 0;
+    interval = 1;
+    lapses += 1;
+  } else {
+    reps += 1;
+    if (reps === 1) interval = 1;
+    else if (reps === 2) interval = 6;
+    else interval = Math.round(interval * ease);
+    if (rating === 2) interval = Math.max(1, Math.round(interval * 0.8)); // Hard penalty
+  }
+
+  return { ease, interval, reps, lapses, due: new Date(now + interval * DAY_MS).toISOString() };
+}
+
+export function isCardDue(schedule: CardSchedule | undefined, now: Date = new Date()): boolean {
+  return !schedule || schedule.due <= now.toISOString();
+}
+
+/**
+ * Coverage-based, recency-weighted domain mastery: the share of a domain's
+ * questions whose most recent attempt was correct. Unattempted or recently
+ * missed questions count against mastery, so the number can't be inflated by
+ * grinding one easy question.
+ */
+export function domainMastery(domainQuestions: Question[], answered: Record<string, AnsweredStat>): number {
+  if (!domainQuestions.length) return 0;
+  const mastered = domainQuestions.filter(q => answered[q.id]?.lastCorrect).length;
+  return pct(mastered, domainQuestions.length);
+}
+
+/** Total distinct questions currently mastered (latest attempt correct). */
+export function masteredCount(answered: Record<string, AnsweredStat>): number {
+  return Object.values(answered).filter(a => a.lastCorrect).length;
+}
+
+export interface AppNotification {
+  id: string;
+  text: string;
+  view: View;
+}
+
+/** Derives actionable reminders for the header bell from the learner's state. */
+export function buildNotifications(state: LearnerState, content: { flashcards: Flashcard[] }, now: Date = new Date()): AppNotification[] {
+  const out: AppNotification[] = [];
+  const due = content.flashcards.filter(f => isCardDue(state.cardRatings[f.id], now)).length;
+  if (due > 0) out.push({ id: "cards-due", text: `${due} flashcard${due > 1 ? "s" : ""} due for review`, view: "flashcards" });
+
+  const remaining = state.dailyGoal - questionsToday(state, dateKey(now));
+  if (remaining > 0) out.push({ id: "daily-goal", text: `${remaining} question${remaining > 1 ? "s" : ""} left in today's goal`, view: "practice" });
+
+  if (state.targetDate) {
+    const days = Math.ceil((new Date(state.targetDate).getTime() - now.getTime()) / DAY_MS);
+    if (days >= 0) out.push({ id: "exam-countdown", text: days === 0 ? "Your exam is today — good luck!" : `${days} day${days > 1 ? "s" : ""} until your exam date`, view: "dashboard" });
+  }
+
+  if (state.attempts.length === 0) out.push({ id: "baseline", text: "Take a baseline practice exam to start tracking readiness", view: "practice" });
+
+  return out;
+}
+
+export interface ObjectiveStat {
+  objective: string;
+  domain: string;
+  mastered: number;
+  total: number;
+  mastery: number;
+}
+
+/**
+ * Normalizes arbitrary persisted data into a valid LearnerState. Tolerates
+ * older schemas and corrupt fields: anything missing or of the wrong type
+ * falls back to a safe default, so a malformed save can never crash the app.
+ */
+export function migrateState(raw: unknown): LearnerState {
+  const data = (raw && typeof raw === "object" ? raw : {}) as Partial<LearnerState> & Record<string, unknown>;
+  const str = (v: unknown, d: string) => (typeof v === "string" ? v : d);
+  const num = (v: unknown, d: number) => (typeof v === "number" && Number.isFinite(v) ? v : d);
+  const obj = <T>(v: unknown): Record<string, T> => (v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, T>) : {});
+  const arr = <T>(v: unknown): T[] => (Array.isArray(v) ? (v as T[]) : []);
+
+  const answered: Record<string, AnsweredStat> = {};
+  for (const [id, a] of Object.entries(obj<Partial<AnsweredStat>>(data.answered))) {
+    if (!a || typeof a !== "object") continue;
+    const correct = num(a.correct, 0);
+    answered[id] = {
+      correct,
+      attempts: num(a.attempts, 0),
+      lastCorrect: typeof a.lastCorrect === "boolean" ? a.lastCorrect : correct > 0
+    };
+  }
+
+  const cardRatings: Record<string, CardSchedule> = {};
+  for (const [id, c] of Object.entries(obj<Partial<CardSchedule>>(data.cardRatings))) {
+    if (!c || typeof c !== "object") continue;
+    cardRatings[id] = {
+      ease: num(c.ease, 2.5),
+      interval: num(c.interval, 0),
+      due: str(c.due, ""),
+      reps: num(c.reps, 0),
+      lapses: num(c.lapses, 0)
+    };
+  }
+
+  const dailyCounts: Record<string, number> = {};
+  for (const [day, n] of Object.entries(obj<unknown>(data.dailyCounts))) {
+    const v = num(n, NaN);
+    if (Number.isFinite(v)) dailyCounts[day] = v;
+  }
+
+  return {
+    schemaVersion: SCHEMA_VERSION,
+    name: str(data.name, initialState.name),
+    targetDate: str(data.targetDate, ""),
+    dailyGoal: num(data.dailyGoal, initialState.dailyGoal),
+    streak: num(data.streak, 0),
+    lastStudyDate: str(data.lastStudyDate, ""),
+    dailyCounts,
+    answered,
+    attempts: arr(data.attempts),
+    bookmarks: arr<string>(data.bookmarks).filter(b => typeof b === "string"),
+    notes: arr(data.notes),
+    cardRatings,
+    theme: data.theme === "light" ? "light" : "dark"
+  };
+}
+
+/** Per-objective mastery, weakest first, limited to attempted objectives. */
+export function objectiveStats(
+  questions: Question[],
+  answered: Record<string, AnsweredStat>
+): ObjectiveStat[] {
+  const groups = new Map<string, Question[]>();
+  for (const q of questions) {
+    const list = groups.get(q.objective) || [];
+    list.push(q);
+    groups.set(q.objective, list);
+  }
+  const stats: ObjectiveStat[] = [];
+  for (const [objective, qs] of groups) {
+    const attempted = qs.some(q => answered[q.id]?.attempts);
+    if (!attempted) continue;
+    const mastered = qs.filter(q => answered[q.id]?.lastCorrect).length;
+    stats.push({ objective, domain: qs[0].domain, mastered, total: qs.length, mastery: pct(mastered, qs.length) });
+  }
+  return stats.sort((a, b) => a.mastery - b.mastery);
+}

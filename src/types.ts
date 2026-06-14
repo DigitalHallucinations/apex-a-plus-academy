@@ -40,16 +40,37 @@ export interface Attempt {
   domainScores: Record<string, { correct: number; total: number }>;
 }
 
+export interface AnsweredStat {
+  correct: number;
+  attempts: number;
+  /** Whether the most recent attempt at this question was correct. */
+  lastCorrect: boolean;
+}
+
+export interface CardSchedule {
+  ease: number;
+  interval: number;
+  due: string;
+  /** Successful repetitions in a row (SM-2). Reset to 0 on a lapse. */
+  reps: number;
+  /** Number of times the card has been failed ("Again"). */
+  lapses: number;
+}
+
 export interface LearnerState {
+  /** Bumped when the persisted shape changes; drives migrate-on-load. */
+  schemaVersion: number;
   name: string;
   targetDate: string;
   dailyGoal: number;
   streak: number;
   lastStudyDate: string;
-  answered: Record<string, { correct: number; attempts: number }>;
+  /** Questions answered per local day, keyed YYYY-MM-DD. */
+  dailyCounts: Record<string, number>;
+  answered: Record<string, AnsweredStat>;
   attempts: Attempt[];
   bookmarks: string[];
   notes: { id: string; title: string; body: string; updatedAt: string }[];
-  cardRatings: Record<string, { ease: number; due: string; interval: number }>;
+  cardRatings: Record<string, CardSchedule>;
   theme: "dark" | "light";
 }

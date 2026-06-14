@@ -160,6 +160,8 @@ src-tauri/target/release/bundle/nsis/
 ### Validation
 
 ```powershell
+npm run validate:content   # schema-checks the question and flashcard banks
+npm test                   # unit tests for scoring, streaks, scheduling, mastery
 npm run build
 cargo fmt --check --manifest-path src-tauri/Cargo.toml
 cargo check --manifest-path src-tauri/Cargo.toml
@@ -174,13 +176,21 @@ cargo check --manifest-path src-tauri/Cargo.toml
 
 ## Roadmap
 
-- Expand the original question and flashcard banks
+Recently shipped:
+
+- Objective/command search with a `Ctrl K` command palette
+- Plain-JSON backup, restore, and progress reset in Preferences
+- Content banks moved to validated JSON loaded by the desktop backend
+- Spaced repetition upgraded to an SM-2 scheduler
+
+Planned:
+
+- Continue expanding the original question and flashcard banks
 - Add dedicated performance-based question simulations
-- Add objective search and command palette behavior
-- Support encrypted backup and restore
+- Add encryption to the backup and restore flow
 - Add configurable full-length mock exams
 - Publish automated Windows release builds and checksums
-- Improve keyboard navigation and accessibility coverage
+- Continue improving keyboard navigation and accessibility coverage
 
 ## Contributing
 

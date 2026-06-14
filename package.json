@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "validate:content": "node scripts/validate-content.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "preview": "vite preview",
     "tauri": "tauri",
     "desktop:dev": "tauri dev",
@@ -24,6 +27,7 @@
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^6.0.2",
     "typescript": "~5.8.0",
-    "vite": "^8.0.16"
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8"
   }
 }
