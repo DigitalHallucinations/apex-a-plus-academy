@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Apex A+ Academy",
+  "version": "1.0.0",
+  "identifier": "com.apexlearning.aplusacademy",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Apex A+ Academy",
+        "width": 1440,
+        "height": 920,
+        "minWidth": 1060,
+        "minHeight": 700,
+        "center": true,
+        "decorations": true,
+        "resizable": true
+      }
+    ],
+    "security": { "csp": null }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "shortDescription": "Offline-first CompTIA A+ study and exam prep",
+    "longDescription": "A focused desktop learning environment with objective tracking, practice exams, spaced repetition, notes, bookmarks, and detailed analytics.",
+    "category": "Education",
+    "copyright": "Copyright 2026 Apex Learning Labs",
+    "windows": {
+      "nsis": {
+        "displayLanguageSelector": false,
+        "installerIcon": "icons/icon.ico",
+        "installMode": "perMachine"
+      }
+    }
+  }
+}

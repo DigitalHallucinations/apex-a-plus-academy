@@ -1,0 +1,23 @@
+# Frontend dependencies and builds
+node_modules/
+dist/
+
+# Rust and Tauri build outputs
+src-tauri/target/
+
+# Local configuration and logs
+.env
+.env.*
+*.log
+npm-debug.log*
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local learner data and generated installers
+learner-state.json
+*.exe
+*.msi
