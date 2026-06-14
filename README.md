@@ -1,32 +1,40 @@
-<div align="center">
-  <img src="app-icon.svg" width="132" alt="Apex A+ Academy lightning bolt logo" />
+# SkillForge Academy
 
-  # Apex A+ Academy
+Offline-first certification learning and exam-preparation software.
 
-  **A modern, offline-first CompTIA A+ study app for Windows.**
+Current track: CompTIA A+.
 
-  Learn the objectives, practice technician scenarios, train with spaced repetition, and measure exam readiness in one focused desktop workspace.
+> SkillForge Academy was previously developed under the working name SkillForge Academy.
 
-  [![Tauri](https://img.shields.io/badge/Tauri_2-24C8D8?style=for-the-badge&logo=tauri&logoColor=white)](https://tauri.app/)
-  [![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)](https://www.rust-lang.org/)
-  [![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-  [![Windows](https://img.shields.io/badge/Windows_10%2F11-0078D4?style=for-the-badge&logo=windows11&logoColor=white)](#system-requirements)
-
-  [Features](#features) | [Exam Coverage](#exam-coverage) | [Install](#install-and-run) | [Development](#development) | [Roadmap](#roadmap)
-</div>
+[![Tauri](https://img.shields.io/badge/Tauri_2-24C8D8?style=for-the-badge&logo=tauri&logoColor=white)](https://tauri.app/)
+[![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)](https://www.rust-lang.org/)
+[![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Windows](https://img.shields.io/badge/Windows_10%2F11-0078D4?style=for-the-badge&logo=windows11&logoColor=white)](#system-requirements)
 
 ---
 
-## Why Apex A+ Academy?
+## Why SkillForge Academy?
 
-CompTIA A+ preparation often means jumping between notes, flashcard sites, video courses, and generic quiz tools. Apex A+ Academy brings those workflows together in a fast desktop application designed around active recall and measurable progress.
+CompTIA A+ preparation often means jumping between notes, flashcard sites, video courses, and generic quiz tools. SkillForge Academy brings those workflows together in a fast desktop application designed around active recall and measurable progress.
 
 - **Study offline** with local-first learner data and no required account.
 - **Practice real decisions** through original troubleshooting and support scenarios.
 - **Target weak domains** with objective-level accuracy and readiness analytics.
 - **Remember more** using a spaced-repetition recall deck.
 - **Stay focused** in a polished environment built specifically for A+ preparation.
+
+## Screenshots
+
+Screenshots will be added as the public UI stabilizes.
+
+Planned:
+
+- Dashboard
+- Learning path view
+- Flashcard review
+- Mock exam results
+- PBQ/practice lab flow
 
 ## Features
 
@@ -59,7 +67,7 @@ Beyond multiple choice, practice interactive **matching** (assign items to categ
 
 ### Spaced-Repetition Flashcards
 
-Rate each recall as Again, Hard, Good, or Easy. Apex automatically schedules the card's next review interval so difficult material returns sooner.
+Rate each recall as Again, Hard, Good, or Easy. SkillForge automatically schedules the card's next review interval so difficult material returns sooner.
 
 ### Performance Analytics
 
@@ -83,7 +91,7 @@ Progress is stored locally through the Rust backend. The app does not require a 
 
 ## Exam Coverage
 
-Apex A+ Academy is organized around the current CompTIA A+ V15 exam series:
+SkillForge Academy is organized around the current CompTIA A+ V15 exam series:
 
 | Exam | Domains covered |
 | --- | --- |
@@ -107,7 +115,7 @@ The included practice material is original educational content. It does not cont
 ## Architecture
 
 ```text
-ApexAPlus/
+SkillForgeAcademy/
 |-- src/                       React and TypeScript application
 |   |-- App.tsx                Navigation and product workflows
 |   |-- data.ts                Original domains, questions, and cards
@@ -133,14 +141,14 @@ Learner state is written atomically to the operating system's application-data d
 
 ### Installer
 
-**Latest stable build:** [Apex A+ Academy 1.2.1 (Windows x64 installer)](https://github.com/DigitalHallucinations/apex-a-plus-academy/releases/download/v1.2.1/Apex.A%2B.Academy_1.2.1_x64-setup.exe) · [all releases](https://github.com/DigitalHallucinations/apex-a-plus-academy/releases)
+**Latest stable build:** [SkillForge Academy 1.2.1 (Windows x64 installer)](https://github.com/ForgeWireLabs/skillforge-academy/releases/download/v1.2.1/Apex.A%2B.Academy_1.2.1_x64-setup.exe) · [all releases](https://github.com/ForgeWireLabs/skillforge-academy/releases)
 
 Download the `.exe`, run it, and follow the prompts. Because the build is not yet code-signed, Windows SmartScreen may show an unrecognized-publisher warning — choose **More info → Run anyway**. To sign your own builds and remove that warning, see [docs/CODE-SIGNING.md](docs/CODE-SIGNING.md).
 
 A SHA-256 checksum is attached to each release as `SHA256SUMS.txt`. Verify your download in PowerShell:
 
 ```powershell
-Get-FileHash ".\Apex A+ Academy_1.2.1_x64-setup.exe" -Algorithm SHA256
+Get-FileHash ".\SkillForge Academy_1.2.1_x64-setup.exe" -Algorithm SHA256
 ```
 
 ## Development
@@ -154,8 +162,8 @@ Get-FileHash ".\Apex A+ Academy_1.2.1_x64-setup.exe" -Algorithm SHA256
 ### Start the Desktop App
 
 ```powershell
-git clone https://github.com/DigitalHallucinations/apex-a-plus-academy.git
-cd apex-a-plus-academy
+git clone https://github.com/ForgeWireLabs/skillforge-academy.git
+cd skillforge-academy
 npm install
 npm run desktop:dev
 ```
@@ -197,6 +205,10 @@ cargo check --manifest-path src-tauri/Cargo.toml
 - Generated learner data and build artifacts are excluded from source control.
 - Removing the application does not necessarily remove its app-data directory; delete that directory separately when a complete data reset is required.
 
+## Project status
+
+SkillForge Academy is an active desktop MVP. The CompTIA A+ track is usable today, while content depth, accessibility testing, installer trust, and additional certification tracks remain ongoing work.
+
 ## Roadmap
 
 Shipped:
@@ -228,9 +240,13 @@ Before contributing assessment content:
 3. Include the relevant exam, domain, objective, answer, and rationale.
 4. Verify commands, ports, standards, and platform behavior against authoritative documentation.
 
+## License
+
+A project license has not yet been selected. Until a LICENSE file is published, default copyright applies.
+
 ## Trademark Notice
 
-CompTIA, A+, and related marks are trademarks of CompTIA, Inc. Apex A+ Academy is an independent educational project and is not affiliated with, sponsored by, or endorsed by CompTIA. Exam objectives and certification requirements may change; always compare your study plan with the official CompTIA materials.
+CompTIA, A+, and related marks are trademarks of CompTIA, Inc. SkillForge Academy is an independent educational project and is not affiliated with, sponsored by, or endorsed by CompTIA. Exam objectives and certification requirements may change; always compare your study plan with the official CompTIA materials.
 
 ---
 
