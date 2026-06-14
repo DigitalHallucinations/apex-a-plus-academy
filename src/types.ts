@@ -51,5 +51,6 @@ export interface LearnerState {
   bookmarks: string[];
   notes: { id: string; title: string; body: string; updatedAt: string }[];
   cardRatings: Record<string, { ease: number; due: string; interval: number }>;
+  dailyActivity: Record<string, { questions: number; cards: number }>;
   theme: "dark" | "light";
 }
