@@ -11,7 +11,7 @@ npm run desktop:build
 ./scripts/sign-windows.ps1 -Thumbprint <your-cert-thumbprint>
 ```
 
-The script signs both `apex-a-plus.exe` and the NSIS `*_x64-setup.exe` with an
+The script signs both `skillforge-academy.exe` and the NSIS `*_x64-setup.exe` with an
 RFC 3161 timestamp. Re-run it after every build (signing happens after bundling).
 
 ## What removes the SmartScreen warning?
@@ -65,7 +65,7 @@ is a security decision that should be made by the machine's owner.
 ```powershell
 # 1. Create a self-signed code-signing certificate
 $cert = New-SelfSignedCertificate -Type CodeSigningCert `
-  -Subject "CN=Apex Learning Labs (self-signed)" `
+  -Subject "CN=ForgeWire Labs (self-signed)" `
   -CertStoreLocation Cert:\CurrentUser\My `
   -KeyUsage DigitalSignature -KeyExportPolicy Exportable `
   -NotAfter (Get-Date).AddYears(3)
@@ -75,15 +75,15 @@ $cert = New-SelfSignedCertificate -Type CodeSigningCert `
 
 # 3. To trust it on THIS machine, export the public cert and import it into
 #    LocalMachine Trusted Root + Trusted Publishers (requires admin):
-Export-Certificate -Cert $cert -FilePath apex-selfsign.cer
-Import-Certificate -FilePath apex-selfsign.cer -CertStoreLocation Cert:\LocalMachine\Root
-Import-Certificate -FilePath apex-selfsign.cer -CertStoreLocation Cert:\LocalMachine\TrustedPublisher
+Export-Certificate -Cert $cert -FilePath skillforge-selfsign.cer
+Import-Certificate -FilePath skillforge-selfsign.cer -CertStoreLocation Cert:\LocalMachine\Root
+Import-Certificate -FilePath skillforge-selfsign.cer -CertStoreLocation Cert:\LocalMachine\TrustedPublisher
 ```
 
 ## Verify a signature
 
 ```powershell
-Get-AuthenticodeSignature ".\src-tauri\target\release\bundle\nsis\Apex A+ Academy_1.2.0_x64-setup.exe" | Format-List
+Get-AuthenticodeSignature ".\src-tauri\target\release\bundle\nsis\SkillForge Academy_1.2.1_x64-setup.exe" | Format-List
 ```
 
 `Status` should be `Valid` once the signing certificate is trusted by the machine.

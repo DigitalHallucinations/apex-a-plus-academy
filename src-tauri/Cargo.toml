@@ -1,12 +1,12 @@
 [package]
-name = "apex-a-plus"
+name = "skillforge-academy"
 version = "1.2.1"
-description = "A private, offline-first CompTIA A+ study companion"
-authors = ["Apex Learning Labs"]
+description = "Offline-first certification learning and exam-prep desktop app, starting with CompTIA A+."
+authors = ["ForgeWire Labs"]
 edition = "2021"
 
 [lib]
-name = "apex_a_plus_lib"
+name = "skillforge_academy_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
 [build-dependencies]

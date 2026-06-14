@@ -44,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tagName: ${{ github.ref_name }}
-          releaseName: "Apex A+ Academy ${{ github.ref_name }}"
+          releaseName: "SkillForge Academy ${{ github.ref_name }}"
           releaseBody: "See CHANGELOG.md for release details."
           releaseDraft: true
           prerelease: false

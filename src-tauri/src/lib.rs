@@ -137,5 +137,5 @@ pub fn run() {
             load_content
         ])
         .run(tauri::generate_context!())
-        .expect("error while running Apex A+ Academy");
+        .expect("error while running SkillForge Academy");
 }

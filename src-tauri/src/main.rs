@@ -1,3 +1,3 @@
 fn main() {
-    apex_a_plus_lib::run();
+    skillforge_academy_lib::run();
 }

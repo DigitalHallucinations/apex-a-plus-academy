@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Authenticode-signs the built Apex A+ Academy Windows installer (and app exe).
+  Authenticode-signs the built SkillForge Academy Windows installer (and app exe).
 
 .DESCRIPTION
   Signs with either a certificate already in your Windows certificate store
@@ -58,7 +58,7 @@ if (-not $File) {
   $bundle = Join-Path $root 'src-tauri/target/release/bundle/nsis'
   $installer = Get-ChildItem (Join-Path $bundle '*_x64-setup.exe') -ErrorAction SilentlyContinue |
     Sort-Object LastWriteTime | Select-Object -Last 1
-  $appExe = Join-Path $root 'src-tauri/target/release/apex-a-plus.exe'
+  $appExe = Join-Path $root 'src-tauri/target/release/skillforge-academy.exe'
   $File = @($appExe, $installer.FullName) | Where-Object { $_ -and (Test-Path $_) }
 }
 if (-not $File) { throw 'Nothing to sign. Run `npm run desktop:build` first, or pass -File.' }

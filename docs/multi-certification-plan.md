@@ -1,17 +1,17 @@
-# Apex Academy — Multi-Certification Architecture Plan
+# SkillForge Academy — Multi-Certification Architecture Plan
 
 **Status:** Draft for review · **Date:** 2026-06-14
 **Decisions locked in:** (1) single app with a track picker, not separate editions;
 (2) CompTIA stack first — A+ → Network+ → Security+; (3) **per-cert** progress
 (streaks included); (4) an **all-tracks** analytics overview from day one; (5)
-**umbrella branding** — "Apex Academy" with named tracks ("A+ Track", "Network+ Track").
+**umbrella branding** — "SkillForge Academy" with named tracks ("A+ Track", "Network+ Track").
 
 **Done ahead of the rest of the plan (the "gotcha"):** all A+ content ids are now
 namespaced under `aplus-` and a v2→v3 re-key migration preserves existing learner
 progress. See §2.3.
 
 This document defines the **target data model** and a **lossless migration** that turns
-"Apex A+ Academy" into "Apex Academy," with A+ as the first of several certification
+"Apex A+ Academy" into "SkillForge Academy," with A+ as the first of several certification
 *tracks*. It is design-only; no call sites change until this is approved.
 
 ---
@@ -235,7 +235,7 @@ if (!progress["a-plus"]) progress["a-plus"] = {
 | **3 — Content + brand** | Author Network+ (`N10-009`) and Security+ (`SY0-701`) banks; brand pass: product name, window title ([lib.rs:97](../src-tauri/src/lib.rs)), `tauri.conf.json`, README, icon. | `content/network-plus/*`, `content/security-plus/*`, README, Tauri config |
 
 Phases 0–2 ship with A+ only and zero user-visible change beyond the track picker — they're
-pure de-risking. Phase 3 is where "Apex Academy" actually becomes multi-cert.
+pure de-risking. Phase 3 is where "SkillForge Academy" actually becomes multi-cert.
 
 ---
 
@@ -256,7 +256,7 @@ pure de-risking. Phase 3 is where "Apex Academy" actually becomes multi-cert.
 
 1. **Streak scope:** ✅ per-cert (each track has its own streak/goal/counts). See §3.
 2. **Analytics:** ✅ per-track *and* an all-tracks overview from day one. See §3 derived views.
-3. **Branding:** ✅ "Apex Academy" umbrella; tracks named "A+ Track", "Network+ Track",
+3. **Branding:** ✅ "SkillForge Academy" umbrella; tracks named "A+ Track", "Network+ Track",
    "Security+ Track". Drives copy/icon work and the Phase 3 product-name pass.
 4. **ID uniqueness:** ✅ fixed up front — all ids cert-prefixed, A+ included. See §2.3.
 

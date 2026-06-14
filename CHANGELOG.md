@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Apex A+ Academy are documented here.
+All notable changes to SkillForge Academy are documented here. SkillForge Academy was previously developed under the working name Apex A+ Academy.
 
 ## 1.2.1 - 2026-06-14
 
@@ -38,7 +38,7 @@ Headline: full-length timed mock exams and performance-based questions, deepenin
 
 ## 1.1.0 - 2026-06-14
 
-Download: [v1.1.0 release](https://github.com/DigitalHallucinations/apex-a-plus-academy/releases/tag/v1.1.0) (Windows x64 installer + SHA-256 checksum).
+Download: [v1.1.0 release](https://github.com/ForgeWireLabs/skillforge-academy/releases/tag/v1.1.0) (Windows x64 installer + SHA-256 checksum).
 
 ### Added
 

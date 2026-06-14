@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Apex A+ Academy",
+  "productName": "SkillForge Academy",
   "version": "1.2.1",
   "identifier": "com.apexlearning.aplusacademy",
   "build": {
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Apex A+ Academy",
+        "title": "SkillForge Academy",
         "width": 1440,
         "height": 920,
         "minWidth": 1060,
@@ -34,10 +34,10 @@
       "../src/content/a-plus/flashcards.json": "content/a-plus/flashcards.json",
       "../src/content/a-plus/pbqs.json": "content/a-plus/pbqs.json"
     },
-    "shortDescription": "Offline-first CompTIA A+ study and exam prep",
-    "longDescription": "A focused desktop learning environment with objective tracking, practice exams, spaced repetition, notes, bookmarks, and detailed analytics.",
+    "shortDescription": "Offline-first certification learning and exam-prep desktop app, starting with CompTIA A+.",
+    "longDescription": "Offline-first certification learning and exam-prep desktop app, starting with CompTIA A+. A focused desktop learning environment with objective tracking, practice exams, spaced repetition, notes, bookmarks, and detailed analytics.",
     "category": "Education",
-    "copyright": "Copyright 2026 Apex Learning Labs",
+    "copyright": "Copyright 2026 ForgeWire Labs",
     "windows": {
       "nsis": {
         "displayLanguageSelector": false,
