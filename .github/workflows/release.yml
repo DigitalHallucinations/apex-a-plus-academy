@@ -54,7 +54,8 @@ jobs:
           $files = Get-ChildItem src-tauri/target/release/bundle/nsis/*.exe
           $lines = foreach ($file in $files) {
             $hash = (Get-FileHash $file.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
-            "$hash  $($file.Name)"
+            $assetName = $file.Name -replace ' ', '.'
+            "$hash  $assetName"
           }
           $lines | Set-Content SHA256SUMS.txt -Encoding ascii
           gh release upload "${{ github.ref_name }}" SHA256SUMS.txt --clobber
