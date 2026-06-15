@@ -2,6 +2,12 @@
 
 All notable changes to SkillForge Academy are documented here. SkillForge Academy was previously developed under the working name Apex A+ Academy.
 
+## 1.3.2 - 2026-06-14
+
+### Added
+
+- Lessons ("classes") in Learning Paths: each domain now includes short, original lessons that teach the material before the knowledge checks — 36 lessons across all nine A+ domains, with read/unread tracking and per-domain progress.
+
 ## 1.3.1 - 2026-06-14
 
 ### Changed
