@@ -1,0 +1,998 @@
+[
+  {
+    "id": "aplus-mobile-l1",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-mobile",
+    "title": "Laptop hardware components",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Identify and replace laptop hardware components"],
+    "sections": [
+      { "body": "A laptop packs the same functions as a desktop into a portable chassis, so its parts are smaller, more integrated, and often proprietary. Knowing which components are field-replaceable — and which are soldered down — tells you whether a fault is a quick fix or a board-level repair." },
+      {
+        "heading": "Memory and storage",
+        "body": "Laptops use compact form factors that differ from their desktop equivalents:",
+        "bullets": [
+          "RAM uses `SO-DIMM` modules, which are physically shorter than desktop DIMMs.",
+          "Storage is commonly an `M.2` SSD (NVMe over PCIe, or slower SATA), or a 2.5-inch SATA SSD in older units.",
+          "Some thin laptops solder RAM and storage to the board, making them non-upgradeable — always check before quoting an upgrade."
+        ]
+      },
+      {
+        "heading": "Commonly replaced parts",
+        "body": "The parts you will swap most often are the battery, keyboard, RAM, storage, and the wireless card (an `M.2` Key A/E module). The CPU and GPU are usually surface-mounted and not serviceable in the field."
+      },
+      {
+        "heading": "Inside the lid",
+        "body": "The display assembly carries more than the panel: it also houses the webcam, microphone, and the Wi-Fi/Bluetooth antennas, whose cables route down through the hinge. A damaged hinge can therefore cause flaky wireless or a dead camera, not just a loose screen."
+      }
+    ]
+  },
+  {
+    "id": "aplus-mobile-l2",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-mobile",
+    "title": "Displays and digitizers",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Diagnose laptop display components"],
+    "sections": [
+      { "body": "The display is a stack of parts working together: a panel that produces the image, a backlight that illuminates it, and — on touchscreens — a digitizer that turns finger contact into coordinates. Matching a symptom to the right layer is the key skill." },
+      {
+        "heading": "Panel types",
+        "body": "Three technologies dominate, each with trade-offs:",
+        "bullets": [
+          "`TN` — cheap and fast, but poor viewing angles and color.",
+          "`IPS` — accurate color and wide viewing angles, the modern default.",
+          "`OLED` — per-pixel lighting for deep blacks and contrast, but risks burn-in over time."
+        ]
+      },
+      {
+        "heading": "Backlight faults",
+        "body": "Most laptops use an LED backlight; older ones used a CCFL tube driven by an inverter. The classic symptom: the screen is very dim but a faint image is visible under a flashlight. That means the panel is still drawing pixels, so the fault is the backlight or its power circuit — not the panel itself."
+      },
+      {
+        "heading": "Digitizer issues",
+        "body": "The digitizer maps physical touch to screen coordinates. If taps register a noticeable distance from where the user presses, the digitizer needs recalibration or replacement — the LCD panel is fine because it is still displaying correctly."
+      }
+    ]
+  },
+  {
+    "id": "aplus-mobile-l3",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-mobile",
+    "title": "Mobile connectivity",
+    "order": 3,
+    "estMinutes": 5,
+    "objectives": ["Configure mobile accessories and connectivity"],
+    "sections": [
+      { "body": "Mobile devices juggle several wireless radios at once, each suited to a different range and purpose. Knowing which radio handles which job lets you pick the right setting to toggle when something will not connect." },
+      {
+        "heading": "The wireless radios",
+        "body": "From shortest range to longest:",
+        "bullets": [
+          "`NFC` — a few centimeters, used for tap-to-pay and quick pairing.",
+          "`Bluetooth` — a personal-area network for peripherals like headsets and keyboards.",
+          "`Wi-Fi` — local network and internet access in homes and offices.",
+          "`Cellular` (LTE/5G) — wide-area data when away from Wi-Fi."
+        ]
+      },
+      {
+        "heading": "Pairing Bluetooth",
+        "body": "The pairing flow is consistent across devices: enable Bluetooth, make the accessory discoverable, select it from the list on the host, confirm any code, then test. If a device will not appear, it is usually not in discoverable mode or is already paired to something else."
+      },
+      {
+        "heading": "Sharing a connection",
+        "body": "A phone can share its cellular data as a hotspot (over Wi-Fi) or by tethering (over USB or Bluetooth). Airplane mode disables all radios at once; you can then re-enable Wi-Fi or Bluetooth individually if the venue allows it."
+      }
+    ]
+  },
+  {
+    "id": "aplus-mobile-l4",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-mobile",
+    "title": "Ports, accessories, and power",
+    "order": 4,
+    "estMinutes": 5,
+    "objectives": ["Configure laptop power options", "Identify laptop expansion options"],
+    "sections": [
+      { "body": "Modern laptops lean on a small set of versatile ports plus accessories that expand them. Understanding what each port can carry — and how USB-C consolidates several roles — saves you from recommending the wrong adapter or dock." },
+      {
+        "heading": "Ports you will meet",
+        "body": "Common connectors and what they carry:",
+        "bullets": [
+          "`USB-C` — data, video (DisplayPort Alt Mode), and power delivery over one reversible connector.",
+          "`Thunderbolt` — high-speed data and video, physically using the USB-C connector.",
+          "`HDMI` / `DisplayPort` — external displays.",
+          "`USB-A` — legacy peripherals and flash drives."
+        ]
+      },
+      {
+        "heading": "Docks vs. port replicators",
+        "body": "A port replicator simply breaks one connection out into more of the same ports. A docking station does more — adding network, extra displays, and charging — and often connects over a single Thunderbolt or USB-C cable, turning a laptop into a desktop workstation."
+      },
+      {
+        "heading": "Power and battery life",
+        "body": "USB-C Power Delivery (`USB-C PD`) lets one cable both charge the laptop and carry data. To extend runtime away from an outlet, enable a battery-saver power plan, which lowers CPU and display power draw — a more effective first step than replacing the battery."
+      }
+    ]
+  },
+  {
+    "id": "aplus-networking-l1",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-networking",
+    "title": "Common ports and protocols",
+    "order": 1,
+    "estMinutes": 7,
+    "objectives": ["Compare common ports and protocols"],
+    "sections": [
+      { "body": "A port number is the address of a service on a device. When a packet arrives, the port tells the system which application should handle it. Memorizing the common ports — and whether each rides on TCP, UDP, or both — is one of the highest-value things you can do for the exam and the job." },
+      {
+        "heading": "Ports worth memorizing",
+        "body": "The frequently tested set:",
+        "bullets": [
+          "`20`/`21` FTP, `22` SSH/SFTP, `23` Telnet, `25` SMTP",
+          "`53` DNS, `67`/`68` DHCP, `80` HTTP, `443` HTTPS",
+          "`110` POP3, `143` IMAP, `3389` RDP, `445` SMB"
+        ]
+      },
+      {
+        "heading": "TCP vs. UDP",
+        "body": "TCP is connection-oriented: it sets up a session and retransmits lost data, so it suits web, email, and file transfer. UDP is connectionless and fast with no delivery guarantee, which is why it carries DNS lookups, DHCP, and real-time voice and video where speed beats perfect accuracy."
+      },
+      {
+        "heading": "Secure vs. insecure pairs",
+        "body": "Many protocols come in a plaintext version and an encrypted replacement. Prefer the secure one: `HTTPS` over HTTP, `SSH` over Telnet, and `SFTP`/`FTPS` over plain FTP. Knowing the secure alternative is a recurring exam theme."
+      }
+    ]
+  },
+  {
+    "id": "aplus-networking-l2",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-networking",
+    "title": "Wi-Fi standards and frequencies",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Compare wireless networking protocols"],
+    "sections": [
+      { "body": "Wi-Fi has evolved through several 802.11 standards, each faster than the last. The other half of the picture is frequency: the band a network uses trades range against speed and interference." },
+      {
+        "heading": "The 802.11 generations",
+        "body": "Newest first, with their marketing names:",
+        "bullets": [
+          "`802.11ax` (Wi-Fi 6) — highest throughput, efficient in crowded areas, 2.4 and 5 GHz (6 GHz on 6E).",
+          "`802.11ac` (Wi-Fi 5) — 5 GHz only, fast and widely deployed.",
+          "`802.11n` (Wi-Fi 4) — dual-band, the first to use MIMO.",
+          "`802.11g`/`802.11b` — older 2.4 GHz standards."
+        ]
+      },
+      {
+        "heading": "2.4 GHz vs. 5 GHz",
+        "body": "The `2.4 GHz` band travels farther and through walls better but is slower and crowded with non-Wi-Fi devices. The `5 GHz` band is faster with more channels and less interference, but its range is shorter. Choose based on whether the user needs coverage or speed."
+      },
+      {
+        "heading": "Securing the wireless",
+        "body": "Use the strongest encryption the hardware supports — `WPA3` if available, otherwise `WPA2` with AES. Avoid the deprecated WEP and original WPA, which are trivially broken."
+      }
+    ]
+  },
+  {
+    "id": "aplus-networking-l3",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-networking",
+    "title": "Configuring a SOHO network",
+    "order": 3,
+    "estMinutes": 7,
+    "objectives": ["Configure a small office / home office network"],
+    "sections": [
+      { "body": "A small office / home office (SOHO) router combines several roles in one box: it routes between your LAN and the internet, hands out addresses, translates private addresses, and serves as a wireless access point. Configuring one safely is a core technician task." },
+      {
+        "heading": "Addressing with DHCP and NAT",
+        "body": "DHCP automatically leases each device an IP address, subnet mask, gateway, and DNS server — the DORA sequence (Discover, Offer, Request, Acknowledge). NAT (Network Address Translation) lets many private devices share one public IP address provided by the ISP."
+      },
+      {
+        "heading": "Private address ranges",
+        "body": "Internal networks use reserved private ranges that are not routable on the internet:",
+        "bullets": [
+          "`10.0.0.0/8`",
+          "`172.16.0.0/12`",
+          "`192.168.0.0/16`"
+        ]
+      },
+      {
+        "heading": "First hardening steps",
+        "body": "Before a router goes live, change the default admin password, update its firmware, set strong WPA2/WPA3 wireless encryption, and disable remote management and WPS. These few steps remove the most common ways SOHO networks get compromised."
+      }
+    ]
+  },
+  {
+    "id": "aplus-networking-l4",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-networking",
+    "title": "Cables, connectors, and tools",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Select and use networking tools and media"],
+    "sections": [
+      { "body": "Physical media still underpins most networks. Knowing which cable to run and which tool diagnoses which fault keeps you from guessing when a connection is flaky." },
+      {
+        "heading": "Copper and fiber",
+        "body": "Common media and their use:",
+        "bullets": [
+          "`Cat 5e`/`Cat 6` twisted pair — standard Ethernet up to 1–10 Gbps over short runs.",
+          "Fiber (single-mode or multimode) — long distance and high speed, immune to electrical interference.",
+          "Coaxial — cable internet and some CCTV."
+        ]
+      },
+      {
+        "heading": "Termination tools",
+        "body": "A `crimper` attaches RJ45 plugs to patch cables; a `punchdown tool` seats wires into a wall jack or patch panel. A cable tester then confirms each pin is wired straight through with no opens or shorts."
+      },
+      {
+        "heading": "Diagnostic tools",
+        "body": "A `toner probe` traces which cable in a bundle is which. A `loopback plug` tests a port by feeding its output back to its input. For software-side checks, `ping` tests reachability and `ipconfig` shows a host's address settings."
+      }
+    ]
+  },
+  {
+    "id": "aplus-hardware-l1",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-hardware",
+    "title": "Motherboards, CPUs, and expansion",
+    "order": 1,
+    "estMinutes": 7,
+    "objectives": ["Identify motherboard form factors and components"],
+    "sections": [
+      { "body": "The motherboard is the backbone that ties every component together. Its form factor sets its size and how many slots it has, while the CPU socket and expansion slots determine what you can install." },
+      {
+        "heading": "Form factors and slots",
+        "body": "From largest to smallest: `ATX`, `microATX`, and `Mini-ITX`. Larger boards offer more expansion (RAM and PCIe slots); smaller ones suit compact builds. Expansion cards use `PCIe` slots, sized by lane count such as x1 and x16 (x16 for graphics)."
+      },
+      {
+        "heading": "CPU sockets",
+        "body": "A CPU is matched to a specific socket. Intel uses LGA sockets where the pins are on the board; AMD's modern AM4/AM5 are also pin-on-board. You cannot mix a CPU and socket that do not match, so always confirm compatibility before ordering."
+      },
+      {
+        "heading": "Firmware and the CMOS battery",
+        "body": "The UEFI/BIOS firmware initializes hardware at startup and stores settings like boot order. A small `CMOS battery` keeps those settings and the clock alive when the system is unplugged — a dead one causes the time to reset and boot settings to be lost."
+      }
+    ]
+  },
+  {
+    "id": "aplus-hardware-l2",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-hardware",
+    "title": "Memory and storage",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Compare RAM and storage technologies"],
+    "sections": [
+      { "body": "Memory holds the data a system is actively working on; storage keeps it permanently. Picking the right type — and recognizing the connector — is everyday hardware work." },
+      {
+        "heading": "RAM types",
+        "body": "Desktops use full-size `DIMM` modules; laptops use shorter `SO-DIMM`s. Generations are not interchangeable — `DDR4` and `DDR5` are keyed differently and will not fit the wrong slot. Some systems support dual-channel, which pairs modules for more bandwidth."
+      },
+      {
+        "heading": "Storage technologies",
+        "body": "Speed and connector, slowest to fastest:",
+        "bullets": [
+          "Hard disk drive (`HDD`) — spinning platters, cheap capacity, slowest.",
+          "SATA `SSD` — flash over the SATA interface, much faster than HDD.",
+          "`NVMe` SSD — flash over PCIe in an M.2 slot, the fastest mainstream option."
+        ]
+      },
+      {
+        "heading": "RAID basics",
+        "body": "RAID combines drives for speed or redundancy: `RAID 0` stripes for speed with no protection, `RAID 1` mirrors for redundancy, `RAID 5` stripes with parity (needs 3+ disks), and `RAID 10` combines mirroring and striping."
+      }
+    ]
+  },
+  {
+    "id": "aplus-hardware-l3",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-hardware",
+    "title": "Power supplies and cooling",
+    "order": 3,
+    "estMinutes": 6,
+    "objectives": ["Select power supplies and cooling solutions"],
+    "sections": [
+      { "body": "The power supply converts wall AC into the DC voltages a PC needs, and cooling carries away the heat that components produce. Both are common sources of intermittent, hard-to-diagnose faults." },
+      {
+        "heading": "Sizing a power supply",
+        "body": "A power supply unit (`PSU`) is rated in watts; choose one with enough headroom for the CPU, GPU, and drives, plus the right connectors (24-pin board, CPU, and PCIe power). An undersized PSU causes random shutdowns under load."
+      },
+      {
+        "heading": "Voltages and safety",
+        "body": "A PC PSU supplies `+3.3V`, `+5V`, and `+12V` rails. Never open a power supply — its internal capacitors can hold a dangerous charge even when unplugged. Replace, do not repair, a failed PSU."
+      },
+      {
+        "heading": "Cooling",
+        "body": "Heat is moved by air (heatsinks and case fans) or liquid cooling loops. A thin layer of `thermal paste` between the CPU and heatsink fills microscopic gaps so heat transfers efficiently. Overheating shows up as throttling, shutdowns, or loud fans."
+      }
+    ]
+  },
+  {
+    "id": "aplus-hardware-l4",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-hardware",
+    "title": "Printers",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Compare printer types and maintenance"],
+    "sections": [
+      { "body": "Printers come in a few distinct technologies, and each has a signature maintenance routine and failure mode. Knowing the imaging process points you straight at the part to service." },
+      {
+        "heading": "Printer types",
+        "body": "The main families:",
+        "bullets": [
+          "Laser — uses a drum, toner, and fused heat; fast, sharp text.",
+          "Inkjet — sprays liquid ink; cheap hardware, good color.",
+          "Thermal — heats special paper; common for receipts and labels.",
+          "Impact (dot-matrix) — pins strike a ribbon; needed for carbon-copy forms."
+        ]
+      },
+      {
+        "heading": "The laser imaging process",
+        "body": "The seven steps in order: processing, charging, exposing, developing, transferring, fusing, and cleaning. A recurring exam question asks you to place these in sequence, so commit the order to memory."
+      },
+      {
+        "heading": "Maintenance and connectivity",
+        "body": "Laser printers need periodic maintenance kits (rollers, fuser); inkjets need head cleaning and alignment. Printers are shared over USB, the network, or print servers, and modern ones support direct printing from mobile devices."
+      }
+    ]
+  },
+  {
+    "id": "aplus-virtualization-l1",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-virtualization",
+    "title": "Hypervisors and virtual machines",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Explain virtualization concepts"],
+    "sections": [
+      { "body": "Virtualization lets one physical computer run several isolated operating systems at once. The software that makes this possible is the hypervisor, which divides real hardware into virtual machines that each believe they own the box." },
+      {
+        "heading": "Type 1 vs. Type 2 hypervisors",
+        "body": "A `Type 1` (bare-metal) hypervisor runs directly on the hardware with no host OS — fast and used in data centers (ESXi, Hyper-V). A `Type 2` (hosted) hypervisor runs as an app on top of a normal OS (VirtualBox, VMware Workstation), which is convenient for testing on a desktop."
+      },
+      {
+        "heading": "Why virtualize",
+        "body": "Common uses: consolidating many servers onto fewer machines, sandboxing risky software, running legacy applications, and spinning up disposable test environments. A VM's whole state is just files, so it can be snapshotted and restored quickly."
+      },
+      {
+        "heading": "Requirements",
+        "body": "Virtualization needs CPU support (Intel VT-x or AMD-V) enabled in firmware, plenty of RAM, and enough storage for each guest. Underprovisioning any of these makes the guests sluggish."
+      }
+    ]
+  },
+  {
+    "id": "aplus-virtualization-l2",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-virtualization",
+    "title": "Cloud service models",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Compare cloud service models"],
+    "sections": [
+      { "body": "Cloud computing rents computing resources over the internet instead of owning them. The service models differ in how much the provider manages versus how much you do." },
+      {
+        "heading": "The three core models",
+        "body": "From most to least that you manage yourself:",
+        "bullets": [
+          "`IaaS` (Infrastructure as a Service) — you rent virtual machines, storage, and networks and manage the OS upward.",
+          "`PaaS` (Platform as a Service) — the provider runs the OS and runtime; you just deploy your application.",
+          "`SaaS` (Software as a Service) — you simply use finished software in a browser, like email or a CRM."
+        ]
+      },
+      {
+        "heading": "Why it appeals",
+        "body": "The cloud is elastic — you scale resources up or down on demand — and metered, so you pay for what you use. That turns large up-front hardware purchases into predictable operating costs."
+      }
+    ]
+  },
+  {
+    "id": "aplus-virtualization-l3",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-virtualization",
+    "title": "Cloud deployment and shared resources",
+    "order": 3,
+    "estMinutes": 5,
+    "objectives": ["Compare cloud deployment models"],
+    "sections": [
+      { "body": "Beyond what a cloud provides, you choose how it is deployed — who owns it and who can use it. The right model balances control, cost, and compliance." },
+      {
+        "heading": "Deployment models",
+        "body": "The main choices:",
+        "bullets": [
+          "`Public` cloud — shared infrastructure run by a provider like AWS or Azure.",
+          "`Private` cloud — dedicated to one organization for control and compliance.",
+          "`Hybrid` cloud — a mix, keeping sensitive workloads private while bursting to public for scale.",
+          "`Community` cloud — shared by organizations with common needs."
+        ]
+      },
+      {
+        "heading": "Shared and measured resources",
+        "body": "Public clouds rely on resource pooling — many customers share a pool of hardware, with each tenant isolated from the others. Rapid elasticity and measured (metered) service mean capacity grows on demand and you are billed for actual usage."
+      }
+    ]
+  },
+  {
+    "id": "aplus-virtualization-l4",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-virtualization",
+    "title": "Containers vs. virtual machines",
+    "order": 4,
+    "estMinutes": 5,
+    "objectives": ["Contrast containers and virtual machines"],
+    "sections": [
+      { "body": "Containers are a lighter alternative to full virtual machines. Both isolate applications, but they do it at different layers, which changes their size and speed." },
+      {
+        "heading": "How they differ",
+        "body": "A VM virtualizes hardware and runs a complete guest OS, so each one is large and slower to start. A container shares the host's OS kernel and packages only the app and its dependencies, so it is small, starts in seconds, and packs densely onto a host."
+      },
+      {
+        "heading": "When to use which",
+        "body": "Use a VM when you need strong isolation or a different operating system. Use a container to deploy and scale many copies of an application quickly and consistently — the model behind most modern cloud services."
+      }
+    ]
+  },
+  {
+    "id": "aplus-hw-troubleshooting-l1",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-hw-troubleshooting",
+    "title": "The CompTIA troubleshooting method",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Apply the best practice troubleshooting methodology"],
+    "sections": [
+      { "body": "CompTIA teaches a fixed six-step troubleshooting process, and the exam expects you to know it in order. The method keeps you from jumping to conclusions and ensures you actually verify and document the fix." },
+      {
+        "heading": "The six steps",
+        "body": "In sequence:",
+        "bullets": [
+          "1. Identify the problem (question the user, check for changes).",
+          "2. Establish a theory of probable cause (question the obvious).",
+          "3. Test the theory to determine the cause.",
+          "4. Establish a plan of action and implement the solution.",
+          "5. Verify full system functionality and apply preventive measures.",
+          "6. Document findings, actions, and outcomes."
+        ]
+      },
+      {
+        "heading": "Key habits",
+        "body": "Always back up data before making changes, change one thing at a time so you know what fixed it, and consider corporate policies and the user's impact. If your first theory fails, establish a new one or escalate."
+      }
+    ]
+  },
+  {
+    "id": "aplus-hw-troubleshooting-l2",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-hw-troubleshooting",
+    "title": "Diagnosing PC hardware symptoms",
+    "order": 2,
+    "estMinutes": 7,
+    "objectives": ["Diagnose problems with PC hardware"],
+    "sections": [
+      { "body": "Hardware faults announce themselves with characteristic symptoms. Learning to map a symptom to its likely component turns vague complaints into a focused repair." },
+      {
+        "heading": "Boot and power symptoms",
+        "body": "No power at all points to the PSU, cabling, or wall outlet. POST beep codes or no display suggest RAM, GPU, or CPU seating. A `time/date reset` on every boot is the classic dead CMOS battery."
+      },
+      {
+        "heading": "Storage and memory warnings",
+        "body": "Failing drives give early warning: clicking or grinding noises, S.M.A.R.T. errors, very slow performance, or files that disappear. Bad RAM tends to cause random crashes and blue screens that move around rather than repeat on one app."
+      },
+      {
+        "heading": "Heat and display",
+        "body": "Overheating causes throttling, sudden shutdowns, and loud fans — check airflow, dust, and thermal paste. Display artifacts, distortion, or a blank screen with the system running point to the GPU, cable, or the monitor itself."
+      }
+    ]
+  },
+  {
+    "id": "aplus-hw-troubleshooting-l3",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-hw-troubleshooting",
+    "title": "Network connectivity faults",
+    "order": 3,
+    "estMinutes": 6,
+    "objectives": ["Troubleshoot network connectivity"],
+    "sections": [
+      { "body": "When a device cannot reach the network, work outward from the host: confirm the physical link, then the IP configuration, then name resolution, then the path to the destination." },
+      {
+        "heading": "Read the IP address",
+        "body": "Run `ipconfig` (Windows) or `ifconfig`/`ip` (Linux). An address starting `169.254.x.x` is APIPA — the device failed to get a DHCP lease, so suspect the DHCP server or the link. No address at all usually means a physical or driver problem."
+      },
+      {
+        "heading": "Test reachability",
+        "body": "Use `ping` to test connectivity to the gateway, then a public IP, then a domain name. If the IP pings but the name does not, the problem is DNS. `tracert` shows where along the path packets stop."
+      },
+      {
+        "heading": "Common causes",
+        "body": "Typical culprits are a bad cable or port, wrong Wi-Fi password, weak signal, duplicate IP addresses, or an exhausted DHCP scope. Swapping a known-good cable is a fast way to rule out the physical layer."
+      }
+    ]
+  },
+  {
+    "id": "aplus-hw-troubleshooting-l4",
+    "certId": "a-plus",
+    "exam": "220-1201",
+    "domain": "aplus-hw-troubleshooting",
+    "title": "Printer problems",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Troubleshoot printers"],
+    "sections": [
+      { "body": "Print problems split into two groups: the job will not come out at all, or it prints but looks wrong. The output defect usually identifies the failing part." },
+      {
+        "heading": "Jobs that will not print",
+        "body": "Check the obvious first: power, paper, and a cleared error. Then look at the print queue — a stuck job blocks everything behind it; clearing the queue or restarting the print spooler service often fixes it. Confirm the right printer and connection are selected."
+      },
+      {
+        "heading": "Output quality on laser printers",
+        "body": "Defects point to parts:",
+        "bullets": [
+          "Faded print — low toner or a failing transfer roller.",
+          "Repeating marks down the page — a damaged drum.",
+          "Toner smears off the page — a failed fuser (not bonding the toner).",
+          "Ghost images — drum or erase-lamp issues."
+        ]
+      },
+      {
+        "heading": "Paper handling",
+        "body": "Frequent jams come from worn pickup rollers, the wrong paper weight, humidity, or overfilled trays. Always pull jammed paper in the direction of travel to avoid leaving fragments behind."
+      }
+    ]
+  },
+  {
+    "id": "aplus-os-l1",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-os",
+    "title": "Windows editions and features",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Compare Windows editions and features"],
+    "sections": [
+      { "body": "Windows ships in several editions aimed at home, business, and enterprise users. The differences are mostly about management and security features, not the core experience." },
+      {
+        "heading": "The editions",
+        "body": "From least to most capable:",
+        "bullets": [
+          "`Home` — consumer edition; lacks domain join and BitLocker.",
+          "`Pro` — adds domain join, Group Policy, BitLocker, and Remote Desktop host.",
+          "`Pro for Workstations` / `Enterprise` — higher hardware limits and advanced management."
+        ]
+      },
+      {
+        "heading": "Domains vs. workgroups",
+        "body": "A `workgroup` is a peer-to-peer group where each PC manages its own accounts — fine for homes and tiny offices. A `domain` centralizes accounts and policy on a server (Active Directory), which is why business networks require Pro or higher to join one."
+      },
+      {
+        "heading": "32-bit vs. 64-bit",
+        "body": "A 64-bit version of Windows can address far more than 4 GB of RAM and runs both 64-bit and 32-bit apps; a 32-bit OS is capped near 4 GB. Modern installs are 64-bit, which also requires a 64-bit CPU."
+      }
+    ]
+  },
+  {
+    "id": "aplus-os-l2",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-os",
+    "title": "Windows tools and the command line",
+    "order": 2,
+    "estMinutes": 7,
+    "objectives": ["Use Windows management tools and commands"],
+    "sections": [
+      { "body": "Windows bundles a deep toolbox of utilities and commands. Knowing which one solves which problem is faster than clicking through menus, and several appear on the exam by name." },
+      {
+        "heading": "Management utilities",
+        "body": "Frequently used consoles:",
+        "bullets": [
+          "`Task Manager` — processes, performance, and startup apps.",
+          "`Device Manager` — hardware and driver problems.",
+          "`Disk Management` — partitions, formatting, and drive letters.",
+          "`Event Viewer` — system and application logs for troubleshooting."
+        ]
+      },
+      {
+        "heading": "Essential commands",
+        "body": "Command-line staples: `ipconfig` for network settings, `ping`/`tracert` for connectivity, `sfc /scannow` to repair system files, `chkdsk` to check a disk, `gpupdate` to refresh policy, and `sfc`/`DISM` together to fix a corrupt image."
+      },
+      {
+        "heading": "Files and navigation",
+        "body": "`cd` changes directory, `dir` lists files, `md`/`rd` make and remove directories, and `copy`/`xcopy`/`robocopy` move files — `robocopy` being the robust choice for large or mirrored transfers."
+      }
+    ]
+  },
+  {
+    "id": "aplus-os-l3",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-os",
+    "title": "Linux and macOS basics",
+    "order": 3,
+    "estMinutes": 6,
+    "objectives": ["Identify features of other operating systems"],
+    "sections": [
+      { "body": "A+ technicians support more than Windows. You need a working familiarity with macOS features and core Linux commands without being an expert in either." },
+      {
+        "heading": "macOS features",
+        "body": "Know these by name: `Time Machine` for backups, `Spotlight` for search, `Mission Control` for window management, `Keychain` for stored credentials, `Disk Utility` for drives, and the `App Store` for software. macOS uses .dmg and .pkg installers."
+      },
+      {
+        "heading": "Core Linux commands",
+        "body": "Common shell commands:",
+        "bullets": [
+          "`ls`, `cd`, `pwd` — list and navigate.",
+          "`cp`, `mv`, `rm`, `mkdir` — manage files.",
+          "`chmod`/`chown` — change permissions and ownership.",
+          "`sudo`, `apt`/`yum`, `grep`, `ps` — elevate, install, search, list processes."
+        ]
+      },
+      {
+        "heading": "Filesystems",
+        "body": "Windows uses NTFS (and exFAT for large removable media); macOS uses APFS; Linux commonly uses ext4. Cross-platform USB drives are often formatted exFAT so every OS can read and write them."
+      }
+    ]
+  },
+  {
+    "id": "aplus-os-l4",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-os",
+    "title": "Installing and deploying operating systems",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Perform OS installations and upgrades"],
+    "sections": [
+      { "body": "Installing an OS is more than clicking Next. The boot method, partition scheme, and install type all affect whether data survives and whether the system boots reliably." },
+      {
+        "heading": "Partition styles and boot",
+        "body": "Modern systems use `GPT` partitioning with `UEFI` firmware, which supports drives over 2 TB and Secure Boot. Older `MBR`/BIOS is limited to 2 TB and four primary partitions. Match the firmware mode to the partition style."
+      },
+      {
+        "heading": "Install types",
+        "body": "An `in-place upgrade` keeps apps and files; a `clean install` wipes the drive for a fresh start; a `repair` install fixes system files without removing data. For widespread rollouts, `image deployment` clones a prepared image to many machines over the network."
+      },
+      {
+        "heading": "Before you begin",
+        "body": "Always back up user data first, verify hardware meets requirements, and have drivers ready. After install, run updates, reinstall applications, and restore the user's data and settings."
+      }
+    ]
+  },
+  {
+    "id": "aplus-security-l1",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-security",
+    "title": "Threats, attacks, and social engineering",
+    "order": 1,
+    "estMinutes": 7,
+    "objectives": ["Recognize common threats and attacks"],
+    "sections": [
+      { "body": "Most breaches start by tricking a person or exploiting a weak configuration, not by breaking encryption. Recognizing the named attacks lets you spot them and teach users to resist them." },
+      {
+        "heading": "Social engineering",
+        "body": "Attacks that target people:",
+        "bullets": [
+          "`Phishing` — fraudulent emails luring users to fake sites; `spear phishing` targets a specific person.",
+          "`Vishing` (voice) and `smishing` (SMS) — the same trick over phone and text.",
+          "`Tailgating` — following someone through a secure door.",
+          "`Shoulder surfing` and `dumpster diving` — stealing info by watching or digging."
+        ]
+      },
+      {
+        "heading": "Technical attacks",
+        "body": "Know `DoS`/`DDoS` (flooding a service offline), `on-path` (formerly man-in-the-middle) interception, `brute force` and `dictionary` password guessing, `SQL injection`, and `zero-day` exploits that target unknown vulnerabilities."
+      },
+      {
+        "heading": "Spoofing and rogue devices",
+        "body": "Attackers impersonate trusted things: spoofed email addresses, an `evil twin` rogue access point mimicking a real Wi-Fi name, or DNS poisoning that sends users to malicious sites. Healthy suspicion is the best first defense."
+      }
+    ]
+  },
+  {
+    "id": "aplus-security-l2",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-security",
+    "title": "Authentication and access control",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Apply authentication and access control"],
+    "sections": [
+      { "body": "Access control answers two questions: are you who you claim to be (authentication), and what are you allowed to do (authorization). Strong identity is the foundation of every other control." },
+      {
+        "heading": "Multifactor authentication",
+        "body": "Combine factors from different categories: something you `know` (password/PIN), something you `have` (phone, token, smart card), and something you `are` (fingerprint, face). Requiring two or more makes a stolen password far less useful."
+      },
+      {
+        "heading": "Least privilege",
+        "body": "Give each user and account the minimum rights needed for the job, and no more. Use standard (non-admin) accounts for daily work, separate administrator accounts for changes, and remove access promptly when roles change."
+      },
+      {
+        "heading": "Identity systems",
+        "body": "On Windows domains, `Active Directory` centralizes accounts and applies `Group Policy`. Single sign-on lets one login reach many services, while strong, unique passwords (ideally in a password manager) protect each identity."
+      }
+    ]
+  },
+  {
+    "id": "aplus-security-l3",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-security",
+    "title": "Hardening devices and networks",
+    "order": 3,
+    "estMinutes": 6,
+    "objectives": ["Apply security best practices to devices"],
+    "sections": [
+      { "body": "Hardening means reducing the attack surface — turning off what you do not need and protecting what you do. A few consistent habits block the majority of opportunistic attacks." },
+      {
+        "heading": "Workstation hardening",
+        "body": "Core steps: keep the OS and apps patched, run reputable anti-malware, enable the host firewall, require strong passwords with screen lock and timeout, and encrypt the drive with `BitLocker` (Windows) or `FileVault` (macOS) so a lost laptop does not leak data."
+      },
+      {
+        "heading": "Network hardening",
+        "body": "On the network, change default credentials, use `WPA2`/`WPA3` wireless encryption, disable unused ports and services, segment guest traffic, and keep firmware current. A firewall filters traffic by rules at the perimeter."
+      },
+      {
+        "heading": "Mobile and physical security",
+        "body": "Mobile devices need screen locks, remote wipe, and app vetting. Physical controls matter too: locked server rooms, cable locks, badge access, and shredding sensitive documents close gaps that software cannot."
+      }
+    ]
+  },
+  {
+    "id": "aplus-security-l4",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-security",
+    "title": "Malware identification and removal",
+    "order": 4,
+    "estMinutes": 7,
+    "objectives": ["Detect, remove, and prevent malware"],
+    "sections": [
+      { "body": "Malware comes in distinct types, and CompTIA defines a specific removal procedure. Knowing both the categories and the ordered steps is heavily tested." },
+      {
+        "heading": "Types of malware",
+        "body": "The main categories:",
+        "bullets": [
+          "`Virus` — attaches to files and spreads when run; a `worm` spreads on its own.",
+          "`Trojan` — disguised as legitimate software.",
+          "`Ransomware` — encrypts data and demands payment.",
+          "`Spyware`/`keylogger` — secretly captures activity; a `rootkit` hides deep in the system."
+        ]
+      },
+      {
+        "heading": "The removal procedure",
+        "body": "CompTIA's order: 1) investigate and verify the symptoms, 2) quarantine the infected system, 3) disable System Restore (Windows), 4) remediate — update anti-malware and scan, 5) schedule scans and run updates, 6) re-enable System Restore and create a clean restore point, 7) educate the end user."
+      },
+      {
+        "heading": "Recognizing infection",
+        "body": "Warning signs include pop-ups, redirected searches, sudden slowness, disabled security tools, unexpected network traffic, and files you cannot open. When malware blocks tools, boot into Safe Mode or use a bootable rescue scanner."
+      }
+    ]
+  },
+  {
+    "id": "aplus-sw-troubleshooting-l1",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-sw-troubleshooting",
+    "title": "Troubleshooting Windows problems",
+    "order": 1,
+    "estMinutes": 7,
+    "objectives": ["Troubleshoot common Windows OS problems"],
+    "sections": [
+      { "body": "Windows issues range from slow boots to a system that will not start at all. A handful of recovery tools and a calm, layered approach resolve most of them." },
+      {
+        "heading": "Boot failures",
+        "body": "If Windows will not start, use the Windows Recovery Environment: `Startup Repair` fixes boot files automatically, `System Restore` rolls back recent changes, and `Safe Mode` loads minimal drivers so you can undo a bad update or driver. A 'no boot device' error points at drive or boot-order problems."
+      },
+      {
+        "heading": "Slow or unstable systems",
+        "body": "For sluggish performance, check Task Manager for resource hogs, disable unneeded startup apps, free disk space, and scan for malware. Repeated blue screens (BSOD) often trace to a bad driver, failing RAM, or overheating — note the stop code to narrow it down."
+      },
+      {
+        "heading": "Repair commands",
+        "body": "When system files are corrupt, run `sfc /scannow` to repair them and `DISM /Online /Cleanup-Image /RestoreHealth` to fix the underlying image. `chkdsk` checks the disk for errors. Reboot and re-test after each repair."
+      }
+    ]
+  },
+  {
+    "id": "aplus-sw-troubleshooting-l2",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-sw-troubleshooting",
+    "title": "Application crashes and performance",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Troubleshoot application issues"],
+    "sections": [
+      { "body": "When a single application misbehaves while the rest of the system is fine, the problem is usually local to that app — its files, settings, permissions, or compatibility." },
+      {
+        "heading": "Crashing or won't open",
+        "body": "Start simple: close and reopen, then reboot. If it persists, run as administrator to rule out permissions, check for updates, and repair or reinstall the application. Event Viewer often logs the exact faulting module."
+      },
+      {
+        "heading": "Compatibility and resources",
+        "body": "Older programs may need Compatibility Mode or a specific runtime (such as .NET or a Visual C++ redistributable). An app that is slow or freezes may be starved of RAM or fighting another process — Task Manager shows what is consuming resources."
+      },
+      {
+        "heading": "Updates gone wrong",
+        "body": "A bad patch can break a working app. Rolling back the update, clearing the app's cache, or restoring a previous version frequently resolves regressions introduced by an update."
+      }
+    ]
+  },
+  {
+    "id": "aplus-sw-troubleshooting-l3",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-sw-troubleshooting",
+    "title": "Mobile OS and app issues",
+    "order": 3,
+    "estMinutes": 6,
+    "objectives": ["Troubleshoot mobile OS and application issues"],
+    "sections": [
+      { "body": "Phones and tablets have their own failure patterns centered on battery, connectivity, and apps. Many fixes are simple, but a few symptoms hint at security problems." },
+      {
+        "heading": "Battery and performance",
+        "body": "Fast battery drain, overheating, and slowness often come from a misbehaving app, an aging battery, or too many background processes. Close or update the offending app, check battery-usage stats, and restart the device before anything drastic."
+      },
+      {
+        "heading": "Connectivity and apps",
+        "body": "For Wi-Fi, Bluetooth, or cellular trouble, toggle the radio or Airplane mode, forget and re-add the network, and confirm signal. Apps that crash or will not update usually clear up after updating the app, clearing its cache, or reinstalling it."
+      },
+      {
+        "heading": "Security symptoms",
+        "body": "Watch for signs of compromise: unexpected data usage, unfamiliar apps, excessive pop-ups, or rapid battery loss. Remove unknown apps, check app permissions, and as a last resort back up and factory-reset the device."
+      }
+    ]
+  },
+  {
+    "id": "aplus-sw-troubleshooting-l4",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-sw-troubleshooting",
+    "title": "Recognizing security symptoms",
+    "order": 4,
+    "estMinutes": 5,
+    "objectives": ["Troubleshoot common security symptoms"],
+    "sections": [
+      { "body": "Some 'software' problems are really security incidents. Learning to recognize the symptoms — and respond in the right order — prevents a minor infection from becoming a breach." },
+      {
+        "heading": "Red-flag symptoms",
+        "body": "Be suspicious of: redirected browser searches, a flood of pop-ups, new toolbars or home pages, disabled antivirus, certificate warnings, and slow performance with high network activity. Renamed or encrypted files signal ransomware."
+      },
+      {
+        "heading": "Responding safely",
+        "body": "Disconnect the device from the network to stop spread, then follow the malware-removal steps: quarantine, scan and remediate, and educate the user. Do not pay ransomware demands — restore from a clean backup instead."
+      }
+    ]
+  },
+  {
+    "id": "aplus-operations-l1",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-operations",
+    "title": "Documentation and change management",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Use documentation and change management best practices"],
+    "sections": [
+      { "body": "Good IT runs on paperwork: records that let the next technician understand the environment, and a process that keeps changes from causing outages. These soft skills are tested as heavily as the hardware." },
+      {
+        "heading": "Documentation you should keep",
+        "body": "Common documents:",
+        "bullets": [
+          "Network topology diagrams and asset inventories.",
+          "Knowledge base / FAQ articles for recurring issues.",
+          "`Acceptable use policy` (AUP) governing how systems may be used.",
+          "Incident reports and a ticketing record of work done."
+        ]
+      },
+      {
+        "heading": "Change management",
+        "body": "Significant changes go through a process: document the purpose and scope, assess risk, get approval from a change board, and prepare a `rollback plan` in case it goes wrong. Planned changes happen in a maintenance window, with end users notified in advance."
+      }
+    ]
+  },
+  {
+    "id": "aplus-operations-l2",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-operations",
+    "title": "Safety and environmental controls",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Apply safety and environmental procedures"],
+    "sections": [
+      { "body": "Protecting people and equipment is a professional baseline. That means guarding components against static, handling hazards correctly, and disposing of materials responsibly." },
+      {
+        "heading": "Protecting equipment from static",
+        "body": "Electrostatic discharge (`ESD`) can silently destroy components. Use an anti-static wrist strap connected to ground, anti-static mats and bags, and keep humidity moderate. Counter-intuitively, do not wear a wrist strap when working inside a CRT or power supply, where stored voltage is the bigger danger."
+      },
+      {
+        "heading": "Personal safety",
+        "body": "Unplug equipment before servicing, remove jewelry, and never open power supplies, CRTs, or laser printer fusers carelessly — they hold dangerous charge or heat. Lift with your legs, and follow lockout procedures around mains power."
+      },
+      {
+        "heading": "Handling and disposal",
+        "body": "An `SDS` (Safety Data Sheet) explains safe handling and disposal of chemicals, batteries, and toner. Batteries, CRTs, and toner are regulated e-waste — recycle them through proper channels rather than the trash. Keep equipment in stable temperature and humidity."
+      }
+    ]
+  },
+  {
+    "id": "aplus-operations-l3",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-operations",
+    "title": "Professionalism and communication",
+    "order": 3,
+    "estMinutes": 5,
+    "objectives": ["Demonstrate professionalism and communication"],
+    "sections": [
+      { "body": "Technical skill earns trust only when paired with professionalism. How you communicate and handle sensitive situations often matters more to the user than the fix itself." },
+      {
+        "heading": "Communicating with users",
+        "body": "Use clear language and avoid jargon, listen actively without interrupting, and set and meet expectations about timing. Be culturally sensitive, stay positive, and confirm the issue is resolved to the user's satisfaction before closing the ticket."
+      },
+      {
+        "heading": "Professional conduct",
+        "body": "Be on time, dress appropriately, and avoid distractions like personal calls during a job. Maintain confidentiality of materials on a user's device, and deal with difficult customers by staying calm, not arguing, and not taking it personally."
+      },
+      {
+        "heading": "Handling sensitive data",
+        "body": "If you encounter prohibited content or a security incident, follow the chain of custody and your organization's reporting procedure — document everything and preserve evidence rather than acting on your own."
+      }
+    ]
+  },
+  {
+    "id": "aplus-operations-l4",
+    "certId": "a-plus",
+    "exam": "220-1202",
+    "domain": "aplus-operations",
+    "title": "Backup and disaster recovery",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Implement backup and recovery methods"],
+    "sections": [
+      { "body": "Backups are the safety net behind every other procedure. Knowing the backup types and following a tested strategy is what turns a disaster into a minor inconvenience." },
+      {
+        "heading": "Backup types",
+        "body": "How much each one copies:",
+        "bullets": [
+          "`Full` — everything; slowest to back up, fastest to restore.",
+          "`Incremental` — only what changed since the last backup of any kind; fast backup, slower restore.",
+          "`Differential` — everything changed since the last full backup; a middle ground.",
+          "`Synthetic full` — a full assembled from previous backups without re-reading all source data."
+        ]
+      },
+      {
+        "heading": "The 3-2-1 rule",
+        "body": "Keep `3` copies of important data on `2` different media with `1` copy stored off-site (or in the cloud). Off-site protects against fire, theft, and ransomware that would otherwise take the originals and local backups together."
+      },
+      {
+        "heading": "Test your restores",
+        "body": "A backup you have never restored is only a hope. Periodically perform a test restore to confirm the data is intact and recoverable, and document the recovery steps so anyone can follow them under pressure."
+      }
+    ]
+  }
+]

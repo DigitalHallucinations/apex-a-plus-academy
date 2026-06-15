@@ -17,6 +17,7 @@ export const initialState: LearnerState = {
   answered: {},
   attempts: [],
   bookmarks: [],
+  lessonsRead: [],
   notes: [],
   cardRatings: {},
   theme: "dark"
@@ -382,6 +383,7 @@ export function migrateState(raw: unknown): LearnerState {
     answered,
     attempts,
     bookmarks: arr<string>(data.bookmarks).filter(b => typeof b === "string").map(certKey),
+    lessonsRead: arr<string>(data.lessonsRead).filter(b => typeof b === "string").map(certKey),
     notes: arr(data.notes),
     cardRatings,
     theme: data.theme === "light" ? "light" : "dark"

@@ -14,7 +14,7 @@ const readOptional = path => { try { return read(path); } catch { return []; } }
 
 const DIFFICULTIES = ["Foundation", "Intermediate", "Advanced"];
 
-function validate(certifications, domains, questions, flashcards, pbqs) {
+function validate(certifications, domains, questions, flashcards, pbqs, lessons) {
   const errors = [];
 
   // ---- Manifest ----
@@ -109,6 +109,20 @@ function validate(certifications, domains, questions, flashcards, pbqs) {
       errors.push(`PBQ ${p.id}: unknown kind "${p.kind}"`);
     }
   }
+
+  const seenL = new Set();
+  for (const l of lessons) {
+    if (seenL.has(l.id)) errors.push(`Duplicate lesson id: ${l.id}`);
+    seenL.add(l.id);
+    checkCertRefs(`Lesson ${l.id}`, l.certId, l.id, l.exam);
+    if (!domainIds.has(l.domain)) errors.push(`Lesson ${l.id}: unknown domain "${l.domain}"`);
+    if (!l.title?.trim()) errors.push(`Lesson ${l.id}: empty title`);
+    if (typeof l.order !== "number") errors.push(`Lesson ${l.id}: order must be a number`);
+    if (!Array.isArray(l.sections) || l.sections.length === 0) errors.push(`Lesson ${l.id}: needs at least one section`);
+    else l.sections.forEach((s, i) => {
+      if (!s?.body?.trim()) errors.push(`Lesson ${l.id}: section ${i} has empty body`);
+    });
+  }
   return errors;
 }
 
@@ -120,7 +134,8 @@ const domains = collect("domains.json");
 const questions = collect("questions.json");
 const flashcards = collect("flashcards.json");
 const pbqs = collect("pbqs.json");
-const errors = validate(certifications, domains, questions, flashcards, pbqs);
+const lessons = collect("lessons.json");
+const errors = validate(certifications, domains, questions, flashcards, pbqs, lessons);
 
 if (errors.length) {
   console.error(`✗ Content validation failed (${errors.length} issue(s)):`);
@@ -131,5 +146,5 @@ if (errors.length) {
 const perDomain = domains
   .map(d => `${d.id}:${questions.filter(q => q.domain === d.id).length}`)
   .join("  ");
-console.log(`✓ Content valid: ${certifications.length} certification(s), ${domains.length} domains, ${questions.length} questions, ${flashcards.length} flashcards, ${pbqs.length} PBQs`);
+console.log(`✓ Content valid: ${certifications.length} certification(s), ${domains.length} domains, ${questions.length} questions, ${flashcards.length} flashcards, ${pbqs.length} PBQs, ${lessons.length} lessons`);
 console.log(`  questions per domain -> ${perDomain}`);

@@ -1,11 +1,12 @@
 import { invoke } from "@tauri-apps/api/core";
-import type { Certification, Domain, Flashcard, Pbq, Question } from "../types";
+import type { Certification, Domain, Flashcard, Lesson, Pbq, Question } from "../types";
 import { validateContent, type ContentBundle } from "./validate";
 import certificationsJson from "./certifications.json";
 import aplusDomains from "./a-plus/domains.json";
 import aplusQuestions from "./a-plus/questions.json";
 import aplusFlashcards from "./a-plus/flashcards.json";
 import aplusPbqs from "./a-plus/pbqs.json";
+import aplusLessons from "./a-plus/lessons.json";
 
 export type { ContentBundle } from "./validate";
 
@@ -20,7 +21,8 @@ export const bundledContent: ContentBundle = {
   domains: [...(aplusDomains as Domain[])],
   questions: [...(aplusQuestions as Question[])],
   flashcards: [...(aplusFlashcards as Flashcard[])],
-  pbqs: [...(aplusPbqs as Pbq[])]
+  pbqs: [...(aplusPbqs as Pbq[])],
+  lessons: [...(aplusLessons as Lesson[])]
 };
 
 function isTauri() {
@@ -43,9 +45,9 @@ export async function loadContent(): Promise<ContentBundle> {
       console.warn("Backend content failed validation; using bundled content.", errors);
       return bundledContent;
     }
-    // A backend that predates the cert manifest or PBQs may omit them; fall back
-    // to the bundled sets for any missing top-level field.
-    return { certifications: bundledContent.certifications, pbqs: bundledContent.pbqs, ...remote } as ContentBundle;
+    // A backend that predates the cert manifest, PBQs, or lessons may omit them;
+    // fall back to the bundled sets for any missing top-level field.
+    return { certifications: bundledContent.certifications, pbqs: bundledContent.pbqs, lessons: bundledContent.lessons, ...remote } as ContentBundle;
   } catch (err) {
     console.warn("Could not load backend content; using bundled content.", err);
     return bundledContent;

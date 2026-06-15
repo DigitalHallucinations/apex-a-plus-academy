@@ -1,4 +1,4 @@
-import type { Certification, Domain, Flashcard, Pbq, Question } from "../types";
+import type { Certification, Domain, Flashcard, Lesson, Pbq, Question } from "../types";
 
 export interface ContentBundle {
   certifications: Certification[];
@@ -6,6 +6,7 @@ export interface ContentBundle {
   questions: Question[];
   flashcards: Flashcard[];
   pbqs: Pbq[];
+  lessons: Lesson[];
 }
 
 const DIFFICULTIES = ["Foundation", "Intermediate", "Advanced"];
@@ -24,12 +25,13 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
   const errors: string[] = [];
   if (!content || typeof content !== "object") return ["Content is not an object"];
 
-  const { certifications, domains, questions, flashcards, pbqs } = content;
+  const { certifications, domains, questions, flashcards, pbqs, lessons } = content;
   if (!Array.isArray(certifications) || certifications.length === 0) errors.push("certifications must be a non-empty array");
   if (!Array.isArray(domains) || domains.length === 0) errors.push("domains must be a non-empty array");
   if (!Array.isArray(questions) || questions.length === 0) errors.push("questions must be a non-empty array");
   if (!Array.isArray(flashcards) || flashcards.length === 0) errors.push("flashcards must be a non-empty array");
   if (pbqs !== undefined && !Array.isArray(pbqs)) errors.push("pbqs must be an array when present");
+  if (lessons !== undefined && !Array.isArray(lessons)) errors.push("lessons must be an array when present");
   if (errors.length) return errors;
 
   // ---- Certification manifest ------------------------------------------------
@@ -132,6 +134,22 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
       const bad = p as { id: string; kind?: string };
       errors.push(`PBQ ${bad.id}: unknown kind "${bad.kind}"`);
     }
+  }
+
+  // ---- Lessons (optional) ----------------------------------------------------
+  const seenL = new Set<string>();
+  for (const l of (lessons ?? []) as Lesson[]) {
+    if (seenL.has(l.id)) errors.push(`Duplicate lesson id: ${l.id}`);
+    seenL.add(l.id);
+    checkCertRefs(`Lesson ${l.id}`, l.certId, l.id, l.exam);
+    if (!domainIds.has(l.domain)) errors.push(`Lesson ${l.id}: unknown domain "${l.domain}"`);
+    if (!l.title?.trim()) errors.push(`Lesson ${l.id}: empty title`);
+    if (typeof l.order !== "number") errors.push(`Lesson ${l.id}: order must be a number`);
+    if (!Array.isArray(l.sections) || l.sections.length === 0) errors.push(`Lesson ${l.id}: needs at least one section`);
+    else l.sections.forEach((s, i) => {
+      if (!s || typeof s !== "object") errors.push(`Lesson ${l.id}: section ${i} is not an object`);
+      else if (!s.body?.trim()) errors.push(`Lesson ${l.id}: section ${i} has empty body`);
+    });
   }
 
   return errors;

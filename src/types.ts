@@ -93,6 +93,32 @@ export interface Flashcard {
   back: string;
 }
 
+/** A block of teaching content within a lesson. */
+export interface LessonSection {
+  /** Optional sub-heading for the block. */
+  heading?: string;
+  /** A paragraph of prose. May contain inline `code` spans (backtick-delimited). */
+  body: string;
+  /** Optional bullet list rendered after the paragraph. */
+  bullets?: string[];
+}
+
+/** A short "class" that teaches one topic of a domain before the knowledge checks. */
+export interface Lesson {
+  id: string;
+  certId: CertId;
+  exam: ExamId;
+  domain: string;
+  title: string;
+  /** Sequence within the domain (ascending). */
+  order: number;
+  /** Estimated reading time in minutes. */
+  estMinutes: number;
+  /** Objective strings this lesson covers. */
+  objectives: string[];
+  sections: LessonSection[];
+}
+
 export interface Attempt {
   id: string;
   certId: CertId;
@@ -147,6 +173,8 @@ export interface LearnerState {
   answered: Record<string, AnsweredStat>;
   attempts: Attempt[];
   bookmarks: string[];
+  /** Ids of lessons the learner has opened/read (cert-prefixed). */
+  lessonsRead: string[];
   notes: { id: string; title: string; body: string; updatedAt: string }[];
   cardRatings: Record<string, CardSchedule>;
   theme: "dark" | "light";

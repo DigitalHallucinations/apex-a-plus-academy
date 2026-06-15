@@ -35,3 +35,28 @@ main{min-width:0;background:radial-gradient(circle at 70% -10%,#12345655,transpa
 .track-menu b{display:block;font-size:12px}
 .track-menu small{display:block;color:var(--muted);font-size:10px}
 .app.collapsed .track-current>div,.app.collapsed .track-current>svg:last-child{display:none}
+
+/* Lessons ("classes") — list + reading view inside the Learn panel */
+.lesson-list{display:flex;flex-direction:column;gap:8px;margin:4px 0 8px}
+.lesson-item{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--text);cursor:pointer;transition:border-color .15s,transform .05s}
+.lesson-item:hover{border-color:var(--blue)}
+.lesson-item:active{transform:translateY(1px)}
+.lesson-item>div{flex:1;min-width:0}
+.lesson-item b{display:block;font-size:14px}
+.lesson-item small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+.lesson-item>svg:last-child{width:16px;color:var(--muted);flex:none}
+.lesson-num{display:flex;align-items:center;justify-content:center;width:30px;height:30px;flex:none;border-radius:8px;background:var(--panel);border:1px solid var(--line);font-size:12px;font-weight:700;color:var(--muted)}
+.lesson-num svg{width:16px}
+.lesson-item.done .lesson-num{background:color-mix(in srgb,var(--teal) 18%,transparent);border-color:var(--teal);color:var(--teal)}
+.lesson-back{display:inline-flex;align-items:center;gap:6px;margin-bottom:12px}
+.lesson-back svg{width:16px}
+.lesson-read-head{margin-bottom:8px}
+.lesson-read-head h2{margin:4px 0 8px}
+.lesson-read-tag{color:var(--teal)}
+.lesson-reader{display:flex;flex-direction:column;gap:18px;margin:4px 0 8px}
+.lesson-section h4{margin:0 0 6px;font-size:14px;color:var(--text)}
+.lesson-section p{margin:0;color:var(--text);line-height:1.65;font-size:14px}
+.lesson-section ul{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.lesson-section li{color:var(--text);line-height:1.55;font-size:14px}
+.lesson-section code,.lesson-reader code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-family:"Cascadia Code",Consolas,monospace;font-size:.85em;color:var(--teal)}
+.lesson-reader-nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}

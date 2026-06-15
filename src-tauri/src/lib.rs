@@ -85,8 +85,8 @@ fn load_content(app: AppHandle) -> Result<Value, String> {
         })
         .unwrap_or_default();
 
-    let (mut domains, mut questions, mut flashcards, mut pbqs) =
-        (Vec::new(), Vec::new(), Vec::new(), Vec::new());
+    let (mut domains, mut questions, mut flashcards, mut pbqs, mut lessons) =
+        (Vec::new(), Vec::new(), Vec::new(), Vec::new(), Vec::new());
     let extend = |target: &mut Vec<Value>, value: Value| {
         if let Value::Array(items) = value {
             target.extend(items);
@@ -109,9 +109,12 @@ fn load_content(app: AppHandle) -> Result<Value, String> {
                 &format!("{id}/flashcards.json"),
             )?,
         );
-        // PBQs are optional so a track without simulations still loads.
+        // PBQs and lessons are optional so a track without them still loads.
         if let Ok(value) = read(cdir.join("pbqs.json"), &format!("{id}/pbqs.json")) {
             extend(&mut pbqs, value);
+        }
+        if let Ok(value) = read(cdir.join("lessons.json"), &format!("{id}/lessons.json")) {
+            extend(&mut lessons, value);
         }
     }
 
@@ -120,7 +123,8 @@ fn load_content(app: AppHandle) -> Result<Value, String> {
         "domains": domains,
         "questions": questions,
         "flashcards": flashcards,
-        "pbqs": pbqs
+        "pbqs": pbqs,
+        "lessons": lessons
     }))
 }
 

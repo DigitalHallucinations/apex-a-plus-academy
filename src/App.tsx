@@ -10,7 +10,7 @@ import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, ResponsiveContaine
 import { loadContent, bundledContent, type ContentBundle } from "./content";
 import { ContentProvider, useContent } from "./ContentContext";
 import { decryptBackup, encryptBackup } from "./backup";
-import type { Attempt, CertId, Certification, LearnerState, Pbq, Question, View } from "./types";
+import type { Attempt, CertId, Certification, LearnerState, Lesson, Pbq, Question, View } from "./types";
 import {
   initialState, pct, shuffle, formatTime, dateKey, questionsToday, applyStudyActivity,
   recordAnswer, scheduleCard, isCardDue, domainMastery, migrateState,
@@ -231,21 +231,58 @@ function Stat({ icon: Icon, label, value, sub, color }: { icon: typeof Gauge; la
   return <div className="stat-card panel"><div className={`stat-icon ${color}`}><Icon/></div><div><span>{label}</span><b>{value}</b><small>{sub}</small></div></div>;
 }
 
+/** Renders inline `code` spans (backtick-delimited) within lesson prose. */
+function renderInline(text: string): React.ReactNode {
+  return text.split("`").map((part, i) => (i % 2 === 1 ? <code key={i}>{part}</code> : <span key={i}>{part}</span>));
+}
+
+function LessonSections({ lesson }: { lesson: Lesson }) {
+  return <div className="lesson-reader">{lesson.sections.map((s, i) => <section className="lesson-section" key={i}>
+    {s.heading && <h4>{s.heading}</h4>}
+    <p>{renderInline(s.body)}</p>
+    {s.bullets && s.bullets.length > 0 && <ul>{s.bullets.map((b, j) => <li key={j}>{renderInline(b)}</li>)}</ul>}
+  </section>)}</div>;
+}
+
 function Learn({ state, setState, setView }: { state:LearnerState; setState:React.Dispatch<React.SetStateAction<LearnerState>>; setView:(v:View)=>void }) {
-  const { certifications, domains, questions } = useContent();
+  const { certifications, domains, questions, lessons } = useContent();
   const cert = certifications.find(c => c.id === state.activeCertId) ?? certifications[0];
   const certDomains = domains.filter(d => d.certId === cert.id);
   const [exam, setExam] = useState<string>(cert.exams[0]?.id ?? "");
   const [selected, setSelected] = useState(certDomains.find(d => d.exam === exam)?.id ?? certDomains[0]?.id ?? "");
+  const [openLessonId, setOpenLessonId] = useState<string|null>(null);
   const list = certDomains.filter(d => d.exam === exam);
   const active = certDomains.find(d => d.id === selected && d.exam === exam) || list[0];
   if (!active) return <><PageHead eyebrow="STRUCTURED CURRICULUM" title="Learning paths" subtitle="Move objective by objective."/><Empty message="No learning content is available for this track yet."/></>;
   const activeQuestions = questions.filter(q => q.domain === active.id);
+  const domainLessons = lessons.filter(l => l.domain === active.id).slice().sort((a,b) => a.order - b.order);
+  const readSet = new Set(state.lessonsRead);
+  const readCount = domainLessons.filter(l => readSet.has(l.id)).length;
+  const openLesson = domainLessons.find(l => l.id === openLessonId) || null;
+  const openIdx = openLesson ? domainLessons.findIndex(l => l.id === openLesson.id) : -1;
+  const pickDomain = (id:string) => { setSelected(id); setOpenLessonId(null); };
+  const pickExam = (id:string) => { setExam(id); setSelected(certDomains.find(d=>d.exam===id)?.id ?? ""); setOpenLessonId(null); };
+  const openAndRead = (id:string) => { setOpenLessonId(id); setState(s => s.lessonsRead.includes(id) ? s : {...s, lessonsRead:[...s.lessonsRead, id]}); };
+
   return <>
-    <PageHead eyebrow="STRUCTURED CURRICULUM" title="Learning paths" subtitle="Move objective by objective. Every lesson connects concepts to technician decisions."/>
-    <div className="segmented">{cert.exams.map(e => <button key={e.id} className={exam===e.id?"active":""} onClick={()=>{setExam(e.id);setSelected(certDomains.find(d=>d.exam===e.id)?.id ?? "")}}>{e.name?`${e.name} · ${e.id}`:e.id}</button>)}</div>
-    <div className="learn-layout"><div className="domain-nav panel">{list.map((d,i) => { const qs=questions.filter(q=>q.domain===d.id); const done=qs.filter(q=>state.answered[q.id]?.lastCorrect).length; return <button key={d.id} className={active.id===d.id?"active":""} onClick={()=>setSelected(d.id)}><span className="domain-index" style={{color:d.color}}>{String(i+1).padStart(2,"0")}</span><div><b>{d.name}</b><small>{d.weight}% of exam · {done}/{qs.length} checked</small></div><ChevronRight/></button>})}</div>
-      <div className="lesson panel"><div className="lesson-hero" style={{"--accent":active.color} as React.CSSProperties}><span>{active.exam} DOMAIN</span><h2>{active.name}</h2><p>{active.description}</p><div className="lesson-meta"><span><Target/> {active.weight}% exam weight</span><span><Clock3/> 30-45 min path</span></div></div><h3>What you'll master</h3><div className="topic-grid">{active.topics.map((t,i)=><div key={t}><span>{i+1}</span><div><b>{t}</b><small>Concepts, scenarios, and field notes</small></div><Check/></div>)}</div><h3>Knowledge checks</h3><div className="check-list">{activeQuestions.map(q=><div key={q.id}><div className={`status ${state.answered[q.id]?.lastCorrect ? "done":""}`}>{state.answered[q.id]?.lastCorrect?<Check/>:<CircleHelp/>}</div><div><b>{q.objective}</b><small>{q.difficulty} · Original practice scenario</small></div><button className="ghost" aria-label="Bookmark this question and open practice" onClick={()=>{setState(s=>({...s,bookmarks:s.bookmarks.includes(q.id)?s.bookmarks:s.bookmarks.concat(q.id)}));setView("practice")}}><Bookmark/></button></div>)}</div><button className="primary wide" onClick={()=>setView("practice")}><Play/> Practice this domain</button></div>
+    <PageHead eyebrow="STRUCTURED CURRICULUM" title="Learning paths" subtitle="Read the lesson, then prove it on the knowledge checks. Every class connects concepts to technician decisions."/>
+    <div className="segmented">{cert.exams.map(e => <button key={e.id} className={exam===e.id?"active":""} onClick={()=>pickExam(e.id)}>{e.name?`${e.name} · ${e.id}`:e.id}</button>)}</div>
+    <div className="learn-layout"><div className="domain-nav panel">{list.map((d,i) => { const dl=lessons.filter(l=>l.domain===d.id); const read=dl.filter(l=>readSet.has(l.id)).length; return <button key={d.id} className={active.id===d.id?"active":""} onClick={()=>pickDomain(d.id)}><span className="domain-index" style={{color:d.color}}>{String(i+1).padStart(2,"0")}</span><div><b>{d.name}</b><small>{d.weight}% of exam · {dl.length?`${read}/${dl.length} lessons`:`${d.topics.length} topics`}</small></div><ChevronRight/></button>})}</div>
+      <div className="lesson panel">
+        {openLesson ? <>
+          <button className="ghost lesson-back" onClick={()=>setOpenLessonId(null)}><ChevronLeft/> {active.name}</button>
+          <div className="lesson-read-head"><span className="eyebrow">LESSON {openIdx+1} OF {domainLessons.length}</span><h2>{openLesson.title}</h2><div className="lesson-meta"><span><Clock3/> {openLesson.estMinutes} min read</span><span className="lesson-read-tag"><Check/> Read</span></div></div>
+          <LessonSections lesson={openLesson}/>
+          <div className="lesson-reader-nav"><button className="ghost" disabled={openIdx<=0} onClick={()=>openAndRead(domainLessons[openIdx-1].id)}><ChevronLeft/> Previous</button>{openIdx < domainLessons.length-1 ? <button className="primary" onClick={()=>openAndRead(domainLessons[openIdx+1].id)}>Next lesson <ChevronRight/></button> : <button className="primary" onClick={()=>setView("practice")}><Play/> Practice this domain</button>}</div>
+        </> : <>
+          <div className="lesson-hero" style={{"--accent":active.color} as React.CSSProperties}><span>{active.exam} DOMAIN</span><h2>{active.name}</h2><p>{active.description}</p><div className="lesson-meta"><span><Target/> {active.weight}% exam weight</span>{domainLessons.length>0 && <span><BookOpen/> {readCount}/{domainLessons.length} lessons read</span>}</div></div>
+          <h3>Lessons</h3>
+          {domainLessons.length>0 ? <div className="lesson-list">{domainLessons.map((l,i) => { const done=readSet.has(l.id); return <button key={l.id} className={`lesson-item${done?" done":""}`} onClick={()=>openAndRead(l.id)}><span className="lesson-num">{done?<Check/>:String(i+1).padStart(2,"0")}</span><div><b>{l.title}</b><small>{l.estMinutes} min read{done?" · read":""}</small></div><ChevronRight/></button>})}</div>
+            : <div className="topic-grid">{active.topics.map((t,i)=><div key={t}><span>{i+1}</span><div><b>{t}</b><small>Concepts, scenarios, and field notes</small></div><Check/></div>)}</div>}
+          <h3>Knowledge checks</h3><div className="check-list">{activeQuestions.map(q=><div key={q.id}><div className={`status ${state.answered[q.id]?.lastCorrect ? "done":""}`}>{state.answered[q.id]?.lastCorrect?<Check/>:<CircleHelp/>}</div><div><b>{q.objective}</b><small>{q.difficulty} · Original practice scenario</small></div><button className="ghost" aria-label="Bookmark this question and open practice" onClick={()=>{setState(s=>({...s,bookmarks:s.bookmarks.includes(q.id)?s.bookmarks:s.bookmarks.concat(q.id)}));setView("practice")}}><Bookmark/></button></div>)}</div>
+          <button className="primary wide" onClick={()=>setView("practice")}><Play/> Practice this domain</button>
+        </>}
+      </div>
     </div>
   </>;
 }
