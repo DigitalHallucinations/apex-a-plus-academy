@@ -93,6 +93,15 @@ export interface Flashcard {
   back: string;
 }
 
+/** An illustration shown within a lesson section. Assets live under public/lessons/. */
+export interface LessonImage {
+  /** Path under public/lessons/, e.g. "a-plus/raid-levels.svg". */
+  src: string;
+  /** Required alternative text for accessibility. */
+  alt: string;
+  caption?: string;
+}
+
 /** A block of teaching content within a lesson. */
 export interface LessonSection {
   /** Optional sub-heading for the block. */
@@ -101,6 +110,8 @@ export interface LessonSection {
   body: string;
   /** Optional bullet list rendered after the paragraph. */
   bullets?: string[];
+  /** Optional illustration rendered after the prose. */
+  image?: LessonImage;
 }
 
 /** A short "class" that teaches one topic of a domain before the knowledge checks. */

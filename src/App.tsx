@@ -241,6 +241,7 @@ function LessonSections({ lesson }: { lesson: Lesson }) {
     {s.heading && <h4>{s.heading}</h4>}
     <p>{renderInline(s.body)}</p>
     {s.bullets && s.bullets.length > 0 && <ul>{s.bullets.map((b, j) => <li key={j}>{renderInline(b)}</li>)}</ul>}
+    {s.image && <figure className="lesson-figure"><img src={`/lessons/${s.image.src}`} alt={s.image.alt} loading="lazy"/>{s.image.caption && <figcaption>{s.image.caption}</figcaption>}</figure>}
   </section>)}</div>;
 }
 

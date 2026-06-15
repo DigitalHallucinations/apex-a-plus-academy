@@ -60,3 +60,8 @@ main{min-width:0;background:radial-gradient(circle at 70% -10%,#12345655,transpa
 .lesson-section li{color:var(--text);line-height:1.55;font-size:14px}
 .lesson-section code,.lesson-reader code{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-family:"Cascadia Code",Consolas,monospace;font-size:.85em;color:var(--teal)}
 .lesson-reader-nav{display:flex;justify-content:space-between;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+
+/* Lesson figures (diagrams / images) */
+.lesson-figure{margin:14px 0 4px;text-align:center}
+.lesson-figure img{max-width:100%;height:auto;border:1px solid var(--line);border-radius:12px;background:#fff;display:block;margin:0 auto}
+.lesson-figure figcaption{margin-top:8px;color:var(--muted);font-size:12px;font-style:italic}

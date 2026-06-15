@@ -1,0 +1,17 @@
+<svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <text x="300" y="30" text-anchor="middle" font-size="18" font-weight="700" fill="#1e2a3a">The TCP/IP model</text>
+  <rect x="120" y="50" width="360" height="52" rx="10" fill="#ede8ff" stroke="#7c5cff"/>
+  <text x="140" y="74" font-size="14" font-weight="700" fill="#1e2a3a">Application</text>
+  <text x="140" y="92" font-size="12" fill="#5a6b80">HTTP/HTTPS, DNS, SMTP, FTP — the data users see</text>
+  <rect x="120" y="112" width="360" height="52" rx="10" fill="#e8f0ff" stroke="#2f6fed"/>
+  <text x="140" y="136" font-size="14" font-weight="700" fill="#1e2a3a">Transport</text>
+  <text x="140" y="154" font-size="12" fill="#5a6b80">TCP (reliable) and UDP (fast) — ports and sessions</text>
+  <rect x="120" y="174" width="360" height="52" rx="10" fill="#e6f7f3" stroke="#0f9d8f"/>
+  <text x="140" y="198" font-size="14" font-weight="700" fill="#1e2a3a">Internet</text>
+  <text x="140" y="216" font-size="12" fill="#5a6b80">IP and ICMP — addressing and routing between networks</text>
+  <rect x="120" y="236" width="360" height="52" rx="10" fill="#fff3da" stroke="#c98a00"/>
+  <text x="140" y="260" font-size="14" font-weight="700" fill="#1e2a3a">Link</text>
+  <text x="140" y="278" font-size="12" fill="#5a6b80">Ethernet and Wi-Fi — the physical hop on the wire/air</text>
+  <text x="500" y="80" font-size="11" fill="#5a6b80" transform="rotate(90 500 80)">data sent</text>
+  <text x="100" y="262" font-size="11" fill="#5a6b80" text-anchor="end" transform="rotate(-90 100 262)">data received</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#5a6b80"/></marker></defs>
+  <text x="330" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e2a3a">The six-step troubleshooting method</text>
+  <g font-size="12" fill="#1e2a3a">
+    <rect x="30" y="60" width="180" height="58" rx="10" fill="#e8f0ff" stroke="#2f6fed"/><text x="120" y="84" text-anchor="middle" font-weight="700">1 · Identify</text><text x="120" y="104" text-anchor="middle" font-size="11" fill="#5a6b80">question the user</text>
+    <rect x="240" y="60" width="180" height="58" rx="10" fill="#e8f0ff" stroke="#2f6fed"/><text x="330" y="84" text-anchor="middle" font-weight="700">2 · Theory</text><text x="330" y="104" text-anchor="middle" font-size="11" fill="#5a6b80">probable cause</text>
+    <rect x="450" y="60" width="180" height="58" rx="10" fill="#e8f0ff" stroke="#2f6fed"/><text x="540" y="84" text-anchor="middle" font-weight="700">3 · Test</text><text x="540" y="104" text-anchor="middle" font-size="11" fill="#5a6b80">confirm the cause</text>
+    <rect x="450" y="160" width="180" height="58" rx="10" fill="#e6f7f3" stroke="#0f9d8f"/><text x="540" y="184" text-anchor="middle" font-weight="700">4 · Plan &amp; fix</text><text x="540" y="204" text-anchor="middle" font-size="11" fill="#5a6b80">implement solution</text>
+    <rect x="240" y="160" width="180" height="58" rx="10" fill="#e6f7f3" stroke="#0f9d8f"/><text x="330" y="184" text-anchor="middle" font-weight="700">5 · Verify</text><text x="330" y="204" text-anchor="middle" font-size="11" fill="#5a6b80">full functionality</text>
+    <rect x="30" y="160" width="180" height="58" rx="10" fill="#e6f7f3" stroke="#0f9d8f"/><text x="120" y="184" text-anchor="middle" font-weight="700">6 · Document</text><text x="120" y="204" text-anchor="middle" font-size="11" fill="#5a6b80">findings &amp; actions</text>
+  </g>
+  <line x1="210" y1="89" x2="238" y2="89" stroke="#5a6b80" marker-end="url(#arr)"/>
+  <line x1="420" y1="89" x2="448" y2="89" stroke="#5a6b80" marker-end="url(#arr)"/>
+  <line x1="540" y1="120" x2="540" y2="158" stroke="#5a6b80" marker-end="url(#arr)"/>
+  <line x1="448" y1="189" x2="422" y2="189" stroke="#5a6b80" marker-end="url(#arr)"/>
+  <line x1="238" y1="189" x2="212" y2="189" stroke="#5a6b80" marker-end="url(#arr)"/>
+  <text x="330" y="252" text-anchor="middle" font-size="11" fill="#5a6b80">Back up data before changes · change one thing at a time · if a theory fails, form a new one or escalate</text>
+</svg>

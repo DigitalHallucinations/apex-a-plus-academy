@@ -39,7 +39,7 @@
     "estMinutes": 6,
     "objectives": ["Diagnose laptop display components"],
     "sections": [
-      { "body": "The display is a stack of parts working together: a panel that produces the image, a backlight that illuminates it, and — on touchscreens — a digitizer that turns finger contact into coordinates. Matching a symptom to the right layer is the key skill." },
+      { "body": "The display is a stack of parts working together: a panel that produces the image, a backlight that illuminates it, and — on touchscreens — a digitizer that turns finger contact into coordinates. Matching a symptom to the right layer is the key skill.", "image": { "src": "a-plus/display-stack.svg", "alt": "Diagram of laptop display layers: digitizer on top, then the LCD or OLED panel, then the backlight.", "caption": "The display is a stack — digitizer, panel, then backlight." } },
       {
         "heading": "Panel types",
         "body": "Three technologies dominate, each with trade-offs:",
@@ -131,7 +131,7 @@
     "estMinutes": 7,
     "objectives": ["Compare common ports and protocols"],
     "sections": [
-      { "body": "A port number is the address of a service on a device. When a packet arrives, the port tells the system which application should handle it. Memorizing the common ports — and whether each rides on TCP, UDP, or both — is one of the highest-value things you can do for the exam and the job." },
+      { "body": "A port number is the address of a service on a device. When a packet arrives, the port tells the system which application should handle it. Memorizing the common ports — and whether each rides on TCP, UDP, or both — is one of the highest-value things you can do for the exam and the job.", "image": { "src": "a-plus/tcpip-model.svg", "alt": "The four layers of the TCP/IP model from Application down to Link, with example protocols at each layer.", "caption": "Ports live at the Transport layer of the TCP/IP model." } },
       {
         "heading": "Ports worth memorizing",
         "body": "The frequently tested set:",
@@ -293,7 +293,7 @@
       },
       {
         "heading": "RAID basics",
-        "body": "RAID combines drives for speed or redundancy: `RAID 0` stripes for speed with no protection, `RAID 1` mirrors for redundancy, `RAID 5` stripes with parity (needs 3+ disks), and `RAID 10` combines mirroring and striping."
+        "body": "RAID combines drives for speed or redundancy: `RAID 0` stripes for speed with no protection, `RAID 1` mirrors for redundancy, `RAID 5` stripes with parity (needs 3+ disks), and `RAID 10` combines mirroring and striping.", "image": { "src": "a-plus/raid-levels.svg", "alt": "Comparison of RAID 0 striping, RAID 1 mirroring, and RAID 5 striping with parity across disks.", "caption": "RAID 0 = speed, RAID 1 = redundancy, RAID 5 = both via parity." }
       }
     ]
   },
@@ -441,7 +441,7 @@
     "estMinutes": 5,
     "objectives": ["Contrast containers and virtual machines"],
     "sections": [
-      { "body": "Containers are a lighter alternative to full virtual machines. Both isolate applications, but they do it at different layers, which changes their size and speed." },
+      { "body": "Containers are a lighter alternative to full virtual machines. Both isolate applications, but they do it at different layers, which changes their size and speed.", "image": { "src": "a-plus/vm-vs-container.svg", "alt": "Side-by-side stacks: virtual machines each run a full guest OS, while containers share the host OS kernel.", "caption": "VMs ship a full OS each; containers share the host kernel." } },
       {
         "heading": "How they differ",
         "body": "A VM virtualizes hardware and runs a complete guest OS, so each one is large and slower to start. A container shares the host's OS kernel and packages only the app and its dependencies, so it is small, starts in seconds, and packs densely onto a host."
@@ -462,7 +462,7 @@
     "estMinutes": 6,
     "objectives": ["Apply the best practice troubleshooting methodology"],
     "sections": [
-      { "body": "CompTIA teaches a fixed six-step troubleshooting process, and the exam expects you to know it in order. The method keeps you from jumping to conclusions and ensures you actually verify and document the fix." },
+      { "body": "CompTIA teaches a fixed six-step troubleshooting process, and the exam expects you to know it in order. The method keeps you from jumping to conclusions and ensures you actually verify and document the fix.", "image": { "src": "a-plus/troubleshooting-steps.svg", "alt": "The six CompTIA troubleshooting steps connected in order from Identify the problem through Document findings.", "caption": "Work the six steps in order, every time." } },
       {
         "heading": "The six steps",
         "body": "In sequence:",
@@ -667,7 +667,7 @@
       { "body": "Installing an OS is more than clicking Next. The boot method, partition scheme, and install type all affect whether data survives and whether the system boots reliably." },
       {
         "heading": "Partition styles and boot",
-        "body": "Modern systems use `GPT` partitioning with `UEFI` firmware, which supports drives over 2 TB and Secure Boot. Older `MBR`/BIOS is limited to 2 TB and four primary partitions. Match the firmware mode to the partition style."
+        "body": "Modern systems use `GPT` partitioning with `UEFI` firmware, which supports drives over 2 TB and Secure Boot. Older `MBR`/BIOS is limited to 2 TB and four primary partitions. Match the firmware mode to the partition style.", "image": { "src": "a-plus/boot-partition.svg", "alt": "Comparison of MBR with legacy BIOS versus GPT with UEFI, listing partition and capacity limits.", "caption": "GPT/UEFI supports larger drives, more partitions, and Secure Boot." }
       },
       {
         "heading": "Install types",
@@ -723,7 +723,7 @@
       { "body": "Access control answers two questions: are you who you claim to be (authentication), and what are you allowed to do (authorization). Strong identity is the foundation of every other control." },
       {
         "heading": "Multifactor authentication",
-        "body": "Combine factors from different categories: something you `know` (password/PIN), something you `have` (phone, token, smart card), and something you `are` (fingerprint, face). Requiring two or more makes a stolen password far less useful."
+        "body": "Combine factors from different categories: something you `know` (password/PIN), something you `have` (phone, token, smart card), and something you `are` (fingerprint, face). Requiring two or more makes a stolen password far less useful.", "image": { "src": "a-plus/mfa-factors.svg", "alt": "Three MFA factor categories — something you know, have, and are — each with examples.", "caption": "MFA combines two or more different factor categories." }
       },
       {
         "heading": "Least privilege",
@@ -804,7 +804,7 @@
       { "body": "Windows issues range from slow boots to a system that will not start at all. A handful of recovery tools and a calm, layered approach resolve most of them." },
       {
         "heading": "Boot failures",
-        "body": "If Windows will not start, use the Windows Recovery Environment: `Startup Repair` fixes boot files automatically, `System Restore` rolls back recent changes, and `Safe Mode` loads minimal drivers so you can undo a bad update or driver. A 'no boot device' error points at drive or boot-order problems."
+        "body": "If Windows will not start, use the Windows Recovery Environment: `Startup Repair` fixes boot files automatically, `System Restore` rolls back recent changes, and `Safe Mode` loads minimal drivers so you can undo a bad update or driver. A 'no boot device' error points at drive or boot-order problems.", "image": { "src": "a-plus/windows-recovery.svg", "alt": "Windows recovery options ordered from least to most drastic: Startup Repair, System Restore, Safe Mode, then Reset.", "caption": "Start with the least drastic recovery option." }
       },
       {
         "heading": "Slow or unstable systems",
@@ -987,7 +987,7 @@
       },
       {
         "heading": "The 3-2-1 rule",
-        "body": "Keep `3` copies of important data on `2` different media with `1` copy stored off-site (or in the cloud). Off-site protects against fire, theft, and ransomware that would otherwise take the originals and local backups together."
+        "body": "Keep `3` copies of important data on `2` different media with `1` copy stored off-site (or in the cloud). Off-site protects against fire, theft, and ransomware that would otherwise take the originals and local backups together.", "image": { "src": "a-plus/backup-321.svg", "alt": "The 3-2-1 backup rule shown as three numbered cards: 3 copies, 2 media types, 1 off-site.", "caption": "3 copies, on 2 media, with 1 off-site." }
       },
       {
         "heading": "Test your restores",

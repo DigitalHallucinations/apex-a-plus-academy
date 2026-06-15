@@ -148,7 +148,13 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
     if (!Array.isArray(l.sections) || l.sections.length === 0) errors.push(`Lesson ${l.id}: needs at least one section`);
     else l.sections.forEach((s, i) => {
       if (!s || typeof s !== "object") errors.push(`Lesson ${l.id}: section ${i} is not an object`);
-      else if (!s.body?.trim()) errors.push(`Lesson ${l.id}: section ${i} has empty body`);
+      else {
+        if (!s.body?.trim()) errors.push(`Lesson ${l.id}: section ${i} has empty body`);
+        if (s.image) {
+          if (!s.image.src?.trim()) errors.push(`Lesson ${l.id}: section ${i} image has empty src`);
+          if (!s.image.alt?.trim()) errors.push(`Lesson ${l.id}: section ${i} image needs alt text`);
+        }
+      }
     });
   }
 

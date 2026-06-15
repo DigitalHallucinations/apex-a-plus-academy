@@ -3,11 +3,12 @@
 //   npm run validate:content
 // The certifications.json manifest is the source of truth; each track's banks
 // live under src/content/<certId>/ and are concatenated for validation.
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const here = dirname(fileURLToPath(import.meta.url));
+const lessonAssetDir = join(here, "..", "public", "lessons");
 const contentDir = join(here, "..", "src", "content");
 const read = path => JSON.parse(readFileSync(join(contentDir, path), "utf8"));
 const readOptional = path => { try { return read(path); } catch { return []; } };
@@ -121,6 +122,11 @@ function validate(certifications, domains, questions, flashcards, pbqs, lessons)
     if (!Array.isArray(l.sections) || l.sections.length === 0) errors.push(`Lesson ${l.id}: needs at least one section`);
     else l.sections.forEach((s, i) => {
       if (!s?.body?.trim()) errors.push(`Lesson ${l.id}: section ${i} has empty body`);
+      if (s?.image) {
+        if (!s.image.src?.trim()) errors.push(`Lesson ${l.id}: section ${i} image has empty src`);
+        else if (!existsSync(join(lessonAssetDir, s.image.src))) errors.push(`Lesson ${l.id}: image not found at public/lessons/${s.image.src}`);
+        if (!s.image.alt?.trim()) errors.push(`Lesson ${l.id}: section ${i} image needs alt text`);
+      }
     });
   }
   return errors;

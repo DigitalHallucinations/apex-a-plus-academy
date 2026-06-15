@@ -1,0 +1,20 @@
+<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <text x="320" y="28" text-anchor="middle" font-size="18" font-weight="700" fill="#1e2a3a">Partition style follows firmware</text>
+  <rect x="30" y="50" width="280" height="210" rx="12" fill="#fbecea" stroke="#d4503e"/>
+  <text x="170" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#1e2a3a">MBR + Legacy BIOS</text>
+  <g font-size="12" fill="#1e2a3a">
+    <text x="50" y="112">• Drives up to 2 TB only</text>
+    <text x="50" y="140">• Max 4 primary partitions</text>
+    <text x="50" y="168">• Older, being phased out</text>
+    <text x="50" y="196">• No Secure Boot</text>
+  </g>
+  <rect x="330" y="50" width="280" height="210" rx="12" fill="#e6f5ee" stroke="#2e8b57"/>
+  <text x="470" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#1e2a3a">GPT + UEFI</text>
+  <g font-size="12" fill="#1e2a3a">
+    <text x="350" y="112">• Drives over 2 TB supported</text>
+    <text x="350" y="140">• Many partitions (128+)</text>
+    <text x="350" y="168">• Modern standard</text>
+    <text x="350" y="196">• Supports Secure Boot</text>
+  </g>
+  <text x="320" y="285" text-anchor="middle" font-size="12" fill="#5a6b80">Match the partition style to the firmware mode the system boots in</text>
+</svg>
