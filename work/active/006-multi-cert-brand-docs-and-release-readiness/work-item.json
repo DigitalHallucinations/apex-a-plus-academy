@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "006",
+  "title": "TODO-006: Multi-Cert Brand, Docs, And Release Readiness",
+  "status": "active",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Deliver the outcome described in the imported plan narrative (`todos/TODO-006-multi-cert-brand-docs-and-release-readiness.md`).",
+      "state": "pending",
+      "evidence": []
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-16",
+  "source": "todos/TODO-006-multi-cert-brand-docs-and-release-readiness.md"
+}
