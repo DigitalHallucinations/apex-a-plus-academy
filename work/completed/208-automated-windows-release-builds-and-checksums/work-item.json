@@ -1,0 +1,20 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "208",
+  "title": "Automated Windows release builds and checksums",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Delivered prior to RepoPact adoption; imported from `ROADMAP.md`. Waived: no RepoPact evidence was captured at the time.",
+      "state": "waived",
+      "evidence": []
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-16",
+  "source": "ROADMAP.md"
+}

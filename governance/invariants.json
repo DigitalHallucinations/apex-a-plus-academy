@@ -1,0 +1,20 @@
+{
+  "$schema": "../schemas/invariants.schema.json",
+  "version": 1,
+  "invariants": [
+    {
+      "id": "INV-1",
+      "statement": "No critical state exists only in conversation; it lives in versioned files.",
+      "rationale": "State must be recoverable without a prior conversation.",
+      "escalation": "If a task would leave load-bearing state only in chat, record it as a file first.",
+      "enforced_by": null
+    },
+    {
+      "id": "INV-2",
+      "statement": "Declared CI workflows are binding gates; removing or weakening one requires operator approval.",
+      "rationale": "CI is the enforcement substrate that the project's correctness claims rest on.",
+      "escalation": "Flag any change that deletes or disables a workflow and confirm with the operator.",
+      "enforced_by": ".github/workflows"
+    }
+  ]
+}

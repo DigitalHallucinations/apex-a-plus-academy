@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "000",
+  "title": "Adopt RepoPact into the existing repository",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [
+    "governance"
+  ],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Existing CODEOWNERS, CI workflows, and nested contracts are represented as RepoPact records.",
+      "state": "satisfied",
+      "evidence": [
+        "20260616-102147-adopt"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "text": "The repository validates as a conformant RepoPact.",
+      "state": "satisfied",
+      "evidence": [
+        "20260616-102147-adopt"
+      ]
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-16"
+}
