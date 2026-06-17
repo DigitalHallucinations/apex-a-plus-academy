@@ -14,8 +14,16 @@
 > `--strict-coverage` to gate. First objective completed end-to-end as the
 > template: `secplus-1.4` (1 lesson + 7 questions tagged).
 >
-> **Phase 2 (ongoing):** verify objective lists vs official PDFs, then author/tag
-> lessons + >=6 questions per objective across all 115 sub-objectives.
+> **Phase 2 (ongoing):** author/tag lessons + >=6 questions per objective across
+> all sub-objectives.
+>
+> - **2026-06-17 — objective lists verified** against official CompTIA objectives
+>   PDFs (pdfplumber). Network+ gained 2.4; A+ rebuilt to V15. 116 verified
+>   sub-objectives (A+ 63, Network+ 25, Security+ 28).
+> - **2026-06-17 — Phase 2 batch 1:** Security+ Domain 1 complete to the deep
+>   target — 1.1 (1 lesson/6 Q), 1.2 (2/8), 1.3 (1/6), 1.4 (2/7). Coverage 4/116.
+>
+> Cadence: author domain by domain, commit per domain, watch the coverage report.
 
 ## Intent
 

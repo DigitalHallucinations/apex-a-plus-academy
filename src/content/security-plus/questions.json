@@ -1,6 +1,7 @@
 [
   {
     "id": "secplus-q001",
+    "objectiveId": "secplus-1.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -13,6 +14,7 @@
   },
   {
     "id": "secplus-q002",
+    "objectiveId": "secplus-1.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -25,6 +27,7 @@
   },
   {
     "id": "secplus-q003",
+    "objectiveId": "secplus-1.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -37,6 +40,7 @@
   },
   {
     "id": "secplus-q004",
+    "objectiveId": "secplus-1.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -54,6 +58,7 @@
   },
   {
     "id": "secplus-q005",
+    "objectiveId": "secplus-1.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -102,6 +107,7 @@
   },
   {
     "id": "secplus-q008",
+    "objectiveId": "secplus-1.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -114,6 +120,7 @@
   },
   {
     "id": "secplus-q009",
+    "objectiveId": "secplus-1.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -755,6 +762,7 @@
   },
   {
     "id": "secplus-q058",
+    "objectiveId": "secplus-1.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -767,6 +775,7 @@
   },
   {
     "id": "secplus-q059",
+    "objectiveId": "secplus-1.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-concepts",
@@ -1741,5 +1750,173 @@
     "answer": 0,
     "explanation": "Vendor risk assessment evaluates a third party's controls and the risk of integrating them, a core part of supply-chain governance.",
     "objective": "Manage third-party risk"
+  },
+  {
+    "id": "secplus-q134",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.1",
+    "difficulty": "Foundation",
+    "prompt": "A firewall that filters traffic according to rules is an example of which control category?",
+    "options": ["Technical (logical)", "Managerial", "Physical", "Operational"],
+    "answer": 0,
+    "explanation": "A firewall is a technical (logical) control implemented in a system. Managerial controls are policies, physical controls are tangible barriers, and operational controls are processes people perform.",
+    "objective": "Classify security control categories"
+  },
+  {
+    "id": "secplus-q135",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.1",
+    "difficulty": "Intermediate",
+    "prompt": "A written risk-assessment policy that directs how the organization manages risk is best classified as which control category?",
+    "options": ["Managerial", "Technical", "Physical", "Detective"],
+    "answer": 0,
+    "explanation": "Policies and risk assessments are managerial (administrative) controls — they govern behavior and decisions. Detective is a control type, not a category.",
+    "objective": "Classify security control categories"
+  },
+  {
+    "id": "secplus-q136",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.1",
+    "difficulty": "Intermediate",
+    "prompt": "An intrusion detection system that alerts on suspicious activity but does not block it is which control type?",
+    "options": ["Detective", "Preventive", "Corrective", "Deterrent"],
+    "answer": 0,
+    "explanation": "An IDS that only alerts is a detective control — it identifies events. A preventive control would stop them, and a corrective control would remediate after the fact.",
+    "objective": "Classify security control types"
+  },
+  {
+    "id": "secplus-q137",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.1",
+    "difficulty": "Intermediate",
+    "prompt": "Restoring systems from backup after a ransomware incident is an example of which control type?",
+    "options": ["Corrective", "Preventive", "Deterrent", "Directive"],
+    "answer": 0,
+    "explanation": "Restoring from backup corrects the situation after an incident, making it a corrective control. Preventive controls act before an event; directive controls instruct expected behavior.",
+    "objective": "Classify security control types"
+  },
+  {
+    "id": "secplus-q138",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.1",
+    "difficulty": "Advanced",
+    "prompt": "A legacy system cannot support MFA, so the team isolates it on a restricted network segment instead. The segmentation is best described as which control?",
+    "options": ["Compensating", "Preventive only", "Deterrent", "Managerial"],
+    "answer": 0,
+    "explanation": "A compensating control provides an alternative when the primary control cannot be implemented. Segmenting the legacy system compensates for the missing MFA.",
+    "objective": "Identify compensating controls"
+  },
+  {
+    "id": "secplus-q139",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.3",
+    "difficulty": "Foundation",
+    "prompt": "What is the primary security purpose of a formal change-management process?",
+    "options": [
+      "To ensure changes are reviewed, approved, tested, and reversible before they affect production",
+      "To make changes faster by skipping approvals",
+      "To encrypt all network traffic",
+      "To assign IP addresses automatically"
+    ],
+    "answer": 0,
+    "explanation": "Change management controls how changes are proposed, approved, tested, and rolled back, preventing self-inflicted outages and security gaps from uncontrolled changes.",
+    "objective": "Explain the importance of change management"
+  },
+  {
+    "id": "secplus-q140",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.3",
+    "difficulty": "Intermediate",
+    "prompt": "Why should every significant change include a documented backout plan?",
+    "options": [
+      "So the system can be restored to a known-good state if the change fails",
+      "So the change can skip testing",
+      "So approvals are unnecessary",
+      "So logging can be disabled during the change"
+    ],
+    "answer": 0,
+    "explanation": "A backout (rollback) plan lets the team revert to a known-good state if the change causes problems, limiting downtime and risk.",
+    "objective": "Explain change-management components"
+  },
+  {
+    "id": "secplus-q141",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.3",
+    "difficulty": "Foundation",
+    "prompt": "Why are changes typically scheduled within a defined maintenance window?",
+    "options": [
+      "To limit disruption by making changes during low-impact periods",
+      "To avoid documenting the change",
+      "To bypass the approval board",
+      "To increase encryption strength"
+    ],
+    "answer": 0,
+    "explanation": "A maintenance window confines changes (and any resulting downtime or restarts) to a planned, low-impact time, reducing disruption to users.",
+    "objective": "Explain change-management components"
+  },
+  {
+    "id": "secplus-q142",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.3",
+    "difficulty": "Intermediate",
+    "prompt": "Which group typically reviews and approves proposed changes, weighing risk and impact before they proceed?",
+    "options": ["A change advisory board (CAB)", "The help desk queue", "The marketing team", "An anonymous user group"],
+    "answer": 0,
+    "explanation": "A change advisory board evaluates the risk, impact, and stakeholders of a change and approves or rejects it, a core governance step in change management.",
+    "objective": "Explain change approval and ownership"
+  },
+  {
+    "id": "secplus-q143",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.3",
+    "difficulty": "Intermediate",
+    "prompt": "Keeping version-controlled documentation of configurations and changes most directly supports what?",
+    "options": [
+      "Knowing the current state and being able to audit or roll back changes",
+      "Faster Wi-Fi speeds",
+      "Eliminating the need for backups",
+      "Automatic malware removal"
+    ],
+    "answer": 0,
+    "explanation": "Version control and change documentation record what changed and when, enabling audits, troubleshooting, and reliable rollback.",
+    "objective": "Explain change documentation and version control"
+  },
+  {
+    "id": "secplus-q144",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "objectiveId": "secplus-1.3",
+    "difficulty": "Advanced",
+    "prompt": "An administrator makes an undocumented firewall rule change outside the change process. Why is this a security concern?",
+    "options": [
+      "It can silently open exposure with no review, audit trail, or rollback path",
+      "It always improves security posture",
+      "It encrypts traffic by default",
+      "It guarantees higher availability"
+    ],
+    "answer": 0,
+    "explanation": "Unapproved, undocumented changes bypass risk review and leave no audit trail or rollback path, so they can introduce exposure that is hard to detect or undo.",
+    "objective": "Explain the security impact of unmanaged change"
   }
 ]
