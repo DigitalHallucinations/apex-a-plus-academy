@@ -293,6 +293,7 @@
   },
   {
     "id": "secplus-q022",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -305,6 +306,7 @@
   },
   {
     "id": "secplus-q023",
+    "objectiveId": "secplus-3.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -322,6 +324,7 @@
   },
   {
     "id": "secplus-q024",
+    "objectiveId": "secplus-3.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -334,6 +337,7 @@
   },
   {
     "id": "secplus-q025",
+    "objectiveId": "secplus-3.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -346,6 +350,7 @@
   },
   {
     "id": "secplus-q026",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -358,6 +363,7 @@
   },
   {
     "id": "secplus-q027",
+    "objectiveId": "secplus-3.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -370,6 +376,7 @@
   },
   {
     "id": "secplus-q028",
+    "objectiveId": "secplus-3.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -382,6 +389,7 @@
   },
   {
     "id": "secplus-q029",
+    "objectiveId": "secplus-3.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -399,6 +407,7 @@
   },
   {
     "id": "secplus-q030",
+    "objectiveId": "secplus-3.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1061,6 +1070,7 @@
   },
   {
     "id": "secplus-q079",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1073,6 +1083,7 @@
   },
   {
     "id": "secplus-q080",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1085,6 +1096,7 @@
   },
   {
     "id": "secplus-q081",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1097,6 +1109,7 @@
   },
   {
     "id": "secplus-q082",
+    "objectiveId": "secplus-3.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1109,6 +1122,7 @@
   },
   {
     "id": "secplus-q083",
+    "objectiveId": "secplus-3.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1121,6 +1135,7 @@
   },
   {
     "id": "secplus-q084",
+    "objectiveId": "secplus-3.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1133,6 +1148,7 @@
   },
   {
     "id": "secplus-q085",
+    "objectiveId": "secplus-3.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1145,6 +1161,7 @@
   },
   {
     "id": "secplus-q086",
+    "objectiveId": "secplus-3.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1162,6 +1179,7 @@
   },
   {
     "id": "secplus-q087",
+    "objectiveId": "secplus-3.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1179,6 +1197,7 @@
   },
   {
     "id": "secplus-q088",
+    "objectiveId": "secplus-3.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1191,6 +1210,7 @@
   },
   {
     "id": "secplus-q089",
+    "objectiveId": "secplus-3.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1203,6 +1223,7 @@
   },
   {
     "id": "secplus-q090",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1215,6 +1236,7 @@
   },
   {
     "id": "secplus-q091",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1227,6 +1249,7 @@
   },
   {
     "id": "secplus-q092",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -1244,6 +1267,7 @@
   },
   {
     "id": "secplus-q093",
+    "objectiveId": "secplus-3.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -2133,5 +2157,41 @@
     "answer": 0,
     "explanation": "Decommissioning removes systems that can never be patched again, eliminating a permanent and growing source of risk.",
     "objective": "Apply mitigation techniques"
+  },
+  {
+    "id": "secplus-q159",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "objectiveId": "secplus-3.1",
+    "difficulty": "Advanced",
+    "prompt": "An industrial control system (ICS/SCADA) often cannot be patched or taken offline. What is the most appropriate architectural mitigation?",
+    "options": [
+      "Isolate it on a segmented, tightly controlled network",
+      "Expose it directly to the internet for monitoring",
+      "Install consumer antivirus and ignore segmentation",
+      "Share its network with general office users"
+    ],
+    "answer": 0,
+    "explanation": "ICS/SCADA and other constrained systems are best protected by strict network segmentation and access control, since patching and downtime are limited.",
+    "objective": "Compare architecture model security implications"
+  },
+  {
+    "id": "secplus-q160",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "objectiveId": "secplus-3.1",
+    "difficulty": "Intermediate",
+    "prompt": "Which is a key security trade-off of a serverless architecture compared with self-managed servers?",
+    "options": [
+      "The provider handles host/runtime security, but you have less visibility and control",
+      "You gain full control of the underlying OS",
+      "It eliminates all application-level vulnerabilities",
+      "It removes the need to secure code or data"
+    ],
+    "answer": 0,
+    "explanation": "Serverless shifts host and runtime security to the provider, reducing your maintenance burden but also your visibility and control; your code, configuration, and data are still your responsibility.",
+    "objective": "Compare architecture model security implications"
   }
 ]

@@ -345,6 +345,7 @@
   },
   {
     "id": "secplus-architecture-l1",
+    "objectiveId": "secplus-3.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -373,6 +374,7 @@
   },
   {
     "id": "secplus-architecture-l2",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -398,6 +400,7 @@
   },
   {
     "id": "secplus-architecture-l3",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -422,6 +425,7 @@
   },
   {
     "id": "secplus-architecture-l4",
+    "objectiveId": "secplus-3.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -446,6 +450,7 @@
   },
   {
     "id": "secplus-architecture-l5",
+    "objectiveId": "secplus-3.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -470,6 +475,7 @@
   },
   {
     "id": "secplus-architecture-l6",
+    "objectiveId": "secplus-3.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -494,6 +500,7 @@
   },
   {
     "id": "secplus-architecture-l7",
+    "objectiveId": "secplus-3.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
