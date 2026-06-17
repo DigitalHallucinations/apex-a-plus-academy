@@ -39,16 +39,103 @@
     "id": "secplus-q004",
     "certId": "security-plus",
     "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "In AAA, a user enters a password and is then allowed to open only the files their role permits. Which two AAA functions are shown, in order?",
+    "options": [
+      "Accounting then authentication",
+      "Authentication then authorization",
+      "Authorization then accounting",
+      "Authentication then accounting"
+    ],
+    "answer": 1,
+    "explanation": "Proving identity is authentication; granting access to specific resources is authorization. Accounting is the later record of what the user did.",
+    "objective": "Distinguish authentication, authorization, and accounting"
+  },
+  {
+    "id": "secplus-q005",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "A signed email lets the recipient prove the sender cannot later deny writing it. Which security property does a digital signature provide here?",
+    "options": ["Availability", "Non-repudiation", "Anonymity", "Redundancy"],
+    "answer": 1,
+    "explanation": "A digital signature ties a message to the sender's private key, providing non-repudiation (and integrity). It does not make the sender anonymous.",
+    "objective": "Explain non-repudiation"
+  },
+  {
+    "id": "secplus-q006",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which statement best describes symmetric encryption?",
+    "options": [
+      "It uses a public key to encrypt and a private key to decrypt",
+      "It uses the same shared key to encrypt and decrypt and is fast for bulk data",
+      "It cannot be used to protect data at rest",
+      "It is only used for hashing passwords"
+    ],
+    "answer": 1,
+    "explanation": "Symmetric algorithms (e.g., AES) use one shared key for both operations and are efficient for large volumes. Public/private key pairs describe asymmetric encryption.",
+    "objective": "Compare symmetric and asymmetric encryption"
+  },
+  {
+    "id": "secplus-q007",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "A download page lists a SHA-256 value next to a file. What does comparing this value after downloading primarily verify?",
+    "options": [
+      "That the file is encrypted",
+      "That the file's integrity is intact and it was not altered",
+      "That the file is from an anonymous source",
+      "That the file is compressed"
+    ],
+    "answer": 1,
+    "explanation": "A hash lets you confirm the file matches the original, verifying integrity. Hashing does not encrypt or hide the contents.",
+    "objective": "Use hashing to verify integrity"
+  },
+  {
+    "id": "secplus-q008",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "difficulty": "Advanced",
+    "prompt": "An organization uses a firewall, endpoint protection, user training, and network segmentation together so no single failure exposes everything. Which principle is this?",
+    "options": ["Defense in depth", "Single point of failure", "Security through obscurity", "Implicit trust"],
+    "answer": 0,
+    "explanation": "Layering independent controls is defense in depth, so a gap in one layer is covered by others. Security through obscurity relies on secrecy of design and is not a primary control.",
+    "objective": "Apply defense in depth"
+  },
+  {
+    "id": "secplus-q009",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "difficulty": "Advanced",
+    "prompt": "Requiring two different employees to each approve a wire transfer is an example of which control?",
+    "options": ["Separation of duties", "Least privilege", "Time-of-day restriction", "Single sign-on"],
+    "answer": 0,
+    "explanation": "Splitting a sensitive task so no one person can complete it alone is separation of duties, which reduces fraud. Least privilege limits each person's access but does not require a second approver.",
+    "objective": "Apply separation of duties"
+  },
+  {
+    "id": "secplus-q010",
+    "certId": "security-plus",
+    "exam": "SY0-701",
     "domain": "secplus-threats",
     "difficulty": "Foundation",
     "prompt": "An employee receives an urgent email appearing to come from the CEO asking them to buy gift cards immediately. Which attack is this?",
     "options": ["Phishing", "SQL injection", "Brute force", "Privilege escalation"],
     "answer": 0,
-    "explanation": "This is phishing (specifically a business-email-compromise style lure using authority and urgency). It targets the user, not a technical flaw.",
+    "explanation": "This is phishing (a business-email-compromise style lure using authority and urgency). It targets the user, not a technical flaw.",
     "objective": "Identify social-engineering attacks"
   },
   {
-    "id": "secplus-q005",
+    "id": "secplus-q011",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-threats",
@@ -60,7 +147,7 @@
     "objective": "Classify malware types"
   },
   {
-    "id": "secplus-q006",
+    "id": "secplus-q012",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-threats",
@@ -72,7 +159,7 @@
     "objective": "Compare threat actors and motivations"
   },
   {
-    "id": "secplus-q007",
+    "id": "secplus-q013",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-threats",
@@ -89,7 +176,103 @@
     "objective": "Mitigate injection vulnerabilities"
   },
   {
-    "id": "secplus-q008",
+    "id": "secplus-q014",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Foundation",
+    "prompt": "A caller pretends to be IT support and pressures a user to read back their login code over the phone. Which attack is this?",
+    "options": ["Vishing", "Tailgating", "Shoulder surfing", "Dumpster diving"],
+    "answer": 0,
+    "explanation": "Voice-based social engineering over the phone is vishing. Tailgating is following someone through a door; shoulder surfing is watching a screen.",
+    "objective": "Identify social-engineering techniques"
+  },
+  {
+    "id": "secplus-q015",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Intermediate",
+    "prompt": "A departing employee with valid credentials copies confidential files before leaving. Which threat category does this represent?",
+    "options": ["Insider threat", "Zero-day", "Supply-chain attack", "Watering-hole attack"],
+    "answer": 0,
+    "explanation": "A trusted person misusing legitimate access is an insider threat. It is dangerous because the access is authorized, so traditional perimeter controls may not detect it.",
+    "objective": "Recognize insider threats"
+  },
+  {
+    "id": "secplus-q016",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Advanced",
+    "prompt": "Attackers exploit a previously unknown software flaw before the vendor has released a patch. What is this called?",
+    "options": ["A zero-day exploit", "A brute-force attack", "A replay attack", "A misconfiguration"],
+    "answer": 0,
+    "explanation": "A zero-day targets a flaw with no available fix, giving defenders zero days to patch. Defense leans on layered controls, monitoring, and rapid response.",
+    "objective": "Define zero-day vulnerabilities"
+  },
+  {
+    "id": "secplus-q017",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Intermediate",
+    "prompt": "An attacker positions themselves between a user and a server to intercept and possibly alter traffic. Which attack is this?",
+    "options": ["On-path (man-in-the-middle)", "Cross-site scripting", "Privilege escalation", "Password spraying"],
+    "answer": 0,
+    "explanation": "Intercepting traffic between two parties is an on-path (MITM) attack. Encryption such as TLS and certificate validation are key mitigations.",
+    "objective": "Recognize on-path attacks"
+  },
+  {
+    "id": "secplus-q018",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Intermediate",
+    "prompt": "A public website becomes unreachable because thousands of compromised devices flood it with traffic. Which attack is this?",
+    "options": ["Distributed denial-of-service (DDoS)", "SQL injection", "Phishing", "Privilege escalation"],
+    "answer": 0,
+    "explanation": "Overwhelming a service from many sources at once is a DDoS attack, targeting availability. Rate limiting, scrubbing services, and CDNs help absorb it.",
+    "objective": "Recognize denial-of-service attacks"
+  },
+  {
+    "id": "secplus-q019",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Advanced",
+    "prompt": "An attacker who gains a standard user account then exploits a flaw to obtain administrator rights has performed what?",
+    "options": ["Privilege escalation", "Data masking", "Tokenization", "Federation"],
+    "answer": 0,
+    "explanation": "Moving from limited to higher rights is privilege escalation. Patching, least privilege, and monitoring for unusual rights changes reduce the risk.",
+    "objective": "Recognize privilege escalation"
+  },
+  {
+    "id": "secplus-q020",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Intermediate",
+    "prompt": "An attacker tries one common password against many user accounts to avoid lockouts. Which technique is this?",
+    "options": ["Password spraying", "Dictionary cracking of one hash", "Rainbow table generation", "Pass-the-hash"],
+    "answer": 0,
+    "explanation": "Trying a single password across many accounts is password spraying, which evades per-account lockout thresholds. MFA and detection of distributed failures help defend.",
+    "objective": "Recognize password attacks"
+  },
+  {
+    "id": "secplus-q021",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Advanced",
+    "prompt": "Malware is inserted into a trusted vendor's software update, which then infects all customers who install it. Which threat is this?",
+    "options": ["Supply-chain attack", "Watering-hole attack", "Evil twin", "Smishing"],
+    "answer": 0,
+    "explanation": "Compromising a trusted upstream supplier to reach downstream victims is a supply-chain attack. Vendor vetting and update integrity checks are key defenses.",
+    "objective": "Recognize supply-chain attacks"
+  },
+  {
+    "id": "secplus-q022",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -101,7 +284,7 @@
     "objective": "Apply network segmentation concepts"
   },
   {
-    "id": "secplus-q009",
+    "id": "secplus-q023",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -118,7 +301,7 @@
     "objective": "Select data-protection controls"
   },
   {
-    "id": "secplus-q010",
+    "id": "secplus-q024",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-architecture",
@@ -130,7 +313,84 @@
     "objective": "Explain resilience and redundancy"
   },
   {
-    "id": "secplus-q011",
+    "id": "secplus-q025",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "difficulty": "Intermediate",
+    "prompt": "Remote workers need to reach internal systems securely over the internet. Which technology protects that data in transit?",
+    "options": ["A VPN using IPsec or TLS", "A spreadsheet of passwords", "Disabling MFA for convenience", "A shared local administrator account"],
+    "answer": 0,
+    "explanation": "A VPN creates an encrypted tunnel over the public internet, protecting data in transit. The other options weaken security.",
+    "objective": "Protect data in transit"
+  },
+  {
+    "id": "secplus-q026",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "difficulty": "Intermediate",
+    "prompt": "Which firewall capability tracks the state of active connections and allows return traffic for sessions it has seen?",
+    "options": ["Stateful inspection", "A static host file", "A simple MAC filter", "Port mirroring"],
+    "answer": 0,
+    "explanation": "A stateful firewall tracks connection state and permits legitimate return traffic, unlike a stateless filter that evaluates each packet in isolation.",
+    "objective": "Compare firewall capabilities"
+  },
+  {
+    "id": "secplus-q027",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "difficulty": "Intermediate",
+    "prompt": "Labeling data as Public, Internal, or Confidential so handling rules can be applied is an example of what?",
+    "options": ["Data classification", "Data deduplication", "Data compression", "Data caching"],
+    "answer": 0,
+    "explanation": "Assigning sensitivity labels is data classification, which drives the right protection and handling for each category. The other options are storage optimizations.",
+    "objective": "Apply data classification"
+  },
+  {
+    "id": "secplus-q028",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "difficulty": "Advanced",
+    "prompt": "A payment system replaces card numbers with non-sensitive substitute values that have no mathematical relationship to the original. Which technique is this?",
+    "options": ["Tokenization", "Symmetric encryption", "Compression", "Steganography"],
+    "answer": 0,
+    "explanation": "Tokenization swaps sensitive values for unrelated tokens stored in a secure vault, reducing exposure. Encryption keeps a reversible mathematical relationship via a key.",
+    "objective": "Compare tokenization and encryption"
+  },
+  {
+    "id": "secplus-q029",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "difficulty": "Advanced",
+    "prompt": "Which backup approach best follows the 3-2-1 rule?",
+    "options": [
+      "Three copies, on two different media types, with one copy off-site",
+      "Three copies all on the same server",
+      "One copy stored only in the cloud",
+      "Two copies on the same external drive"
+    ],
+    "answer": 0,
+    "explanation": "The 3-2-1 rule keeps three copies on two media types with one off-site, so a single failure or disaster cannot destroy all copies.",
+    "objective": "Apply backup strategies"
+  },
+  {
+    "id": "secplus-q030",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "difficulty": "Intermediate",
+    "prompt": "A recovery site has equipment and current data ready so operations can resume within minutes of a disaster. Which site type is this?",
+    "options": ["Hot site", "Cold site", "Warm site", "Mobile kiosk"],
+    "answer": 0,
+    "explanation": "A hot site is fully provisioned with up-to-date data for near-immediate failover. A cold site is just space and power; a warm site is partially ready.",
+    "objective": "Compare disaster-recovery sites"
+  },
+  {
+    "id": "secplus-q031",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -147,7 +407,7 @@
     "objective": "Apply multifactor authentication"
   },
   {
-    "id": "secplus-q012",
+    "id": "secplus-q032",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -164,7 +424,7 @@
     "objective": "Apply least privilege"
   },
   {
-    "id": "secplus-q013",
+    "id": "secplus-q033",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -176,7 +436,7 @@
     "objective": "Order the incident-response phases"
   },
   {
-    "id": "secplus-q014",
+    "id": "secplus-q034",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -193,7 +453,108 @@
     "objective": "Explain the role of a SIEM"
   },
   {
-    "id": "secplus-q015",
+    "id": "secplus-q035",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Foundation",
+    "prompt": "Regularly applying vendor security updates to close known flaws is part of which process?",
+    "options": ["Patch management", "Data classification", "Social engineering", "Tokenization"],
+    "answer": 0,
+    "explanation": "Tracking, testing, and deploying updates is patch management, a core way to reduce known vulnerabilities. The other options are unrelated to applying fixes.",
+    "objective": "Apply patch management"
+  },
+  {
+    "id": "secplus-q036",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "A vulnerability scan run with valid login credentials can do what that an unauthenticated scan cannot?",
+    "options": [
+      "Assess missing patches and configuration from the system's perspective",
+      "Guarantee zero false positives",
+      "Encrypt the scanned host",
+      "Replace the need for a firewall"
+    ],
+    "answer": 0,
+    "explanation": "A credentialed scan logs in to inspect installed patches and settings, giving far deeper and more accurate results than an external, unauthenticated scan.",
+    "objective": "Compare vulnerability scan types"
+  },
+  {
+    "id": "secplus-q037",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "A team prioritizes remediation using a 0-10 severity score for each vulnerability. Which scoring system is this?",
+    "options": ["CVSS", "CVE", "RTO", "SLA"],
+    "answer": 0,
+    "explanation": "CVSS (Common Vulnerability Scoring System) rates severity from 0 to 10. A CVE is the identifier for a specific vulnerability, not its severity.",
+    "objective": "Use CVSS for prioritization"
+  },
+  {
+    "id": "secplus-q038",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Advanced",
+    "prompt": "Which tool continuously monitors endpoints for suspicious behavior and supports investigation and response on those hosts?",
+    "options": ["EDR (endpoint detection and response)", "A DHCP server", "A load balancer", "A patch repository"],
+    "answer": 0,
+    "explanation": "EDR watches endpoint activity, detects threats by behavior, and enables response actions such as isolation. The other options provide infrastructure services, not endpoint threat response.",
+    "objective": "Explain endpoint detection and response"
+  },
+  {
+    "id": "secplus-q039",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Advanced",
+    "prompt": "Administrators must check out elevated credentials from a vault that records each use and rotates the password afterward. Which control is this?",
+    "options": ["Privileged access management (PAM)", "Single sign-on", "A guest network", "A honeypot"],
+    "answer": 0,
+    "explanation": "PAM controls, monitors, and rotates privileged credentials, reducing the risk of standing admin access. SSO simplifies user logins but does not vault privileged accounts.",
+    "objective": "Apply privileged access management"
+  },
+  {
+    "id": "secplus-q040",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Advanced",
+    "prompt": "During an investigation, evidence must be tracked with documented handling from collection to court. Which concept ensures this?",
+    "options": ["Chain of custody", "Load balancing", "Data masking", "Federation"],
+    "answer": 0,
+    "explanation": "Chain of custody documents who handled evidence and when, preserving its integrity and admissibility. The other options are unrelated to evidence handling.",
+    "objective": "Maintain chain of custody"
+  },
+  {
+    "id": "secplus-q041",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "Before a device is allowed onto the corporate network, a system checks that it has current patches and antivirus. Which technology enforces this?",
+    "options": ["Network access control (NAC)", "A spam filter", "A password vault", "A CDN"],
+    "answer": 0,
+    "explanation": "NAC assesses device posture and admits, quarantines, or blocks endpoints based on policy. The other options serve different purposes.",
+    "objective": "Apply network access control"
+  },
+  {
+    "id": "secplus-q042",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "A browser warns that a certificate has been revoked. Which mechanism reports revocation status for a single certificate in real time?",
+    "options": ["OCSP", "DHCP", "NTP", "SNMP"],
+    "answer": 0,
+    "explanation": "OCSP (Online Certificate Status Protocol) checks the status of one certificate on demand; a CRL is a downloadable list of revoked certificates. The others are unrelated services.",
+    "objective": "Explain certificate revocation"
+  },
+  {
+    "id": "secplus-q043",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -205,7 +566,7 @@
     "objective": "Identify governance documents"
   },
   {
-    "id": "secplus-q016",
+    "id": "secplus-q044",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -217,7 +578,7 @@
     "objective": "Apply risk-management strategies"
   },
   {
-    "id": "secplus-q017",
+    "id": "secplus-q045",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -229,7 +590,7 @@
     "objective": "Manage third-party risk"
   },
   {
-    "id": "secplus-q018",
+    "id": "secplus-q046",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -239,5 +600,101 @@
     "answer": 0,
     "explanation": "Phishing simulations and training build security awareness, reducing the human risk that technical controls cannot fully address.",
     "objective": "Explain security-awareness programs"
+  },
+  {
+    "id": "secplus-q047",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "difficulty": "Intermediate",
+    "prompt": "An organization maintains a central list of identified risks, each with an owner, likelihood, impact, and treatment. What is this artifact called?",
+    "options": ["Risk register", "Network diagram", "Change log", "Asset image"],
+    "answer": 0,
+    "explanation": "A risk register tracks risks with their owners, ratings, and treatment decisions, supporting ongoing risk management. The other options serve different purposes.",
+    "objective": "Use a risk register"
+  },
+  {
+    "id": "secplus-q048",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "difficulty": "Advanced",
+    "prompt": "A single loss is expected to cost $10,000 and is anticipated twice per year. What is the annualized loss expectancy (ALE)?",
+    "options": ["$5,000", "$10,000", "$20,000", "$2,000"],
+    "answer": 2,
+    "explanation": "ALE = SLE x ARO = $10,000 x 2 = $20,000. ALE expresses expected yearly loss and helps justify control spending.",
+    "objective": "Calculate quantitative risk (SLE, ARO, ALE)"
+  },
+  {
+    "id": "secplus-q049",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "difficulty": "Intermediate",
+    "prompt": "Which agreement defines the measurable service levels (such as uptime) a provider commits to deliver?",
+    "options": ["SLA", "NDA", "MOU", "BPA"],
+    "answer": 0,
+    "explanation": "A service level agreement (SLA) specifies measurable commitments like uptime and response times. An NDA covers confidentiality; an MOU is a non-binding understanding; a BPA is a business partnership agreement.",
+    "objective": "Compare vendor agreement types"
+  },
+  {
+    "id": "secplus-q050",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "difficulty": "Advanced",
+    "prompt": "In data-privacy roles, who determines the purposes and means of processing personal data?",
+    "options": ["Data controller", "Data processor", "Data subject", "Data custodian"],
+    "answer": 0,
+    "explanation": "The data controller decides why and how personal data is processed; a processor acts on the controller's instructions, and the data subject is the individual the data describes.",
+    "objective": "Distinguish data privacy roles"
+  },
+  {
+    "id": "secplus-q051",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "difficulty": "Intermediate",
+    "prompt": "Which analysis identifies critical business processes and the impact of their disruption to set recovery priorities?",
+    "options": ["Business impact analysis (BIA)", "Penetration test", "Port scan", "Phishing simulation"],
+    "answer": 0,
+    "explanation": "A BIA determines which processes are critical and the consequences of downtime, feeding metrics like RTO and RPO. The other options assess technical or human weaknesses.",
+    "objective": "Perform a business impact analysis"
+  },
+  {
+    "id": "secplus-q052",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "difficulty": "Intermediate",
+    "prompt": "Requiring that production changes be reviewed, approved, tested, and documented before deployment describes which process?",
+    "options": ["Change management", "Incident response", "Threat hunting", "Tokenization"],
+    "answer": 0,
+    "explanation": "Change management governs how changes are proposed, approved, and recorded, reducing outages and unauthorized modifications. The other options address different goals.",
+    "objective": "Apply change management"
+  },
+  {
+    "id": "secplus-q053",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "difficulty": "Advanced",
+    "prompt": "Researching a vendor's security posture before signing is due diligence. Continuously ensuring controls remain effective afterward is best described as what?",
+    "options": ["Due care", "Due process", "Data minimization", "Separation of duties"],
+    "answer": 0,
+    "explanation": "Due care is the ongoing, reasonable effort to maintain protections, while due diligence is the up-front investigation. Together they show responsible stewardship.",
+    "objective": "Distinguish due care and due diligence"
+  },
+  {
+    "id": "secplus-q054",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "difficulty": "Intermediate",
+    "prompt": "An independent reviewer formally examines whether a company's controls meet a required standard and issues findings. What is this?",
+    "options": ["An audit", "A backup", "A firewall rule review only", "A penetration test"],
+    "answer": 0,
+    "explanation": "An audit is a formal, independent assessment of controls against a standard, producing findings and attestation. A penetration test specifically probes for exploitable weaknesses.",
+    "objective": "Explain audits and assessments"
   }
 ]

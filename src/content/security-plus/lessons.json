@@ -28,6 +28,97 @@
     ]
   },
   {
+    "id": "secplus-concepts-l2",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "title": "Cryptography building blocks",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Compare symmetric and asymmetric encryption", "Use hashing to verify integrity", "Explain non-repudiation"],
+    "sections": [
+      {
+        "body": "Cryptography shows up everywhere in security, but it is built from a small number of primitives. Knowing what each one does — and what it does not do — keeps you from reaching for the wrong tool."
+      },
+      {
+        "heading": "Encryption: symmetric and asymmetric",
+        "body": "Encryption protects confidentiality by making data unreadable without a key.",
+        "bullets": [
+          "Symmetric uses one shared key for both encrypt and decrypt. It is fast, so it protects bulk data like a disk (e.g., AES).",
+          "Asymmetric uses a public/private key pair. It is slower, so it is used for key exchange and digital signatures (e.g., RSA, ECC)."
+        ]
+      },
+      {
+        "heading": "Hashing and signatures",
+        "body": "Hashing is one-way: it produces a fixed-length fingerprint that detects any change, giving you integrity — but it is not encryption and does not hide data. A digital signature combines a hash with the signer's private key, so the recipient gets integrity plus non-repudiation: proof of who sent it. A useful rule of thumb: encrypt for secrecy, hash for integrity, sign for proof of origin."
+      }
+    ]
+  },
+  {
+    "id": "secplus-threats-l1",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "title": "Social engineering and malware in plain terms",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Identify social-engineering techniques", "Classify malware types"],
+    "sections": [
+      {
+        "body": "Many breaches do not start with clever code — they start with a convincing message. Social engineering manipulates people into bypassing security, and it pairs naturally with malware that does the technical damage once a foothold exists."
+      },
+      {
+        "heading": "Social engineering by channel",
+        "body": "The lure is the same; only the delivery changes.",
+        "bullets": [
+          "Phishing: deceptive email; spear phishing targets specific people; whaling targets executives.",
+          "Vishing: voice/phone; smishing: SMS text.",
+          "Common levers: urgency, authority, fear, and familiarity."
+        ]
+      },
+      {
+        "heading": "Malware by behavior",
+        "body": "Classify malware by what it does, not just its name.",
+        "bullets": [
+          "Ransomware encrypts data and demands payment.",
+          "Spyware secretly collects information; a keylogger records keystrokes.",
+          "A worm self-propagates; a trojan hides inside something useful; a rootkit hides its own presence."
+        ]
+      },
+      {
+        "body": "The strongest defense blends technical controls with people: filtering and endpoint protection reduce what reaches users, while awareness training reduces how often a lure succeeds."
+      }
+    ]
+  },
+  {
+    "id": "secplus-architecture-l1",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "title": "Protecting data in every state",
+    "order": 1,
+    "estMinutes": 5,
+    "objectives": ["Protect data in transit", "Select data-protection controls", "Apply data classification"],
+    "sections": [
+      {
+        "body": "Data is not protected by a single switch. It lives in three states, and each one needs its own controls. Designing for all three is what keeps information safe end to end."
+      },
+      {
+        "heading": "The three states",
+        "body": "Match the control to the state.",
+        "bullets": [
+          "At rest (storage): full-disk or file/database encryption protects lost or stolen media.",
+          "In transit (network): TLS or a VPN tunnel protects data crossing untrusted links.",
+          "In use (memory): access controls and trusted execution limit exposure while data is processed."
+        ]
+      },
+      {
+        "heading": "Classify first, then protect",
+        "body": "You cannot protect what you have not labeled. Data classification — Public, Internal, Confidential, and so on — tells you how strongly each item must be protected. Techniques like tokenization (swapping data for unrelated tokens) and masking further limit exposure of sensitive fields where full encryption is not practical."
+      }
+    ]
+  },
+  {
     "id": "secplus-operations-l1",
     "certId": "security-plus",
     "exam": "SY0-701",
@@ -55,6 +146,35 @@
       {
         "heading": "Where teams slip",
         "body": "Two phases get shortchanged. Containment is sometimes rushed straight to eradication, which can tip off an attacker or destroy evidence. And lessons learned is often skipped once the fire is out — yet that is the step that prevents the next incident. Treat documentation as part of the job, not an afterthought."
+      }
+    ]
+  },
+  {
+    "id": "secplus-governance-l1",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "title": "Managing risk like a program",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Apply risk-management strategies", "Calculate quantitative risk (SLE, ARO, ALE)", "Use a risk register"],
+    "sections": [
+      {
+        "body": "Security cannot eliminate every risk, so governance is about making deliberate, documented choices. A risk-management program identifies what could go wrong, decides how to handle it, and tracks those decisions over time."
+      },
+      {
+        "heading": "Four ways to handle a risk",
+        "body": "Every identified risk gets a treatment decision.",
+        "bullets": [
+          "Mitigate: reduce likelihood or impact with controls.",
+          "Transfer: shift the financial impact, e.g., insurance.",
+          "Avoid: stop doing the risky activity.",
+          "Accept: formally tolerate a low, documented risk."
+        ]
+      },
+      {
+        "heading": "Putting numbers on risk",
+        "body": "Quantitative analysis helps justify spending. The single loss expectancy (SLE) is the cost of one event; the annualized rate of occurrence (ARO) is how often it happens per year; and the annualized loss expectancy is ALE = SLE x ARO. If a control costs less than the ALE it removes, it is usually worth it. All of these decisions belong in a risk register — a living list of risks with owners, ratings, and treatments — so the program stays accountable."
       }
     ]
   }

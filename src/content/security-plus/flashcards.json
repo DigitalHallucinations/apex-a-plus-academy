@@ -23,85 +23,295 @@
   {
     "id": "secplus-f004",
     "certId": "security-plus",
+    "domain": "secplus-concepts",
+    "front": "AAA",
+    "back": "Authentication (who you are), Authorization (what you may access), Accounting (record of what you did)."
+  },
+  {
+    "id": "secplus-f005",
+    "certId": "security-plus",
+    "domain": "secplus-concepts",
+    "front": "Symmetric vs asymmetric encryption",
+    "back": "Symmetric: one shared key, fast, for bulk data. Asymmetric: public/private key pair, used for key exchange and signatures."
+  },
+  {
+    "id": "secplus-f006",
+    "certId": "security-plus",
+    "domain": "secplus-concepts",
+    "front": "What does hashing provide?",
+    "back": "Integrity — a fixed-length fingerprint that detects change. It is one-way and does not provide confidentiality."
+  },
+  {
+    "id": "secplus-f007",
+    "certId": "security-plus",
+    "domain": "secplus-concepts",
+    "front": "Non-repudiation",
+    "back": "Proof a party performed an action (e.g., a digital signature) so they cannot credibly deny it."
+  },
+  {
+    "id": "secplus-f008",
+    "certId": "security-plus",
+    "domain": "secplus-concepts",
+    "front": "Defense in depth",
+    "back": "Layer independent controls so a failure in one layer is covered by others."
+  },
+  {
+    "id": "secplus-f009",
+    "certId": "security-plus",
+    "domain": "secplus-concepts",
+    "front": "Separation of duties vs least privilege",
+    "back": "Separation of duties splits a task so no one person completes it alone; least privilege limits each person to the access they need."
+  },
+  {
+    "id": "secplus-f010",
+    "certId": "security-plus",
     "domain": "secplus-threats",
     "front": "Phishing vs spear phishing vs whaling",
     "back": "Phishing: broad. Spear phishing: targeted at specific people. Whaling: targets executives."
   },
   {
-    "id": "secplus-f005",
+    "id": "secplus-f011",
     "certId": "security-plus",
     "domain": "secplus-threats",
     "front": "Ransomware",
     "back": "Malware that encrypts files and demands payment for the key. Best defense: tested offline backups."
   },
   {
-    "id": "secplus-f006",
+    "id": "secplus-f012",
     "certId": "security-plus",
     "domain": "secplus-threats",
     "front": "APT (advanced persistent threat)",
     "back": "Well-resourced (often nation-state) actor seeking long-term, stealthy access for strategic goals."
   },
   {
-    "id": "secplus-f007",
+    "id": "secplus-f013",
+    "certId": "security-plus",
+    "domain": "secplus-threats",
+    "front": "Vishing vs smishing",
+    "back": "Vishing: social engineering by voice/phone. Smishing: social engineering by SMS text message."
+  },
+  {
+    "id": "secplus-f014",
+    "certId": "security-plus",
+    "domain": "secplus-threats",
+    "front": "Insider threat",
+    "back": "A trusted person misusing legitimate access — hard to catch because the access is authorized."
+  },
+  {
+    "id": "secplus-f015",
+    "certId": "security-plus",
+    "domain": "secplus-threats",
+    "front": "Zero-day",
+    "back": "An exploited flaw with no available patch yet. Mitigate with layered controls, monitoring, and fast response."
+  },
+  {
+    "id": "secplus-f016",
+    "certId": "security-plus",
+    "domain": "secplus-threats",
+    "front": "On-path (MITM) attack",
+    "back": "Attacker intercepts/alters traffic between two parties. Mitigate with TLS and certificate validation."
+  },
+  {
+    "id": "secplus-f017",
+    "certId": "security-plus",
+    "domain": "secplus-threats",
+    "front": "Password spraying vs brute force",
+    "back": "Spraying: one common password across many accounts (avoids lockout). Brute force: many passwords against one account."
+  },
+  {
+    "id": "secplus-f018",
+    "certId": "security-plus",
+    "domain": "secplus-threats",
+    "front": "Supply-chain attack",
+    "back": "Compromising a trusted vendor/update to reach its customers. Defend with vendor vetting and update integrity checks."
+  },
+  {
+    "id": "secplus-f019",
     "certId": "security-plus",
     "domain": "secplus-architecture",
     "front": "Screened subnet (DMZ)",
     "back": "An isolated segment for internet-facing services so their compromise doesn't expose the internal LAN."
   },
   {
-    "id": "secplus-f008",
+    "id": "secplus-f020",
     "certId": "security-plus",
     "domain": "secplus-architecture",
     "front": "Data states",
     "back": "Data at rest (storage), in transit (network), and in use (memory) — each needs its own protections."
   },
   {
-    "id": "secplus-f009",
+    "id": "secplus-f021",
     "certId": "security-plus",
     "domain": "secplus-architecture",
     "front": "Resilience vs redundancy",
     "back": "Redundancy duplicates components; resilience is the broader ability to keep operating and recover from failure."
   },
   {
-    "id": "secplus-f010",
+    "id": "secplus-f022",
+    "certId": "security-plus",
+    "domain": "secplus-architecture",
+    "front": "VPN purpose",
+    "back": "Creates an encrypted tunnel (IPsec or TLS) to protect data in transit over untrusted networks."
+  },
+  {
+    "id": "secplus-f023",
+    "certId": "security-plus",
+    "domain": "secplus-architecture",
+    "front": "Stateful vs stateless firewall",
+    "back": "Stateful tracks connection state and allows return traffic; stateless evaluates each packet against rules in isolation."
+  },
+  {
+    "id": "secplus-f024",
+    "certId": "security-plus",
+    "domain": "secplus-architecture",
+    "front": "Data classification",
+    "back": "Labeling data by sensitivity (e.g., Public/Internal/Confidential) to apply the right handling and controls."
+  },
+  {
+    "id": "secplus-f025",
+    "certId": "security-plus",
+    "domain": "secplus-architecture",
+    "front": "Tokenization vs encryption",
+    "back": "Tokenization swaps data for unrelated tokens stored in a vault; encryption is reversible with a key."
+  },
+  {
+    "id": "secplus-f026",
+    "certId": "security-plus",
+    "domain": "secplus-architecture",
+    "front": "3-2-1 backup rule",
+    "back": "Three copies, on two media types, with one copy off-site."
+  },
+  {
+    "id": "secplus-f027",
+    "certId": "security-plus",
+    "domain": "secplus-architecture",
+    "front": "Hot vs warm vs cold site",
+    "back": "Hot: ready with current data (minutes). Warm: partially ready (hours/days). Cold: space and power only."
+  },
+  {
+    "id": "secplus-f028",
     "certId": "security-plus",
     "domain": "secplus-operations",
     "front": "MFA factors",
     "back": "Something you know, something you have, something you are (plus somewhere you are / something you do)."
   },
   {
-    "id": "secplus-f011",
+    "id": "secplus-f029",
     "certId": "security-plus",
     "domain": "secplus-operations",
     "front": "Incident response phases",
     "back": "Preparation → Identification → Containment → Eradication → Recovery → Lessons learned."
   },
   {
-    "id": "secplus-f012",
+    "id": "secplus-f030",
     "certId": "security-plus",
     "domain": "secplus-operations",
     "front": "What does a SIEM do?",
     "back": "Centralizes and correlates logs from many sources to detect, alert on, and investigate incidents."
   },
   {
-    "id": "secplus-f013",
+    "id": "secplus-f031",
+    "certId": "security-plus",
+    "domain": "secplus-operations",
+    "front": "Patch management",
+    "back": "Tracking, testing, and deploying vendor updates to close known vulnerabilities."
+  },
+  {
+    "id": "secplus-f032",
+    "certId": "security-plus",
+    "domain": "secplus-operations",
+    "front": "Credentialed vs non-credentialed scan",
+    "back": "Credentialed scans log in for deeper, more accurate results (patches/config); non-credentialed see only the external view."
+  },
+  {
+    "id": "secplus-f033",
+    "certId": "security-plus",
+    "domain": "secplus-operations",
+    "front": "CVE vs CVSS",
+    "back": "CVE: the unique identifier for a specific vulnerability. CVSS: its 0-10 severity score."
+  },
+  {
+    "id": "secplus-f034",
+    "certId": "security-plus",
+    "domain": "secplus-operations",
+    "front": "EDR",
+    "back": "Endpoint Detection and Response — monitors endpoints for suspicious behavior and enables investigation and isolation."
+  },
+  {
+    "id": "secplus-f035",
+    "certId": "security-plus",
+    "domain": "secplus-operations",
+    "front": "PAM",
+    "back": "Privileged Access Management — vaults, monitors, and rotates privileged credentials to limit standing admin access."
+  },
+  {
+    "id": "secplus-f036",
+    "certId": "security-plus",
+    "domain": "secplus-operations",
+    "front": "CRL vs OCSP",
+    "back": "CRL: a downloadable list of revoked certificates. OCSP: real-time status check for a single certificate."
+  },
+  {
+    "id": "secplus-f037",
     "certId": "security-plus",
     "domain": "secplus-governance",
     "front": "Risk-handling strategies",
     "back": "Accept, avoid, transfer (e.g., insurance), and mitigate (reduce likelihood or impact)."
   },
   {
-    "id": "secplus-f014",
+    "id": "secplus-f038",
     "certId": "security-plus",
     "domain": "secplus-governance",
     "front": "Policy vs standard vs procedure",
     "back": "Policy = intent/rules; standard = specific requirements; procedure = step-by-step how-to."
   },
   {
-    "id": "secplus-f015",
+    "id": "secplus-f039",
     "certId": "security-plus",
     "domain": "secplus-governance",
     "front": "RTO vs RPO",
     "back": "RTO = target time to restore service. RPO = maximum acceptable data loss measured in time."
+  },
+  {
+    "id": "secplus-f040",
+    "certId": "security-plus",
+    "domain": "secplus-governance",
+    "front": "Quantitative risk: SLE, ARO, ALE",
+    "back": "SLE = single loss cost. ARO = times per year. ALE = SLE x ARO (expected yearly loss)."
+  },
+  {
+    "id": "secplus-f041",
+    "certId": "security-plus",
+    "domain": "secplus-governance",
+    "front": "Risk register",
+    "back": "A central list of risks with owner, likelihood, impact, and chosen treatment."
+  },
+  {
+    "id": "secplus-f042",
+    "certId": "security-plus",
+    "domain": "secplus-governance",
+    "front": "SLA vs MOU vs NDA vs BPA",
+    "back": "SLA: measurable service commitments. MOU: non-binding understanding. NDA: confidentiality. BPA: business partnership terms."
+  },
+  {
+    "id": "secplus-f043",
+    "certId": "security-plus",
+    "domain": "secplus-governance",
+    "front": "Data privacy roles",
+    "back": "Controller decides why/how data is processed; processor acts on its instructions; data subject is the individual."
+  },
+  {
+    "id": "secplus-f044",
+    "certId": "security-plus",
+    "domain": "secplus-governance",
+    "front": "BIA (business impact analysis)",
+    "back": "Identifies critical processes and the impact of downtime to set recovery priorities (feeds RTO/RPO)."
+  },
+  {
+    "id": "secplus-f045",
+    "certId": "security-plus",
+    "domain": "secplus-governance",
+    "front": "Due care vs due diligence",
+    "back": "Due diligence: up-front investigation. Due care: ongoing, reasonable effort to maintain protections."
   }
 ]

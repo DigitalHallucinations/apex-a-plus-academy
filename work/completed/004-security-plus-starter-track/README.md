@@ -9,7 +9,12 @@
 > Network+'s threshold to 0.80 so all three derive from official scaled passing ÷
 > 900 (A+ 0.75, Network+ 0.80, Security+ 0.83). All content is original. Verified
 > by `audits/AUDIT-2026-06-17-security-plus-starter.md` (validate:content, 48
-> tests, build, a11y all green). Starter sample, not full coverage.
+> tests, build, a11y all green).
+>
+> **2026-06-17 follow-up:** Security+ content tripled on request — now 54
+> questions, 45 flashcards, 6 lessons, and 6 PBQs (from 18/15/2/2), all original
+> and distributed across the five domains. Evidence:
+> `evidence/runs/20260617-171612-004-expand.json`.
 
 ## Imported plan narrative
 

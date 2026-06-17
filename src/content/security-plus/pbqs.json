@@ -42,5 +42,96 @@
     ],
     "answer": ["s-prep", "s-ident", "s-contain", "s-erad", "s-recover", "s-lessons"],
     "explanation": "The sequence is preparation, identification, containment, eradication, recovery, and finally lessons learned — contain before eradicating, and never skip the review."
+  },
+  {
+    "id": "secplus-p003",
+    "certId": "security-plus",
+    "kind": "matching",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Match each control to the control type it best represents.",
+    "objective": "Classify security control types",
+    "items": [
+      { "id": "c-fw", "text": "Firewall blocking unauthorized traffic" },
+      { "id": "c-ids", "text": "IDS alert on suspicious activity" },
+      { "id": "c-restore", "text": "Restoring systems from backup after an incident" },
+      { "id": "c-banner", "text": "Warning banner shown before login" }
+    ],
+    "targets": [
+      { "id": "preventive", "label": "Preventive" },
+      { "id": "detective", "label": "Detective" },
+      { "id": "corrective", "label": "Corrective" },
+      { "id": "deterrent", "label": "Deterrent" }
+    ],
+    "answer": { "c-fw": "preventive", "c-ids": "detective", "c-restore": "corrective", "c-banner": "deterrent" },
+    "explanation": "A firewall prevents, an IDS detects, restoring from backup corrects after the fact, and a warning banner deters by discouraging misuse."
+  },
+  {
+    "id": "secplus-p004",
+    "certId": "security-plus",
+    "kind": "matching",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Intermediate",
+    "prompt": "Match each attack to the description that fits it best.",
+    "objective": "Recognize common attacks",
+    "items": [
+      { "id": "a-vishing", "text": "Vishing" },
+      { "id": "a-ransom", "text": "Ransomware" },
+      { "id": "a-onpath", "text": "On-path attack" },
+      { "id": "a-priv", "text": "Privilege escalation" }
+    ],
+    "targets": [
+      { "id": "d-phone", "label": "Phone-based social engineering" },
+      { "id": "d-encrypt", "label": "Encrypts files and demands payment" },
+      { "id": "d-intercept", "label": "Intercepts traffic between two parties" },
+      { "id": "d-rights", "label": "Gains higher rights than were granted" }
+    ],
+    "answer": { "a-vishing": "d-phone", "a-ransom": "d-encrypt", "a-onpath": "d-intercept", "a-priv": "d-rights" },
+    "explanation": "Vishing is phone-based social engineering, ransomware encrypts for extortion, an on-path attack intercepts traffic, and privilege escalation raises an attacker's access."
+  },
+  {
+    "id": "secplus-p005",
+    "certId": "security-plus",
+    "kind": "matching",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "difficulty": "Intermediate",
+    "prompt": "Match each data scenario to the most appropriate protection.",
+    "objective": "Protect data in every state",
+    "items": [
+      { "id": "d-rest", "text": "Laptop hard drive that could be lost" },
+      { "id": "d-transit", "text": "Traffic between a remote worker and HQ" },
+      { "id": "d-card", "text": "Stored credit-card numbers in an app" },
+      { "id": "d-share", "text": "A sensitive document shared internally" }
+    ],
+    "targets": [
+      { "id": "fde", "label": "Full-disk encryption" },
+      { "id": "vpn", "label": "VPN / TLS tunnel" },
+      { "id": "token", "label": "Tokenization" },
+      { "id": "classify", "label": "Data classification and access control" }
+    ],
+    "answer": { "d-rest": "fde", "d-transit": "vpn", "d-card": "token", "d-share": "classify" },
+    "explanation": "Encrypt the disk for data at rest, tunnel data in transit, tokenize stored card numbers, and classify shared documents so the right access controls apply."
+  },
+  {
+    "id": "secplus-p006",
+    "certId": "security-plus",
+    "kind": "ordering",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Advanced",
+    "prompt": "Place the vulnerability-management lifecycle steps in the correct order.",
+    "objective": "Apply the vulnerability-management lifecycle",
+    "steps": [
+      { "id": "v-scan", "text": "Discover assets and scan for vulnerabilities" },
+      { "id": "v-prioritize", "text": "Prioritize findings by severity (CVSS)" },
+      { "id": "v-remediate", "text": "Remediate by patching or mitigating" },
+      { "id": "v-verify", "text": "Verify the fix with a rescan" },
+      { "id": "v-report", "text": "Report and track to closure" }
+    ],
+    "answer": ["v-scan", "v-prioritize", "v-remediate", "v-verify", "v-report"],
+    "explanation": "You scan to find issues, prioritize by severity, remediate, verify with a rescan, then report and track to closure — a continuous cycle, not a one-time task."
   }
 ]
