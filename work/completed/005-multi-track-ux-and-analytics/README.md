@@ -1,7 +1,15 @@
 # 005 — TODO-005: Multi-Track UX, Availability, And Analytics
 
-> **Status**: 📋 Active
+> **Status**: ✅ Completed (2026-06-17)
 > Imported into RepoPact from `todos/TODO-005-multi-track-ux-and-analytics.md`; the source is preserved.
+>
+> **Outcome:** Added optional `order` and `status` (`available` | `coming-soon`)
+> fields to the `Certification` manifest with deterministic ordering
+> (`sortCertifications`), a coming-soon affordance in the track switcher and
+> all-tracks analytics, required-bank validation exemption for coming-soon tracks,
+> a safe active-track fallback (`resolveActiveCert`), vendor-aware trademark copy,
+> and empty states for tracks without questions. Verified by
+> `audits/AUDIT-2026-06-17-multi-track-ux.md` (validate:content, 48 tests, build all green).
 
 ## Imported plan narrative
 

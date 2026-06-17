@@ -7,9 +7,41 @@
     "idPrefix": "aplus",
     "description": "Entry-level technician certification covering hardware, operating systems, networking, security, troubleshooting, and operational procedures across two core exams.",
     "passThreshold": 0.75,
+    "order": 1,
     "exams": [
-      { "id": "220-1201", "certId": "a-plus", "name": "Core 1", "defaultQuestions": 90, "defaultMinutes": 90 },
-      { "id": "220-1202", "certId": "a-plus", "name": "Core 2", "defaultQuestions": 90, "defaultMinutes": 90 }
+      {
+        "id": "220-1201",
+        "certId": "a-plus",
+        "name": "Core 1",
+        "defaultQuestions": 90,
+        "defaultMinutes": 90
+      },
+      {
+        "id": "220-1202",
+        "certId": "a-plus",
+        "name": "Core 2",
+        "defaultQuestions": 90,
+        "defaultMinutes": 90
+      }
+    ]
+  },
+  {
+    "id": "network-plus",
+    "name": "CompTIA Network+",
+    "shortName": "Network+",
+    "vendor": "CompTIA",
+    "idPrefix": "netplus",
+    "description": "Vendor-neutral networking certification covering network concepts, implementation, operations, security, and troubleshooting. This starter track is a small, original sample built to exercise the multi-track platform — not full exam coverage.",
+    "passThreshold": 0.75,
+    "order": 2,
+    "exams": [
+      {
+        "id": "N10-009",
+        "certId": "network-plus",
+        "name": "",
+        "defaultQuestions": 90,
+        "defaultMinutes": 90
+      }
     ]
   }
 ]

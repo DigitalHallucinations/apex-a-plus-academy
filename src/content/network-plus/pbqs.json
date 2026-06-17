@@ -1,0 +1,46 @@
+[
+  {
+    "id": "netplus-p001",
+    "certId": "network-plus",
+    "kind": "matching",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Match each default port number to the protocol that uses it.",
+    "objective": "Compare common ports and protocols",
+    "items": [
+      { "id": "p443", "text": "443" },
+      { "id": "p22", "text": "22" },
+      { "id": "p53", "text": "53" },
+      { "id": "p123", "text": "123" }
+    ],
+    "targets": [
+      { "id": "https", "label": "HTTPS" },
+      { "id": "ssh", "label": "SSH" },
+      { "id": "dns", "label": "DNS" },
+      { "id": "ntp", "label": "NTP" }
+    ],
+    "answer": { "p443": "https", "p22": "ssh", "p53": "dns", "p123": "ntp" },
+    "explanation": "HTTPS uses 443, SSH uses 22, DNS uses 53, and NTP synchronizes time on UDP 123. Knowing default ports speeds up both configuration and troubleshooting."
+  },
+  {
+    "id": "netplus-p002",
+    "certId": "network-plus",
+    "kind": "ordering",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "difficulty": "Intermediate",
+    "prompt": "Place the troubleshooting methodology steps in the correct order.",
+    "objective": "Apply the troubleshooting methodology",
+    "steps": [
+      { "id": "s-identify", "text": "Identify the problem" },
+      { "id": "s-theory", "text": "Establish a theory of probable cause" },
+      { "id": "s-test", "text": "Test the theory to determine cause" },
+      { "id": "s-plan", "text": "Establish a plan and implement the solution" },
+      { "id": "s-verify", "text": "Verify full functionality" },
+      { "id": "s-document", "text": "Document findings, actions, and outcomes" }
+    ],
+    "answer": ["s-identify", "s-theory", "s-test", "s-plan", "s-verify", "s-document"],
+    "explanation": "The methodology runs from identifying the problem through testing a theory before fixing, then verifying and finally documenting — the two steps most often skipped."
+  }
+]

@@ -55,16 +55,40 @@ Rules:
 - `passThreshold` is a fraction from `> 0` through `1`.
 - Every exam object repeats the parent `certId`.
 - Single-exam certs still use the same `exams` array shape.
+- `order` (optional number) sets the track's position in the switcher and the
+  all-tracks analytics overview. Tracks without an `order` sort after ordered
+  ones, then alphabetically by name.
+- `status` (optional) is `"available"` (default) or `"coming-soon"`.
+
+## Track Availability ("coming soon")
+
+A `"coming-soon"` track is advertised in the UI — it appears under a "Coming
+soon" heading in the track switcher and as a roadmap row in the all-tracks
+analytics overview — but it cannot be entered, and the required-bank rule does
+not apply to it. This lets you publish the roadmap (e.g. an upcoming Network+
+track) before any content is authored.
+
+Scaffold a roadmap track with empty banks:
+
+```powershell
+npm run scaffold:cert -- --id security-plus --prefix secplus --name "CompTIA Security+" --shortName "Security+" --exam SY0-701 --status coming-soon --order 3
+```
+
+When the content is ready, author the banks and remove `"status": "coming-soon"`
+(or set it to `"available"`); validation then enforces the required banks again.
+The app guards `activeCertId`: if a learner's focused track is removed or flipped
+to coming-soon, the workspace falls back to the first available track.
 
 ## Required Banks
 
-Every manifest cert must have non-empty:
+Every `available` manifest cert must have non-empty:
 
 - `domains.json`
 - `questions.json`
 - `flashcards.json`
 
-Validation fails if any required bank is missing or empty for a cert.
+Validation fails if any required bank is missing or empty for an available cert.
+`coming-soon` tracks are exempt (see Track Availability above).
 
 ## Optional Banks
 

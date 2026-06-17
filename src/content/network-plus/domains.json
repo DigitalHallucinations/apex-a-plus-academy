@@ -1,0 +1,77 @@
+[
+  {
+    "id": "netplus-concepts",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "name": "Networking Concepts",
+    "weight": 23,
+    "color": "#55a8ff",
+    "description": "Foundational models and addressing: the OSI layers, common ports and protocols, IPv4/IPv6 addressing, and the building blocks that everything else builds on.",
+    "topics": [
+      "OSI model layers",
+      "Ports and protocols",
+      "IPv4 and IPv6 addressing",
+      "Network topologies and types"
+    ]
+  },
+  {
+    "id": "netplus-implementation",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "name": "Network Implementation",
+    "weight": 20,
+    "color": "#36d6b5",
+    "description": "Building the network: routing and switching behavior, VLANs, wireless standards, and the cabling and devices that connect endpoints.",
+    "topics": [
+      "Routing and switching",
+      "VLANs and trunking",
+      "Wireless standards",
+      "Cabling and connectors"
+    ]
+  },
+  {
+    "id": "netplus-operations",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "name": "Network Operations",
+    "weight": 19,
+    "color": "#a78bfa",
+    "description": "Keeping the network healthy: documentation, monitoring and metrics, high availability, and the disaster-recovery concepts that limit downtime.",
+    "topics": [
+      "Documentation and diagrams",
+      "Monitoring and metrics",
+      "High availability",
+      "Disaster recovery"
+    ]
+  },
+  {
+    "id": "netplus-security",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "name": "Network Security",
+    "weight": 14,
+    "color": "#f2b84b",
+    "description": "Defending the network: security concepts, common attack types, hardening techniques, and the access controls that keep traffic and devices trustworthy.",
+    "topics": [
+      "Security concepts (CIA)",
+      "Common attacks",
+      "Hardening and segmentation",
+      "Authentication and access control"
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "name": "Network Troubleshooting",
+    "weight": 24,
+    "color": "#ff7c70",
+    "description": "Diagnosing faults methodically: a structured troubleshooting process plus the cabling, connectivity, and software tools used to isolate and fix problems.",
+    "topics": [
+      "Troubleshooting methodology",
+      "Cable and connectivity issues",
+      "Command-line tools",
+      "Common service problems"
+    ]
+  }
+]

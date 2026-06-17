@@ -2,6 +2,19 @@
 
 All notable changes to SkillForge Academy are documented here. SkillForge Academy was previously developed under the working name Apex A+ Academy.
 
+## Unreleased
+
+### Added
+
+- **CompTIA Network+ (N10-009) starter track** — a second certification is now selectable from the track switcher, with original content across all five Network+ domains (18 practice questions, 15 flashcards, 2 lessons, and 2 performance-based questions). This is a starter sample to exercise the multi-track platform, not full exam coverage; A+ remains the primary track and its progress stays fully separate.
+- Multi-track availability and ordering: certification tracks can now declare an optional `order` and a `status` of `available` or `coming-soon` in the manifest. Coming-soon tracks are advertised in the track switcher and the all-tracks analytics overview, are not selectable, and are exempt from the required-bank content validation — so an upcoming track can be published on the roadmap before its content is authored.
+
+### Changed
+
+- The track switcher now uses a deterministic order (available tracks first, then by `order`, then by name) and groups coming-soon tracks under a "Coming soon" heading.
+- Trademark/affiliation disclaimers on the dashboard and preferences now derive the vendor from the active track instead of hardcoding CompTIA/A+, so shared UI stays correct across tracks.
+- The app now falls back to the first available track if a saved active track is missing or has become coming-soon.
+
 ## 1.3.2 - 2026-06-14
 
 ### Added

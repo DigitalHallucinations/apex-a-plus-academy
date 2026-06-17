@@ -47,6 +47,10 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
       if (!c[field]?.trim()) errors.push(`Certification ${c.id}: empty ${field}`);
     if (typeof c.passThreshold !== "number" || c.passThreshold <= 0 || c.passThreshold > 1)
       errors.push(`Certification ${c.id}: passThreshold must be between 0 and 1`);
+    if (c.status !== undefined && c.status !== "available" && c.status !== "coming-soon")
+      errors.push(`Certification ${c.id}: status must be "available" or "coming-soon"`);
+    if (c.order !== undefined && !Number.isFinite(c.order))
+      errors.push(`Certification ${c.id}: order must be a number when present`);
     if (!Array.isArray(c.exams) || c.exams.length === 0) errors.push(`Certification ${c.id}: needs at least one exam`);
     for (const e of c.exams ?? []) {
       if (examToCert.has(e.id)) errors.push(`Duplicate exam id: ${e.id}`);
@@ -79,6 +83,9 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
   const lessonList = (lessons ?? []) as Lesson[];
 
   for (const c of certList) {
+    // Coming-soon tracks are advertised before any banks are authored, so the
+    // required-bank check only applies to available tracks.
+    if (c.status === "coming-soon") continue;
     const counts = {
       domains: domainList.filter(d => d.certId === c.id).length,
       questions: questionList.filter(q => q.certId === c.id).length,

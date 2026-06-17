@@ -2,7 +2,7 @@
   "$schema": "../../../schemas/work-item.schema.json",
   "id": "003",
   "title": "TODO-003: Network+ Starter Track",
-  "status": "active",
+  "status": "completed",
   "owner_scope": "governance",
   "affected_scopes": [],
   "depends_on": [],
@@ -10,11 +10,14 @@
     {
       "id": "AC-1",
       "text": "Deliver the outcome described in the imported plan narrative (`todos/TODO-003-network-plus-starter-track.md`).",
-      "state": "pending",
-      "evidence": []
+      "state": "satisfied",
+      "evidence": [
+        "audits/AUDIT-2026-06-17-network-plus-starter.md",
+        "evidence/runs/20260617-164911-003.json"
+      ]
     }
   ],
   "created": "2026-06-16",
-  "updated": "2026-06-16",
+  "updated": "2026-06-17",
   "source": "todos/TODO-003-network-plus-starter-track.md"
 }

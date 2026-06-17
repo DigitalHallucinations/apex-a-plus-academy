@@ -1,0 +1,63 @@
+[
+  {
+    "id": "netplus-concepts-l1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "The OSI model as a troubleshooting map",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Map devices to OSI layers", "Use the OSI model to isolate faults"],
+    "sections": [
+      {
+        "body": "The OSI model breaks networking into seven layers, from the physical signaling at the bottom to the application a user interacts with at the top. You rarely configure 'the OSI model' directly, but it gives you a shared vocabulary and, more usefully, a checklist for isolating where a problem lives."
+      },
+      {
+        "heading": "The seven layers",
+        "body": "From bottom to top, the layers are Physical, Data Link, Network, Transport, Session, Presentation, and Application. A common way to remember them is to think of building up from cables and signals to the software the user sees.",
+        "bullets": [
+          "Layer 1 Physical: cables, connectors, signaling, voltage.",
+          "Layer 2 Data Link: MAC addresses, switches, frames.",
+          "Layer 3 Network: IP addresses, routers, packets.",
+          "Layer 4 Transport: TCP/UDP, ports, segments.",
+          "Layers 5-7 Session/Presentation/Application: sessions, formatting, and protocols like HTTP."
+        ]
+      },
+      {
+        "heading": "Why technicians care",
+        "body": "When something breaks, work the layers. If a link light is dark, that is Layer 1 — no point checking DNS yet. If you can ping by IP but not by name, the lower layers are fine and the problem is higher up, at name resolution. Narrowing the fault to a layer turns a vague 'the network is down' into a specific, testable question."
+      }
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting-l1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "title": "A repeatable troubleshooting method",
+    "order": 1,
+    "estMinutes": 5,
+    "objectives": ["Apply the troubleshooting methodology"],
+    "sections": [
+      {
+        "body": "Good troubleshooting is a process, not a guess. Following the same steps every time keeps you from jumping to a fix that treats a symptom instead of the cause — and it gives you a record others can follow."
+      },
+      {
+        "heading": "The steps in order",
+        "body": "The method moves from understanding the problem to confirming a lasting fix.",
+        "bullets": [
+          "Identify the problem: gather symptoms and what changed.",
+          "Establish a theory of probable cause.",
+          "Test the theory to confirm or reject it.",
+          "Establish a plan of action and implement the solution.",
+          "Verify full functionality and apply preventive measures.",
+          "Document findings, actions, and outcomes."
+        ]
+      },
+      {
+        "heading": "The discipline that matters",
+        "body": "The two steps people skip are testing the theory before fixing, and documenting after. Testing first stops you from swapping hardware that was never the problem. Documenting turns today's outage into tomorrow's quick answer when the same `CRC error` or DNS failure reappears."
+      }
+    ]
+  }
+]

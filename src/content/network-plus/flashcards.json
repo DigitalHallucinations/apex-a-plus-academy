@@ -1,0 +1,107 @@
+[
+  {
+    "id": "netplus-f001",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "OSI layers, top to bottom",
+    "back": "Application, Presentation, Session, Transport, Network, Data Link, Physical (7 → 1)."
+  },
+  {
+    "id": "netplus-f002",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "Common ports: HTTP, HTTPS, SSH, DNS",
+    "back": "HTTP 80/TCP, HTTPS 443/TCP, SSH 22/TCP, DNS 53/UDP+TCP."
+  },
+  {
+    "id": "netplus-f003",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "Private IPv4 ranges (RFC 1918)",
+    "back": "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16."
+  },
+  {
+    "id": "netplus-f004",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "What does 802.1Q do?",
+    "back": "Tags Ethernet frames with a VLAN ID so trunk links can carry multiple VLANs between switches."
+  },
+  {
+    "id": "netplus-f005",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "Copper twisted-pair distance limit",
+    "back": "~100 meters per run; beyond that, use fiber."
+  },
+  {
+    "id": "netplus-f006",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "2.4 GHz vs 5 GHz Wi-Fi",
+    "back": "2.4 GHz: longer range, more interference, fewer channels. 5 GHz: shorter range, faster, more non-overlapping channels."
+  },
+  {
+    "id": "netplus-f007",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "RTO vs RPO",
+    "back": "RTO = target time to restore service. RPO = maximum acceptable data loss measured in time."
+  },
+  {
+    "id": "netplus-f008",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "What is SNMP used for?",
+    "back": "Polling device metrics and receiving trap alerts from network devices into a monitoring system."
+  },
+  {
+    "id": "netplus-f009",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "High availability vs load balancing",
+    "back": "HA removes single points of failure (failover); load balancing spreads traffic across multiple active resources."
+  },
+  {
+    "id": "netplus-f010",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "CIA triad",
+    "back": "Confidentiality (secrecy), Integrity (no unauthorized change), Availability (reachable when needed)."
+  },
+  {
+    "id": "netplus-f011",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "ARP spoofing",
+    "back": "Forged ARP replies bind the attacker's MAC to another IP, enabling on-path interception. Mitigate with Dynamic ARP Inspection."
+  },
+  {
+    "id": "netplus-f012",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "What does 802.1X provide?",
+    "back": "Port-based network access control: authenticate (often via RADIUS) before the switch port grants access."
+  },
+  {
+    "id": "netplus-f013",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "Troubleshooting methodology order",
+    "back": "Identify problem → theory of cause → test theory → plan → implement → verify → document."
+  },
+  {
+    "id": "netplus-f014",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "Works by IP but not by name",
+    "back": "Name-resolution (DNS) problem. Check the client's DNS server and test with nslookup/dig."
+  },
+  {
+    "id": "netplus-f015",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "CRC errors on a port indicate…",
+    "back": "Physical-layer corruption — damaged/out-of-spec cabling, excessive length, or interference."
+  }
+]

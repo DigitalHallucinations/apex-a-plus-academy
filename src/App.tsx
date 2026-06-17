@@ -14,7 +14,7 @@ import type { Attempt, CertId, Certification, LearnerState, Lesson, Pbq, Questio
 import {
   initialState, pct, shuffle, formatTime, dateKey, questionsToday, applyStudyActivity,
   recordAnswer, scheduleCard, isCardDue, domainMastery, migrateState,
-  activeProgress, patchProgress,
+  activeProgress, patchProgress, isCertAvailable, sortCertifications, resolveActiveCert,
   buildNotifications, buildMockExam, scoreMock, gradePbq, MOCK_PASS, MOCK_DEFAULT_QUESTIONS,
   MOCK_DEFAULT_MINUTES, type MockItem
 } from "./logic";
@@ -75,6 +75,13 @@ export default function App() {
     Promise.all([readState(), loadContent()]).then(([s, c]) => { setState(s); setContent(c); setReady(true); });
   }, []);
   useEffect(() => { if (ready) writeState(state); }, [state, ready]);
+  // Keep focus on a real, available track: if a saved activeCertId points at a
+  // track that was removed or flipped to coming-soon, fall back deterministically.
+  useEffect(() => {
+    if (!ready) return;
+    const resolved = resolveActiveCert(content.certifications, state.activeCertId);
+    if (resolved && resolved.id !== state.activeCertId) setState(s => ({ ...s, activeCertId: resolved.id }));
+  }, [ready, content, state.activeCertId]);
   useEffect(() => { document.documentElement.dataset.theme = state.theme; }, [state.theme]);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -139,15 +146,24 @@ export default function App() {
 
 function TrackSwitcher({ certs, activeCertId, onSelect }: { certs: Certification[]; activeCertId: CertId; onSelect: (id: CertId) => void }) {
   const [open, setOpen] = useState(false);
-  const active = certs.find(c => c.id === activeCertId) ?? certs[0];
+  const ordered = useMemo(() => sortCertifications(certs), [certs]);
+  const available = ordered.filter(isCertAvailable);
+  const comingSoon = ordered.filter(c => !isCertAvailable(c));
+  const active = ordered.find(c => c.id === activeCertId) ?? available[0] ?? ordered[0];
   if (!active) return null;
-  const multi = certs.length > 1;
+  // Open the menu when there is more than one selectable track or any roadmap
+  // track to advertise — a single track with nothing coming stays a static label.
+  const expandable = available.length > 1 || comingSoon.length > 0;
   return <div className={`track-switcher${open ? " open" : ""}`}>
-    <button className="track-current" aria-haspopup={multi || undefined} aria-expanded={multi ? open : undefined} disabled={!multi} onClick={() => setOpen(o => !o)} title={`${active.name} (${active.vendor})`}>
-      <GraduationCap/><div><b>{active.shortName} Track</b><small>{active.vendor}</small></div>{multi && <ChevronDown/>}
+    <button className="track-current" aria-haspopup={expandable || undefined} aria-expanded={expandable ? open : undefined} disabled={!expandable} onClick={() => setOpen(o => !o)} title={`${active.name} (${active.vendor})`}>
+      <GraduationCap/><div><b>{active.shortName} Track</b><small>{active.vendor}</small></div>{expandable && <ChevronDown/>}
     </button>
-    {open && multi && <div className="track-menu" role="menu" aria-label="Switch certification track">
-      {certs.map(c => <button key={c.id} role="menuitem" className={c.id === activeCertId ? "active" : ""} onClick={() => { onSelect(c.id); setOpen(false); }}><b>{c.shortName} Track</b><small>{c.name}</small></button>)}
+    {open && expandable && <div className="track-menu" role="menu" aria-label="Switch certification track">
+      {available.map(c => <button key={c.id} role="menuitem" className={c.id === activeCertId ? "active" : ""} onClick={() => { onSelect(c.id); setOpen(false); }}><b>{c.shortName} Track</b><small>{c.name}</small></button>)}
+      {comingSoon.length > 0 && <>
+        <div className="track-menu-label" role="presentation">Coming soon</div>
+        {comingSoon.map(c => <button key={c.id} role="menuitem" className="coming-soon" disabled aria-disabled="true" title={`${c.name} — in development`}><b>{c.shortName} Track</b><small>{c.vendor} · In development</small></button>)}
+      </>}
     </div>}
   </div>;
 }
@@ -188,8 +204,9 @@ function CommandPalette({ activeCertId, onClose, onPick }: { activeCertId: CertI
 }
 
 function Dashboard({ state, setView }: { state: LearnerState; setView: (v: View) => void }) {
-  const { domains, questions, flashcards } = useContent();
+  const { certifications, domains, questions, flashcards } = useContent();
   const cert = state.activeCertId;
+  const activeCert = certifications.find(c => c.id === cert);
   const progress = activeProgress(state);
   const certDomains = domains.filter(d => d.certId === cert);
   const certQuestions = questions.filter(q => q.certId === cert);
@@ -223,8 +240,17 @@ function Dashboard({ state, setView }: { state: LearnerState; setView: (v: View)
       <div className="panel chart-panel"><div className="panel-title"><div><span>PERFORMANCE TREND</span><h3>Practice exam scores</h3></div><button className="text-btn" onClick={() => setView("analytics")}>Full report <ChevronRight/></button></div>{trend.length ? <ResponsiveContainer width="100%" height={230}><AreaChart data={trend}><defs><linearGradient id="scoreFill" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#55a8ff" stopOpacity={.45}/><stop offset="95%" stopColor="#55a8ff" stopOpacity={0}/></linearGradient></defs><CartesianGrid strokeDasharray="3 3" stroke="var(--line)"/><XAxis dataKey="name" stroke="var(--muted)"/><YAxis domain={[0,100]} stroke="var(--muted)"/><Tooltip contentStyle={{background:"var(--panel)",border:"1px solid var(--line)"}}/><Area type="monotone" dataKey="score" stroke="#55a8ff" strokeWidth={3} fill="url(#scoreFill)"/></AreaChart></ResponsiveContainer> : <Empty message="Complete a practice session to reveal your trend." action="Start practice" onClick={() => setView("practice")}/>}</div>
       <div className="panel"><div className="panel-title"><div><span>DOMAIN MASTERY</span><h3>Objective coverage</h3></div></div><div className="domain-list">{domainData.slice(0,5).map(d => <div className="domain-row" key={d.id}><span className="domain-dot" style={{background:d.color}}/><div><b>{d.name}</b><small>{d.exam}</small></div><div className="thin-progress"><i style={{width:`${d.mastery}%`,background:d.color}}/></div><strong>{d.mastery}%</strong></div>)}</div></div>
     </div>
-    <div className="disclaimer">SkillForge Academy is an independent study tool. CompTIA and A+ are trademarks of CompTIA, Inc. This product is not affiliated with or endorsed by CompTIA.</div>
+    <TrademarkNote vendor={activeCert?.vendor} shortName={activeCert?.shortName}/>
   </>;
+}
+
+/**
+ * Track-aware trademark disclaimer. Reads the active certification's vendor and
+ * short name so shared UI never hardcodes A+/CompTIA once other tracks exist.
+ */
+function TrademarkNote({ vendor, shortName }: { vendor?: string; shortName?: string }) {
+  if (!vendor) return <div className="disclaimer">SkillForge Academy is an independent study tool and is not affiliated with or endorsed by the certification vendors.</div>;
+  return <div className="disclaimer">SkillForge Academy is an independent study tool. {vendor}{shortName ? ` and ${shortName}` : ""} {shortName ? "are" : "is a"} trademark{shortName ? "s" : ""} of their respective owners. This product is not affiliated with or endorsed by {vendor}.</div>;
 }
 
 function Stat({ icon: Icon, label, value, sub, color }: { icon: typeof Gauge; label:string; value:string; sub:string; color:string }) {
@@ -320,6 +346,7 @@ function Practice({ state, setState }: { state:LearnerState; setState:React.Disp
     });
     setMode("results");
   };
+  if(!certQuestions.length) return <><PageHead eyebrow="ADAPTIVE PRACTICE" title="Practice lab" subtitle="Choose a target, enter focus mode, and learn from every explanation."/><Empty message="No practice questions are available for this track yet."/></>;
   if(mode==="setup") return <><PageHead eyebrow="ADAPTIVE PRACTICE" title="Practice lab" subtitle="Choose a target, enter focus mode, and learn from every explanation."/><div className="setup-grid"><div className="panel setup-main"><h3>Build your session</h3><label>Exam track</label><div className="option-grid">{[...cert.exams.map(e=>e.id), "Mixed"].map(x=>{const meta=cert.exams.find(e=>e.id===x);return <button key={x} className={exam===x?"selected":""} onClick={()=>setExam(x)}><span>{x==="Mixed"?<Brain/>:<Activity/>}</span><b>{x==="Mixed"?"Mixed":(meta?.name||x)}</b><small>{x==="Mixed"?"All exams":x}</small></button>})}</div><label>Question count</label><div className="count-picker">{[5,10,15,20].map(x=><button key={x} className={count===x?"selected":""} onClick={()=>setCount(x)}>{x}</button>)}</div><button className="primary wide launch" onClick={start}><Play/> Launch session</button></div><div className="panel setup-side"><span className="pill purple"><Sparkles/> SESSION PREVIEW</span><h2>{Math.min(count,exam==="Mixed"?certQuestions.length:certQuestions.filter(q=>q.exam===exam).length)} questions</h2><div className="preview-row"><Clock3/><div><b>Estimated time</b><small>{Math.min(count,20)*1.5} minutes</small></div></div><div className="preview-row"><Target/><div><b>Coverage</b><small>{exam === "Mixed" ? `All ${cert.shortName} domains` : `Weighted ${exam} mix`}</small></div></div><div className="preview-row"><CircleHelp/><div><b>Learning mode</b><small>Explanations available after answering</small></div></div></div></div></>;
   if(mode==="results") { const score=session.filter(q=>answers[q.id]===q.answer).length; return <><PageHead eyebrow="SESSION COMPLETE" title="Your results" subtitle="Review what clicked and turn misses into your next study plan."/><div className="results panel"><div className={`result-ring ${pct(score,session.length)>=75?"pass":""}`}><b>{pct(score,session.length)}%</b><span>{score} of {session.length}</span></div><h2>{pct(score,session.length)>=75?"Strong work.":"Good baseline. Keep sharpening."}</h2><p>{pct(score,session.length)>=75?"Your decisions are trending toward exam readiness.":"Review the explanations below, then run a focused domain drill."}</p><div className="result-actions"><button className="primary" onClick={()=>setMode("setup")}><RotateCcw/> New session</button></div></div><div className="review-list">{session.map((q,i)=>{const ok=answers[q.id]===q.answer;return <div className={`panel review ${ok?"correct":"wrong"}`} key={q.id}><span>{ok?<Check/>:<X/>}</span><div><small>QUESTION {i+1} · {q.objective}</small><b>{q.prompt}</b><p><strong>Your answer:</strong> {q.options[answers[q.id]] || "Unanswered"}</p>{!ok&&<p><strong>Correct:</strong> {q.options[q.answer]}</p>}<em>{q.explanation}</em></div></div>})}</div></>; }
   const q=session[index]; const selected=answers[q.id]; const isLast=index===session.length-1;
@@ -441,6 +468,7 @@ function MockExam({ state, setState }: { state:LearnerState; setState:React.Disp
 
   const answeredCount = items.filter(it=> it.type==="mcq" ? mcqAnswers[it.question.id]!==undefined : true).length;
 
+  if(!certQuestions.length) return <><PageHead eyebrow="EXAM SIMULATION" title="Mock exam" subtitle="A full-length, timed, domain-weighted exam. No feedback until you submit — just like the real thing."/><Empty message="No mock-exam questions are available for this track yet."/></>;
   if(phase==="setup") return <>
     <PageHead eyebrow="EXAM SIMULATION" title="Mock exam" subtitle="A full-length, timed, domain-weighted exam. No feedback until you submit — just like the real thing."/>
     <div className="setup-grid"><div className="panel setup-main"><h3>Configure your exam</h3>
@@ -516,6 +544,8 @@ function Notes({ state, setState }: { state:LearnerState; setState:React.Dispatc
 }
 
 function Preferences({ state, update, setState }: { state:LearnerState; update:(n:Partial<LearnerState>)=>void; setState:React.Dispatch<React.SetStateAction<LearnerState>> }) {
+  const { certifications } = useContent();
+  const activeVendor = certifications.find(c => c.id === state.activeCertId)?.vendor;
   const fileRef = useRef<HTMLInputElement>(null);
   const [passphrase, setPassphrase] = useState("");
   const [backupNotice, setBackupNotice] = useState("");
@@ -549,7 +579,7 @@ function Preferences({ state, update, setState }: { state:LearnerState; update:(
     if (isTauri()) { try { await invoke("reset_state"); } catch { /* file may not exist yet */ } }
     setState(migrateState({}));
   };
-  return <><PageHead eyebrow="MAKE IT YOURS" title="Preferences" subtitle="Tune your study target, daily rhythm, and workspace."/><div className="settings-grid"><div className="panel settings-card"><div className="setting-icon"><GraduationCap/></div><div><h3>Learner profile</h3><p>This name appears throughout your workspace.</p><label>Display name<input value={state.name} onChange={e=>update({name:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><CalendarDays/></div><div><h3>Exam target</h3><p>Set a date to add a countdown to your dashboard.</p><label>Target date<input type="date" value={progress.targetDate} onChange={e=>setState(s=>patchProgress(s,{targetDate:e.target.value}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Target/></div><div><h3>Daily mission</h3><p>Choose a realistic question goal you can sustain.</p><label>Questions per day<input type="number" min="5" max="100" value={progress.dailyGoal} onChange={e=>setState(s=>patchProgress(s,{dailyGoal:Number(e.target.value)}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Moon/></div><div><h3>Appearance</h3><p>Switch the complete interface theme.</p><div className="theme-toggle"><button className={state.theme==="dark"?"active":""} aria-pressed={state.theme==="dark"} onClick={()=>update({theme:"dark"})}><Moon/> Dark</button><button className={state.theme==="light"?"active":""} aria-pressed={state.theme==="light"} onClick={()=>update({theme:"light"})}><Sun/> Light</button></div></div></div><div className="panel settings-card"><div className="setting-icon"><ShieldCheck/></div><div><h3>Encrypted backup</h3><p>Use the same passphrase to restore this portable backup on another device. Legacy plain JSON backups can still be imported.</p><label>Backup passphrase<input type="password" minLength={8} autoComplete="new-password" value={passphrase} onChange={e=>setPassphrase(e.target.value)} placeholder="At least 8 characters"/></label><div className="theme-toggle data-actions"><button onClick={onExport}><Download/> Export encrypted</button><button onClick={()=>fileRef.current?.click()}><Upload/> Import backup</button><button className="danger" onClick={onReset}><Trash2/> Reset progress</button></div>{backupNotice&&<span className="setting-notice" role="status">{backupNotice}</span>}<input ref={fileRef} type="file" accept="application/json,.json,.apexbackup" hidden onChange={onImport}/></div></div><div className="panel about-card"><div className="brand-mark"><Zap/></div><div><h3>SkillForge Academy</h3><p>Version 1.3.2 · Offline-first desktop edition</p><small>Your progress is stored locally on this computer. This independent educational app is not affiliated with or endorsed by CompTIA.</small></div></div></div></>;
+  return <><PageHead eyebrow="MAKE IT YOURS" title="Preferences" subtitle="Tune your study target, daily rhythm, and workspace."/><div className="settings-grid"><div className="panel settings-card"><div className="setting-icon"><GraduationCap/></div><div><h3>Learner profile</h3><p>This name appears throughout your workspace.</p><label>Display name<input value={state.name} onChange={e=>update({name:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><CalendarDays/></div><div><h3>Exam target</h3><p>Set a date to add a countdown to your dashboard.</p><label>Target date<input type="date" value={progress.targetDate} onChange={e=>setState(s=>patchProgress(s,{targetDate:e.target.value}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Target/></div><div><h3>Daily mission</h3><p>Choose a realistic question goal you can sustain.</p><label>Questions per day<input type="number" min="5" max="100" value={progress.dailyGoal} onChange={e=>setState(s=>patchProgress(s,{dailyGoal:Number(e.target.value)}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Moon/></div><div><h3>Appearance</h3><p>Switch the complete interface theme.</p><div className="theme-toggle"><button className={state.theme==="dark"?"active":""} aria-pressed={state.theme==="dark"} onClick={()=>update({theme:"dark"})}><Moon/> Dark</button><button className={state.theme==="light"?"active":""} aria-pressed={state.theme==="light"} onClick={()=>update({theme:"light"})}><Sun/> Light</button></div></div></div><div className="panel settings-card"><div className="setting-icon"><ShieldCheck/></div><div><h3>Encrypted backup</h3><p>Use the same passphrase to restore this portable backup on another device. Legacy plain JSON backups can still be imported.</p><label>Backup passphrase<input type="password" minLength={8} autoComplete="new-password" value={passphrase} onChange={e=>setPassphrase(e.target.value)} placeholder="At least 8 characters"/></label><div className="theme-toggle data-actions"><button onClick={onExport}><Download/> Export encrypted</button><button onClick={()=>fileRef.current?.click()}><Upload/> Import backup</button><button className="danger" onClick={onReset}><Trash2/> Reset progress</button></div>{backupNotice&&<span className="setting-notice" role="status">{backupNotice}</span>}<input ref={fileRef} type="file" accept="application/json,.json,.apexbackup" hidden onChange={onImport}/></div></div><div className="panel about-card"><div className="brand-mark"><Zap/></div><div><h3>SkillForge Academy</h3><p>Version 1.3.2 · Offline-first desktop edition</p><small>Your progress is stored locally on this computer. This independent educational app is not affiliated with or endorsed by {activeVendor || "the certification vendors"}.</small></div></div></div></>;
 }
 
 function PageHead({eyebrow,title,subtitle}:{eyebrow:string;title:string;subtitle:string}) { return <div className="page-title"><div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{subtitle}</p></div></div>; }

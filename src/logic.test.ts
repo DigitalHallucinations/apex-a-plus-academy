@@ -3,15 +3,67 @@ import {
   pct, formatTime, shuffle, dateKey, questionsToday, applyStudyActivity, recordAnswer,
   scheduleCard, isCardDue, domainMastery, masteredCount, objectiveStats, migrateState,
   buildNotifications, initialState, SCHEMA_VERSION,
-  buildWeightedQuestionSet, buildMockExam, gradePbq, scoreMock, type MockItem
+  buildWeightedQuestionSet, buildMockExam, gradePbq, scoreMock, type MockItem,
+  isCertAvailable, sortCertifications, resolveActiveCert
 } from "./logic";
-import type { AnsweredStat, CertProgress, Domain, LearnerState, Pbq, Question } from "./types";
+import type { AnsweredStat, Certification, CertProgress, Domain, LearnerState, Pbq, Question } from "./types";
 
 const baseState = (over: Partial<LearnerState> = {}): LearnerState => ({ ...initialState, ...over });
 const prog = (over: Partial<CertProgress> = {}): CertProgress => ({ targetDate: "", dailyGoal: 25, streak: 0, lastStudyDate: "", dailyCounts: {}, ...over });
 
 const q = (id: string, domain: string, objective: string, exam: "220-1201" | "220-1202" = "220-1201"): Question => ({
   id, certId: "a-plus", exam, domain, difficulty: "Foundation", prompt: id, options: ["a", "b"], answer: 0, explanation: "x", objective
+});
+
+const cert = (over: Partial<Certification> = {}): Certification => ({
+  id: "x", name: "X", shortName: "X", vendor: "V", idPrefix: "x", description: "", passThreshold: 0.75,
+  exams: [{ id: "e", certId: "x", name: "", defaultQuestions: 90, defaultMinutes: 90 }], ...over
+});
+
+describe("certification availability and ordering", () => {
+  it("treats a track as available unless explicitly coming-soon", () => {
+    expect(isCertAvailable(cert())).toBe(true);
+    expect(isCertAvailable(cert({ status: "available" }))).toBe(true);
+    expect(isCertAvailable(cert({ status: "coming-soon" }))).toBe(false);
+  });
+  it("orders available tracks first, then by order, then by name", () => {
+    const certs = [
+      cert({ id: "soon", name: "Soon", status: "coming-soon", order: 1 }),
+      cert({ id: "b", name: "Beta", order: 2 }),
+      cert({ id: "a", name: "Alpha", order: 2 }),
+      cert({ id: "first", name: "First", order: 1 })
+    ];
+    expect(sortCertifications(certs).map(c => c.id)).toEqual(["first", "a", "b", "soon"]);
+  });
+  it("sorts tracks without an explicit order after ordered ones", () => {
+    const certs = [cert({ id: "noorder", name: "Z" }), cert({ id: "ordered", name: "A", order: 5 })];
+    expect(sortCertifications(certs).map(c => c.id)).toEqual(["ordered", "noorder"]);
+  });
+  it("does not mutate the input array", () => {
+    const certs = [cert({ id: "b", order: 2 }), cert({ id: "a", order: 1 })];
+    sortCertifications(certs);
+    expect(certs.map(c => c.id)).toEqual(["b", "a"]);
+  });
+});
+
+describe("resolveActiveCert", () => {
+  const certs = [
+    cert({ id: "a-plus", name: "A+", order: 1 }),
+    cert({ id: "net", name: "Network+", order: 2 }),
+    cert({ id: "sec", name: "Security+", status: "coming-soon", order: 3 })
+  ];
+  it("keeps the requested track when it exists and is available", () => {
+    expect(resolveActiveCert(certs, "net")?.id).toBe("net");
+  });
+  it("falls back to the first available track when the requested one is coming-soon", () => {
+    expect(resolveActiveCert(certs, "sec")?.id).toBe("a-plus");
+  });
+  it("falls back when the requested track is missing entirely", () => {
+    expect(resolveActiveCert(certs, "gone")?.id).toBe("a-plus");
+  });
+  it("returns undefined for an empty manifest", () => {
+    expect(resolveActiveCert([], "a-plus")).toBeUndefined();
+  });
 });
 
 describe("pct / formatTime", () => {

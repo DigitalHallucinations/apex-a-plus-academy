@@ -1,8 +1,47 @@
-import type { AnsweredStat, Attempt, CardSchedule, CertId, CertProgress, Domain, ExamId, Flashcard, LearnerState, Pbq, Question, View } from "./types";
+import type { AnsweredStat, Attempt, CardSchedule, CertId, Certification, CertProgress, Domain, ExamId, Flashcard, LearnerState, Pbq, Question, View } from "./types";
 
 export const SCHEMA_VERSION = 3;
 export const DEFAULT_CERT_ID = "a-plus";
 export const DEFAULT_DAILY_GOAL = 25;
+
+// ---------------------------------------------------------------------------
+// Certification tracks: availability and ordering
+// ---------------------------------------------------------------------------
+
+/** Whether a track is selectable. "coming-soon" tracks are roadmap-only. */
+export function isCertAvailable(cert: Certification): boolean {
+  return cert.status !== "coming-soon";
+}
+
+/**
+ * Deterministic track order for the switcher and all-tracks overview: available
+ * tracks first, then by explicit `order` (ascending; unset sorts last), then by
+ * name. Determinism keeps the default track and switcher stable regardless of
+ * the manifest's array order. Returns a new array; the input is not mutated.
+ */
+export function sortCertifications(certs: Certification[]): Certification[] {
+  return [...certs].sort((a, b) => {
+    const av = isCertAvailable(a), bv = isCertAvailable(b);
+    if (av !== bv) return av ? -1 : 1;
+    const ao = a.order ?? Number.POSITIVE_INFINITY, bo = b.order ?? Number.POSITIVE_INFINITY;
+    if (ao !== bo) return ao - bo;
+    return a.name.localeCompare(b.name);
+  });
+}
+
+/**
+ * Resolves the track that should be in focus: the requested one if it exists and
+ * is available, otherwise the first available track, otherwise the first track.
+ * Keeps the workspace usable when a saved `activeCertId` points at a track that
+ * was removed from the manifest or flipped to coming-soon.
+ */
+export function resolveActiveCert(certs: Certification[], activeCertId: CertId): Certification | undefined {
+  if (!certs.length) return undefined;
+  const sorted = sortCertifications(certs);
+  const requested = sorted.find(c => c.id === activeCertId);
+  if (requested && isCertAvailable(requested)) return requested;
+  return sorted.find(isCertAvailable) ?? sorted[0];
+}
 
 /** A fresh, empty progress bucket for a certification track. */
 export function defaultProgress(): CertProgress {

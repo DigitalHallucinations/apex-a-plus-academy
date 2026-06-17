@@ -1,0 +1,34 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260617-143220-005",
+  "timestamp": "2026-06-17T14:32:20Z",
+  "work_item": "005",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "npm run validate:content",
+      "exit_code": 0,
+      "summary": "Content valid: 1 certification, 9 domains, 133 questions, 36 flashcards, 8 PBQs, 36 lessons."
+    },
+    {
+      "command": "npm test -- --run",
+      "exit_code": 0,
+      "summary": "3 test files, 48 tests passed (13 new: track availability/ordering/resolution + manifest validation)."
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "summary": "tsc type-check and vite production build succeeded."
+    }
+  ],
+  "artifacts": [
+    "audits/AUDIT-2026-06-17-multi-track-ux.md",
+    "src/logic.ts",
+    "src/content/validate.ts",
+    "src/App.tsx",
+    "src/Analytics.tsx"
+  ],
+  "environment": {
+    "platform": "win32"
+  }
+}

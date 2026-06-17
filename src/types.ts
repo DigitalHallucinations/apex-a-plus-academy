@@ -2,6 +2,12 @@
 export type CertId = string;
 /** A specific exam within a certification, e.g. "220-1201", "n10-009". */
 export type ExamId = string;
+/**
+ * Track availability. "available" tracks have authored content and are
+ * selectable; "coming-soon" tracks are advertised on the roadmap (track
+ * switcher and all-tracks analytics) but cannot be entered yet.
+ */
+export type CertStatus = "available" | "coming-soon";
 export type View = "dashboard" | "learn" | "practice" | "pbq" | "mock" | "flashcards" | "analytics" | "notes" | "settings";
 export type Difficulty = "Foundation" | "Intermediate" | "Advanced";
 
@@ -28,6 +34,13 @@ export interface Certification {
   description: string;
   /** Mock-exam pass line as a fraction (0..1). */
   passThreshold: number;
+  /**
+   * Explicit position in the track switcher and overviews (ascending). Tracks
+   * without an order sort after ordered ones, then alphabetically by name.
+   */
+  order?: number;
+  /** Availability of the track. Defaults to "available" when omitted. */
+  status?: CertStatus;
   exams: ExamMeta[];
 }
 

@@ -34,6 +34,10 @@ main{min-width:0;background:radial-gradient(circle at 70% -10%,#12345655,transpa
 .track-menu button:hover,.track-menu button.active{background:var(--panel2)}
 .track-menu b{display:block;font-size:12px}
 .track-menu small{display:block;color:var(--muted);font-size:10px}
+.track-menu-label{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px;margin-top:4px;border-top:1px solid var(--line)}
+.track-menu button.coming-soon,.track-menu button:disabled{cursor:default;opacity:.55}
+.track-menu button.coming-soon:hover,.track-menu button:disabled:hover{background:none}
+.track-soon-tag{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .app.collapsed .track-current>div,.app.collapsed .track-current>svg:last-child{display:none}
 
 /* Lessons ("classes") — list + reading view inside the Learn panel */

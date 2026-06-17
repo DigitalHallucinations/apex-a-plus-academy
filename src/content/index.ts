@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import type { Certification, Domain, Flashcard, Lesson, Pbq, Question } from "../types";
+import { isCertAvailable, sortCertifications } from "../logic";
 import { validateContent, type ContentBundle } from "./validate";
 import certificationsJson from "./certifications.json";
 
@@ -25,20 +26,23 @@ function bankPath(certId: string, bank: BankName): string {
 function readBank<T>(cert: Certification, bank: BankName, required: boolean): T[] {
   const mod = bankModules[bank][bankPath(cert.id, bank)] as JsonModule<T[]> | undefined;
   if (!mod) {
-    if (required) console.warn(`Missing bundled content bank: ${cert.id}/${bank}.json`);
+    // Coming-soon tracks are advertised before their banks exist, so a missing
+    // bank is only worth warning about for an available track.
+    if (required && isCertAvailable(cert)) console.warn(`Missing bundled content bank: ${cert.id}/${bank}.json`);
     return [];
   }
   return mod.default;
 }
 
 function buildBundledContent(certifications: Certification[]): ContentBundle {
+  const ordered = sortCertifications(certifications);
   return {
-    certifications,
-    domains: certifications.flatMap(cert => readBank<Domain>(cert, "domains", REQUIRED_BANKS.includes("domains"))),
-    questions: certifications.flatMap(cert => readBank<Question>(cert, "questions", REQUIRED_BANKS.includes("questions"))),
-    flashcards: certifications.flatMap(cert => readBank<Flashcard>(cert, "flashcards", REQUIRED_BANKS.includes("flashcards"))),
-    pbqs: certifications.flatMap(cert => readBank<Pbq>(cert, "pbqs", false)),
-    lessons: certifications.flatMap(cert => readBank<Lesson>(cert, "lessons", false))
+    certifications: ordered,
+    domains: ordered.flatMap(cert => readBank<Domain>(cert, "domains", REQUIRED_BANKS.includes("domains"))),
+    questions: ordered.flatMap(cert => readBank<Question>(cert, "questions", REQUIRED_BANKS.includes("questions"))),
+    flashcards: ordered.flatMap(cert => readBank<Flashcard>(cert, "flashcards", REQUIRED_BANKS.includes("flashcards"))),
+    pbqs: ordered.flatMap(cert => readBank<Pbq>(cert, "pbqs", false)),
+    lessons: ordered.flatMap(cert => readBank<Lesson>(cert, "lessons", false))
   };
 }
 
@@ -69,7 +73,8 @@ export async function loadContent(): Promise<ContentBundle> {
       console.warn("Backend content failed validation; using bundled content.", errors);
       return bundledContent;
     }
-    return remote as ContentBundle;
+    const bundle = remote as ContentBundle;
+    return { ...bundle, certifications: sortCertifications(bundle.certifications) };
   } catch (err) {
     console.warn("Could not load backend content; using bundled content.", err);
     return bundledContent;

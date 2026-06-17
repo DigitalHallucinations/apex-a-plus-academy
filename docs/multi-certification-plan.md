@@ -260,7 +260,17 @@ pure de-risking. Phase 3 is where "SkillForge Academy" actually becomes multi-ce
    "Security+ Track". Drives copy/icon work and the Phase 3 product-name pass.
 4. **ID uniqueness:** ✅ fixed up front — all ids cert-prefixed, A+ included. See §2.3.
 
+5. **Track ordering / "coming soon":** ✅ resolved in work item `005`. The
+   `Certification` manifest gained optional `order` and `status`
+   (`available` | `coming-soon`) fields. Ordering is deterministic
+   (`sortCertifications`: available first, then `order`, then name). Coming-soon
+   tracks are advertised in the switcher and analytics overview, are not
+   selectable, and are exempt from required-bank validation so the roadmap can be
+   published before content exists. The app resolves a safe active track when a
+   saved `activeCertId` is missing or coming-soon. See
+   `docs/certification-authoring.md` → *Track Availability*.
+
 ### Smaller things still to confirm during build
 
 - Whether the **all-tracks overview** is its own view or a toggle inside Analytics.
-- Track ordering / "coming soon" affordance for certs without authored banks yet.
+  (Currently an inline panel in Analytics, shown only when ≥2 tracks exist.)

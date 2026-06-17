@@ -44,6 +44,10 @@ function validate(certifications, domains, questions, flashcards, pbqs, lessons)
       if (!c[field]?.trim()) errors.push(`Certification ${c.id}: empty ${field}`);
     if (typeof c.passThreshold !== "number" || c.passThreshold <= 0 || c.passThreshold > 1)
       errors.push(`Certification ${c.id}: passThreshold must be between 0 and 1`);
+    if (c.status !== undefined && c.status !== "available" && c.status !== "coming-soon")
+      errors.push(`Certification ${c.id}: status must be "available" or "coming-soon"`);
+    if (c.order !== undefined && !Number.isFinite(c.order))
+      errors.push(`Certification ${c.id}: order must be a number when present`);
     if (!Array.isArray(c.exams) || c.exams.length === 0) errors.push(`Certification ${c.id}: needs at least one exam`);
     for (const e of c.exams ?? []) {
       if (examToCert.has(e.id)) errors.push(`Duplicate exam id: ${e.id}`);
@@ -68,6 +72,8 @@ function validate(certifications, domains, questions, flashcards, pbqs, lessons)
   };
 
   for (const c of certifications) {
+    // Coming-soon tracks are advertised before any banks are authored.
+    if (c.status === "coming-soon") continue;
     const counts = {
       domains: domains.filter(d => d.certId === c.id).length,
       questions: questions.filter(q => q.certId === c.id).length,
@@ -162,9 +168,9 @@ function validate(certifications, domains, questions, flashcards, pbqs, lessons)
 }
 
 const certifications = read("certifications.json");
-const certIds = certifications.map(c => c.id);
 const bankErrors = [];
-const collect = (file, required) => certIds.flatMap(id => readBank(id, file, required, bankErrors));
+// A coming-soon track's banks may not exist yet, so they are never required.
+const collect = (file, required) => certifications.flatMap(c => readBank(c.id, file, required && c.status !== "coming-soon", bankErrors));
 
 const domains = collect("domains.json", true);
 const questions = collect("questions.json", true);

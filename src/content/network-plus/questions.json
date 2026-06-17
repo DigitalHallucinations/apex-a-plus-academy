@@ -1,0 +1,243 @@
+[
+  {
+    "id": "netplus-q001",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "At which OSI layer does a router make its forwarding decisions?",
+    "options": ["Layer 2 (Data Link)", "Layer 3 (Network)", "Layer 4 (Transport)", "Layer 7 (Application)"],
+    "answer": 1,
+    "explanation": "Routers forward packets based on logical IP addresses, which live at Layer 3, the Network layer. Switches operate primarily at Layer 2 using MAC addresses.",
+    "objective": "Map devices to OSI layers"
+  },
+  {
+    "id": "netplus-q002",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "A web browser connects securely to a site. Which port and protocol is it most likely using by default?",
+    "options": ["TCP 80 (HTTP)", "TCP 443 (HTTPS)", "UDP 53 (DNS)", "TCP 22 (SSH)"],
+    "answer": 1,
+    "explanation": "Encrypted web traffic uses HTTPS over TCP 443. Plain HTTP uses TCP 80, DNS uses UDP/TCP 53, and SSH uses TCP 22.",
+    "objective": "Identify common ports and protocols"
+  },
+  {
+    "id": "netplus-q003",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "A host is configured with the address 192.168.10.50/26. How many usable host addresses exist in its subnet?",
+    "options": ["14", "30", "62", "126"],
+    "answer": 2,
+    "explanation": "A /26 leaves 6 host bits (2^6 = 64 addresses). Subtracting the network and broadcast addresses leaves 62 usable hosts.",
+    "objective": "Calculate IPv4 subnet sizes"
+  },
+  {
+    "id": "netplus-q004",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which address range is reserved for Automatic Private IP Addressing (APIPA) when a DHCP server cannot be reached?",
+    "options": ["10.0.0.0/8", "172.16.0.0/12", "169.254.0.0/16", "192.168.0.0/16"],
+    "answer": 2,
+    "explanation": "APIPA self-assigns an address in 169.254.0.0/16. Seeing one is a strong sign the client failed to obtain a DHCP lease.",
+    "objective": "Recognize special-purpose IPv4 ranges"
+  },
+  {
+    "id": "netplus-q005",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Foundation",
+    "prompt": "What is the primary purpose of configuring VLANs on a switch?",
+    "options": [
+      "To increase the physical port speed",
+      "To segment one physical switch into separate broadcast domains",
+      "To convert fiber signals to copper",
+      "To assign IP addresses automatically"
+    ],
+    "answer": 1,
+    "explanation": "VLANs logically divide a switch into multiple broadcast domains, improving segmentation and security without extra hardware. Routing is still required to move traffic between VLANs.",
+    "objective": "Explain the purpose of VLANs"
+  },
+  {
+    "id": "netplus-q006",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Intermediate",
+    "prompt": "A trunk link must carry traffic for several VLANs between two switches. Which protocol tags the frames so the far switch knows each frame's VLAN?",
+    "options": ["802.1Q", "802.3af", "802.11ac", "802.1X"],
+    "answer": 0,
+    "explanation": "IEEE 802.1Q inserts a VLAN tag into Ethernet frames on a trunk. 802.3af is PoE, 802.11ac is Wi-Fi, and 802.1X is port-based access control.",
+    "objective": "Identify VLAN trunking standards"
+  },
+  {
+    "id": "netplus-q007",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Foundation",
+    "prompt": "Which wireless frequency band generally offers longer range but is more prone to interference from common household devices?",
+    "options": ["2.4 GHz", "5 GHz", "6 GHz", "60 GHz"],
+    "answer": 0,
+    "explanation": "The 2.4 GHz band travels farther and penetrates walls better but shares spectrum with microwaves, Bluetooth, and many other devices, so it sees more interference than 5 GHz.",
+    "objective": "Compare wireless frequency bands"
+  },
+  {
+    "id": "netplus-q008",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Advanced",
+    "prompt": "A technician needs to run a 10 Gbps link about 200 meters between two buildings. Which cabling choice is most appropriate?",
+    "options": [
+      "Cat 5e UTP",
+      "Cat 6 UTP",
+      "Multimode fiber",
+      "Coaxial RG-6"
+    ],
+    "answer": 2,
+    "explanation": "Twisted-pair copper is limited to about 100 meters, so a 200-meter 10 Gbps run between buildings calls for fiber. Multimode fiber comfortably supports 10 Gbps at that distance.",
+    "objective": "Select cabling for distance and speed requirements"
+  },
+  {
+    "id": "netplus-q009",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Foundation",
+    "prompt": "Which protocol is commonly used to collect metrics and send alerts from network devices to a monitoring system?",
+    "options": ["SNMP", "SMTP", "FTP", "NTP"],
+    "answer": 0,
+    "explanation": "SNMP (Simple Network Management Protocol) lets a manager poll device metrics and receive trap alerts. SMTP is email, FTP is file transfer, and NTP synchronizes time.",
+    "objective": "Identify monitoring protocols"
+  },
+  {
+    "id": "netplus-q010",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "A disaster-recovery plan lists an RTO of 4 hours. What does this value describe?",
+    "options": [
+      "The maximum acceptable amount of data loss measured in time",
+      "The target time to restore a service after an outage",
+      "The average time between failures",
+      "The time required to detect an incident"
+    ],
+    "answer": 1,
+    "explanation": "Recovery Time Objective (RTO) is the target duration to bring a service back online. Maximum acceptable data loss in time is the Recovery Point Objective (RPO).",
+    "objective": "Distinguish RTO from RPO"
+  },
+  {
+    "id": "netplus-q011",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "Two firewalls are deployed so that if the active unit fails, the standby unit immediately takes over. Which concept does this implement?",
+    "options": ["Load balancing", "High availability", "Port mirroring", "Link aggregation"],
+    "answer": 1,
+    "explanation": "An active/standby failover pair provides high availability by removing a single point of failure. Load balancing distributes traffic across units rather than standing one by as a backup.",
+    "objective": "Explain high-availability designs"
+  },
+  {
+    "id": "netplus-q012",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "difficulty": "Foundation",
+    "prompt": "In the CIA triad, which goal is primarily protected by encrypting data in transit?",
+    "options": ["Confidentiality", "Integrity", "Availability", "Accountability"],
+    "answer": 0,
+    "explanation": "Encryption keeps data unreadable to eavesdroppers, protecting confidentiality. Integrity is about preventing unauthorized changes, and availability is about keeping the service reachable.",
+    "objective": "Apply the CIA triad"
+  },
+  {
+    "id": "netplus-q013",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "difficulty": "Intermediate",
+    "prompt": "An attacker sends forged ARP replies so that traffic meant for the gateway is sent to the attacker instead. Which attack is this?",
+    "options": ["DNS poisoning", "ARP spoofing", "SYN flood", "Evil twin"],
+    "answer": 1,
+    "explanation": "ARP spoofing (ARP poisoning) associates the attacker's MAC with another host's IP, enabling on-path interception. Dynamic ARP Inspection is a common mitigation.",
+    "objective": "Recognize common network attacks"
+  },
+  {
+    "id": "netplus-q014",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "difficulty": "Advanced",
+    "prompt": "A company wants only devices with a valid certificate to connect to switch ports, authenticating before any network access is granted. Which standard fits best?",
+    "options": ["802.1X", "802.1Q", "WPA2-PSK", "SNMPv3"],
+    "answer": 0,
+    "explanation": "802.1X provides port-based network access control, requiring authentication (often via certificates and a RADIUS server) before the port is opened. 802.1Q is VLAN tagging.",
+    "objective": "Select port-based access control"
+  },
+  {
+    "id": "netplus-q015",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "difficulty": "Foundation",
+    "prompt": "According to a structured troubleshooting methodology, what should you do immediately after establishing a theory of probable cause?",
+    "options": [
+      "Document the findings and outcomes",
+      "Test the theory to determine the cause",
+      "Implement the permanent fix",
+      "Escalate to a vendor"
+    ],
+    "answer": 1,
+    "explanation": "After forming a theory you test it to confirm or reject the cause. Only once confirmed do you plan and implement a fix, and documentation comes at the end.",
+    "objective": "Apply the troubleshooting methodology"
+  },
+  {
+    "id": "netplus-q016",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "difficulty": "Intermediate",
+    "prompt": "A user can reach servers by IP address but not by hostname. Which service is the most likely culprit?",
+    "options": ["DHCP", "DNS", "NTP", "SNMP"],
+    "answer": 1,
+    "explanation": "Working by IP but failing by name points to name resolution — DNS. Confirm the client's configured DNS server and test with a lookup tool such as nslookup.",
+    "objective": "Diagnose name-resolution failures"
+  },
+  {
+    "id": "netplus-q017",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "difficulty": "Intermediate",
+    "prompt": "Which command-line tool shows the path packets take to a destination and the latency at each hop?",
+    "options": ["ping", "traceroute / tracert", "ipconfig / ifconfig", "arp"],
+    "answer": 1,
+    "explanation": "traceroute (tracert on Windows) lists each router hop and its round-trip time, helping locate where a path breaks or slows. ping only tests reachability to one endpoint.",
+    "objective": "Select the correct connectivity tool"
+  },
+  {
+    "id": "netplus-q018",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "difficulty": "Advanced",
+    "prompt": "Several users on one floor report intermittent connectivity. A switch port shows a high rate of CRC errors. What is the most likely cause?",
+    "options": [
+      "An incorrect default gateway",
+      "A damaged or out-of-spec cable run",
+      "An expired DHCP scope",
+      "A misconfigured DNS suffix"
+    ],
+    "answer": 1,
+    "explanation": "CRC errors indicate frames arriving corrupted, typically from physical-layer problems such as a damaged cable, excessive length, or interference. Gateway, DHCP, and DNS issues do not produce CRC errors.",
+    "objective": "Interpret interface error counters"
+  }
+]

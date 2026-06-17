@@ -2,6 +2,8 @@
 // Creates a starter certification manifest entry and minimal content banks.
 // Example:
 //   npm run scaffold:cert -- --id network-plus --prefix netplus --name "CompTIA Network+" --shortName "Network+" --exam N10-009 --examName "Network+"
+// Roadmap (coming-soon) track — advertised in the UI with empty banks until authored:
+//   npm run scaffold:cert -- --id security-plus --prefix secplus --name "CompTIA Security+" --shortName "Security+" --exam SY0-701 --status coming-soon --order 3
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -47,10 +49,17 @@ const examName = opts.examName || "";
 const passThreshold = opts.passThreshold ? Number(opts.passThreshold) : 0.75;
 const defaultQuestions = opts.defaultQuestions ? Number(opts.defaultQuestions) : 90;
 const defaultMinutes = opts.defaultMinutes ? Number(opts.defaultMinutes) : 90;
+const status = opts.status;
+const order = opts.order !== undefined ? Number(opts.order) : undefined;
+// A coming-soon track is advertised before content exists; scaffold it with
+// empty banks so no placeholder content can ship in the meantime.
+const comingSoon = status === "coming-soon";
 
 if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) throw new Error("--id must be kebab-case");
 if (!/^[a-z0-9]+$/.test(idPrefix)) throw new Error("--prefix must be lowercase letters/numbers without punctuation");
 if (!Number.isFinite(passThreshold) || passThreshold <= 0 || passThreshold > 1) throw new Error("--passThreshold must be > 0 and <= 1");
+if (status !== undefined && status !== "available" && status !== "coming-soon") throw new Error('--status must be "available" or "coming-soon"');
+if (order !== undefined && !Number.isFinite(order)) throw new Error("--order must be a number");
 
 const certDir = join(contentDir, id);
 mkdirSync(certDir, { recursive: true });
@@ -65,6 +74,8 @@ if (!manifest.some(cert => cert.id === id)) {
     idPrefix,
     description: `${name} certification track. Replace this starter description before release.`,
     passThreshold,
+    ...(order !== undefined ? { order } : {}),
+    ...(status ? { status } : {}),
     exams: [
       { id: exam, certId: id, name: examName, defaultQuestions, defaultMinutes }
     ]
@@ -73,7 +84,13 @@ if (!manifest.some(cert => cert.id === id)) {
 }
 
 const starterDomain = `${idPrefix}-starter`;
-const files = {
+const files = comingSoon ? {
+  "domains.json": [],
+  "questions.json": [],
+  "flashcards.json": [],
+  "pbqs.json": [],
+  "lessons.json": []
+} : {
   "domains.json": [
     {
       id: starterDomain,

@@ -1,0 +1,45 @@
+import { describe, expect, it } from "vitest";
+import { validateContent, type ContentBundle } from "./validate";
+import type { Certification, Domain, Flashcard, Question } from "../types";
+
+// A minimal, structurally valid single-track bundle that individual tests mutate.
+const aPlus: Certification = {
+  id: "a-plus", name: "CompTIA A+", shortName: "A+", vendor: "CompTIA", idPrefix: "aplus",
+  description: "", passThreshold: 0.75,
+  exams: [{ id: "220-1201", certId: "a-plus", name: "Core 1", defaultQuestions: 90, defaultMinutes: 90 }]
+};
+const domain: Domain = { id: "aplus-net", certId: "a-plus", exam: "220-1201", name: "Networking", weight: 100, color: "#000", description: "", topics: [] };
+const question: Question = { id: "aplus-q1", certId: "a-plus", exam: "220-1201", domain: "aplus-net", difficulty: "Foundation", prompt: "p", options: ["a", "b"], answer: 0, explanation: "x", objective: "o" };
+const flashcard: Flashcard = { id: "aplus-f1", certId: "a-plus", domain: "aplus-net", front: "f", back: "b" };
+
+const bundle = (over: Partial<ContentBundle> = {}): ContentBundle => ({
+  certifications: [aPlus], domains: [domain], questions: [question], flashcards: [flashcard], pbqs: [], lessons: [], ...over
+});
+
+describe("validateContent — track availability and ordering", () => {
+  it("accepts a sound single-track bundle", () => {
+    expect(validateContent(bundle())).toEqual([]);
+  });
+
+  it("accepts a coming-soon track with no authored banks", () => {
+    const soon: Certification = { ...aPlus, id: "security-plus", shortName: "Security+", idPrefix: "secplus", status: "coming-soon", order: 3, exams: [{ id: "sy0-701", certId: "security-plus", name: "", defaultQuestions: 90, defaultMinutes: 90 }] };
+    // Note: no security-plus domains/questions/flashcards are supplied.
+    expect(validateContent(bundle({ certifications: [aPlus, soon] }))).toEqual([]);
+  });
+
+  it("still requires banks for an available track", () => {
+    const empty: Certification = { ...aPlus, id: "network-plus", shortName: "Network+", idPrefix: "netplus", exams: [{ id: "n10-009", certId: "network-plus", name: "", defaultQuestions: 90, defaultMinutes: 90 }] };
+    const errors = validateContent(bundle({ certifications: [aPlus, empty] }));
+    expect(errors.some(e => e.includes("network-plus") && e.includes("missing required"))).toBe(true);
+  });
+
+  it("rejects an invalid status", () => {
+    const bad = { ...aPlus, status: "soon" } as unknown as Certification;
+    expect(validateContent(bundle({ certifications: [bad] })).some(e => e.includes("status must be"))).toBe(true);
+  });
+
+  it("rejects a non-numeric order", () => {
+    const bad = { ...aPlus, order: "first" } as unknown as Certification;
+    expect(validateContent(bundle({ certifications: [bad] })).some(e => e.includes("order must be a number"))).toBe(true);
+  });
+});
