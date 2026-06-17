@@ -28,7 +28,7 @@ const readBank = (certId, file, required, errors) => {
 
 const DIFFICULTIES = ["Foundation", "Intermediate", "Advanced"];
 
-function validate(certifications, domains, questions, flashcards, pbqs, lessons) {
+function validate(certifications, domains, questions, flashcards, pbqs, lessons, objectives) {
   const errors = [];
 
   // ---- Manifest ----
@@ -164,6 +164,32 @@ function validate(certifications, domains, questions, flashcards, pbqs, lessons)
       }
     });
   }
+
+  // ---- Objectives (optional registry) ----
+  const objectiveIds = new Set();
+  const objectiveToCert = new Map();
+  const seenO = new Set();
+  for (const o of objectives) {
+    if (seenO.has(o.id)) errors.push(`Duplicate objective id: ${o.id}`);
+    seenO.add(o.id);
+    checkCertRefs(`Objective ${o.id}`, o.certId, o.id, o.exam);
+    if (!domainIds.has(o.domain)) errors.push(`Objective ${o.id}: unknown domain "${o.domain}"`);
+    else if (domainToCert.get(o.domain) !== o.certId) errors.push(`Objective ${o.id}: domain "${o.domain}" does not belong to cert "${o.certId}"`);
+    if (!o.code?.trim()) errors.push(`Objective ${o.id}: empty code`);
+    if (!o.title?.trim()) errors.push(`Objective ${o.id}: empty title`);
+    objectiveIds.add(o.id);
+    objectiveToCert.set(o.id, o.certId);
+  }
+  const checkObjRef = (label, certId, objectiveId) => {
+    if (objectiveId === undefined) return;
+    if (!objectiveIds.has(objectiveId)) errors.push(`${label}: unknown objectiveId "${objectiveId}"`);
+    else if (objectiveToCert.get(objectiveId) !== certId) errors.push(`${label}: objectiveId "${objectiveId}" does not belong to cert "${certId}"`);
+  };
+  for (const q of questions) checkObjRef(`Question ${q.id}`, q.certId, q.objectiveId);
+  for (const f of flashcards) checkObjRef(`Flashcard ${f.id}`, f.certId, f.objectiveId);
+  for (const p of pbqs) checkObjRef(`PBQ ${p.id}`, p.certId, p.objectiveId);
+  for (const l of lessons) checkObjRef(`Lesson ${l.id}`, l.certId, l.objectiveId);
+
   return errors;
 }
 
@@ -177,7 +203,8 @@ const questions = collect("questions.json", true);
 const flashcards = collect("flashcards.json", true);
 const pbqs = collect("pbqs.json", false);
 const lessons = collect("lessons.json", false);
-const errors = [...bankErrors, ...validate(certifications, domains, questions, flashcards, pbqs, lessons)];
+const objectives = collect("objectives.json", false);
+const errors = [...bankErrors, ...validate(certifications, domains, questions, flashcards, pbqs, lessons, objectives)];
 
 if (errors.length) {
   console.error(`✗ Content validation failed (${errors.length} issue(s)):`);
@@ -197,3 +224,34 @@ const perCert = certifications
 console.log(`✓ Content valid: ${certifications.length} certification(s), ${domains.length} domains, ${questions.length} questions, ${flashcards.length} flashcards, ${pbqs.length} PBQs, ${lessons.length} lessons`);
 console.log(`  per cert -> ${perCert}`);
 console.log(`  questions per domain -> ${perDomain}`);
+
+// ---- Objective coverage report ----
+// "Deep" target per the curriculum plan: each objective needs >=1 lesson and
+// >=6 tagged questions. Pass --strict-coverage to fail the run on any gap.
+const QUESTION_TARGET = 6;
+const strict = process.argv.includes("--strict-coverage");
+if (objectives.length) {
+  console.log(`\nObjective coverage (target: >=1 lesson and >=${QUESTION_TARGET} questions per objective):`);
+  let totalGaps = 0;
+  for (const c of certifications) {
+    const objs = objectives.filter(o => o.certId === c.id);
+    if (!objs.length) continue;
+    const lessonsBy = id => lessons.filter(l => l.objectiveId === id).length;
+    const questionsBy = id => questions.filter(q => q.objectiveId === id).length;
+    const withLesson = objs.filter(o => lessonsBy(o.id) >= 1).length;
+    const withQuestions = objs.filter(o => questionsBy(o.id) >= QUESTION_TARGET).length;
+    const complete = objs.filter(o => lessonsBy(o.id) >= 1 && questionsBy(o.id) >= QUESTION_TARGET);
+    const unverified = objs.filter(o => o.verified === false).length;
+    const taggedQ = questions.filter(q => q.certId === c.id && q.objectiveId).length;
+    const taggedL = lessons.filter(l => l.certId === c.id && l.objectiveId).length;
+    console.log(`  ${c.id}: ${objs.length} objectives | ${complete.length} complete | ${withLesson} have a lesson | ${withQuestions} have >=${QUESTION_TARGET} questions`);
+    console.log(`    tagged content: ${taggedL} lessons, ${taggedQ} questions${unverified ? ` | ${unverified} objective(s) not yet verified vs official PDF` : ""}`);
+    const gaps = objs.length - complete.length;
+    totalGaps += gaps;
+  }
+  if (strict && totalGaps > 0) {
+    console.error(`\n✗ Objective coverage incomplete: ${totalGaps} objective(s) below target.`);
+    process.exit(1);
+  }
+  if (totalGaps > 0) console.log(`\n  Note: ${totalGaps} objective(s) still below the deep-coverage target (authoring in progress).`);
+}

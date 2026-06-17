@@ -79,6 +79,7 @@
     ],
     "answer": 1,
     "explanation": "Symmetric algorithms (e.g., AES) use one shared key for both operations and are efficient for large volumes. Public/private key pairs describe asymmetric encryption.",
+    "objectiveId": "secplus-1.4",
     "objective": "Compare symmetric and asymmetric encryption"
   },
   {
@@ -96,6 +97,7 @@
     ],
     "answer": 1,
     "explanation": "A hash lets you confirm the file matches the original, verifying integrity. Hashing does not encrypt or hide the contents.",
+    "objectiveId": "secplus-1.4",
     "objective": "Use hashing to verify integrity"
   },
   {
@@ -712,6 +714,7 @@
     ],
     "answer": 0,
     "explanation": "A CA vouches for identities by signing certificates that bind a public key to a subject, enabling trust in PKI. It does not assign addresses or store plaintext passwords.",
+    "objectiveId": "secplus-1.4",
     "objective": "Explain PKI and certificate authorities"
   },
   {
@@ -729,6 +732,7 @@
     ],
     "answer": 0,
     "explanation": "A certificate proves the server's identity (validated by a trusted CA) and supplies the public key used to establish an encrypted session.",
+    "objectiveId": "secplus-1.4",
     "objective": "Explain digital certificates"
   },
   {
@@ -746,6 +750,7 @@
     ],
     "answer": 0,
     "explanation": "A per-password salt ensures identical passwords produce different hashes and makes precomputed rainbow tables useless, forcing attackers to crack each one separately.",
+    "objectiveId": "secplus-1.4",
     "objective": "Explain password salting"
   },
   {
@@ -787,6 +792,7 @@
     ],
     "answer": 0,
     "explanation": "For a given algorithm, a longer key expands the search space, making brute force exponentially harder. Algorithm choice and implementation also matter.",
+    "objectiveId": "secplus-1.4",
     "objective": "Explain key strength"
   },
   {
@@ -799,6 +805,7 @@
     "options": ["Steganography", "Hashing", "Tokenization", "Load balancing"],
     "answer": 0,
     "explanation": "Steganography conceals data within other media. Hashing verifies integrity, and tokenization substitutes sensitive values.",
+    "objectiveId": "secplus-1.4",
     "objective": "Define steganography"
   },
   {

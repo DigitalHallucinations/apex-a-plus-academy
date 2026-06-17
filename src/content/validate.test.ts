@@ -13,7 +13,7 @@ const question: Question = { id: "aplus-q1", certId: "a-plus", exam: "220-1201",
 const flashcard: Flashcard = { id: "aplus-f1", certId: "a-plus", domain: "aplus-net", front: "f", back: "b" };
 
 const bundle = (over: Partial<ContentBundle> = {}): ContentBundle => ({
-  certifications: [aPlus], domains: [domain], questions: [question], flashcards: [flashcard], pbqs: [], lessons: [], ...over
+  certifications: [aPlus], domains: [domain], questions: [question], flashcards: [flashcard], pbqs: [], lessons: [], objectives: [], ...over
 });
 
 describe("validateContent — track availability and ordering", () => {
@@ -41,5 +41,28 @@ describe("validateContent — track availability and ordering", () => {
   it("rejects a non-numeric order", () => {
     const bad = { ...aPlus, order: "first" } as unknown as Certification;
     expect(validateContent(bundle({ certifications: [bad] })).some(e => e.includes("order must be a number"))).toBe(true);
+  });
+});
+
+describe("validateContent — objective registry", () => {
+  const objective = { id: "aplus-1.1", certId: "a-plus", exam: "220-1201", domain: "aplus-net", code: "1.1", title: "Sample objective", verified: false };
+
+  it("accepts objectives and content that references a valid objectiveId", () => {
+    const q = { ...question, objectiveId: "aplus-1.1" };
+    expect(validateContent(bundle({ objectives: [objective], questions: [q] }))).toEqual([]);
+  });
+
+  it("rejects content referencing an unknown objectiveId", () => {
+    const q = { ...question, objectiveId: "aplus-9.9" };
+    expect(validateContent(bundle({ objectives: [objective], questions: [q] })).some(e => e.includes("unknown objectiveId"))).toBe(true);
+  });
+
+  it("rejects an objective pointing at an unknown domain", () => {
+    const bad = { ...objective, domain: "aplus-nope" };
+    expect(validateContent(bundle({ objectives: [bad] })).some(e => e.includes("unknown domain"))).toBe(true);
+  });
+
+  it("rejects duplicate objective ids", () => {
+    expect(validateContent(bundle({ objectives: [objective, objective] })).some(e => e.includes("Duplicate objective id"))).toBe(true);
   });
 });

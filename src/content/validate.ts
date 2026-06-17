@@ -1,4 +1,4 @@
-import type { Certification, Domain, Flashcard, Lesson, Pbq, Question } from "../types";
+import type { Certification, Domain, Flashcard, Lesson, Objective, Pbq, Question } from "../types";
 
 export interface ContentBundle {
   certifications: Certification[];
@@ -7,6 +7,8 @@ export interface ContentBundle {
   flashcards: Flashcard[];
   pbqs: Pbq[];
   lessons: Lesson[];
+  /** Published exam objectives per track (optional bank). */
+  objectives: Objective[];
 }
 
 const DIFFICULTIES = ["Foundation", "Intermediate", "Advanced"];
@@ -25,13 +27,14 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
   const errors: string[] = [];
   if (!content || typeof content !== "object") return ["Content is not an object"];
 
-  const { certifications, domains, questions, flashcards, pbqs, lessons } = content;
+  const { certifications, domains, questions, flashcards, pbqs, lessons, objectives } = content;
   if (!Array.isArray(certifications) || certifications.length === 0) errors.push("certifications must be a non-empty array");
   if (!Array.isArray(domains) || domains.length === 0) errors.push("domains must be a non-empty array");
   if (!Array.isArray(questions) || questions.length === 0) errors.push("questions must be a non-empty array");
   if (!Array.isArray(flashcards) || flashcards.length === 0) errors.push("flashcards must be a non-empty array");
   if (pbqs !== undefined && !Array.isArray(pbqs)) errors.push("pbqs must be an array when present");
   if (lessons !== undefined && !Array.isArray(lessons)) errors.push("lessons must be an array when present");
+  if (objectives !== undefined && !Array.isArray(objectives)) errors.push("objectives must be an array when present");
   if (errors.length) return errors;
 
   // ---- Certification manifest ------------------------------------------------
@@ -81,6 +84,7 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
   const flashcardList = flashcards as Flashcard[];
   const pbqList = (pbqs ?? []) as Pbq[];
   const lessonList = (lessons ?? []) as Lesson[];
+  const objectiveList = (objectives ?? []) as Objective[];
 
   for (const c of certList) {
     // Coming-soon tracks are advertised before any banks are authored, so the
@@ -187,6 +191,34 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
       }
     });
   }
+
+  // ---- Objectives (optional registry) ---------------------------------------
+  const objectiveIds = new Set<string>();
+  const objectiveToCert = new Map<string, string>();
+  const seenObj = new Set<string>();
+  for (const o of objectiveList) {
+    if (seenObj.has(o.id)) errors.push(`Duplicate objective id: ${o.id}`);
+    seenObj.add(o.id);
+    checkCertRefs(`Objective ${o.id}`, o.certId, o.id, o.exam);
+    if (!domainIds.has(o.domain)) errors.push(`Objective ${o.id}: unknown domain "${o.domain}"`);
+    else if (domainToCert.get(o.domain) !== o.certId) errors.push(`Objective ${o.id}: domain "${o.domain}" does not belong to cert "${o.certId}"`);
+    if (!o.code?.trim()) errors.push(`Objective ${o.id}: empty code`);
+    if (!o.title?.trim()) errors.push(`Objective ${o.id}: empty title`);
+    objectiveIds.add(o.id);
+    objectiveToCert.set(o.id, o.certId);
+  }
+
+  // Any content item that references an objective must point at an existing one
+  // in the same certification.
+  const checkObjectiveRef = (label: string, certId: string, objectiveId?: string) => {
+    if (objectiveId === undefined) return;
+    if (!objectiveIds.has(objectiveId)) errors.push(`${label}: unknown objectiveId "${objectiveId}"`);
+    else if (objectiveToCert.get(objectiveId) !== certId) errors.push(`${label}: objectiveId "${objectiveId}" does not belong to cert "${certId}"`);
+  };
+  for (const q of questionList) checkObjectiveRef(`Question ${q.id}`, q.certId, q.objectiveId);
+  for (const f of flashcardList) checkObjectiveRef(`Flashcard ${f.id}`, f.certId, f.objectiveId);
+  for (const p of pbqList) checkObjectiveRef(`PBQ ${p.id}`, p.certId, p.objectiveId);
+  for (const l of lessonList) checkObjectiveRef(`Lesson ${l.id}`, l.certId, l.objectiveId);
 
   return errors;
 }

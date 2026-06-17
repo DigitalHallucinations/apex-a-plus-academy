@@ -96,8 +96,53 @@ These may be absent or empty:
 
 - `pbqs.json`
 - `lessons.json`
+- `objectives.json`
 
 If present, they are fully validated.
+
+## Objective Mapping And Coverage
+
+Each track has an objective registry at `src/content/<cert>/objectives.json` —
+the published exam objectives the curriculum is built against. Each entry:
+
+```json
+{
+  "id": "secplus-1.4",
+  "certId": "security-plus",
+  "exam": "SY0-701",
+  "domain": "secplus-architecture",
+  "code": "1.4",
+  "title": "Explain the importance of using appropriate cryptographic solutions",
+  "verified": false
+}
+```
+
+Rules:
+
+- `id` is cert-prefixed and globally unique (A+ ids include the core, e.g. `aplus-c1-2.1`).
+- `domain` and `exam` must belong to the same cert.
+- `verified` records whether the objective number/title has been confirmed against
+  CompTIA's **official objectives PDF** for that exam version. Registries are
+  seeded from the public structure as `false`; confirm and flip to `true`.
+
+Lessons, questions, flashcards, and PBQs may carry an optional `objectiveId` that
+references a registry entry in the same track. The validator rejects any
+`objectiveId` that does not resolve.
+
+### Coverage
+
+`npm run validate:content` prints an objective-coverage report. The **deep
+target** is at least one lesson and at least six tagged questions per objective.
+Run with `--strict-coverage` to fail the build on any gap:
+
+```powershell
+node scripts/validate-content.mjs --strict-coverage
+```
+
+Authoring an objective end to end means: write the lesson(s) that teach it, tag
+them with its `objectiveId`, and tag (or author) at least six questions plus
+flashcards/PBQs to the same `objectiveId`. See
+`decisions/0006-objective-mapped-curriculum.md`.
 
 ## ID Rules
 

@@ -1,0 +1,41 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260617-191333-215-objectives",
+  "timestamp": "2026-06-17T19:13:33Z",
+  "work_item": "215",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "npm run validate:content",
+      "exit_code": 0,
+      "summary": "3 tracks valid; objective registries loaded (A+ 63, Network+ 24, Security+ 28); coverage report active; secplus-1.4 complete (1 lesson, 7 questions)."
+    },
+    {
+      "command": "npm test -- --run",
+      "exit_code": 0,
+      "summary": "3 test files, 52 tests passed (added objective-registry validation tests)."
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "summary": "tsc type-check and vite production build succeeded with the new Objective type and objectiveId fields."
+    },
+    {
+      "command": "npm run validate:a11y",
+      "exit_code": 0,
+      "summary": "Accessibility validation passed (6 checks)."
+    }
+  ],
+  "artifacts": [
+    "decisions/0006-objective-mapped-curriculum.md",
+    "src/content/a-plus/objectives.json",
+    "src/content/network-plus/objectives.json",
+    "src/content/security-plus/objectives.json",
+    "src/content/validate.ts",
+    "scripts/validate-content.mjs",
+    "src/types.ts"
+  ],
+  "environment": {
+    "platform": "win32"
+  }
+}

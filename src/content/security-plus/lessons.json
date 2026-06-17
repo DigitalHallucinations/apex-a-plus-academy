@@ -36,6 +36,7 @@
     "order": 2,
     "estMinutes": 6,
     "objectives": ["Compare symmetric and asymmetric encryption", "Use hashing to verify integrity", "Explain non-repudiation"],
+    "objectiveId": "secplus-1.4",
     "sections": [
       {
         "body": "Cryptography shows up everywhere, but it is built from a few primitives. Knowing what each one does — and does not do — keeps you from reaching for the wrong tool."

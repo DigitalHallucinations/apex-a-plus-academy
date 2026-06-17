@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import type { Certification, Domain, Flashcard, Lesson, Pbq, Question } from "../types";
+import type { Certification, Domain, Flashcard, Lesson, Objective, Pbq, Question } from "../types";
 import { isCertAvailable, sortCertifications } from "../logic";
 import { validateContent, type ContentBundle } from "./validate";
 import certificationsJson from "./certifications.json";
@@ -7,7 +7,7 @@ import certificationsJson from "./certifications.json";
 export type { ContentBundle } from "./validate";
 
 type JsonModule<T> = { default: T };
-type BankName = "domains" | "questions" | "flashcards" | "pbqs" | "lessons";
+type BankName = "domains" | "questions" | "flashcards" | "pbqs" | "lessons" | "objectives";
 
 const REQUIRED_BANKS = ["domains", "questions", "flashcards"] as const satisfies readonly BankName[];
 
@@ -16,7 +16,8 @@ const bankModules = {
   questions: import.meta.glob<JsonModule<Question[]>>("./*/questions.json", { eager: true }),
   flashcards: import.meta.glob<JsonModule<Flashcard[]>>("./*/flashcards.json", { eager: true }),
   pbqs: import.meta.glob<JsonModule<Pbq[]>>("./*/pbqs.json", { eager: true }),
-  lessons: import.meta.glob<JsonModule<Lesson[]>>("./*/lessons.json", { eager: true })
+  lessons: import.meta.glob<JsonModule<Lesson[]>>("./*/lessons.json", { eager: true }),
+  objectives: import.meta.glob<JsonModule<Objective[]>>("./*/objectives.json", { eager: true })
 };
 
 function bankPath(certId: string, bank: BankName): string {
@@ -42,7 +43,8 @@ function buildBundledContent(certifications: Certification[]): ContentBundle {
     questions: ordered.flatMap(cert => readBank<Question>(cert, "questions", REQUIRED_BANKS.includes("questions"))),
     flashcards: ordered.flatMap(cert => readBank<Flashcard>(cert, "flashcards", REQUIRED_BANKS.includes("flashcards"))),
     pbqs: ordered.flatMap(cert => readBank<Pbq>(cert, "pbqs", false)),
-    lessons: ordered.flatMap(cert => readBank<Lesson>(cert, "lessons", false))
+    lessons: ordered.flatMap(cert => readBank<Lesson>(cert, "lessons", false)),
+    objectives: ordered.flatMap(cert => readBank<Objective>(cert, "objectives", false))
   };
 }
 

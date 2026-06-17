@@ -1,8 +1,21 @@
 # 215 — Build course lessons and real-world class content
 
-> **Status**: 📋 Active
+> **Status**: 🚧 In progress
 > **Owners**: Content Specialist lead with Architect support.
 > **Depends on**: 210, 214.
+>
+> **2026-06-17 — Phase 1 (objective-mapped backbone) landed.** Per
+> `decisions/0006-objective-mapped-curriculum.md`, each track now has an objective
+> registry (`src/content/<cert>/objectives.json`) covering all published
+> sub-objectives (A+ 63, Network+ 24, Security+ 28 = 115 total, seeded
+> `verified:false` pending official-PDF confirmation). Content items can carry an
+> `objectiveId`; validation rejects bad references and reports per-objective
+> coverage against the deep target (>=1 lesson + >=6 questions), with
+> `--strict-coverage` to gate. First objective completed end-to-end as the
+> template: `secplus-1.4` (1 lesson + 7 questions tagged).
+>
+> **Phase 2 (ongoing):** verify objective lists vs official PDFs, then author/tag
+> lessons + >=6 questions per objective across all 115 sub-objectives.
 
 ## Intent
 

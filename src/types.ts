@@ -55,6 +55,25 @@ export interface Domain {
   topics: string[];
 }
 
+/**
+ * One published exam objective (e.g., Security+ "1.2 Summarize fundamental
+ * security concepts"). The objective registry per track is the spec that
+ * lessons, questions, flashcards, and PBQs map to via `objectiveId`, so
+ * coverage can be measured objective by objective.
+ */
+export interface Objective {
+  /** Globally unique, cert-prefixed id, e.g. "secplus-1.2" or "aplus-c1-1.1". */
+  id: string;
+  certId: CertId;
+  exam: ExamId;
+  domain: string;
+  /** Official objective number within its exam, e.g. "1.2". */
+  code: string;
+  title: string;
+  /** Whether the title/number has been confirmed against the official objectives PDF. */
+  verified?: boolean;
+}
+
 export interface Question {
   id: string;
   certId: CertId;
@@ -65,7 +84,10 @@ export interface Question {
   options: string[];
   answer: number;
   explanation: string;
+  /** Human-readable objective label shown in the UI. */
   objective: string;
+  /** Optional reference to an Objective.id in the track's objective registry. */
+  objectiveId?: string;
 }
 
 interface PbqBase {
@@ -76,6 +98,8 @@ interface PbqBase {
   difficulty: Difficulty;
   prompt: string;
   objective: string;
+  /** Optional reference to an Objective.id in the track's objective registry. */
+  objectiveId?: string;
   explanation: string;
 }
 
@@ -104,6 +128,8 @@ export interface Flashcard {
   domain: string;
   front: string;
   back: string;
+  /** Optional reference to an Objective.id in the track's objective registry. */
+  objectiveId?: string;
 }
 
 /** An illustration shown within a lesson section. Assets live under public/lessons/. */
@@ -138,8 +164,10 @@ export interface Lesson {
   order: number;
   /** Estimated reading time in minutes. */
   estMinutes: number;
-  /** Objective strings this lesson covers. */
+  /** Objective strings this lesson covers (human-readable). */
   objectives: string[];
+  /** Optional reference to an Objective.id in the track's objective registry. */
+  objectiveId?: string;
   sections: LessonSection[];
 }
 
