@@ -133,5 +133,53 @@
     ],
     "answer": ["v-scan", "v-prioritize", "v-remediate", "v-verify", "v-report"],
     "explanation": "You scan to find issues, prioritize by severity, remediate, verify with a rescan, then report and track to closure — a continuous cycle, not a one-time task."
+  },
+  {
+    "id": "secplus-p007",
+    "certId": "security-plus",
+    "kind": "matching",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "difficulty": "Advanced",
+    "prompt": "Match each access-control model to its description.",
+    "objective": "Compare access control models",
+    "items": [
+      { "id": "m-rbac", "text": "RBAC" },
+      { "id": "m-mac", "text": "MAC" },
+      { "id": "m-dac", "text": "DAC" },
+      { "id": "m-abac", "text": "ABAC" }
+    ],
+    "targets": [
+      { "id": "roles", "label": "Access granted by job role" },
+      { "id": "labels", "label": "System enforces labels and clearances" },
+      { "id": "owner", "label": "Resource owner grants access at discretion" },
+      { "id": "attrs", "label": "Decisions based on attributes/context" }
+    ],
+    "answer": { "m-rbac": "roles", "m-mac": "labels", "m-dac": "owner", "m-abac": "attrs" },
+    "explanation": "RBAC uses roles, MAC enforces labels/clearances centrally, DAC lets owners decide, and ABAC evaluates attributes such as user, device, and context."
+  },
+  {
+    "id": "secplus-p008",
+    "certId": "security-plus",
+    "kind": "matching",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "difficulty": "Intermediate",
+    "prompt": "Match each malware type to its defining behavior.",
+    "objective": "Classify malware types",
+    "items": [
+      { "id": "m-worm", "text": "Worm" },
+      { "id": "m-trojan", "text": "Trojan" },
+      { "id": "m-rootkit", "text": "Rootkit" },
+      { "id": "m-logic", "text": "Logic bomb" }
+    ],
+    "targets": [
+      { "id": "spread", "label": "Self-propagates across networks" },
+      { "id": "disguise", "label": "Hides inside seemingly useful software" },
+      { "id": "conceal", "label": "Conceals itself to keep privileged access" },
+      { "id": "trigger", "label": "Activates when a condition is met" }
+    ],
+    "answer": { "m-worm": "spread", "m-trojan": "disguise", "m-rootkit": "conceal", "m-logic": "trigger" },
+    "explanation": "Worms self-propagate, trojans masquerade as useful software, rootkits hide to maintain access, and logic bombs fire on a trigger condition."
   }
 ]

@@ -21,6 +21,48 @@
     "back": "10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16."
   },
   {
+    "id": "netplus-f016",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "TCP vs UDP",
+    "back": "TCP: connection-oriented, reliable, ordered. UDP: connectionless, low-overhead, good for real-time."
+  },
+  {
+    "id": "netplus-f017",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "IPv4 vs IPv6 length",
+    "back": "IPv4 is 32-bit (dotted decimal); IPv6 is 128-bit (hex groups)."
+  },
+  {
+    "id": "netplus-f018",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "Default gateway",
+    "back": "The router a host sends traffic to when the destination is outside its local subnet."
+  },
+  {
+    "id": "netplus-f019",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "DNS record types: A, AAAA, CNAME, MX",
+    "back": "A → IPv4, AAAA → IPv6, CNAME → alias, MX → mail server."
+  },
+  {
+    "id": "netplus-f020",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "DHCP ports",
+    "back": "Server UDP 67, client UDP 68. (Also remember NTP 123, SMTP 25.)"
+  },
+  {
+    "id": "netplus-f021",
+    "certId": "network-plus",
+    "domain": "netplus-concepts",
+    "front": "/26 subnet usable hosts",
+    "back": "6 host bits = 64 addresses − 2 = 62 usable hosts."
+  },
+  {
     "id": "netplus-f004",
     "certId": "network-plus",
     "domain": "netplus-implementation",
@@ -40,6 +82,48 @@
     "domain": "netplus-implementation",
     "front": "2.4 GHz vs 5 GHz Wi-Fi",
     "back": "2.4 GHz: longer range, more interference, fewer channels. 5 GHz: shorter range, faster, more non-overlapping channels."
+  },
+  {
+    "id": "netplus-f022",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "Straight-through vs crossover cable",
+    "back": "Straight-through: unlike devices (PC↔switch). Crossover: like devices (switch↔switch), pre-auto-MDI-X."
+  },
+  {
+    "id": "netplus-f023",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "Power over Ethernet (PoE)",
+    "back": "802.3af / 802.3at deliver power over the data cable to APs, phones, and cameras."
+  },
+  {
+    "id": "netplus-f024",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "Wireless security: WEP → WPA3",
+    "back": "WEP and WPA are deprecated; WPA2 is common; WPA3 is the most secure current choice."
+  },
+  {
+    "id": "netplus-f025",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "Spanning Tree Protocol (STP)",
+    "back": "Prevents switching loops by blocking redundant paths until needed."
+  },
+  {
+    "id": "netplus-f026",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "What does NAT do?",
+    "back": "Maps many private addresses to one/few public IPs, conserving IPv4 and hiding internal addressing."
+  },
+  {
+    "id": "netplus-f027",
+    "certId": "network-plus",
+    "domain": "netplus-implementation",
+    "front": "Static vs dynamic routing",
+    "back": "Static: manual, no adaptation (small nets). Dynamic (e.g., OSPF): learns and reconverges automatically."
   },
   {
     "id": "netplus-f007",
@@ -63,6 +147,48 @@
     "back": "HA removes single points of failure (failover); load balancing spreads traffic across multiple active resources."
   },
   {
+    "id": "netplus-f028",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "What is Syslog?",
+    "back": "A protocol that centralizes log messages from many devices to one collector for review and retention."
+  },
+  {
+    "id": "netplus-f029",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "Flow data (NetFlow)",
+    "back": "Summarizes conversations (src/dst, ports, volume) to find top talkers and analyze bandwidth use."
+  },
+  {
+    "id": "netplus-f030",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "SLA",
+    "back": "Service Level Agreement — committed, measurable service levels such as uptime and response time."
+  },
+  {
+    "id": "netplus-f031",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "Hot vs warm vs cold site",
+    "back": "Hot: ready with current data (minutes). Warm: partially ready (hours/days). Cold: space and power only."
+  },
+  {
+    "id": "netplus-f032",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "Why back up device configs?",
+    "back": "To restore a known-good configuration quickly after hardware failure or a bad change."
+  },
+  {
+    "id": "netplus-f033",
+    "certId": "network-plus",
+    "domain": "netplus-operations",
+    "front": "NTP",
+    "back": "Network Time Protocol (UDP 123) keeps device clocks in sync — vital for logs and authentication."
+  },
+  {
     "id": "netplus-f010",
     "certId": "network-plus",
     "domain": "netplus-security",
@@ -84,6 +210,48 @@
     "back": "Port-based network access control: authenticate (often via RADIUS) before the switch port grants access."
   },
   {
+    "id": "netplus-f034",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "Implicit deny",
+    "back": "Firewall posture that blocks all traffic not explicitly allowed, shrinking the attack surface."
+  },
+  {
+    "id": "netplus-f035",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "Screened subnet (DMZ)",
+    "back": "An isolated segment for internet-facing servers so their compromise doesn't expose the internal LAN."
+  },
+  {
+    "id": "netplus-f036",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "Port security",
+    "back": "Limits which/how many MAC addresses a switch port accepts; can disable the port on a violation."
+  },
+  {
+    "id": "netplus-f037",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "DHCP snooping",
+    "back": "Trusts only approved ports for DHCP server messages, blocking rogue DHCP servers."
+  },
+  {
+    "id": "netplus-f038",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "Why segment a network?",
+    "back": "To limit lateral movement so a breach in one zone doesn't expose the whole network."
+  },
+  {
+    "id": "netplus-f039",
+    "certId": "network-plus",
+    "domain": "netplus-security",
+    "front": "VPN",
+    "back": "Encrypted tunnel (IPsec or TLS) for secure remote access across untrusted networks."
+  },
+  {
     "id": "netplus-f013",
     "certId": "network-plus",
     "domain": "netplus-troubleshooting",
@@ -103,5 +271,47 @@
     "domain": "netplus-troubleshooting",
     "front": "CRC errors on a port indicate…",
     "back": "Physical-layer corruption — damaged/out-of-spec cabling, excessive length, or interference."
+  },
+  {
+    "id": "netplus-f040",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "ping vs traceroute",
+    "back": "ping tests reachability/latency to one host; traceroute lists each hop and where the path breaks."
+  },
+  {
+    "id": "netplus-f041",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "ipconfig / ifconfig",
+    "back": "Shows a host's IP address, subnet mask, and default gateway."
+  },
+  {
+    "id": "netplus-f042",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "Local works, remote doesn't",
+    "back": "Suspect a wrong or missing default gateway — traffic can't leave the local subnet."
+  },
+  {
+    "id": "netplus-f043",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "Loopback address",
+    "back": "127.0.0.1 — pinging it confirms the local TCP/IP stack works."
+  },
+  {
+    "id": "netplus-f044",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "Choppy video, fine throughput",
+    "back": "Check latency, jitter, and packet loss — real-time media is sensitive to these, not just bandwidth."
+  },
+  {
+    "id": "netplus-f045",
+    "certId": "network-plus",
+    "domain": "netplus-troubleshooting",
+    "front": "IP address conflict cause",
+    "back": "Two devices share an address, often a static IP set inside the DHCP range. Reserve statics outside the scope."
   }
 ]

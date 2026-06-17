@@ -250,5 +250,68 @@
     "domain": "aplus-operations",
     "front": "Secure media disposal",
     "back": "Use approved wiping, degaussing, shredding, or physical destruction based on the media and policy."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f37",
+    "domain": "aplus-mobile",
+    "front": "MDM (mobile device management)",
+    "back": "Centrally enforces policy, encryption, app control, and remote wipe on managed mobile devices."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f38",
+    "domain": "aplus-networking",
+    "front": "DHCP vs DNS",
+    "back": "DHCP hands out IP configuration (address, mask, gateway, DNS); DNS resolves names to IP addresses."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f39",
+    "domain": "aplus-hardware",
+    "front": "RAID 0 vs 1 vs 5",
+    "back": "0: striping (speed, no redundancy). 1: mirroring. 5: striping with distributed parity (needs 3+ disks)."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f40",
+    "domain": "aplus-virtualization",
+    "front": "Type 1 vs Type 2 hypervisor",
+    "back": "Type 1 runs on bare metal; Type 2 runs as software on a host OS."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f41",
+    "domain": "aplus-os",
+    "front": "NTFS vs FAT32 vs exFAT",
+    "back": "NTFS: permissions/journaling, large files. FAT32: 4 GB file limit, broad compatibility. exFAT: large files, flash/cross-platform."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f42",
+    "domain": "aplus-security",
+    "front": "Multifactor authentication",
+    "back": "Combine factors: something you know, have, and are. A password plus an app code is MFA."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f43",
+    "domain": "aplus-operations",
+    "front": "Why RAID is not a backup",
+    "back": "RAID provides uptime/redundancy, not point-in-time recovery; you still need real backups."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f44",
+    "domain": "aplus-hw-troubleshooting",
+    "front": "Repeated beeps at POST",
+    "back": "Often indicate RAM or video faults; reseat the module and check the board's beep-code table."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-f45",
+    "domain": "aplus-sw-troubleshooting",
+    "front": "App keeps crashing on Windows",
+    "back": "Check updates and Event Viewer logs, repair/reinstall, verify resources, and test in a clean boot."
   }
 ]

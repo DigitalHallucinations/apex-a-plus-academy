@@ -42,5 +42,138 @@
     ],
     "answer": ["s-identify", "s-theory", "s-test", "s-plan", "s-verify", "s-document"],
     "explanation": "The methodology runs from identifying the problem through testing a theory before fixing, then verifying and finally documenting — the two steps most often skipped."
+  },
+  {
+    "id": "netplus-p003",
+    "certId": "network-plus",
+    "kind": "matching",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Intermediate",
+    "prompt": "Match each connector to the media it terminates.",
+    "objective": "Identify cable connectors",
+    "items": [
+      { "id": "i-lc", "text": "LC" },
+      { "id": "i-rj45", "text": "RJ45" },
+      { "id": "i-rj11", "text": "RJ11" },
+      { "id": "i-bnc", "text": "BNC" }
+    ],
+    "targets": [
+      { "id": "fiber", "label": "Fiber-optic" },
+      { "id": "utp", "label": "Twisted-pair Ethernet" },
+      { "id": "phone", "label": "Telephone line" },
+      { "id": "coax", "label": "Coaxial" }
+    ],
+    "answer": { "i-lc": "fiber", "i-rj45": "utp", "i-rj11": "phone", "i-bnc": "coax" },
+    "explanation": "LC terminates fiber, RJ45 terminates twisted-pair Ethernet, RJ11 is for phone lines, and BNC is a coaxial connector."
+  },
+  {
+    "id": "netplus-p004",
+    "certId": "network-plus",
+    "kind": "matching",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Match each protocol to its default port.",
+    "objective": "Identify common ports and protocols",
+    "items": [
+      { "id": "i-ftp", "text": "FTP" },
+      { "id": "i-telnet", "text": "Telnet" },
+      { "id": "i-smtp", "text": "SMTP" },
+      { "id": "i-rdp", "text": "RDP" }
+    ],
+    "targets": [
+      { "id": "p21", "label": "21" },
+      { "id": "p23", "label": "23" },
+      { "id": "p25", "label": "25" },
+      { "id": "p3389", "label": "3389" }
+    ],
+    "answer": { "i-ftp": "p21", "i-telnet": "p23", "i-smtp": "p25", "i-rdp": "p3389" },
+    "explanation": "FTP uses 21, Telnet 23, SMTP 25, and RDP 3389. Knowing default ports speeds configuration and troubleshooting."
+  },
+  {
+    "id": "netplus-p005",
+    "certId": "network-plus",
+    "kind": "matching",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "difficulty": "Advanced",
+    "prompt": "Match each attack to the control that best mitigates it.",
+    "objective": "Map attacks to mitigations",
+    "items": [
+      { "id": "i-arp", "text": "ARP spoofing" },
+      { "id": "i-dhcp", "text": "Rogue DHCP server" },
+      { "id": "i-macflood", "text": "MAC flooding" },
+      { "id": "i-eviltwin", "text": "Evil twin AP" }
+    ],
+    "targets": [
+      { "id": "dai", "label": "Dynamic ARP Inspection" },
+      { "id": "snoop", "label": "DHCP snooping" },
+      { "id": "portsec", "label": "Port security" },
+      { "id": "wpa3", "label": "WPA3 / 802.1X" }
+    ],
+    "answer": { "i-arp": "dai", "i-dhcp": "snoop", "i-macflood": "portsec", "i-eviltwin": "wpa3" },
+    "explanation": "Dynamic ARP Inspection stops ARP spoofing, DHCP snooping blocks rogue DHCP, port security limits MAC flooding, and strong wireless auth (WPA3/802.1X) defeats evil twins."
+  },
+  {
+    "id": "netplus-p006",
+    "certId": "network-plus",
+    "kind": "ordering",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Place the DHCP lease (DORA) steps in order.",
+    "objective": "Explain the DHCP process",
+    "steps": [
+      { "id": "d-discover", "text": "Discover" },
+      { "id": "d-offer", "text": "Offer" },
+      { "id": "d-request", "text": "Request" },
+      { "id": "d-ack", "text": "Acknowledge" }
+    ],
+    "answer": ["d-discover", "d-offer", "d-request", "d-ack"],
+    "explanation": "The client Discovers, the server Offers, the client Requests the offered address, and the server Acknowledges (DORA)."
+  },
+  {
+    "id": "netplus-p007",
+    "certId": "network-plus",
+    "kind": "matching",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "difficulty": "Intermediate",
+    "prompt": "Match each command-line tool to what it is best used for.",
+    "objective": "Select diagnostic tools",
+    "items": [
+      { "id": "t-ping", "text": "ping" },
+      { "id": "t-trace", "text": "traceroute / tracert" },
+      { "id": "t-ns", "text": "nslookup / dig" },
+      { "id": "t-ipc", "text": "ipconfig / ifconfig" }
+    ],
+    "targets": [
+      { "id": "reach", "label": "Test reachability and latency" },
+      { "id": "path", "label": "Show each hop along the path" },
+      { "id": "dns", "label": "Query DNS name resolution" },
+      { "id": "cfg", "label": "Show the host's IP configuration" }
+    ],
+    "answer": { "t-ping": "reach", "t-trace": "path", "t-ns": "dns", "t-ipc": "cfg" },
+    "explanation": "ping tests reachability, traceroute shows the path, nslookup/dig query DNS, and ipconfig/ifconfig show local IP settings."
+  },
+  {
+    "id": "netplus-p008",
+    "certId": "network-plus",
+    "kind": "ordering",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "Place these change-management steps in a sensible order.",
+    "objective": "Apply change management",
+    "steps": [
+      { "id": "c-request", "text": "Submit the change request" },
+      { "id": "c-assess", "text": "Assess risk and get approval" },
+      { "id": "c-test", "text": "Test the change" },
+      { "id": "c-implement", "text": "Implement during the change window" },
+      { "id": "c-verify", "text": "Verify and document the result" }
+    ],
+    "answer": ["c-request", "c-assess", "c-test", "c-implement", "c-verify"],
+    "explanation": "Changes are requested, assessed and approved, tested, implemented in a window, then verified and documented — with a rollback plan ready throughout."
   }
 ]

@@ -10,22 +10,696 @@
     "objectives": ["Map devices to OSI layers", "Use the OSI model to isolate faults"],
     "sections": [
       {
-        "body": "The OSI model breaks networking into seven layers, from the physical signaling at the bottom to the application a user interacts with at the top. You rarely configure 'the OSI model' directly, but it gives you a shared vocabulary and, more usefully, a checklist for isolating where a problem lives."
+        "body": "The OSI model breaks networking into seven layers, from the physical signaling at the bottom to the application a user interacts with at the top. You rarely configure 'the OSI model' directly, but it gives you a shared vocabulary and a checklist for isolating where a problem lives."
       },
       {
         "heading": "The seven layers",
-        "body": "From bottom to top, the layers are Physical, Data Link, Network, Transport, Session, Presentation, and Application. A common way to remember them is to think of building up from cables and signals to the software the user sees.",
+        "body": "From bottom to top: Physical, Data Link, Network, Transport, Session, Presentation, Application.",
         "bullets": [
-          "Layer 1 Physical: cables, connectors, signaling, voltage.",
+          "Layer 1 Physical: cables, connectors, signaling.",
           "Layer 2 Data Link: MAC addresses, switches, frames.",
           "Layer 3 Network: IP addresses, routers, packets.",
           "Layer 4 Transport: TCP/UDP, ports, segments.",
-          "Layers 5-7 Session/Presentation/Application: sessions, formatting, and protocols like HTTP."
+          "Layers 5-7: sessions, formatting, and protocols like HTTP."
         ]
       },
       {
         "heading": "Why technicians care",
-        "body": "When something breaks, work the layers. If a link light is dark, that is Layer 1 — no point checking DNS yet. If you can ping by IP but not by name, the lower layers are fine and the problem is higher up, at name resolution. Narrowing the fault to a layer turns a vague 'the network is down' into a specific, testable question."
+        "body": "When something breaks, work the layers. A dark link light is Layer 1 — no point checking DNS yet. Reaching a host by IP but not by name means the lower layers are fine and the issue is higher up, at name resolution."
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "Ports and protocols you must know",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Identify common ports and protocols"],
+    "sections": [
+      {
+        "body": "Ports are how a single host runs many services at once: each listening service claims a number so returning traffic finds the right application. Memorizing the common ones turns vague 'it won't connect' reports into specific checks."
+      },
+      {
+        "heading": "Common ports",
+        "body": "Group them by purpose so they stick.",
+        "bullets": [
+          "Web: HTTP 80, HTTPS 443.",
+          "Remote: SSH 22, Telnet 23 (insecure), RDP 3389.",
+          "Mail: SMTP 25, POP3 110, IMAP 143, secured 587/993/995.",
+          "Core services: DNS 53, DHCP 67/68, NTP 123, SNMP 161."
+        ]
+      },
+      {
+        "body": "Prefer the secure version of any protocol where one exists — SSH over Telnet, HTTPS over HTTP, SNMPv3 over v1/v2c."
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "IPv4 addressing and subnetting basics",
+    "order": 3,
+    "estMinutes": 8,
+    "objectives": ["Calculate IPv4 subnet sizes", "Recognize private IPv4 ranges"],
+    "sections": [
+      {
+        "body": "An IPv4 address is 32 bits split into a network portion and a host portion. The subnet mask (or its CIDR /prefix) marks where that split falls, which determines how many hosts a subnet can hold."
+      },
+      {
+        "heading": "Counting hosts",
+        "body": "Host bits are whatever the mask leaves. Usable hosts = 2^(host bits) − 2 (network and broadcast).",
+        "bullets": [
+          "/24 = 8 host bits = 254 usable.",
+          "/26 = 6 host bits = 62 usable.",
+          "/30 = 2 host bits = 2 usable (ideal for point-to-point links)."
+        ]
+      },
+      {
+        "heading": "Private ranges",
+        "body": "RFC 1918 reserves 10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16 for internal use. A 169.254.x.x address is APIPA, a sign that DHCP failed."
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "IPv6 essentials",
+    "order": 4,
+    "estMinutes": 5,
+    "objectives": ["Describe IPv6 addressing", "Identify IPv6 address types"],
+    "sections": [
+      {
+        "body": "IPv6 was created because the 32-bit IPv4 space ran short. An IPv6 address is 128 bits, written as eight groups of hexadecimal, with rules to shorten long strings of zeros."
+      },
+      {
+        "heading": "Address types to recognize",
+        "body": "A few prefixes carry meaning.",
+        "bullets": [
+          "Global unicast: routable on the internet.",
+          "Link-local (fe80::/10): valid only on the local link, auto-configured.",
+          "Loopback: ::1 (the IPv6 equivalent of 127.0.0.1).",
+          "Multicast (ff00::/8): one-to-many delivery."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "DNS: how names become addresses",
+    "order": 5,
+    "estMinutes": 6,
+    "objectives": ["Explain DNS hierarchy", "Identify DNS record types"],
+    "sections": [
+      {
+        "body": "People remember names; networks route to numbers. DNS bridges the two, resolving a hostname to an IP address through a hierarchy of servers."
+      },
+      {
+        "heading": "The lookup path and records",
+        "body": "Resolution walks down the hierarchy and returns a record.",
+        "bullets": [
+          "Root → TLD (.com) → authoritative server for the domain.",
+          "A record → IPv4, AAAA → IPv6.",
+          "CNAME → an alias to another name.",
+          "MX → mail servers; TXT → text data (e.g., SPF)."
+        ]
+      },
+      {
+        "body": "A classic clue: if a host works by IP but not by name, suspect DNS first and test with nslookup or dig."
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l6",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "DHCP and dynamic addressing",
+    "order": 6,
+    "estMinutes": 5,
+    "objectives": ["Explain the DHCP process"],
+    "sections": [
+      {
+        "body": "DHCP automates IP configuration so devices get an address, mask, gateway, and DNS server without manual setup. Understanding its handshake makes addressing failures easy to diagnose."
+      },
+      {
+        "heading": "The DORA process",
+        "body": "Four messages, in order:",
+        "bullets": [
+          "Discover: the client broadcasts to find a server.",
+          "Offer: a server proposes an address.",
+          "Request: the client asks for that address.",
+          "Acknowledge: the server confirms the lease."
+        ]
+      },
+      {
+        "body": "If DORA fails, the client self-assigns a 169.254.x.x APIPA address — useful only on the local link and a clear signal to check the DHCP server and path."
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l7",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "TCP, UDP, and the transport layer",
+    "order": 7,
+    "estMinutes": 5,
+    "objectives": ["Compare transport protocols", "Explain TCP connection setup"],
+    "sections": [
+      {
+        "body": "The transport layer decides how reliably data moves. TCP and UDP make opposite trade-offs, and choosing the right mental model explains a lot of application behavior."
+      },
+      {
+        "heading": "TCP vs UDP",
+        "body": "Reliability versus speed.",
+        "bullets": [
+          "TCP: connection-oriented, ordered, acknowledged — web, email, file transfer.",
+          "UDP: connectionless, low-overhead — voice, video, DNS queries.",
+          "TCP opens with a three-way handshake: SYN, SYN-ACK, ACK."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l8",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "Topologies and network types",
+    "order": 8,
+    "estMinutes": 4,
+    "objectives": ["Compare network topologies", "Compare network models"],
+    "sections": [
+      {
+        "body": "Topology describes how nodes connect; network type describes scope. Both shape performance, cost, and resilience."
+      },
+      {
+        "heading": "Common shapes and scopes",
+        "body": "Know the trade-offs.",
+        "bullets": [
+          "Star: every node to a central switch — the common LAN design.",
+          "Mesh: many direct links — costly but very resilient.",
+          "LAN, WAN, and the client-server vs peer-to-peer models."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-implementation-l1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "title": "Switching fundamentals and VLANs",
+    "order": 1,
+    "estMinutes": 6,
+    "objectives": ["Explain the purpose of VLANs", "Identify VLAN trunking standards"],
+    "sections": [
+      {
+        "body": "A switch learns which MAC address lives on each port and forwards frames only where they need to go, unlike a hub that repeats everything everywhere. VLANs add logical structure on top of that."
+      },
+      {
+        "heading": "VLANs and trunks",
+        "body": "One switch can become many logical networks.",
+        "bullets": [
+          "A VLAN is a separate broadcast domain on shared hardware.",
+          "Trunks carry several VLANs between switches.",
+          "802.1Q tags each frame with its VLAN ID.",
+          "Routing (or a Layer 3 switch) is needed to move traffic between VLANs."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-implementation-l2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "title": "Routing basics: static and dynamic",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Compare static and dynamic routing", "Compare routing protocols"],
+    "sections": [
+      {
+        "body": "Routers choose paths between networks. You can tell them every path by hand or let them learn paths automatically — each approach fits a different scale."
+      },
+      {
+        "heading": "Static vs dynamic",
+        "body": "Trade control for adaptability.",
+        "bullets": [
+          "Static routes: manual, predictable, good for small or stub networks.",
+          "Dynamic protocols learn and reconverge automatically.",
+          "OSPF: link-state interior protocol using cost.",
+          "BGP: the exterior protocol that routes between autonomous systems on the internet."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-implementation-l3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "title": "Ethernet cabling and connectors",
+    "order": 3,
+    "estMinutes": 6,
+    "objectives": ["Select cabling for distance and speed requirements", "Identify cable connectors"],
+    "sections": [
+      {
+        "body": "The physical medium sets the ceiling on distance and speed. Picking the right cable avoids mysterious errors later."
+      },
+      {
+        "heading": "Copper and fiber",
+        "body": "Match media to the job.",
+        "bullets": [
+          "Twisted-pair copper: ~100 m limit; Cat 5e/6/6a for rising speeds.",
+          "Fiber: long distances, high speed, immune to EMI (LC/SC connectors).",
+          "RJ45 terminates Ethernet; T568A/B define the pinout.",
+          "Coaxial uses BNC/F connectors."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-implementation-l4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "title": "Wireless standards and channels",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Compare wireless frequency bands", "Plan wireless channels"],
+    "sections": [
+      {
+        "body": "Wi-Fi performance is as much about RF planning as it is about the standard. Bands and channels determine range and interference."
+      },
+      {
+        "heading": "Bands, standards, channels",
+        "body": "Plan to avoid overlap.",
+        "bullets": [
+          "2.4 GHz: longer range, more interference; use channels 1, 6, 11.",
+          "5 GHz: faster, shorter range, more non-overlapping channels.",
+          "802.11ax (Wi-Fi 6) improves efficiency in dense areas.",
+          "Prefer WPA3 (or WPA2) and avoid WEP/WPA."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-implementation-l5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "title": "Network devices and where they fit",
+    "order": 5,
+    "estMinutes": 5,
+    "objectives": ["Select network devices"],
+    "sections": [
+      {
+        "body": "Each device operates at a layer and solves a specific problem. Knowing which is which speeds both design and troubleshooting."
+      },
+      {
+        "heading": "The lineup",
+        "body": "From simple to smart.",
+        "bullets": [
+          "Hub (L1): repeats to all ports — obsolete.",
+          "Switch (L2): forwards by MAC; Layer 3 switch also routes.",
+          "Router (L3): forwards between networks.",
+          "Firewall: filters traffic by policy; media converter bridges copper and fiber."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-implementation-l6",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "title": "NAT and address translation",
+    "order": 6,
+    "estMinutes": 4,
+    "objectives": ["Explain NAT", "Explain NAT and port forwarding"],
+    "sections": [
+      {
+        "body": "There are far more devices than public IPv4 addresses, so NAT lets many private hosts share a small pool of public addresses while hiding the internal layout."
+      },
+      {
+        "heading": "NAT in practice",
+        "body": "Two common needs.",
+        "bullets": [
+          "Outbound: many private hosts share one public IP (PAT/overload).",
+          "Inbound: port forwarding maps a public IP/port to an internal server.",
+          "NAT conserves addresses but is not a substitute for a firewall."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-implementation-l7",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "title": "Redundancy: aggregation and gateway failover",
+    "order": 7,
+    "estMinutes": 5,
+    "objectives": ["Explain link aggregation", "Explain gateway redundancy"],
+    "sections": [
+      {
+        "body": "Single links and single gateways are single points of failure. A few standard techniques add bandwidth and survivability."
+      },
+      {
+        "heading": "Two building blocks",
+        "body": "Bond links, share gateways.",
+        "bullets": [
+          "Link aggregation (LACP): bond multiple links for more bandwidth and failover.",
+          "First-hop redundancy (HSRP/VRRP): a virtual gateway IP fails over to a backup router.",
+          "Spanning Tree (STP) prevents loops when redundant switch paths exist."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-operations-l1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "title": "Documentation and diagrams",
+    "order": 1,
+    "estMinutes": 5,
+    "objectives": ["Maintain network documentation"],
+    "sections": [
+      {
+        "body": "Good documentation turns a 2 a.m. outage into a quick fix. Two diagram types answer different questions during an incident."
+      },
+      {
+        "heading": "Physical vs logical",
+        "body": "Keep both current.",
+        "bullets": [
+          "Physical: racks, ports, cable runs, device locations.",
+          "Logical: IP subnets, VLANs, and traffic flow.",
+          "Also track an asset inventory: models, firmware, owners."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-operations-l2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "title": "Monitoring with SNMP and flow data",
+    "order": 2,
+    "estMinutes": 5,
+    "objectives": ["Identify monitoring protocols", "Explain SNMP components"],
+    "sections": [
+      {
+        "body": "You cannot manage what you cannot see. Monitoring tells you a device's health and how traffic moves so you can spot trouble before users call."
+      },
+      {
+        "heading": "Two complementary views",
+        "body": "Device health and traffic patterns.",
+        "bullets": [
+          "SNMP polls metrics (via the MIB) and receives trap alerts; prefer SNMPv3.",
+          "Flow data (NetFlow) reveals top talkers and bandwidth use.",
+          "Uptime monitoring probes services the way a user reaches them."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-operations-l3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "title": "Logging and time synchronization",
+    "order": 3,
+    "estMinutes": 4,
+    "objectives": ["Explain centralized logging", "Explain time synchronization"],
+    "sections": [
+      {
+        "body": "Logs are your record of what happened, but they are only useful if they are centralized and their timestamps line up."
+      },
+      {
+        "heading": "Syslog and NTP",
+        "body": "Collect centrally, sync the clocks.",
+        "bullets": [
+          "Syslog sends events to a central collector for correlation and retention.",
+          "NTP (UDP 123) keeps clocks in sync so timelines are trustworthy.",
+          "Clock drift makes correlating multi-device events nearly impossible."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-operations-l4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "title": "Performance metrics and baselines",
+    "order": 4,
+    "estMinutes": 5,
+    "objectives": ["Interpret performance metrics", "Use performance baselines"],
+    "sections": [
+      {
+        "body": "Numbers only mean something compared to normal. A baseline of healthy behavior is what lets you call today's reading 'a problem.'"
+      },
+      {
+        "heading": "Metrics that matter",
+        "body": "Especially for real-time traffic.",
+        "bullets": [
+          "Throughput: how much data moves per second.",
+          "Latency: delay; jitter: variation in that delay.",
+          "Packet loss: dropped traffic — deadly for voice/video.",
+          "Compare current values to the baseline to spot anomalies."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-operations-l5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "title": "High availability and load balancing",
+    "order": 5,
+    "estMinutes": 5,
+    "objectives": ["Explain high-availability designs", "Explain load balancing"],
+    "sections": [
+      {
+        "body": "Availability is designed in, not hoped for. Two related techniques keep services up under failure and load."
+      },
+      {
+        "heading": "HA vs load balancing",
+        "body": "Different goals, often combined.",
+        "bullets": [
+          "High availability: a standby takes over on failure (no single point of failure).",
+          "Load balancing: spread traffic across active servers for performance and resilience.",
+          "Availability is often stated as a percentage, e.g., 99.99% ('four nines')."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-operations-l6",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "title": "Disaster recovery: sites and backups",
+    "order": 6,
+    "estMinutes": 5,
+    "objectives": ["Compare disaster-recovery sites", "Distinguish RTO from RPO"],
+    "sections": [
+      {
+        "body": "When the worst happens, recovery speed depends on choices made long before. Two metrics and three site types frame the plan."
+      },
+      {
+        "heading": "Key concepts",
+        "body": "Targets and readiness.",
+        "bullets": [
+          "RTO: target time to restore service. RPO: acceptable data loss in time.",
+          "Hot site: ready with current data (minutes).",
+          "Warm site: partially provisioned (hours/days).",
+          "Cold site: space and power only (slowest)."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-operations-l7",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "title": "Change and configuration management",
+    "order": 7,
+    "estMinutes": 4,
+    "objectives": ["Apply change management", "Apply configuration management"],
+    "sections": [
+      {
+        "body": "Most outages are self-inflicted by changes. A light-touch process catches risk before it reaches production and makes recovery quick."
+      },
+      {
+        "heading": "Discipline that pays off",
+        "body": "Plan, approve, record.",
+        "bullets": [
+          "Request → assess/approve → test → implement in a window → verify → document.",
+          "Always have a rollback plan.",
+          "Keep configuration backups so you can restore a known-good state."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-security-l1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "title": "Security fundamentals and hardening",
+    "order": 1,
+    "estMinutes": 5,
+    "objectives": ["Apply the CIA triad", "Apply device hardening"],
+    "sections": [
+      {
+        "body": "Network security starts with goals and good hygiene. The CIA triad frames the goals; hardening shrinks what an attacker can touch."
+      },
+      {
+        "heading": "Where to begin",
+        "body": "Small steps, big impact.",
+        "bullets": [
+          "Confidentiality, Integrity, Availability guide every control.",
+          "Change default credentials and disable unused ports/services.",
+          "Use secure management protocols (SSH, SNMPv3)."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-security-l2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "title": "Common network attacks",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Recognize common network attacks", "Map attacks to mitigations"],
+    "sections": [
+      {
+        "body": "You defend better when you can name the attack. A handful of Layer 2/3 attacks show up again and again."
+      },
+      {
+        "heading": "Attacks and defenses",
+        "body": "Pair each threat with its control.",
+        "bullets": [
+          "ARP spoofing → Dynamic ARP Inspection.",
+          "Rogue DHCP → DHCP snooping.",
+          "MAC flooding → port security.",
+          "On-path interception and DoS/DDoS round out the list."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-security-l3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "title": "Switch and port security",
+    "order": 3,
+    "estMinutes": 5,
+    "objectives": ["Apply switch port hardening", "Mitigate rogue DHCP"],
+    "sections": [
+      {
+        "body": "The access layer is where unauthorized devices try to get in. A few switch features keep ports honest."
+      },
+      {
+        "heading": "Controls on the port",
+        "body": "Limit who connects.",
+        "bullets": [
+          "Port security limits MAC addresses per port and can shut a port on violation.",
+          "DHCP snooping trusts only approved ports for DHCP offers.",
+          "Disable auto-trunking and avoid using the native VLAN for data to prevent VLAN hopping."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-security-l4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "title": "Wireless security",
+    "order": 4,
+    "estMinutes": 5,
+    "objectives": ["Select wireless security standards", "Recognize wireless attacks"],
+    "sections": [
+      {
+        "body": "Wireless is convenient and exposed — anyone in range can listen. Strong authentication and encryption are non-negotiable."
+      },
+      {
+        "heading": "Protect the air",
+        "body": "Standards and threats.",
+        "bullets": [
+          "Use WPA3 (or WPA2); never WEP/WPA.",
+          "Enterprise auth via 802.1X/RADIUS beats a shared key.",
+          "Watch for evil-twin rogue APs that mimic your SSID."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-security-l5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "title": "Firewalls, IDS/IPS, and segmentation",
+    "order": 5,
+    "estMinutes": 5,
+    "objectives": ["Apply firewall best practices", "Compare IDS and IPS"],
+    "sections": [
+      {
+        "body": "Perimeter and internal controls work together: filter what crosses boundaries, and divide the network so a breach cannot spread freely."
+      },
+      {
+        "heading": "Layered defenses",
+        "body": "Filter, detect, contain.",
+        "bullets": [
+          "Firewalls enforce policy; prefer implicit deny (allow only what's needed).",
+          "IDS detects and alerts; IPS sits inline and can block.",
+          "Segmentation (VLANs, a screened subnet/DMZ) limits lateral movement."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-security-l6",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "title": "Remote access and VPNs",
+    "order": 6,
+    "estMinutes": 5,
+    "objectives": ["Select remote-access solutions", "Compare VPN models"],
+    "sections": [
+      {
+        "body": "Remote work means corporate traffic crosses the public internet. A VPN restores confidentiality and integrity over that untrusted path."
+      },
+      {
+        "heading": "VPN choices",
+        "body": "Tunnels and trade-offs.",
+        "bullets": [
+          "A VPN builds an encrypted tunnel (IPsec or TLS).",
+          "Full tunnel sends all traffic through HQ for inspection.",
+          "Split tunnel sends only corporate traffic through the VPN.",
+          "Site-to-site VPNs connect whole networks."
+        ]
       }
     ]
   },
@@ -40,23 +714,193 @@
     "objectives": ["Apply the troubleshooting methodology"],
     "sections": [
       {
-        "body": "Good troubleshooting is a process, not a guess. Following the same steps every time keeps you from jumping to a fix that treats a symptom instead of the cause — and it gives you a record others can follow."
+        "body": "Good troubleshooting is a process, not a guess. Following the same steps every time keeps you from fixing a symptom instead of the cause."
       },
       {
         "heading": "The steps in order",
-        "body": "The method moves from understanding the problem to confirming a lasting fix.",
+        "body": "From understanding to lasting fix.",
         "bullets": [
-          "Identify the problem: gather symptoms and what changed.",
+          "Identify the problem (and what changed).",
           "Establish a theory of probable cause.",
           "Test the theory to confirm or reject it.",
-          "Establish a plan of action and implement the solution.",
-          "Verify full functionality and apply preventive measures.",
-          "Document findings, actions, and outcomes."
+          "Plan and implement the solution.",
+          "Verify full functionality, then document."
         ]
       },
       {
-        "heading": "The discipline that matters",
-        "body": "The two steps people skip are testing the theory before fixing, and documenting after. Testing first stops you from swapping hardware that was never the problem. Documenting turns today's outage into tomorrow's quick answer when the same `CRC error` or DNS failure reappears."
+        "body": "The two steps people skip are testing the theory before fixing and documenting after. Both save the most time on the next incident."
+      }
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting-l2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "title": "Troubleshooting layer by layer",
+    "order": 2,
+    "estMinutes": 5,
+    "objectives": ["Apply layered troubleshooting"],
+    "sections": [
+      {
+        "body": "When a problem is fuzzy, the OSI model is your divide-and-conquer tool. Start low and work up, or isolate the layer with a quick test."
+      },
+      {
+        "heading": "Symptoms by layer",
+        "body": "Let the symptom point you.",
+        "bullets": [
+          "No link light → Layer 1 (cable, port, NIC).",
+          "Local works, remote fails → Layer 3 (gateway/routing).",
+          "IP works, names fail → DNS (upper layers).",
+          "Confirm the stack itself with a loopback ping to 127.0.0.1."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting-l3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "title": "Command-line tools",
+    "order": 3,
+    "estMinutes": 6,
+    "objectives": ["Select diagnostic tools", "Select diagnostic commands"],
+    "sections": [
+      {
+        "body": "A handful of commands answer most connectivity questions. Knowing which one to reach for saves time."
+      },
+      {
+        "heading": "The core toolkit",
+        "body": "Each tool, one job.",
+        "bullets": [
+          "ping: reachability and latency to one host.",
+          "traceroute/tracert: each hop and where the path breaks.",
+          "nslookup/dig: DNS resolution.",
+          "ipconfig/ifconfig: local IP settings; netstat: connections and listening ports."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting-l4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "title": "Cabling and physical-layer faults",
+    "order": 4,
+    "estMinutes": 5,
+    "objectives": ["Select cabling tools", "Interpret interface error counters"],
+    "sections": [
+      {
+        "body": "When errors pile up at the interface, the cable plant is often to blame. The right tester confirms it quickly."
+      },
+      {
+        "heading": "Symptoms and tools",
+        "body": "Read the counters, grab the tester.",
+        "bullets": [
+          "CRC/input errors → corrupted frames (damaged cable, length, interference).",
+          "Wiremap tester: continuity and correct pinout.",
+          "Toner and probe: trace an unlabeled copper run.",
+          "Optical power meter/OTDR: measure fiber loss and find breaks."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting-l5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "title": "Addressing problems",
+    "order": 5,
+    "estMinutes": 5,
+    "objectives": ["Diagnose DHCP failures", "Diagnose addressing conflicts"],
+    "sections": [
+      {
+        "body": "Addressing issues stop traffic before it starts. A few telltale signs point straight at the cause."
+      },
+      {
+        "heading": "Common addressing faults",
+        "body": "What the address tells you.",
+        "bullets": [
+          "169.254.x.x (APIPA) → DHCP failed; check the server and path.",
+          "IP conflict → a static set inside the DHCP scope; reserve statics outside it.",
+          "Local-only connectivity → wrong/missing default gateway.",
+          "Use ipconfig /release and /renew to refresh a lease."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting-l6",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "title": "Name-resolution (DNS) issues",
+    "order": 6,
+    "estMinutes": 4,
+    "objectives": ["Diagnose name-resolution failures", "Diagnose DNS caching issues"],
+    "sections": [
+      {
+        "body": "DNS problems masquerade as 'the internet is down' even when routing is fine. The pattern is unmistakable once you know it."
+      },
+      {
+        "heading": "Spotting DNS trouble",
+        "body": "Test names, not just numbers.",
+        "bullets": [
+          "Reaches IPs but no sites load → DNS resolution failing.",
+          "Resolves an old/wrong IP → stale cache; flush the resolver and check TTLs.",
+          "Verify the configured DNS server and test with nslookup/dig."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting-l7",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "title": "Performance problems",
+    "order": 7,
+    "estMinutes": 5,
+    "objectives": ["Interpret performance metrics", "Diagnose speed/negotiation issues"],
+    "sections": [
+      {
+        "body": "'Slow' has many causes. Separate raw speed problems from quality problems to find the real culprit."
+      },
+      {
+        "heading": "Where to look",
+        "body": "Speed vs quality.",
+        "bullets": [
+          "Gigabit link stuck at 100 Mbps → sub-spec cable or 100 Mbps negotiation.",
+          "Late collisions → duplex mismatch; set both ends consistently.",
+          "Choppy calls with fine throughput → latency, jitter, packet loss."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-troubleshooting-l8",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "title": "Wireless troubleshooting",
+    "order": 8,
+    "estMinutes": 4,
+    "objectives": ["Diagnose wireless interference", "Resolve wireless coverage issues"],
+    "sections": [
+      {
+        "body": "Wi-Fi issues are often environmental. Time and place are big clues."
+      },
+      {
+        "heading": "Coverage and interference",
+        "body": "Tune the RF.",
+        "bullets": [
+          "Slow only at busy times in a shared space → channel congestion; pick 1/6/11 or a clean 5 GHz channel.",
+          "Weak signal far from the AP → reposition, adjust antennas/power.",
+          "A Wi-Fi analyzer reveals overlap and dead spots."
+        ]
       }
     ]
   }

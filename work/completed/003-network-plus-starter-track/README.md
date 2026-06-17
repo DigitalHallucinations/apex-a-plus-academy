@@ -10,6 +10,12 @@
 > `audits/AUDIT-2026-06-17-network-plus-starter.md` (validate:content, 48 tests,
 > build, a11y all green). Scope was intentionally a starter sample, not full
 > Network+ coverage.
+>
+> **2026-06-17 follow-up:** On request, Network+ (and Security+) were expanded to
+> full parity with A+ — each track now has 133 questions, 45 flashcards, 8 PBQs,
+> and 36 lessons, all original and weight-distributed across domains. A+ flashcards
+> were rounded up from 36 to 45 to match. Evidence:
+> `evidence/runs/20260617-174213-content-parity.json`.
 
 ## Imported plan narrative
 

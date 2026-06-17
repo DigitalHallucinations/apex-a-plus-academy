@@ -6,7 +6,7 @@ All notable changes to SkillForge Academy are documented here. SkillForge Academ
 
 ### Added
 
-- **CompTIA Network+ (N10-009) and Security+ (SY0-701) tracks** — two additional certifications are now selectable from the track switcher, with original content across all five domains of each. Network+ ships as a starter sample (18 questions, 15 flashcards, 2 lessons, 2 PBQs); Security+ is more built out (54 questions, 45 flashcards, 6 lessons, 6 PBQs). A+ remains the primary track and every track's progress stays fully separate.
+- **CompTIA Network+ (N10-009) and Security+ (SY0-701) tracks** — two additional certifications are now selectable from the track switcher, each built out to the same depth as A+: 133 practice questions, 45 flashcards, 36 lessons, and 8 performance-based questions per track, all original and spread across the five domains by exam weight. A+ flashcards were rounded up to 45 so all three tracks match in every content area. Every track's progress stays fully separate.
 - Multi-track availability and ordering: certification tracks can now declare an optional `order` and a `status` of `available` or `coming-soon` in the manifest. Coming-soon tracks are advertised in the track switcher and the all-tracks analytics overview, are not selectable, and are exempt from the required-bank content validation — so an upcoming track can be published on the roadmap before its content is authored.
 
 ### Changed

@@ -10,20 +10,20 @@
     "objectives": ["Apply the CIA triad", "Classify security control types"],
     "sections": [
       {
-        "body": "Almost every security decision traces back to three goals: keeping data secret, keeping it accurate, and keeping it available. Those goals are the CIA triad — Confidentiality, Integrity, and Availability — and they give you a quick way to reason about why a control exists and what it protects."
+        "body": "Almost every security decision traces back to three goals: keeping data secret, keeping it accurate, and keeping it available. Those goals are the CIA triad — Confidentiality, Integrity, and Availability — and they give you a quick way to reason about why a control exists."
       },
       {
         "heading": "What each goal means",
-        "body": "The three goals often pull in different directions, so security is usually about balancing them rather than maximizing one.",
+        "body": "The three often pull in different directions, so security is about balancing them.",
         "bullets": [
-          "Confidentiality: only authorized people can read the data (e.g., encryption, access control).",
-          "Integrity: data is not changed without authorization, and changes are detectable (e.g., hashing, signatures).",
-          "Availability: the data and systems are reachable when needed (e.g., redundancy, backups)."
+          "Confidentiality: only authorized people can read the data (encryption, access control).",
+          "Integrity: data is not changed without authorization, and changes are detectable (hashing, signatures).",
+          "Availability: data and systems are reachable when needed (redundancy, backups)."
         ]
       },
       {
         "heading": "Controls fill the gaps",
-        "body": "Controls are how you achieve the triad, and they come in categories — technical, managerial, operational, and physical — and types such as preventive, detective, and corrective. A locked door is a physical preventive control; a log review is a detective control. When you meet a new control, ask which triad goal it serves and whether it prevents, detects, or corrects."
+        "body": "Controls come in categories — technical, managerial, operational, physical — and types such as preventive, detective, and corrective. For any new control, ask which triad goal it serves and whether it prevents, detects, or corrects."
       }
     ]
   },
@@ -38,19 +38,93 @@
     "objectives": ["Compare symmetric and asymmetric encryption", "Use hashing to verify integrity", "Explain non-repudiation"],
     "sections": [
       {
-        "body": "Cryptography shows up everywhere in security, but it is built from a small number of primitives. Knowing what each one does — and what it does not do — keeps you from reaching for the wrong tool."
+        "body": "Cryptography shows up everywhere, but it is built from a few primitives. Knowing what each one does — and does not do — keeps you from reaching for the wrong tool."
       },
       {
-        "heading": "Encryption: symmetric and asymmetric",
-        "body": "Encryption protects confidentiality by making data unreadable without a key.",
+        "heading": "Encryption, hashing, signatures",
+        "body": "Different jobs.",
         "bullets": [
-          "Symmetric uses one shared key for both encrypt and decrypt. It is fast, so it protects bulk data like a disk (e.g., AES).",
-          "Asymmetric uses a public/private key pair. It is slower, so it is used for key exchange and digital signatures (e.g., RSA, ECC)."
+          "Symmetric: one shared key, fast, for bulk data (AES).",
+          "Asymmetric: public/private key pair for key exchange and signatures (RSA, ECC).",
+          "Hashing: one-way fingerprint for integrity — not encryption.",
+          "Digital signature: hash + private key → integrity plus non-repudiation."
         ]
       },
       {
-        "heading": "Hashing and signatures",
-        "body": "Hashing is one-way: it produces a fixed-length fingerprint that detects any change, giving you integrity — but it is not encryption and does not hide data. A digital signature combines a hash with the signer's private key, so the recipient gets integrity plus non-repudiation: proof of who sent it. A useful rule of thumb: encrypt for secrecy, hash for integrity, sign for proof of origin."
+        "body": "Rule of thumb: encrypt for secrecy, hash for integrity, sign for proof of origin."
+      }
+    ]
+  },
+  {
+    "id": "secplus-concepts-l3",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "title": "Authentication, authorization, and accounting",
+    "order": 3,
+    "estMinutes": 5,
+    "objectives": ["Distinguish authentication, authorization, and accounting", "Classify authentication factors"],
+    "sections": [
+      {
+        "body": "AAA is the backbone of identity. Separating its three parts clears up a lot of access-control confusion."
+      },
+      {
+        "heading": "The three A's and the factors",
+        "body": "Prove, permit, record.",
+        "bullets": [
+          "Authentication: prove who you are.",
+          "Authorization: what you are allowed to access.",
+          "Accounting: the record of what you did.",
+          "Factors: something you know, have, are (MFA combines categories)."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-concepts-l4",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "title": "PKI and digital certificates",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Explain PKI and certificate authorities", "Explain digital certificates"],
+    "sections": [
+      {
+        "body": "Public key infrastructure lets strangers trust each other online. It binds identities to public keys through a chain of trust you can verify."
+      },
+      {
+        "heading": "How trust flows",
+        "body": "Authorities vouch for identities.",
+        "bullets": [
+          "A certificate authority (CA) signs certificates that bind a key to a subject.",
+          "A certificate proves a server's identity and supplies its public key.",
+          "Revoked certificates are reported via CRL (a list) or OCSP (real-time)."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-concepts-l5",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-concepts",
+    "title": "Zero trust and defense in depth",
+    "order": 5,
+    "estMinutes": 5,
+    "objectives": ["Explain the zero trust model", "Apply defense in depth"],
+    "sections": [
+      {
+        "body": "Two principles shape modern architecture: never assume trust from location, and never rely on a single control."
+      },
+      {
+        "heading": "Two mindsets",
+        "body": "Verify everything, layer everything.",
+        "bullets": [
+          "Zero trust: verify every request explicitly; grant least privilege.",
+          "Defense in depth: layer independent controls so one failure is covered.",
+          "Together they limit both initial access and blast radius."
+        ]
       }
     ]
   },
@@ -65,28 +139,194 @@
     "objectives": ["Identify social-engineering techniques", "Classify malware types"],
     "sections": [
       {
-        "body": "Many breaches do not start with clever code — they start with a convincing message. Social engineering manipulates people into bypassing security, and it pairs naturally with malware that does the technical damage once a foothold exists."
+        "body": "Many breaches start with a convincing message, not clever code. Social engineering manipulates people, and it pairs with malware that does the technical damage."
       },
       {
         "heading": "Social engineering by channel",
-        "body": "The lure is the same; only the delivery changes.",
+        "body": "Same lure, different delivery.",
         "bullets": [
-          "Phishing: deceptive email; spear phishing targets specific people; whaling targets executives.",
-          "Vishing: voice/phone; smishing: SMS text.",
-          "Common levers: urgency, authority, fear, and familiarity."
+          "Phishing (email); spear phishing (targeted); whaling (executives).",
+          "Vishing (voice); smishing (SMS).",
+          "Levers: urgency, authority, fear, familiarity."
         ]
       },
       {
         "heading": "Malware by behavior",
-        "body": "Classify malware by what it does, not just its name.",
+        "body": "Classify by what it does.",
         "bullets": [
-          "Ransomware encrypts data and demands payment.",
-          "Spyware secretly collects information; a keylogger records keystrokes.",
-          "A worm self-propagates; a trojan hides inside something useful; a rootkit hides its own presence."
+          "Ransomware encrypts for extortion; spyware/keyloggers steal data.",
+          "Worms self-spread; trojans hide in useful software; rootkits conceal access."
         ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-threats-l2",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "title": "Threat actors and motivations",
+    "order": 2,
+    "estMinutes": 5,
+    "objectives": ["Compare threat actors and motivations"],
+    "sections": [
+      {
+        "body": "Knowing who might attack — and why — shapes which defenses matter most. Actors differ widely in resources and goals."
       },
       {
-        "body": "The strongest defense blends technical controls with people: filtering and endpoint protection reduce what reaches users, while awareness training reduces how often a lure succeeds."
+        "heading": "The cast",
+        "body": "From opportunists to states.",
+        "bullets": [
+          "Script kiddies: low skill, existing tools.",
+          "Hacktivists: ideological motives.",
+          "Organized crime: financial gain (ransomware, fraud).",
+          "Nation-state/APT: well-funded, stealthy, strategic; insiders may be malicious or accidental."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-threats-l3",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "title": "Malware deep dive",
+    "order": 3,
+    "estMinutes": 6,
+    "objectives": ["Classify malware types"],
+    "sections": [
+      {
+        "body": "Malware names describe behavior. Sorting them by what they do makes detection and response clearer."
+      },
+      {
+        "heading": "The families",
+        "body": "Behavior is the key.",
+        "bullets": [
+          "Virus: attaches to a host file, needs user execution.",
+          "Worm: self-propagates across networks.",
+          "Trojan: disguised as legitimate software.",
+          "Rootkit: hides to keep privileged access; logic bomb: fires on a trigger."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-threats-l4",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "title": "Web application attacks",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Recognize web application attacks", "Mitigate injection vulnerabilities"],
+    "sections": [
+      {
+        "body": "Web apps take untrusted input, which is exactly where attackers push. A few patterns dominate."
+      },
+      {
+        "heading": "The big three",
+        "body": "Attack and defense.",
+        "bullets": [
+          "SQL injection → parameterized queries and input validation.",
+          "Cross-site scripting (XSS) → output encoding and a content security policy.",
+          "CSRF → anti-CSRF tokens and same-site cookies."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-threats-l5",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "title": "Network and on-path attacks",
+    "order": 5,
+    "estMinutes": 5,
+    "objectives": ["Recognize on-path attacks", "Recognize denial-of-service attacks"],
+    "sections": [
+      {
+        "body": "Some attacks target the network itself — intercepting, redirecting, or overwhelming traffic."
+      },
+      {
+        "heading": "What to watch for",
+        "body": "Interception and disruption.",
+        "bullets": [
+          "On-path (MITM): intercept/alter traffic → defend with TLS and cert validation.",
+          "DDoS: flood from many sources → rate limiting, scrubbing, CDNs.",
+          "Spoofing and replay → authentication, nonces, timestamps."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-threats-l6",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "title": "Password and authentication attacks",
+    "order": 6,
+    "estMinutes": 5,
+    "objectives": ["Recognize password attacks", "Recognize authentication attacks"],
+    "sections": [
+      {
+        "body": "Credentials are a favorite target. Knowing the techniques explains why MFA and good password handling matter so much."
+      },
+      {
+        "heading": "Techniques and defenses",
+        "body": "Guessing and reuse.",
+        "bullets": [
+          "Brute force: many passwords against one account.",
+          "Password spraying: one common password across many accounts (evades lockout).",
+          "Credential stuffing: reuse breached pairs across sites.",
+          "Defenses: MFA, salted hashing, lockout, breached-password checks."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-threats-l7",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "title": "Vulnerabilities and misconfigurations",
+    "order": 7,
+    "estMinutes": 5,
+    "objectives": ["Recognize application vulnerabilities", "Recognize misconfiguration risks"],
+    "sections": [
+      {
+        "body": "Not every weakness is an exotic exploit. Many are mundane: a default password, an open share, an unpatched service."
+      },
+      {
+        "heading": "Common weaknesses",
+        "body": "Often the easiest way in.",
+        "bullets": [
+          "Misconfigurations: defaults, excessive permissions, unused services.",
+          "Buffer overflow: writing past memory bounds to run code.",
+          "Mitigate with hardening, baselines, patching, and least privilege."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-threats-l8",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-threats",
+    "title": "Supply-chain and zero-day threats",
+    "order": 8,
+    "estMinutes": 5,
+    "objectives": ["Recognize supply-chain attacks", "Define zero-day vulnerabilities"],
+    "sections": [
+      {
+        "body": "Some threats bypass your front door by exploiting trust or timing — a trusted vendor, or a flaw nobody has patched yet."
+      },
+      {
+        "heading": "Trust and timing",
+        "body": "Hard to prevent, important to limit.",
+        "bullets": [
+          "Supply-chain: malware in a trusted update reaches all customers → vendor vetting, update integrity checks.",
+          "Zero-day: exploited before a patch exists → layered controls, monitoring, fast response."
+        ]
       }
     ]
   },
@@ -101,20 +341,165 @@
     "objectives": ["Protect data in transit", "Select data-protection controls", "Apply data classification"],
     "sections": [
       {
-        "body": "Data is not protected by a single switch. It lives in three states, and each one needs its own controls. Designing for all three is what keeps information safe end to end."
+        "body": "Data is not protected by a single switch. It lives in three states, and each needs its own controls."
       },
       {
         "heading": "The three states",
-        "body": "Match the control to the state.",
+        "body": "Match control to state.",
         "bullets": [
-          "At rest (storage): full-disk or file/database encryption protects lost or stolen media.",
-          "In transit (network): TLS or a VPN tunnel protects data crossing untrusted links.",
-          "In use (memory): access controls and trusted execution limit exposure while data is processed."
+          "At rest: full-disk or file/database encryption.",
+          "In transit: TLS or a VPN tunnel.",
+          "In use: access controls and trusted execution."
         ]
       },
       {
-        "heading": "Classify first, then protect",
-        "body": "You cannot protect what you have not labeled. Data classification — Public, Internal, Confidential, and so on — tells you how strongly each item must be protected. Techniques like tokenization (swapping data for unrelated tokens) and masking further limit exposure of sensitive fields where full encryption is not practical."
+        "heading": "Classify first",
+        "body": "Labeling data (Public/Internal/Confidential) tells you how strongly to protect it. Tokenization and masking further limit exposure of sensitive fields."
+      }
+    ]
+  },
+  {
+    "id": "secplus-architecture-l2",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "title": "Network segmentation and zones",
+    "order": 2,
+    "estMinutes": 5,
+    "objectives": ["Apply network segmentation concepts", "Apply segmentation strategies"],
+    "sections": [
+      {
+        "body": "Flat networks let a single breach spread everywhere. Segmentation divides the network so a compromise stays contained."
+      },
+      {
+        "heading": "Ways to divide",
+        "body": "Coarse to fine.",
+        "bullets": [
+          "Screened subnet (DMZ): isolate internet-facing servers.",
+          "VLANs: separate broadcast domains and trust levels.",
+          "Microsegmentation: per-workload isolation.",
+          "Air gap: full isolation for the most critical systems."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-architecture-l3",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "title": "Firewalls, proxies, and WAFs",
+    "order": 3,
+    "estMinutes": 5,
+    "objectives": ["Compare security appliances", "Select application-layer defenses"],
+    "sections": [
+      {
+        "body": "Boundary devices decide what crosses, but they operate at different layers. Picking the right one depends on what you are protecting."
+      },
+      {
+        "heading": "The lineup",
+        "body": "From ports to payloads.",
+        "bullets": [
+          "Stateful firewall: tracks connections; NGFW/UTM bundle IPS, AV, filtering.",
+          "Proxy/reverse proxy: mediates and hides servers, centralizes TLS.",
+          "WAF: understands HTTP and blocks injection/XSS at the app layer."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-architecture-l4",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "title": "Cloud models and shared responsibility",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Compare cloud service models", "Apply the shared responsibility model"],
+    "sections": [
+      {
+        "body": "Moving to the cloud changes who secures what. Misunderstanding that split is a common source of exposure."
+      },
+      {
+        "heading": "Models and ownership",
+        "body": "Know your part.",
+        "bullets": [
+          "IaaS: provider secures infrastructure; you secure OS, apps, data.",
+          "PaaS: provider secures the platform; you secure your code and data.",
+          "SaaS: provider secures the app; you secure access and data use."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-architecture-l5",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "title": "Resilience, redundancy, and backups",
+    "order": 5,
+    "estMinutes": 6,
+    "objectives": ["Explain resilience and redundancy", "Compare backup types", "Plan backup recovery"],
+    "sections": [
+      {
+        "body": "Availability is engineered. Redundancy removes single points of failure, and backups let you recover when prevention fails."
+      },
+      {
+        "heading": "Backups that work",
+        "body": "Types and the rule.",
+        "bullets": [
+          "Full: everything; differential: changes since last full; incremental: changes since last backup.",
+          "Recovery: full + latest differential, or full + all incrementals.",
+          "Follow 3-2-1 (three copies, two media, one off-site) and test restores."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-architecture-l6",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "title": "Choosing secure protocols",
+    "order": 6,
+    "estMinutes": 4,
+    "objectives": ["Select secure protocols"],
+    "sections": [
+      {
+        "body": "Many legacy protocols send data in the clear. Swapping in the secure equivalent is one of the cheapest, highest-value hardening steps."
+      },
+      {
+        "heading": "Prefer the secure version",
+        "body": "Encrypt by default.",
+        "bullets": [
+          "SSH instead of Telnet for remote admin.",
+          "HTTPS/TLS instead of HTTP.",
+          "SFTP/FTPS instead of plain FTP; SNMPv3 instead of v1/v2c."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-architecture-l7",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-architecture",
+    "title": "Cryptographic systems and key management",
+    "order": 7,
+    "estMinutes": 5,
+    "objectives": ["Explain key protection", "Explain key strength"],
+    "sections": [
+      {
+        "body": "Strong algorithms fail if keys are weak or mishandled. Key management is where cryptography succeeds or quietly breaks."
+      },
+      {
+        "heading": "Protecting keys",
+        "body": "Strength and storage.",
+        "bullets": [
+          "Longer keys resist brute force (for a given algorithm).",
+          "An HSM generates and stores keys in tamper-resistant hardware.",
+          "Rotate keys, restrict access, and consider key escrow for recovery."
+        ]
       }
     ]
   },
@@ -129,23 +514,211 @@
     "objectives": ["Order the incident-response phases"],
     "sections": [
       {
-        "body": "When something goes wrong, a calm, repeatable process beats improvisation. Incident response gives teams a shared sequence so nothing critical is skipped under pressure — and so the organization actually learns from each event."
+        "body": "When something goes wrong, a calm, repeatable process beats improvisation and ensures the organization learns from each event."
       },
       {
-        "heading": "The phases in order",
-        "body": "A widely used model runs in six phases.",
+        "heading": "The phases",
+        "body": "Six steps in order.",
         "bullets": [
-          "Preparation: tools, plans, and training before anything happens.",
-          "Identification: detect and confirm that an incident is real.",
-          "Containment: limit the spread and damage.",
-          "Eradication: remove the cause (malware, compromised accounts).",
-          "Recovery: restore systems and verify they are clean.",
-          "Lessons learned: document what happened and improve."
+          "Preparation, Identification, Containment.",
+          "Eradication, Recovery, Lessons learned.",
+          "Contain before eradicating; never skip the review."
         ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l2",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Identity and access management",
+    "order": 2,
+    "estMinutes": 6,
+    "objectives": ["Explain single sign-on", "Explain federation", "Apply multifactor authentication"],
+    "sections": [
+      {
+        "body": "Identity is the new perimeter. IAM decides who gets in and what they can do, so it carries a lot of security weight."
       },
       {
-        "heading": "Where teams slip",
-        "body": "Two phases get shortchanged. Containment is sometimes rushed straight to eradication, which can tip off an attacker or destroy evidence. And lessons learned is often skipped once the fire is out — yet that is the step that prevents the next incident. Treat documentation as part of the job, not an afterthought."
+        "heading": "Core concepts",
+        "body": "Convenience with strong proof.",
+        "bullets": [
+          "SSO: one login for many apps — protect it heavily.",
+          "Federation (SAML/OIDC): trust identities across organizations.",
+          "MFA: combine factors so a stolen password isn't enough."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l3",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Access control models",
+    "order": 3,
+    "estMinutes": 5,
+    "objectives": ["Compare access control models", "Apply least privilege"],
+    "sections": [
+      {
+        "body": "Once a user is authenticated, a model decides what they may reach. The right model depends on how strict and scalable access must be."
+      },
+      {
+        "heading": "The models",
+        "body": "Who decides access.",
+        "bullets": [
+          "RBAC: by job role (scales well).",
+          "MAC: system enforces labels/clearances (high security).",
+          "DAC: resource owner decides; ABAC: by attributes/context.",
+          "Apply least privilege under any model."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l4",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Vulnerability management",
+    "order": 4,
+    "estMinutes": 6,
+    "objectives": ["Apply the vulnerability-management lifecycle", "Use CVSS for prioritization"],
+    "sections": [
+      {
+        "body": "Finding weaknesses is only useful if you act on them in priority order. Vulnerability management is a continuous cycle, not a one-time scan."
+      },
+      {
+        "heading": "The lifecycle",
+        "body": "Scan, prioritize, fix, verify.",
+        "bullets": [
+          "Discover and scan (credentialed scans go deeper).",
+          "Prioritize by severity (CVSS 0-10); CVE identifies the specific flaw.",
+          "Remediate, then verify with a rescan, and report to closure.",
+          "Distinguish false positives from real findings."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l5",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Logging, monitoring, and SIEM",
+    "order": 5,
+    "estMinutes": 5,
+    "objectives": ["Explain the role of a SIEM", "Select relevant log sources", "Protect log integrity"],
+    "sections": [
+      {
+        "body": "Detection depends on evidence. Centralized logging plus correlation turns scattered events into a story you can act on."
+      },
+      {
+        "heading": "Make logs useful",
+        "body": "Collect, correlate, protect.",
+        "bullets": [
+          "A SIEM aggregates and correlates logs to detect and investigate.",
+          "Security/audit logs reveal logon activity; pick sources to fit the question.",
+          "Central, tamper-resistant logging preserves evidence if an endpoint is wiped."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l6",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Endpoint and email security",
+    "order": 6,
+    "estMinutes": 5,
+    "objectives": ["Explain endpoint detection and response", "Apply email security controls"],
+    "sections": [
+      {
+        "body": "Most attacks land on an endpoint or arrive by email. Controls there stop or contain a large share of incidents."
+      },
+      {
+        "heading": "Where attacks land",
+        "body": "Watch endpoints and inboxes.",
+        "bullets": [
+          "EDR monitors endpoint behavior and enables isolation/response.",
+          "Secure email gateways scan attachments and links before delivery.",
+          "Sandboxing detonates suspicious files safely.",
+          "DLP stops sensitive data from leaving."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l7",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Hardening and secure baselines",
+    "order": 7,
+    "estMinutes": 5,
+    "objectives": ["Apply secure baselines", "Manage access lifecycle"],
+    "sections": [
+      {
+        "body": "A consistent, hardened starting point prevents a thousand small mistakes. Baselines make 'secure' the default, not an afterthought."
+      },
+      {
+        "heading": "Reduce the attack surface",
+        "body": "Standardize and review.",
+        "bullets": [
+          "Apply a hardened baseline/template to every new system.",
+          "Remove defaults, disable unused services, patch promptly.",
+          "Recertify access periodically to fight privilege creep."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l8",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Digital forensics basics",
+    "order": 8,
+    "estMinutes": 5,
+    "objectives": ["Maintain chain of custody", "Apply the order of volatility"],
+    "sections": [
+      {
+        "body": "When evidence may be needed later, how you handle it matters as much as what you find. Forensics protects both the data and its admissibility."
+      },
+      {
+        "heading": "Handle evidence right",
+        "body": "Order and custody.",
+        "bullets": [
+          "Order of volatility: capture RAM and live data before disk and media.",
+          "Chain of custody documents who handled evidence and when.",
+          "A legal hold suspends routine deletion of relevant data."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l9",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Automation and threat hunting",
+    "order": 9,
+    "estMinutes": 4,
+    "objectives": ["Explain SOAR", "Explain threat hunting"],
+    "sections": [
+      {
+        "body": "Defenders are outnumbered, so they lean on automation and proactive searching to keep up."
+      },
+      {
+        "heading": "Work smarter",
+        "body": "Automate and hunt.",
+        "bullets": [
+          "SOAR automates playbooks across tools to speed response.",
+          "Threat hunting proactively looks for compromise that alerts missed.",
+          "Both complement, not replace, preventive controls."
+        ]
       }
     ]
   },
@@ -160,21 +733,160 @@
     "objectives": ["Apply risk-management strategies", "Calculate quantitative risk (SLE, ARO, ALE)", "Use a risk register"],
     "sections": [
       {
-        "body": "Security cannot eliminate every risk, so governance is about making deliberate, documented choices. A risk-management program identifies what could go wrong, decides how to handle it, and tracks those decisions over time."
+        "body": "Security cannot eliminate every risk, so governance is about deliberate, documented choices — identify what could go wrong and decide how to handle it."
       },
       {
-        "heading": "Four ways to handle a risk",
-        "body": "Every identified risk gets a treatment decision.",
+        "heading": "Handle and quantify",
+        "body": "Four options, some math.",
         "bullets": [
-          "Mitigate: reduce likelihood or impact with controls.",
-          "Transfer: shift the financial impact, e.g., insurance.",
-          "Avoid: stop doing the risky activity.",
-          "Accept: formally tolerate a low, documented risk."
+          "Mitigate, transfer (insurance), avoid, or accept.",
+          "ALE = SLE x ARO (expected yearly loss).",
+          "Track everything in a risk register with owners and treatments."
         ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-governance-l2",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "title": "Risk assessment methods",
+    "order": 2,
+    "estMinutes": 5,
+    "objectives": ["Compare risk-assessment methods", "Distinguish inherent and residual risk", "Explain risk appetite"],
+    "sections": [
+      {
+        "body": "How you measure risk shapes the decisions you make. Two approaches and a few key terms cover most discussions."
       },
       {
-        "heading": "Putting numbers on risk",
-        "body": "Quantitative analysis helps justify spending. The single loss expectancy (SLE) is the cost of one event; the annualized rate of occurrence (ARO) is how often it happens per year; and the annualized loss expectancy is ALE = SLE x ARO. If a control costs less than the ALE it removes, it is usually worth it. All of these decisions belong in a risk register — a living list of risks with owners, ratings, and treatments — so the program stays accountable."
+        "heading": "Measure and frame",
+        "body": "Ratings, dollars, and limits.",
+        "bullets": [
+          "Qualitative: High/Medium/Low. Quantitative: monetary (SLE/ALE).",
+          "Inherent risk (before controls) vs residual risk (after).",
+          "Risk appetite sets how much risk leadership will accept."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-governance-l3",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "title": "Policies, standards, and procedures",
+    "order": 3,
+    "estMinutes": 4,
+    "objectives": ["Identify governance documents", "Distinguish governance document types"],
+    "sections": [
+      {
+        "body": "Governance documents form a hierarchy from intent down to step-by-step action. Knowing which is which avoids a lot of confusion."
+      },
+      {
+        "heading": "The hierarchy",
+        "body": "Intent to action.",
+        "bullets": [
+          "Policy: required intent and rules (e.g., acceptable use).",
+          "Standard: specific mandatory requirements.",
+          "Procedure: step-by-step how-to; guideline: recommended best practice."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-governance-l4",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "title": "Third-party and supply-chain risk",
+    "order": 4,
+    "estMinutes": 5,
+    "objectives": ["Manage third-party risk", "Compare vendor agreement types", "Use third-party attestations"],
+    "sections": [
+      {
+        "body": "Your security is only as strong as the vendors you trust. Managing that risk is now a core governance task."
+      },
+      {
+        "heading": "Vet and formalize",
+        "body": "Assess, contract, verify.",
+        "bullets": [
+          "Assess a vendor's controls before integrating.",
+          "Use the right agreement: SLA (service levels), NDA (confidentiality), MOU, BPA.",
+          "Rely on attestations like SOC 2 Type II for independent assurance."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-governance-l5",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "title": "Compliance and regulations",
+    "order": 5,
+    "estMinutes": 5,
+    "objectives": ["Identify regulatory frameworks", "Identify compliance standards"],
+    "sections": [
+      {
+        "body": "Many controls are not optional — laws and standards mandate them. Knowing which framework applies guides what you must do."
+      },
+      {
+        "heading": "Know the landscape",
+        "body": "Match data to rules.",
+        "bullets": [
+          "GDPR: EU personal data; HIPAA: US health data.",
+          "PCI DSS: payment card data; SOX: financial reporting.",
+          "Audits provide independent assurance that controls meet a standard."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-governance-l6",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "title": "Data governance and privacy",
+    "order": 6,
+    "estMinutes": 5,
+    "objectives": ["Distinguish data privacy roles", "Classify sensitive data", "Apply data governance policies"],
+    "sections": [
+      {
+        "body": "Protecting data starts with knowing what you have, who is responsible, and how long to keep it."
+      },
+      {
+        "heading": "Roles and rules",
+        "body": "Classify, assign, retain.",
+        "bullets": [
+          "PII/PHI require strong protection; public data does not.",
+          "Controller decides why/how; processor acts on instructions; data subject is the individual.",
+          "Retention policy and data sovereignty dictate how long and where data lives."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "secplus-governance-l7",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "title": "Personnel security and awareness",
+    "order": 7,
+    "estMinutes": 5,
+    "objectives": ["Explain security-awareness programs", "Apply the personnel lifecycle", "Apply administrative controls"],
+    "sections": [
+      {
+        "body": "People are both the biggest risk and a strong control. Governance manages risk across the whole employment lifecycle."
+      },
+      {
+        "heading": "From hire to exit",
+        "body": "Build the human firewall.",
+        "bullets": [
+          "Onboarding (background checks, NDAs) and prompt offboarding (revoke access).",
+          "Administrative controls: separation of duties, job rotation, mandatory vacation.",
+          "Ongoing awareness training and phishing simulations reduce human risk."
+        ]
       }
     ]
   }
