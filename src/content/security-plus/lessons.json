@@ -525,6 +525,7 @@
   },
   {
     "id": "secplus-operations-l1",
+    "objectiveId": "secplus-4.8",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -549,6 +550,7 @@
   },
   {
     "id": "secplus-operations-l2",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -573,6 +575,7 @@
   },
   {
     "id": "secplus-operations-l3",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -598,6 +601,7 @@
   },
   {
     "id": "secplus-operations-l4",
+    "objectiveId": "secplus-4.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -623,6 +627,7 @@
   },
   {
     "id": "secplus-operations-l5",
+    "objectiveId": "secplus-4.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -647,6 +652,7 @@
   },
   {
     "id": "secplus-operations-l6",
+    "objectiveId": "secplus-4.5",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -672,6 +678,7 @@
   },
   {
     "id": "secplus-operations-l7",
+    "objectiveId": "secplus-4.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -696,6 +703,7 @@
   },
   {
     "id": "secplus-operations-l8",
+    "objectiveId": "secplus-4.8",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -720,6 +728,7 @@
   },
   {
     "id": "secplus-operations-l9",
+    "objectiveId": "secplus-4.7",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -969,6 +978,66 @@
       {
         "heading": "Hardening targets",
         "body": "Apply hardening across the estate: enforce secure baselines, disable unused services and ports, change default credentials, and decommission end-of-life systems. Each removes an avenue an attacker would otherwise use."
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l10",
+    "objectiveId": "secplus-4.2",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Hardware, software, and data asset management",
+    "order": 10,
+    "estMinutes": 5,
+    "objectives": ["Explain the security implications of proper asset management"],
+    "sections": [
+      {
+        "body": "You cannot protect what you do not know you have. Asset management tracks hardware, software, and data through their whole life so nothing slips through unmonitored or is disposed of unsafely."
+      },
+      {
+        "heading": "The asset lifecycle",
+        "body": "Security touches every stage.",
+        "bullets": [
+          "Acquisition/procurement: vet and record assets as they enter.",
+          "Inventory and assignment: know what exists, where, and who owns it.",
+          "Monitoring and maintenance: patch and track configuration over the asset's life.",
+          "Decommissioning and disposal: sanitize media and retire assets securely."
+        ]
+      },
+      {
+        "heading": "Why it matters",
+        "body": "An accurate inventory drives patching, incident response, and license compliance — and prevents 'unknown' devices from becoming blind spots. Secure disposal (wiping, degaussing, or destruction) keeps retired drives from leaking data, and tracking ownership ensures every asset has someone accountable for it."
+      }
+    ]
+  },
+  {
+    "id": "secplus-operations-l11",
+    "objectiveId": "secplus-4.9",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "title": "Using data sources to support an investigation",
+    "order": 11,
+    "estMinutes": 5,
+    "objectives": ["Use data sources to support an investigation"],
+    "sections": [
+      {
+        "body": "An investigation is only as good as its evidence. Knowing which data source answers which question turns a vague alert into a clear timeline of what happened."
+      },
+      {
+        "heading": "Common data sources",
+        "body": "Match the source to the question.",
+        "bullets": [
+          "Log data (security, application, system, firewall): who did what, when.",
+          "Packet captures: exactly what crossed the wire.",
+          "SIEM dashboards and automated reports: correlated, at-a-glance signals.",
+          "Vulnerability scans and metadata: context on weaknesses and files."
+        ]
+      },
+      {
+        "heading": "Putting it together",
+        "body": "Correlate sources to build a timeline: a SIEM alert points you to firewall and endpoint logs, a packet capture confirms exfiltration, and metadata or scan output explains how the attacker got in. Consistent timestamps (via synchronized clocks) are what let these sources line up."
       }
     ]
   }

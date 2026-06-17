@@ -420,6 +420,7 @@
   },
   {
     "id": "secplus-q031",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -437,6 +438,7 @@
   },
   {
     "id": "secplus-q032",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -454,6 +456,7 @@
   },
   {
     "id": "secplus-q033",
+    "objectiveId": "secplus-4.8",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -466,6 +469,7 @@
   },
   {
     "id": "secplus-q034",
+    "objectiveId": "secplus-4.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -483,6 +487,7 @@
   },
   {
     "id": "secplus-q035",
+    "objectiveId": "secplus-4.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -495,6 +500,7 @@
   },
   {
     "id": "secplus-q036",
+    "objectiveId": "secplus-4.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -512,6 +518,7 @@
   },
   {
     "id": "secplus-q037",
+    "objectiveId": "secplus-4.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -524,6 +531,7 @@
   },
   {
     "id": "secplus-q038",
+    "objectiveId": "secplus-4.5",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -536,6 +544,7 @@
   },
   {
     "id": "secplus-q039",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -548,6 +557,7 @@
   },
   {
     "id": "secplus-q040",
+    "objectiveId": "secplus-4.8",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -560,6 +570,7 @@
   },
   {
     "id": "secplus-q041",
+    "objectiveId": "secplus-4.5",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -572,6 +583,7 @@
   },
   {
     "id": "secplus-q042",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1285,6 +1297,7 @@
   },
   {
     "id": "secplus-q094",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1297,6 +1310,7 @@
   },
   {
     "id": "secplus-q095",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1309,6 +1323,7 @@
   },
   {
     "id": "secplus-q096",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1321,6 +1336,7 @@
   },
   {
     "id": "secplus-q097",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1333,6 +1349,7 @@
   },
   {
     "id": "secplus-q098",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1345,6 +1362,7 @@
   },
   {
     "id": "secplus-q099",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1357,6 +1375,7 @@
   },
   {
     "id": "secplus-q100",
+    "objectiveId": "secplus-4.5",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1369,6 +1388,7 @@
   },
   {
     "id": "secplus-q101",
+    "objectiveId": "secplus-4.5",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1381,6 +1401,7 @@
   },
   {
     "id": "secplus-q102",
+    "objectiveId": "secplus-4.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1398,6 +1419,7 @@
   },
   {
     "id": "secplus-q103",
+    "objectiveId": "secplus-4.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1410,6 +1432,7 @@
   },
   {
     "id": "secplus-q104",
+    "objectiveId": "secplus-4.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1427,6 +1450,7 @@
   },
   {
     "id": "secplus-q105",
+    "objectiveId": "secplus-4.8",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1444,6 +1468,7 @@
   },
   {
     "id": "secplus-q106",
+    "objectiveId": "secplus-4.8",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1456,6 +1481,7 @@
   },
   {
     "id": "secplus-q107",
+    "objectiveId": "secplus-4.7",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1468,6 +1494,7 @@
   },
   {
     "id": "secplus-q108",
+    "objectiveId": "secplus-4.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1480,6 +1507,7 @@
   },
   {
     "id": "secplus-q109",
+    "objectiveId": "secplus-4.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1492,6 +1520,7 @@
   },
   {
     "id": "secplus-q110",
+    "objectiveId": "secplus-4.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1504,6 +1533,7 @@
   },
   {
     "id": "secplus-q111",
+    "objectiveId": "secplus-4.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1516,6 +1546,7 @@
   },
   {
     "id": "secplus-q112",
+    "objectiveId": "secplus-4.8",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1545,6 +1576,7 @@
   },
   {
     "id": "secplus-q114",
+    "objectiveId": "secplus-4.8",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1557,6 +1589,7 @@
   },
   {
     "id": "secplus-q115",
+    "objectiveId": "secplus-4.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1569,6 +1602,7 @@
   },
   {
     "id": "secplus-q116",
+    "objectiveId": "secplus-4.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1586,6 +1620,7 @@
   },
   {
     "id": "secplus-q117",
+    "objectiveId": "secplus-4.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -1603,6 +1638,7 @@
   },
   {
     "id": "secplus-q118",
+    "objectiveId": "secplus-4.5",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-operations",
@@ -2193,5 +2229,359 @@
     "answer": 0,
     "explanation": "Serverless shifts host and runtime security to the provider, reducing your maintenance burden but also your visibility and control; your code, configuration, and data are still your responsibility.",
     "objective": "Compare architecture model security implications"
+  },
+  {
+    "id": "secplus-q161",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.1",
+    "difficulty": "Intermediate",
+    "prompt": "Which technique applies a consistent, hardened configuration to computing resources to reduce risk?",
+    "options": ["Establishing and enforcing secure baselines", "Granting all users admin rights", "Disabling all logging", "Using default passwords"],
+    "answer": 0,
+    "explanation": "Secure baselines define and enforce a known-good hardened configuration on hosts, reducing misconfiguration and drift.",
+    "objective": "Apply security techniques to computing resources"
+  },
+  {
+    "id": "secplus-q162",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.1",
+    "difficulty": "Intermediate",
+    "prompt": "Encrypting a mobile device's storage and requiring a screen lock are examples of securing which resource type?",
+    "options": ["Mobile/endpoint computing resources", "Network cabling", "A risk register", "An audit report"],
+    "answer": 0,
+    "explanation": "Full-device encryption and screen locks are common techniques applied to mobile and endpoint resources to protect data if a device is lost or stolen.",
+    "objective": "Apply security techniques to computing resources"
+  },
+  {
+    "id": "secplus-q163",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.1",
+    "difficulty": "Advanced",
+    "prompt": "A team enforces device configuration centrally and prevents users from changing protected settings. This best demonstrates what?",
+    "options": ["Configuration enforcement", "Social engineering", "A denial-of-service attack", "Data classification"],
+    "answer": 0,
+    "explanation": "Configuration enforcement keeps systems in their approved secure state and stops users or malware from weakening protected settings.",
+    "objective": "Apply security techniques to computing resources"
+  },
+  {
+    "id": "secplus-q164",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.2",
+    "difficulty": "Foundation",
+    "prompt": "Why is an accurate asset inventory important to security operations?",
+    "options": [
+      "You cannot patch, monitor, or respond for devices you do not know exist",
+      "It speeds up the Wi-Fi",
+      "It replaces the need for encryption",
+      "It eliminates the need for backups"
+    ],
+    "answer": 0,
+    "explanation": "Unknown assets are blind spots that go unpatched and unmonitored. An accurate inventory underpins patching, monitoring, and incident response.",
+    "objective": "Explain asset management security implications"
+  },
+  {
+    "id": "secplus-q165",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.2",
+    "difficulty": "Intermediate",
+    "prompt": "Before disposing of old hard drives, the team wipes or destroys them. Which asset-management stage is this?",
+    "options": ["Decommissioning/disposal (sanitization)", "Acquisition", "Assignment", "Procurement"],
+    "answer": 0,
+    "explanation": "Secure decommissioning sanitizes or destroys media so retired assets cannot leak data. Acquisition and procurement are entry stages.",
+    "objective": "Explain secure disposal"
+  },
+  {
+    "id": "secplus-q166",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.2",
+    "difficulty": "Intermediate",
+    "prompt": "Assigning each asset an owner who is accountable for it primarily supports what?",
+    "options": [
+      "Clear responsibility for maintenance, monitoring, and risk decisions",
+      "Faster encryption",
+      "Automatic threat hunting",
+      "Eliminating the need for policies"
+    ],
+    "answer": 0,
+    "explanation": "Ownership ensures someone is accountable for each asset's upkeep and security, preventing neglected systems.",
+    "objective": "Explain asset ownership"
+  },
+  {
+    "id": "secplus-q167",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.2",
+    "difficulty": "Foundation",
+    "prompt": "Tracking which software is installed and licensed across the organization most directly helps with what?",
+    "options": [
+      "Patching known-vulnerable software and staying license-compliant",
+      "Increasing network latency",
+      "Disabling MFA",
+      "Generating passwords"
+    ],
+    "answer": 0,
+    "explanation": "A software inventory reveals vulnerable or unsupported applications to patch or remove and supports license compliance.",
+    "objective": "Explain software asset management"
+  },
+  {
+    "id": "secplus-q168",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.2",
+    "difficulty": "Advanced",
+    "prompt": "An 'unknown' device appears on the network with no inventory record. Why is this a security concern?",
+    "options": [
+      "Unmanaged assets are unpatched, unmonitored, and may be rogue or compromised",
+      "It always improves performance",
+      "It automatically encrypts traffic",
+      "It is never a risk"
+    ],
+    "answer": 0,
+    "explanation": "Assets outside inventory escape patching and monitoring and could be rogue or attacker-controlled, making them prime risks.",
+    "objective": "Explain asset management security implications"
+  },
+  {
+    "id": "secplus-q169",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.2",
+    "difficulty": "Intermediate",
+    "prompt": "Which is the most secure method to ensure data cannot be recovered from drives being physically discarded?",
+    "options": ["Physical destruction (shred/degauss)", "Moving files to the recycle bin", "Renaming the files", "A quick format only"],
+    "answer": 0,
+    "explanation": "Physical destruction or degaussing reliably prevents recovery. Deleting, renaming, or quick-formatting leaves data recoverable.",
+    "objective": "Explain secure disposal"
+  },
+  {
+    "id": "secplus-q170",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.4",
+    "difficulty": "Intermediate",
+    "prompt": "Which tool aggregates and correlates logs from many sources to generate security alerts?",
+    "options": ["SIEM", "DHCP server", "Patch repository", "Load balancer"],
+    "answer": 0,
+    "explanation": "A SIEM centralizes and correlates log data to surface alerts and support monitoring and investigation.",
+    "objective": "Explain alerting and monitoring tools"
+  },
+  {
+    "id": "secplus-q171",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.4",
+    "difficulty": "Advanced",
+    "prompt": "A monitoring system generates many alerts for benign activity, causing analysts to miss real ones. What is this problem called, and a fix?",
+    "options": [
+      "Alert fatigue from false positives; tune rules and thresholds",
+      "Zero-day exposure; buy insurance",
+      "Data sovereignty; move data abroad",
+      "Tailgating; add a mantrap"
+    ],
+    "answer": 0,
+    "explanation": "Excessive false positives cause alert fatigue. Tuning detection rules and thresholds (and prioritization) reduces noise so real alerts stand out.",
+    "objective": "Explain alerting and monitoring concepts"
+  },
+  {
+    "id": "secplus-q172",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.5",
+    "difficulty": "Intermediate",
+    "prompt": "To block known-malicious websites for all users, which capability should the security team deploy?",
+    "options": ["A web/content filter", "A DHCP relay", "A patch panel", "A risk register"],
+    "answer": 0,
+    "explanation": "A web (content) filter enforces policy on web access, blocking malicious or disallowed sites. The others are unrelated services.",
+    "objective": "Modify enterprise capabilities to enhance security"
+  },
+  {
+    "id": "secplus-q173",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.7",
+    "difficulty": "Foundation",
+    "prompt": "What is the primary benefit of automating repetitive security tasks with orchestration (SOAR)?",
+    "options": [
+      "Faster, consistent response and less manual error",
+      "It removes the need for any security staff",
+      "It guarantees zero incidents",
+      "It encrypts all data automatically"
+    ],
+    "answer": 0,
+    "explanation": "Automation and orchestration speed up response and apply steps consistently, reducing human error and freeing analysts for higher-value work.",
+    "objective": "Explain automation and orchestration benefits"
+  },
+  {
+    "id": "secplus-q174",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.7",
+    "difficulty": "Intermediate",
+    "prompt": "Automatically creating and disabling user accounts as employees join and leave is an example of which automation use case?",
+    "options": ["User provisioning/deprovisioning", "Packet capture", "Disk defragmentation", "Cable testing"],
+    "answer": 0,
+    "explanation": "Automated provisioning and deprovisioning enforces timely, consistent access changes across the employee lifecycle, a common orchestration use case.",
+    "objective": "Identify automation use cases"
+  },
+  {
+    "id": "secplus-q175",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.7",
+    "difficulty": "Advanced",
+    "prompt": "Which is a realistic risk of over-relying on automation in security operations?",
+    "options": [
+      "A flawed automated action can propagate a mistake quickly and widely",
+      "Automation always slows response",
+      "Automation cannot be audited",
+      "Automation eliminates all logging"
+    ],
+    "answer": 0,
+    "explanation": "Automation executes fast and at scale, so a bad rule or script can cause widespread impact. Guardrails, testing, and review mitigate this.",
+    "objective": "Explain automation considerations"
+  },
+  {
+    "id": "secplus-q176",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.7",
+    "difficulty": "Intermediate",
+    "prompt": "A SOAR playbook automatically enriches a phishing alert with reputation data and opens a ticket. This primarily improves what?",
+    "options": ["Response efficiency and consistency", "Wireless range", "Cable length", "Password length"],
+    "answer": 0,
+    "explanation": "Playbooks orchestrate routine steps (enrichment, ticketing, containment) so responses are faster and uniform.",
+    "objective": "Explain orchestration use cases"
+  },
+  {
+    "id": "secplus-q177",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.7",
+    "difficulty": "Foundation",
+    "prompt": "Scripting routine administrative tasks supports secure operations mainly by doing what?",
+    "options": [
+      "Reducing manual, error-prone repetition and ensuring consistency",
+      "Guaranteeing no vulnerabilities exist",
+      "Replacing the firewall",
+      "Removing the need for backups"
+    ],
+    "answer": 0,
+    "explanation": "Scripting makes repetitive tasks consistent and less error-prone, a foundation of automation in secure operations.",
+    "objective": "Explain the role of scripting"
+  },
+  {
+    "id": "secplus-q178",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.9",
+    "difficulty": "Intermediate",
+    "prompt": "During an investigation, which data source best shows exactly what traffic crossed the network at a point in time?",
+    "options": ["A packet capture", "A risk register", "An asset purchase order", "A password policy"],
+    "answer": 0,
+    "explanation": "Packet captures record actual traffic, letting investigators see precisely what was sent or received. The others are not investigative traffic data.",
+    "objective": "Use data sources to support an investigation"
+  },
+  {
+    "id": "secplus-q179",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.9",
+    "difficulty": "Foundation",
+    "prompt": "Which log would you check first to investigate repeated failed logins on a server?",
+    "options": ["Security/authentication logs", "Printer spooler logs", "DHCP lease logs", "Cable test results"],
+    "answer": 0,
+    "explanation": "Authentication events appear in security logs, making them the right source for investigating logon failures.",
+    "objective": "Select data sources for investigation"
+  },
+  {
+    "id": "secplus-q180",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.9",
+    "difficulty": "Intermediate",
+    "prompt": "Why are synchronized clocks (NTP) important when correlating multiple log sources in an investigation?",
+    "options": [
+      "So events from different systems line up into an accurate timeline",
+      "To increase bandwidth",
+      "To encrypt the logs",
+      "To reduce disk usage"
+    ],
+    "answer": 0,
+    "explanation": "Consistent timestamps let investigators align events across systems; clock drift makes a reliable timeline impossible.",
+    "objective": "Correlate investigation data sources"
+  },
+  {
+    "id": "secplus-q181",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.9",
+    "difficulty": "Advanced",
+    "prompt": "A dashboard summarizing correlated alerts and trends is most useful in an investigation for what?",
+    "options": [
+      "Quickly spotting patterns and prioritizing where to dig deeper",
+      "Encrypting endpoints",
+      "Physically destroying drives",
+      "Assigning IP addresses"
+    ],
+    "answer": 0,
+    "explanation": "Dashboards and automated reports surface correlated signals at a glance, guiding analysts to the most relevant raw data.",
+    "objective": "Use dashboards and reports in investigations"
+  },
+  {
+    "id": "secplus-q182",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.9",
+    "difficulty": "Intermediate",
+    "prompt": "Which data source helps confirm whether a compromised host was missing a known patch?",
+    "options": ["Vulnerability scan output", "The acceptable use policy", "A network cable map", "A visitor log"],
+    "answer": 0,
+    "explanation": "Vulnerability scan results show missing patches and weaknesses, helping explain how a host may have been compromised.",
+    "objective": "Use data sources to support an investigation"
+  },
+  {
+    "id": "secplus-q183",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.9",
+    "difficulty": "Foundation",
+    "prompt": "Firewall logs are most useful in an investigation for showing what?",
+    "options": [
+      "Allowed and blocked connections to and from the network",
+      "The CPU temperature",
+      "Employee vacation schedules",
+      "Software license counts"
+    ],
+    "answer": 0,
+    "explanation": "Firewall logs record connection attempts (allowed and denied), helping trace inbound/outbound activity during an investigation.",
+    "objective": "Select data sources for investigation"
   }
 ]
