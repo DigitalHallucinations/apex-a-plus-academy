@@ -753,6 +753,7 @@
   },
   {
     "id": "secplus-governance-l1",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -777,6 +778,7 @@
   },
   {
     "id": "secplus-governance-l2",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -801,6 +803,7 @@
   },
   {
     "id": "secplus-governance-l3",
+    "objectiveId": "secplus-5.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -825,6 +828,7 @@
   },
   {
     "id": "secplus-governance-l4",
+    "objectiveId": "secplus-5.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -849,6 +853,7 @@
   },
   {
     "id": "secplus-governance-l5",
+    "objectiveId": "secplus-5.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -873,6 +878,7 @@
   },
   {
     "id": "secplus-governance-l6",
+    "objectiveId": "secplus-5.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -897,6 +903,7 @@
   },
   {
     "id": "secplus-governance-l7",
+    "objectiveId": "secplus-5.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1038,6 +1045,35 @@
       {
         "heading": "Putting it together",
         "body": "Correlate sources to build a timeline: a SIEM alert points you to firewall and endpoint logs, a packet capture confirms exfiltration, and metadata or scan output explains how the attacker got in. Consistent timestamps (via synchronized clocks) are what let these sources line up."
+      }
+    ]
+  },
+  {
+    "id": "secplus-governance-l8",
+    "objectiveId": "secplus-5.5",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "title": "Audits and assessments",
+    "order": 8,
+    "estMinutes": 5,
+    "objectives": ["Explain types and purposes of audits and assessments"],
+    "sections": [
+      {
+        "body": "Trust, but verify. Audits and assessments independently check whether controls actually exist and work — for leadership, regulators, and customers alike."
+      },
+      {
+        "heading": "Internal vs external",
+        "body": "Both have a place.",
+        "bullets": [
+          "Internal audits: self-checks for continuous improvement and readiness.",
+          "External/independent audits: third-party assurance, often for compliance or attestation.",
+          "Attestation (e.g., SOC 2): a formal statement that controls were tested over a period."
+        ]
+      },
+      {
+        "heading": "Assessments and testing",
+        "body": "Beyond paperwork, technical assessments test reality: a vulnerability assessment enumerates weaknesses, while a penetration test attempts to exploit them to prove impact. Red-team/blue-team exercises pit attackers against defenders. Each produces findings that feed back into the risk program and remediation."
       }
     ]
   }

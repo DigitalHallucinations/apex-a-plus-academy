@@ -596,6 +596,7 @@
   },
   {
     "id": "secplus-q043",
+    "objectiveId": "secplus-5.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -608,6 +609,7 @@
   },
   {
     "id": "secplus-q044",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -620,6 +622,7 @@
   },
   {
     "id": "secplus-q045",
+    "objectiveId": "secplus-5.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -632,6 +635,7 @@
   },
   {
     "id": "secplus-q046",
+    "objectiveId": "secplus-5.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -644,6 +648,7 @@
   },
   {
     "id": "secplus-q047",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -656,6 +661,7 @@
   },
   {
     "id": "secplus-q048",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -668,6 +674,7 @@
   },
   {
     "id": "secplus-q049",
+    "objectiveId": "secplus-5.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -680,6 +687,7 @@
   },
   {
     "id": "secplus-q050",
+    "objectiveId": "secplus-5.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -692,6 +700,7 @@
   },
   {
     "id": "secplus-q051",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -704,6 +713,7 @@
   },
   {
     "id": "secplus-q052",
+    "objectiveId": "secplus-5.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -716,6 +726,7 @@
   },
   {
     "id": "secplus-q053",
+    "objectiveId": "secplus-5.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -728,6 +739,7 @@
   },
   {
     "id": "secplus-q054",
+    "objectiveId": "secplus-5.5",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1651,6 +1663,7 @@
   },
   {
     "id": "secplus-q119",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1663,6 +1676,7 @@
   },
   {
     "id": "secplus-q120",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1675,6 +1689,7 @@
   },
   {
     "id": "secplus-q121",
+    "objectiveId": "secplus-5.2",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1687,6 +1702,7 @@
   },
   {
     "id": "secplus-q122",
+    "objectiveId": "secplus-5.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1699,6 +1715,7 @@
   },
   {
     "id": "secplus-q123",
+    "objectiveId": "secplus-5.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1711,6 +1728,7 @@
   },
   {
     "id": "secplus-q124",
+    "objectiveId": "secplus-5.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1723,6 +1741,7 @@
   },
   {
     "id": "secplus-q125",
+    "objectiveId": "secplus-5.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1735,6 +1754,7 @@
   },
   {
     "id": "secplus-q126",
+    "objectiveId": "secplus-5.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1747,6 +1767,7 @@
   },
   {
     "id": "secplus-q127",
+    "objectiveId": "secplus-5.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1759,6 +1780,7 @@
   },
   {
     "id": "secplus-q128",
+    "objectiveId": "secplus-5.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1771,6 +1793,7 @@
   },
   {
     "id": "secplus-q129",
+    "objectiveId": "secplus-5.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1788,6 +1811,7 @@
   },
   {
     "id": "secplus-q130",
+    "objectiveId": "secplus-5.1",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1800,6 +1824,7 @@
   },
   {
     "id": "secplus-q131",
+    "objectiveId": "secplus-5.6",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1812,6 +1837,7 @@
   },
   {
     "id": "secplus-q132",
+    "objectiveId": "secplus-5.4",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -1824,6 +1850,7 @@
   },
   {
     "id": "secplus-q133",
+    "objectiveId": "secplus-5.3",
     "certId": "security-plus",
     "exam": "SY0-701",
     "domain": "secplus-governance",
@@ -2583,5 +2610,165 @@
     "answer": 0,
     "explanation": "Firewall logs record connection attempts (allowed and denied), helping trace inbound/outbound activity during an investigation.",
     "objective": "Select data sources for investigation"
+  },
+  {
+    "id": "secplus-q184",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.1",
+    "difficulty": "Intermediate",
+    "prompt": "Which group provides direction and accountability for a security program at the organizational level?",
+    "options": ["A governance committee/board with defined roles", "The help desk", "Individual end users", "An anonymous forum"],
+    "answer": 0,
+    "explanation": "Effective governance assigns clear roles and oversight (e.g., a steering committee or board) so security has direction and accountability, supported by policies and standards.",
+    "objective": "Summarize security governance elements"
+  },
+  {
+    "id": "secplus-q185",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.3",
+    "difficulty": "Intermediate",
+    "prompt": "Which agreement defines the overall terms and framework governing an ongoing vendor relationship?",
+    "options": ["Master service agreement (MSA)", "A single purchase receipt", "An incident report", "A packet capture"],
+    "answer": 0,
+    "explanation": "An MSA sets the overarching terms for a vendor relationship, with specific work defined in SOWs and service levels in SLAs — all part of third-party risk management.",
+    "objective": "Compare third-party agreement types"
+  },
+  {
+    "id": "secplus-q186",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.5",
+    "difficulty": "Foundation",
+    "prompt": "What is the main difference between an internal and an external audit?",
+    "options": [
+      "Internal audits are self-performed; external audits are conducted by an independent third party",
+      "Internal audits are always larger",
+      "External audits never produce findings",
+      "They are identical"
+    ],
+    "answer": 0,
+    "explanation": "Internal audits are run by the organization for self-improvement; external audits provide independent third-party assurance, often for compliance.",
+    "objective": "Compare audit types"
+  },
+  {
+    "id": "secplus-q187",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.5",
+    "difficulty": "Intermediate",
+    "prompt": "An authorized simulated attack to find and exploit weaknesses is best described as what?",
+    "options": ["A penetration test", "A data retention policy", "A change request", "A backup job"],
+    "answer": 0,
+    "explanation": "A penetration test is an authorized assessment that exploits weaknesses to demonstrate real impact, going beyond a vulnerability scan's enumeration.",
+    "objective": "Explain assessment types"
+  },
+  {
+    "id": "secplus-q188",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.5",
+    "difficulty": "Intermediate",
+    "prompt": "In a penetration-testing engagement, what does the 'rules of engagement' document define?",
+    "options": [
+      "Scope, methods, timing, and limits agreed before testing begins",
+      "The marketing budget",
+      "The Wi-Fi password policy",
+      "The data retention period"
+    ],
+    "answer": 0,
+    "explanation": "Rules of engagement define what testers may do (scope, targets, timing, constraints), keeping the test authorized and safe.",
+    "objective": "Explain assessment governance"
+  },
+  {
+    "id": "secplus-q189",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.5",
+    "difficulty": "Advanced",
+    "prompt": "In red-team/blue-team exercises, what role does the blue team play?",
+    "options": ["The defenders who detect and respond", "The attackers who exploit", "The auditors who sign off", "The end users"],
+    "answer": 0,
+    "explanation": "The blue team defends — detecting and responding to the red team's simulated attacks; a purple team helps both sides share lessons.",
+    "objective": "Explain assessment exercises"
+  },
+  {
+    "id": "secplus-q190",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.5",
+    "difficulty": "Foundation",
+    "prompt": "What is the primary purpose of an attestation such as a SOC 2 report?",
+    "options": [
+      "Independent confirmation that controls were tested and operated effectively",
+      "A list of customer passwords",
+      "A marketing brochure",
+      "A network diagram"
+    ],
+    "answer": 0,
+    "explanation": "An attestation gives customers and regulators independent assurance that an organization's controls were assessed and functioning.",
+    "objective": "Explain audits and attestation"
+  },
+  {
+    "id": "secplus-q191",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.6",
+    "difficulty": "Foundation",
+    "prompt": "What is the main goal of a security awareness program?",
+    "options": [
+      "Help users recognize and properly respond to threats like phishing",
+      "Replace all technical controls",
+      "Increase network bandwidth",
+      "Eliminate the need for backups"
+    ],
+    "answer": 0,
+    "explanation": "Awareness programs change user behavior so people recognize and report threats, addressing risk that technical controls alone cannot.",
+    "objective": "Implement security awareness practices"
+  },
+  {
+    "id": "secplus-q192",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.6",
+    "difficulty": "Intermediate",
+    "prompt": "Running simulated phishing campaigns against employees primarily measures and improves what?",
+    "options": [
+      "User susceptibility and reporting behavior over time",
+      "Firewall throughput",
+      "Disk encryption strength",
+      "Cable quality"
+    ],
+    "answer": 0,
+    "explanation": "Phishing simulations gauge how often users fall for or report lures, and repeated campaigns track improvement from training.",
+    "objective": "Implement security awareness practices"
+  },
+  {
+    "id": "secplus-q193",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "domain": "secplus-governance",
+    "objectiveId": "secplus-5.6",
+    "difficulty": "Intermediate",
+    "prompt": "Teaching staff to recognize and report unusual or anomalous behavior supports security how?",
+    "options": [
+      "Users act as additional sensors, surfacing incidents faster",
+      "It disables logging",
+      "It removes the need for MFA",
+      "It slows incident response"
+    ],
+    "answer": 0,
+    "explanation": "Trained users who report anomalies extend detection beyond tooling, helping incidents get caught and escalated sooner.",
+    "objective": "Implement security awareness practices"
   }
 ]
