@@ -1125,5 +1125,56 @@
       ] },
       { "body": "Faded output usually means low toner/ink; streaks and registration errors often clear after a cleaning or calibration cycle." }
     ]
+  },
+  {
+    "id": "aplus-hw-troubleshooting-l5", "objectiveId": "aplus-c1-5.2",
+    "certId": "a-plus", "exam": "220-1201", "domain": "aplus-hw-troubleshooting",
+    "title": "Troubleshooting drives and RAID",
+    "order": 5, "estMinutes": 5,
+    "objectives": ["Troubleshoot drive and RAID issues"],
+    "sections": [
+      { "body": "Storage faults range from noisy mechanical failure to a drive the OS simply has not been told to use yet." },
+      { "heading": "Common symptoms", "body": "Read the signs.", "bullets": [
+        "Clicking + not detected → mechanical HDD failure; recover and replace.",
+        "Seen in firmware, not in OS → initialize/partition/format in Disk Management.",
+        "Slow access and read errors → check S.M.A.R.T. health.",
+        "RAID degraded → replace the failed disk so the array rebuilds."
+      ] },
+      { "body": "RAID gives uptime, not backups — a failed array or accidental deletion still needs a real backup to recover." }
+    ]
+  },
+  {
+    "id": "aplus-hw-troubleshooting-l6", "objectiveId": "aplus-c1-5.3",
+    "certId": "a-plus", "exam": "220-1201", "domain": "aplus-hw-troubleshooting",
+    "title": "Troubleshooting video and displays",
+    "order": 6, "estMinutes": 5,
+    "objectives": ["Troubleshoot video, projector, and display issues"],
+    "sections": [
+      { "body": "Display problems are often physical or driver-related. Work from the cable inward." },
+      { "heading": "Where to look", "body": "Isolate the layer.", "bullets": [
+        "'No signal' → cable seated, correct input source.",
+        "Stuck low resolution → install the correct GPU driver.",
+        "Dim laptop screen with faint image → backlight/inverter.",
+        "Dim projector + lamp warning → replace the bulb."
+      ] },
+      { "body": "Test with an external monitor to decide whether the fault is the panel or the graphics output." }
+    ]
+  },
+  {
+    "id": "aplus-hw-troubleshooting-l7", "objectiveId": "aplus-c1-5.4",
+    "certId": "a-plus", "exam": "220-1201", "domain": "aplus-hw-troubleshooting",
+    "title": "Troubleshooting mobile devices",
+    "order": 7, "estMinutes": 5,
+    "objectives": ["Troubleshoot common mobile device issues"],
+    "sections": [
+      { "body": "Phones and tablets are sealed and battery-powered, so triage focuses on power, heat, input, and connectivity — and on safety." },
+      { "heading": "Common issues", "body": "Start simple.", "bullets": [
+        "Fast battery drain → check per-app usage; close/uninstall offenders.",
+        "Overheating/random reboots → reduce load; suspect a failing battery.",
+        "Erratic touch → remove screen protector/case, clean, restart.",
+        "Won't charge → clean lint from the port; verify cable/adapter."
+      ] },
+      { "heading": "Safety first", "body": "A swollen battery is a fire hazard — stop using the device and replace the battery with proper handling and disposal." }
+    ]
   }
 ]
