@@ -14,7 +14,12 @@
 > `--strict-coverage` to gate. First objective completed end-to-end as the
 > template: `secplus-1.4` (1 lesson + 7 questions tagged).
 >
-> **Phase 2 (ongoing):** author/tag lessons + >=6 questions per objective across
+> **✅ Completed 2026-06-18.** All 116 sub-objectives across A+ (63), Network+
+> (25), and Security+ (28) meet the deep target (>=1 lesson + >=6 questions),
+> enforced by `validate:content --strict-coverage`. Library totals: 752 questions,
+> 150 lessons. See `audits/AUDIT-2026-06-18-objective-coverage.md`.
+>
+> **Phase 2 (done):** authored/tagged lessons + >=6 questions per objective across
 > all sub-objectives.
 >
 > - **2026-06-17 — objective lists verified** against official CompTIA objectives

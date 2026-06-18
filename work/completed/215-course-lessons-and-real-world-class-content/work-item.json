@@ -2,7 +2,7 @@
   "$schema": "../../../schemas/work-item.schema.json",
   "id": "215",
   "title": "Build course lessons and real-world class content",
-  "status": "active",
+  "status": "completed",
   "owner_scope": "content",
   "affected_scopes": ["content", "curriculum", "app-ui", "accessibility"],
   "depends_on": ["210", "214"],
@@ -40,9 +40,19 @@
       "evidence": [
         "docs/course-lesson-content-model.md"
       ]
+    },
+    {
+      "id": "AC-5",
+      "text": "Deliver verifiable objective-by-objective coverage: an objective registry per exam and, for every published sub-objective across all tracks, at least one lesson and six tagged questions, enforced by validation.",
+      "state": "satisfied",
+      "evidence": [
+        "decisions/0006-objective-mapped-curriculum.md",
+        "audits/AUDIT-2026-06-18-objective-coverage.md",
+        "evidence/runs/20260618-012803-215-complete.json"
+      ]
     }
   ],
   "created": "2026-06-16",
-  "updated": "2026-06-16",
+  "updated": "2026-06-18",
   "source": "user-product-direction"
 }

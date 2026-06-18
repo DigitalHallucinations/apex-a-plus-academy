@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260618-012803-215-complete",
+  "timestamp": "2026-06-18T01:28:03Z",
+  "work_item": "215",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "node scripts/validate-content.mjs --strict-coverage",
+      "exit_code": 0,
+      "summary": "All 116 objectives meet the deep target (>=1 lesson + >=6 questions). A+ 63/63, Network+ 25/25, Security+ 28/28."
+    },
+    {
+      "command": "npm test -- --run",
+      "exit_code": 0,
+      "summary": "3 test files, 52 tests passed."
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "summary": "tsc type-check and vite production build succeeded."
+    },
+    {
+      "command": "npm run validate:a11y",
+      "exit_code": 0,
+      "summary": "Accessibility validation passed (6 checks)."
+    }
+  ],
+  "artifacts": [
+    "src/content/a-plus/questions.json",
+    "src/content/a-plus/lessons.json",
+    "src/content/a-plus/objectives.json",
+    "src/content/network-plus/objectives.json",
+    "src/content/security-plus/objectives.json"
+  ],
+  "environment": {
+    "platform": "win32"
+  }
+}

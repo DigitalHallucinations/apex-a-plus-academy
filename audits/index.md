@@ -1,6 +1,6 @@
 # Audit Index
 
-Last updated: 2026-06-17
+Last updated: 2026-06-18
 
 | ID | Title | Type | Status | Related Todo | Date |
 | --- | --- | --- | --- | --- | --- |
@@ -9,6 +9,7 @@ Last updated: 2026-06-17
 | [AUDIT-2026-06-17-multi-track-ux](AUDIT-2026-06-17-multi-track-ux.md) | Multi-Track UX, Availability, and Analytics | implementation | passed-with-notes | [005](../work/completed/005-multi-track-ux-and-analytics/README.md) | 2026-06-17 |
 | [AUDIT-2026-06-17-network-plus-starter](AUDIT-2026-06-17-network-plus-starter.md) | Network+ Starter Track | content / implementation | passed-with-notes | [003](../work/completed/003-network-plus-starter-track/README.md) | 2026-06-17 |
 | [AUDIT-2026-06-17-security-plus-starter](AUDIT-2026-06-17-security-plus-starter.md) | Security+ Starter Track | content / implementation | passed-with-notes | [004](../work/completed/004-security-plus-starter-track/README.md) | 2026-06-17 |
+| [AUDIT-2026-06-18-objective-coverage](AUDIT-2026-06-18-objective-coverage.md) | Objective-by-Objective Curriculum Coverage | content / implementation | passed | [215](../work/completed/215-course-lessons-and-real-world-class-content/README.md) | 2026-06-18 |
 
 ## Next Recommended Audit
 

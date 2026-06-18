@@ -1404,5 +1404,117 @@
         "Use private mode and sign out on shared computers."
       ] }
     ]
+  },
+  {
+    "id": "aplus-sw-troubleshooting-l5", "objectiveId": "aplus-c2-3.3",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-sw-troubleshooting",
+    "title": "Mobile OS and app security symptoms",
+    "order": 5, "estMinutes": 5,
+    "objectives": ["Troubleshoot common mobile OS and application security issues"],
+    "sections": [
+      { "body": "Mobile malware shows up as performance, battery, and data anomalies more than obvious infections." },
+      { "heading": "Warning signs", "body": "What to watch for.", "bullets": [
+        "Unexpected pop-ups, new unknown apps, or changed settings.",
+        "Battery drain and data spikes with no user activity.",
+        "Apps requesting excessive permissions."
+      ] },
+      { "heading": "Response", "body": "Remove suspicious apps, revoke permissions, update the OS, and stick to official app stores to prevent reinfection. Jailbroken/rooted managed devices should be treated as non-compliant." }
+    ]
+  },
+  {
+    "id": "aplus-operations-l5", "objectiveId": "aplus-c2-4.2",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-operations",
+    "title": "Change management procedures",
+    "order": 5, "estMinutes": 5,
+    "objectives": ["Apply change management procedures"],
+    "sections": [
+      { "body": "Change management keeps changes deliberate, approved, and reversible so they do not cause outages or security gaps." },
+      { "heading": "The flow", "body": "Plan and approve before acting.", "bullets": [
+        "Submit a change request with scope and risk/impact analysis.",
+        "Get approval (often a change advisory board).",
+        "Schedule a maintenance window; test the change.",
+        "Have a rollback plan; document the result."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-operations-l6", "objectiveId": "aplus-c2-4.5",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-operations",
+    "title": "Environmental impacts and controls",
+    "order": 6, "estMinutes": 5,
+    "objectives": ["Summarize environmental impacts and local environment controls"],
+    "sections": [
+      { "body": "Technicians protect both equipment and the environment through proper power, cooling, and disposal." },
+      { "heading": "Controls", "body": "Keep gear healthy.", "bullets": [
+        "Temperature and humidity control; clean airflow to prevent overheating and ESD.",
+        "UPS for power protection and clean shutdown; surge protection.",
+        "Power-management policies to reduce energy use."
+      ] },
+      { "heading": "Disposal", "body": "Recycle batteries, toner, and e-waste per regulations and the Safety Data Sheet (SDS) rather than discarding them in regular trash." }
+    ]
+  },
+  {
+    "id": "aplus-operations-l7", "objectiveId": "aplus-c2-4.6",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-operations",
+    "title": "Privacy, licensing, and policy",
+    "order": 7, "estMinutes": 6,
+    "objectives": ["Explain prohibited content/activity and privacy, licensing, and policy concepts"],
+    "sections": [
+      { "body": "Beyond fixing computers, technicians must respect law, licensing, and company policy." },
+      { "heading": "Key concepts", "body": "Know your obligations.", "bullets": [
+        "Licensing: per-seat vs site, open-source vs proprietary; stay within terms.",
+        "Privacy: protect PII/PHI; follow regulations (e.g., GDPR, HIPAA).",
+        "Prohibited content: preserve evidence, maintain chain of custody, and report per policy.",
+        "Acceptable use policies govern how systems may be used."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-operations-l8", "objectiveId": "aplus-c2-4.8",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-operations",
+    "title": "Scripting basics",
+    "order": 8, "estMinutes": 5,
+    "objectives": ["Explain the basics of scripting"],
+    "sections": [
+      { "body": "Scripts automate repetitive tasks like mapping drives, installs, and backups, saving time and reducing errors." },
+      { "heading": "Languages and building blocks", "body": "Recognize these.", "bullets": [
+        "Windows: batch (.bat/.cmd), PowerShell (.ps1). Linux/macOS: shell (.sh). Cross-platform: Python (.py).",
+        "Variables store values; loops repeat; conditionals branch.",
+        "Comments document intent."
+      ] },
+      { "heading": "Caution", "body": "Scripts run with the user's privileges — review untrusted scripts before running, since they can make sweeping changes or install malware." }
+    ]
+  },
+  {
+    "id": "aplus-operations-l9", "objectiveId": "aplus-c2-4.9",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-operations",
+    "title": "Remote access technologies",
+    "order": 9, "estMinutes": 5,
+    "objectives": ["Use remote access technologies"],
+    "sections": [
+      { "body": "Remote access lets technicians and users connect from afar — securely, with consent and authentication." },
+      { "heading": "Common methods", "body": "Pick the right tool.", "bullets": [
+        "RDP: graphical Windows control (TCP 3389).",
+        "SSH: secure command line; VPN: encrypted tunnel into the network.",
+        "Screen-sharing/remote support tools for live assistance."
+      ] },
+      { "heading": "Secure it", "body": "Require MFA, verify identity and get user consent, prefer encrypted protocols, and log sessions. Remote access is internet-exposed, so weak controls are quickly attacked." }
+    ]
+  },
+  {
+    "id": "aplus-operations-l10", "objectiveId": "aplus-c2-4.10",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-operations",
+    "title": "Basic AI concepts for technicians",
+    "order": 10, "estMinutes": 5,
+    "objectives": ["Explain basic concepts related to artificial intelligence (AI)"],
+    "sections": [
+      { "body": "AI tools are now part of IT work. Used well, they speed tasks; used carelessly, they create privacy and accuracy risks." },
+      { "heading": "What to know", "body": "Capabilities and limits.", "bullets": [
+        "Generative AI creates text, images, and code from prompts.",
+        "It can 'hallucinate' — produce confident but wrong output, so verify it.",
+        "AI assistants help draft messages and summarize data, with human review."
+      ] },
+      { "heading": "Use it responsibly", "body": "Do not paste confidential data into public AI tools, follow the organization's AI acceptable-use policy, and treat AI as an aid rather than an authority." }
+    ]
   }
 ]
