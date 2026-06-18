@@ -1289,5 +1289,120 @@
         "Missing synced files usually means the wrong account or sync not finished."
       ] }
     ]
+  },
+  {
+    "id": "aplus-security-l5", "objectiveId": "aplus-c2-2.2",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-security",
+    "title": "Windows OS security settings",
+    "order": 5, "estMinutes": 6,
+    "objectives": ["Configure and apply basic Microsoft Windows OS security settings"],
+    "sections": [
+      { "body": "Windows ships with layered security you configure per device and per policy." },
+      { "heading": "Key controls", "body": "Know where each lives.", "bullets": [
+        "BitLocker: full-disk encryption for data at rest.",
+        "Defender Antivirus + Firewall: malware and traffic control.",
+        "NTFS vs share permissions: effective access is the most restrictive of the two.",
+        "UAC: consent prompt before privileged changes."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-security-l6", "objectiveId": "aplus-c2-2.3",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-security",
+    "title": "Wireless security protocols and authentication",
+    "order": 6, "estMinutes": 5,
+    "objectives": ["Compare wireless security protocols and authentication methods"],
+    "sections": [
+      { "body": "Wireless is exposed by nature, so encryption and authentication choices matter a lot." },
+      { "heading": "Protocols and modes", "body": "Use current standards.", "bullets": [
+        "WPA3 (best), WPA2 (acceptable); never WEP/WPA.",
+        "Personal (PSK): one passphrase, good for homes.",
+        "Enterprise (802.1X/RADIUS): per-user authentication.",
+        "Disable WPS PIN; it is brute-forceable."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-security-l7", "objectiveId": "aplus-c2-2.6",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-security",
+    "title": "The malware removal process",
+    "order": 7, "estMinutes": 6,
+    "objectives": ["Implement procedures for basic SOHO malware removal"],
+    "sections": [
+      { "body": "CompTIA defines a repeatable malware-removal sequence so infections are contained and do not recur." },
+      { "heading": "The steps", "body": "In order:", "bullets": [
+        "Investigate and verify symptoms.",
+        "Quarantine the system (disconnect from the network).",
+        "Disable System Restore (Windows).",
+        "Remediate: update anti-malware, scan and remove (Safe Mode/rescue media if needed).",
+        "Schedule scans and updates; re-enable System Restore and create a clean point.",
+        "Educate the end user."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-security-l8", "objectiveId": "aplus-c2-2.8",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-security",
+    "title": "Securing mobile and embedded devices",
+    "order": 8, "estMinutes": 5,
+    "objectives": ["Apply common methods for securing mobile devices"],
+    "sections": [
+      { "body": "Mobile devices are easily lost and carry sensitive data, so protection focuses on access, encryption, and management." },
+      { "heading": "Core protections", "body": "Layer them.", "bullets": [
+        "Screen lock with biometrics or strong passcode; device encryption.",
+        "Remote wipe and locate via MDM or find-my-device.",
+        "Install apps only from official stores; avoid sideloading.",
+        "Avoid rooting/jailbreaking, which disables built-in protections."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-security-l9", "objectiveId": "aplus-c2-2.9",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-security",
+    "title": "Data destruction and disposal",
+    "order": 9, "estMinutes": 5,
+    "objectives": ["Use common data destruction and disposal methods"],
+    "sections": [
+      { "body": "Retired media must be sanitized so data cannot be recovered. The right method depends on the media." },
+      { "heading": "Methods", "body": "Match method to media.", "bullets": [
+        "Physical destruction: shred, drill, incinerate.",
+        "Degaussing: erases magnetic media (HDD/tape) — useless on SSDs.",
+        "Secure erase / certified multi-pass wipe for reuse.",
+        "Keep a certificate of destruction for the audit trail."
+      ] },
+      { "body": "Deleting files or quick-formatting does not remove recoverable data." }
+    ]
+  },
+  {
+    "id": "aplus-security-l10", "objectiveId": "aplus-c2-2.10",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-security",
+    "title": "Securing SOHO networks",
+    "order": 10, "estMinutes": 5,
+    "objectives": ["Configure appropriate security settings on SOHO wireless and wired networks"],
+    "sections": [
+      { "body": "A few settings turn a default home router into a reasonably hardened gateway." },
+      { "heading": "Checklist", "body": "Do these.", "bullets": [
+        "Change default admin credentials; keep firmware updated.",
+        "Use WPA3/WPA2 encryption; disable WPS.",
+        "Disable remote/WAN administration.",
+        "Add a guest network; treat MAC filtering only as a minor extra layer."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-security-l11", "objectiveId": "aplus-c2-2.11",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-security",
+    "title": "Browser security settings",
+    "order": 11, "estMinutes": 4,
+    "objectives": ["Install and configure browsers and relevant security settings"],
+    "sections": [
+      { "body": "The browser is a primary attack surface, so a few habits and settings matter." },
+      { "heading": "Stay safe online", "body": "Configure and watch.", "bullets": [
+        "Install extensions only from trusted sources.",
+        "Heed certificate warnings; look for HTTPS/padlock.",
+        "Enable the pop-up blocker; clear cache/cookies when troubleshooting.",
+        "Use private mode and sign out on shared computers."
+      ] }
+    ]
   }
 ]
