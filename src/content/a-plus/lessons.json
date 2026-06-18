@@ -1060,5 +1060,70 @@
       ] },
       { "heading": "Network types", "body": "Scope matters: PAN (personal), LAN (building/campus), MAN (metro), and WAN (long distance, often via an ISP)." }
     ]
+  },
+  {
+    "id": "aplus-hardware-l5", "objectiveId": "aplus-c1-3.1",
+    "certId": "a-plus", "exam": "220-1201", "domain": "aplus-hardware",
+    "title": "Display components and attributes",
+    "order": 5, "estMinutes": 5,
+    "objectives": ["Compare display components and attributes"],
+    "sections": [
+      { "body": "Knowing the parts of a display and the specs that describe it helps you choose, configure, and troubleshoot screens." },
+      { "heading": "Components", "body": "What is inside a panel.", "bullets": [
+        "LCD needs a backlight (LED); OLED pixels emit their own light.",
+        "The digitizer adds touch/stylus input.",
+        "An inverter (older LCDs) drives the backlight."
+      ] },
+      { "heading": "Attributes", "body": "Resolution (pixel count), refresh rate (Hz), brightness (nits), and contrast describe quality. A dim image still faintly visible points to a backlight fault, not a dead panel." }
+    ]
+  },
+  {
+    "id": "aplus-hardware-l6", "objectiveId": "aplus-c1-3.2",
+    "certId": "a-plus", "exam": "220-1201", "domain": "aplus-hardware",
+    "title": "Cable types and connectors",
+    "order": 6, "estMinutes": 6,
+    "objectives": ["Compare cable types and connectors"],
+    "sections": [
+      { "body": "Technicians meet many cables; recognizing each connector and its purpose prevents mismatches and bad buys." },
+      { "heading": "Data and network", "body": "Common ones to know.", "bullets": [
+        "RJ45 (Ethernet), RJ11 (phone), LC/SC (fiber), BNC (coax).",
+        "SATA (drives), NVMe M.2 (PCIe SSD), USB-A/USB-C/Thunderbolt.",
+        "Video: HDMI, DisplayPort, VGA (analog)."
+      ] },
+      { "heading": "Copper categories", "body": "Cat 5e (1 Gbps), Cat 6/6a (up to 10 Gbps), each limited to ~100 m. Beyond that, use fiber." }
+    ]
+  },
+  {
+    "id": "aplus-hardware-l7", "objectiveId": "aplus-c1-3.4",
+    "certId": "a-plus", "exam": "220-1201", "domain": "aplus-hardware",
+    "title": "Storage devices and RAID",
+    "order": 7, "estMinutes": 6,
+    "objectives": ["Compare storage devices"],
+    "sections": [
+      { "body": "Storage choices balance speed, capacity, cost, and redundancy." },
+      { "heading": "Drive types and interfaces", "body": "From slow to fast.", "bullets": [
+        "HDD: spinning platters, cheap capacity.",
+        "SATA SSD: faster, no moving parts.",
+        "NVMe (M.2 over PCIe): fastest consumer storage."
+      ] },
+      { "heading": "RAID basics", "body": "RAID 0 stripes (speed, no redundancy), RAID 1 mirrors, RAID 5 stripes with distributed parity (3+ disks), RAID 10 combines mirroring and striping. RAID provides uptime, not a backup." }
+    ]
+  },
+  {
+    "id": "aplus-hardware-l8", "objectiveId": "aplus-c1-3.8",
+    "certId": "a-plus", "exam": "220-1201", "domain": "aplus-hardware",
+    "title": "Printer maintenance",
+    "order": 8, "estMinutes": 5,
+    "objectives": ["Perform appropriate printer maintenance"],
+    "sections": [
+      { "body": "Printers are mechanical and need routine upkeep to stay reliable. Maintenance differs by technology." },
+      { "heading": "By printer type", "body": "Match the task to the printer.", "bullets": [
+        "Laser: replace toner, periodically the fuser/rollers (maintenance kit), and reset the counter.",
+        "Inkjet: run cleaning to clear nozzles and calibrate/align the head.",
+        "Thermal: clean the heating element and replace special paper.",
+        "Impact: replace the ribbon and check the print head."
+      ] },
+      { "body": "Faded output usually means low toner/ink; streaks and registration errors often clear after a cleaning or calibration cycle." }
+    ]
   }
 ]
