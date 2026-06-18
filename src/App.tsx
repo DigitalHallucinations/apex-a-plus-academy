@@ -272,7 +272,7 @@ function LessonSections({ lesson }: { lesson: Lesson }) {
 }
 
 function Learn({ state, setState, setView }: { state:LearnerState; setState:React.Dispatch<React.SetStateAction<LearnerState>>; setView:(v:View)=>void }) {
-  const { certifications, domains, questions, lessons } = useContent();
+  const { certifications, domains, questions, lessons, objectives } = useContent();
   const cert = certifications.find(c => c.id === state.activeCertId) ?? certifications[0];
   const certDomains = domains.filter(d => d.certId === cert.id);
   const [exam, setExam] = useState<string>(cert.exams[0]?.id ?? "");
@@ -287,6 +287,17 @@ function Learn({ state, setState, setView }: { state:LearnerState; setState:Reac
   const readCount = domainLessons.filter(l => readSet.has(l.id)).length;
   const openLesson = domainLessons.find(l => l.id === openLessonId) || null;
   const openIdx = openLesson ? domainLessons.findIndex(l => l.id === openLesson.id) : -1;
+  // Official objectives for this domain, with per-objective learner progress.
+  const objCode = (id?:string) => objectives.find(o => o.id === id)?.code;
+  const domainObjectives = objectives.filter(o => o.domain === active.id).slice()
+    .sort((a,b) => a.code.localeCompare(b.code, undefined, { numeric:true }));
+  const objProgress = (objectiveId:string) => {
+    const ol = domainLessons.filter(l => l.objectiveId === objectiveId);
+    const oq = activeQuestions.filter(q => q.objectiveId === objectiveId);
+    const lr = ol.filter(l => readSet.has(l.id)).length;
+    const qm = oq.filter(q => state.answered[q.id]?.lastCorrect).length;
+    return { ol, oq, lr, qm, pct: oq.length ? Math.round((qm / oq.length) * 100) : 0 };
+  };
   const pickDomain = (id:string) => { setSelected(id); setOpenLessonId(null); };
   const pickExam = (id:string) => { setExam(id); setSelected(certDomains.find(d=>d.exam===id)?.id ?? ""); setOpenLessonId(null); };
   const openAndRead = (id:string) => { setOpenLessonId(id); setState(s => s.lessonsRead.includes(id) ? s : {...s, lessonsRead:[...s.lessonsRead, id]}); };
@@ -298,15 +309,16 @@ function Learn({ state, setState, setView }: { state:LearnerState; setState:Reac
       <div className="lesson panel">
         {openLesson ? <>
           <button className="ghost lesson-back" onClick={()=>setOpenLessonId(null)}><ChevronLeft/> {active.name}</button>
-          <div className="lesson-read-head"><span className="eyebrow">LESSON {openIdx+1} OF {domainLessons.length}</span><h2>{openLesson.title}</h2><div className="lesson-meta"><span><Clock3/> {openLesson.estMinutes} min read</span><span className="lesson-read-tag"><Check/> Read</span></div></div>
+          <div className="lesson-read-head"><span className="eyebrow">LESSON {openIdx+1} OF {domainLessons.length}{objCode(openLesson.objectiveId)?` · OBJECTIVE ${objCode(openLesson.objectiveId)}`:""}</span><h2>{openLesson.title}</h2><div className="lesson-meta"><span><Clock3/> {openLesson.estMinutes} min read</span><span className="lesson-read-tag"><Check/> Read</span></div></div>
           <LessonSections lesson={openLesson}/>
           <div className="lesson-reader-nav"><button className="ghost" disabled={openIdx<=0} onClick={()=>openAndRead(domainLessons[openIdx-1].id)}><ChevronLeft/> Previous</button>{openIdx < domainLessons.length-1 ? <button className="primary" onClick={()=>openAndRead(domainLessons[openIdx+1].id)}>Next lesson <ChevronRight/></button> : <button className="primary" onClick={()=>setView("practice")}><Play/> Practice this domain</button>}</div>
         </> : <>
-          <div className="lesson-hero" style={{"--accent":active.color} as React.CSSProperties}><span>{active.exam} DOMAIN</span><h2>{active.name}</h2><p>{active.description}</p><div className="lesson-meta"><span><Target/> {active.weight}% exam weight</span>{domainLessons.length>0 && <span><BookOpen/> {readCount}/{domainLessons.length} lessons read</span>}</div></div>
+          <div className="lesson-hero" style={{"--accent":active.color} as React.CSSProperties}><span>{active.exam} DOMAIN</span><h2>{active.name}</h2><p>{active.description}</p><div className="lesson-meta"><span><Target/> {active.weight}% exam weight</span>{domainLessons.length>0 && <span><BookOpen/> {readCount}/{domainLessons.length} lessons read</span>}{domainObjectives.length>0 && <span><Check/> {domainObjectives.filter(o=>{const p=objProgress(o.id);return p.ol.length>0 && p.lr===p.ol.length && p.pct>=75;}).length}/{domainObjectives.length} objectives mastered</span>}</div></div>
+          {domainObjectives.length>0 && <><h3>Exam objectives</h3><ul className="objective-list">{domainObjectives.map(o=>{ const p=objProgress(o.id); const target=p.ol.find(l=>!readSet.has(l.id)) || p.ol[0]; const mastered=p.ol.length>0 && p.lr===p.ol.length && p.pct>=75; return <li key={o.id}><button className={`objective-row${mastered?" mastered":""}`} disabled={!p.ol.length} aria-label={`Objective ${o.code}: ${o.title}. ${p.lr} of ${p.ol.length} lessons read, ${p.qm} of ${p.oq.length} questions mastered.`} onClick={()=>target&&openAndRead(target.id)}><span className="obj-code">{o.code}</span><div className="obj-main"><b>{o.title}</b><small>{p.lr}/{p.ol.length} lessons · {p.qm}/{p.oq.length} questions mastered</small><div className="thin-progress" role="progressbar" aria-valuenow={p.pct} aria-valuemin={0} aria-valuemax={100}><i style={{width:`${p.pct}%`,background:active.color}}/></div></div><strong>{mastered?<Check/>:`${p.pct}%`}</strong></button></li>})}</ul></>}
           <h3>Lessons</h3>
-          {domainLessons.length>0 ? <div className="lesson-list">{domainLessons.map((l,i) => { const done=readSet.has(l.id); return <button key={l.id} className={`lesson-item${done?" done":""}`} onClick={()=>openAndRead(l.id)}><span className="lesson-num">{done?<Check/>:String(i+1).padStart(2,"0")}</span><div><b>{l.title}</b><small>{l.estMinutes} min read{done?" · read":""}</small></div><ChevronRight/></button>})}</div>
+          {domainLessons.length>0 ? <div className="lesson-list">{domainLessons.map((l,i) => { const done=readSet.has(l.id); const code=objCode(l.objectiveId); return <button key={l.id} className={`lesson-item${done?" done":""}`} onClick={()=>openAndRead(l.id)}><span className="lesson-num">{done?<Check/>:String(i+1).padStart(2,"0")}</span><div><b>{l.title}</b><small>{l.estMinutes} min read{code?` · Obj ${code}`:""}{done?" · read":""}</small></div><ChevronRight/></button>})}</div>
             : <div className="topic-grid">{active.topics.map((t,i)=><div key={t}><span>{i+1}</span><div><b>{t}</b><small>Concepts, scenarios, and field notes</small></div><Check/></div>)}</div>}
-          <h3>Knowledge checks</h3><div className="check-list">{activeQuestions.map(q=><div key={q.id}><div className={`status ${state.answered[q.id]?.lastCorrect ? "done":""}`}>{state.answered[q.id]?.lastCorrect?<Check/>:<CircleHelp/>}</div><div><b>{q.objective}</b><small>{q.difficulty} · Original practice scenario</small></div><button className="ghost" aria-label="Bookmark this question and open practice" onClick={()=>{setState(s=>({...s,bookmarks:s.bookmarks.includes(q.id)?s.bookmarks:s.bookmarks.concat(q.id)}));setView("practice")}}><Bookmark/></button></div>)}</div>
+          <h3>Knowledge checks</h3><div className="check-list">{activeQuestions.map(q=><div key={q.id}><div className={`status ${state.answered[q.id]?.lastCorrect ? "done":""}`}>{state.answered[q.id]?.lastCorrect?<Check/>:<CircleHelp/>}</div><div><b>{q.objective}</b><small>{objCode(q.objectiveId)?`Obj ${objCode(q.objectiveId)} · `:""}{q.difficulty} · Original practice scenario</small></div><button className="ghost" aria-label="Bookmark this question and open practice" onClick={()=>{setState(s=>({...s,bookmarks:s.bookmarks.includes(q.id)?s.bookmarks:s.bookmarks.concat(q.id)}));setView("practice")}}><Bookmark/></button></div>)}</div>
           <button className="primary wide" onClick={()=>setView("practice")}><Play/> Practice this domain</button>
         </>}
       </div>
