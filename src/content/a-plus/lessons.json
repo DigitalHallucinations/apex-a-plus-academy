@@ -1176,5 +1176,118 @@
       ] },
       { "heading": "Safety first", "body": "A swollen battery is a fire hazard — stop using the device and replace the battery with proper handling and disposal." }
     ]
+  },
+  {
+    "id": "aplus-os-l5", "objectiveId": "aplus-c2-1.1",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-os",
+    "title": "Operating system types and purposes",
+    "order": 5, "estMinutes": 5,
+    "objectives": ["Explain common operating system types and their purposes"],
+    "sections": [
+      { "body": "An operating system manages hardware and gives applications a consistent platform. Different OS families suit different devices." },
+      { "heading": "Families", "body": "Know the landscape.", "bullets": [
+        "Desktop: Windows, macOS, Linux.",
+        "Mobile: iOS, Android; web-centric: Chrome OS.",
+        "Server and hypervisor OSes host services and VMs."
+      ] },
+      { "heading": "Why it matters", "body": "Software targets specific OSes and architectures (32- vs 64-bit). A 32-bit OS addresses only ~4 GB of RAM, so compatibility and requirements drive OS choice." }
+    ]
+  },
+  {
+    "id": "aplus-os-l6", "objectiveId": "aplus-c2-1.5",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-os",
+    "title": "Windows command-line tools",
+    "order": 6, "estMinutes": 6,
+    "objectives": ["Use the appropriate Microsoft command-line tools"],
+    "sections": [
+      { "body": "The command line fixes things the GUI cannot, and is essential for scripting and remote support." },
+      { "heading": "Core commands", "body": "Reach for these.", "bullets": [
+        "`ipconfig` — view/renew IP config, flush DNS.",
+        "`sfc /scannow` — repair protected system files; `DISM` — repair the component store.",
+        "`chkdsk` — check/repair the file system.",
+        "`gpupdate` / `gpresult` — refresh and report Group Policy."
+      ] },
+      { "body": "Run an elevated (administrator) prompt for commands that modify system state." }
+    ]
+  },
+  {
+    "id": "aplus-os-l7", "objectiveId": "aplus-c2-1.6",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-os",
+    "title": "Configuring Windows settings",
+    "order": 7, "estMinutes": 5,
+    "objectives": ["Configure Microsoft Windows settings"],
+    "sections": [
+      { "body": "The Settings app is where most day-to-day configuration happens. Knowing the sections speeds support." },
+      { "heading": "Key sections", "body": "Where things live.", "bullets": [
+        "System: display, sound, power & sleep, storage.",
+        "Apps: installed programs and default apps.",
+        "Update & Security: Windows Update, recovery, backup.",
+        "Accounts and Accessibility for users and assistive features."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-os-l8", "objectiveId": "aplus-c2-1.7",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-os",
+    "title": "Windows networking configuration",
+    "order": 8, "estMinutes": 5,
+    "objectives": ["Configure Microsoft Windows networking features on a client/desktop"],
+    "sections": [
+      { "body": "Client networking ties the PC into the LAN and to shared resources." },
+      { "heading": "Common tasks", "body": "What you configure.", "bullets": [
+        "Static vs DHCP addressing in adapter properties.",
+        "Network profile (Private/Public/Domain) to control firewall behavior.",
+        "Join a domain or workgroup; map network drives.",
+        "Enable Remote Desktop (Pro and higher) and allow it through the firewall."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-os-l9", "objectiveId": "aplus-c2-1.8",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-os",
+    "title": "macOS features and tools",
+    "order": 9, "estMinutes": 4,
+    "objectives": ["Explain common features and tools of the macOS/desktop operating system"],
+    "sections": [
+      { "body": "Supporting Macs means knowing a handful of built-in tools and their Windows equivalents." },
+      { "heading": "Know these", "body": "Built-in macOS tools.", "bullets": [
+        "Time Machine — automatic backups.",
+        "Disk Utility — partitioning and First Aid repair.",
+        "Spotlight — search and app launch; Finder — file manager.",
+        "Keychain — credential store; Mission Control — windows/spaces."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-os-l10", "objectiveId": "aplus-c2-1.10",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-os",
+    "title": "Installing applications",
+    "order": 10, "estMinutes": 5,
+    "objectives": ["Install applications according to requirements"],
+    "sections": [
+      { "body": "A clean install starts with checking that the system and the policy can support the app." },
+      { "heading": "Before and during", "body": "Check, then install.", "bullets": [
+        "Verify system requirements, OS compatibility, and free space.",
+        "Confirm licensing and that the app is approved.",
+        "Prefer trusted sources (app store / managed packages).",
+        "Some installs need local admin rights to write system locations."
+      ] }
+    ]
+  },
+  {
+    "id": "aplus-os-l11", "objectiveId": "aplus-c2-1.11",
+    "certId": "a-plus", "exam": "220-1202", "domain": "aplus-os",
+    "title": "Cloud-based productivity tools",
+    "order": 11, "estMinutes": 4,
+    "objectives": ["Install and configure cloud-based productivity tools"],
+    "sections": [
+      { "body": "Suites like Microsoft 365 and Google Workspace deliver apps, email, and storage as a subscription service." },
+      { "heading": "Setup essentials", "body": "What to get right.", "bullets": [
+        "Sign in with the correct account; enable file sync across devices.",
+        "Per-user subscription licensing and internet connectivity.",
+        "Protect the account with multifactor authentication.",
+        "Missing synced files usually means the wrong account or sync not finished."
+      ] }
+    ]
   }
 ]
