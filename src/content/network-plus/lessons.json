@@ -1,6 +1,7 @@
 [
   {
     "id": "netplus-concepts-l1",
+    "objectiveId": "netplus-1.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -31,6 +32,7 @@
   },
   {
     "id": "netplus-concepts-l2",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -59,6 +61,7 @@
   },
   {
     "id": "netplus-concepts-l3",
+    "objectiveId": "netplus-1.7",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -87,9 +90,10 @@
   },
   {
     "id": "netplus-concepts-l4",
+    "objectiveId": "netplus-3.4",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-concepts",
+    "domain": "netplus-operations",
     "title": "IPv6 essentials",
     "order": 4,
     "estMinutes": 5,
@@ -112,6 +116,7 @@
   },
   {
     "id": "netplus-concepts-l5",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -140,6 +145,7 @@
   },
   {
     "id": "netplus-concepts-l6",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -168,6 +174,7 @@
   },
   {
     "id": "netplus-concepts-l7",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -192,6 +199,7 @@
   },
   {
     "id": "netplus-concepts-l8",
+    "objectiveId": "netplus-1.6",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -216,6 +224,7 @@
   },
   {
     "id": "netplus-implementation-l1",
+    "objectiveId": "netplus-2.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -241,6 +250,7 @@
   },
   {
     "id": "netplus-implementation-l2",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -266,9 +276,10 @@
   },
   {
     "id": "netplus-implementation-l3",
+    "objectiveId": "netplus-1.5",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "title": "Ethernet cabling and connectors",
     "order": 3,
     "estMinutes": 6,
@@ -291,6 +302,7 @@
   },
   {
     "id": "netplus-implementation-l4",
+    "objectiveId": "netplus-2.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -316,9 +328,10 @@
   },
   {
     "id": "netplus-implementation-l5",
+    "objectiveId": "netplus-1.2",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "title": "Network devices and where they fit",
     "order": 5,
     "estMinutes": 5,
@@ -341,6 +354,7 @@
   },
   {
     "id": "netplus-implementation-l6",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -365,6 +379,7 @@
   },
   {
     "id": "netplus-implementation-l7",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -389,6 +404,7 @@
   },
   {
     "id": "netplus-operations-l1",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -413,6 +429,7 @@
   },
   {
     "id": "netplus-operations-l2",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -437,6 +454,7 @@
   },
   {
     "id": "netplus-operations-l3",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -461,6 +479,7 @@
   },
   {
     "id": "netplus-operations-l4",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -486,6 +505,7 @@
   },
   {
     "id": "netplus-operations-l5",
+    "objectiveId": "netplus-3.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -510,6 +530,7 @@
   },
   {
     "id": "netplus-operations-l6",
+    "objectiveId": "netplus-3.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -535,6 +556,7 @@
   },
   {
     "id": "netplus-operations-l7",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -559,6 +581,7 @@
   },
   {
     "id": "netplus-security-l1",
+    "objectiveId": "netplus-4.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -583,6 +606,7 @@
   },
   {
     "id": "netplus-security-l2",
+    "objectiveId": "netplus-4.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -608,6 +632,7 @@
   },
   {
     "id": "netplus-security-l3",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -632,6 +657,7 @@
   },
   {
     "id": "netplus-security-l4",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -656,6 +682,7 @@
   },
   {
     "id": "netplus-security-l5",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -680,6 +707,7 @@
   },
   {
     "id": "netplus-security-l6",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -705,6 +733,7 @@
   },
   {
     "id": "netplus-troubleshooting-l1",
+    "objectiveId": "netplus-5.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -734,6 +763,7 @@
   },
   {
     "id": "netplus-troubleshooting-l2",
+    "objectiveId": "netplus-5.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -759,6 +789,7 @@
   },
   {
     "id": "netplus-troubleshooting-l3",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -784,6 +815,7 @@
   },
   {
     "id": "netplus-troubleshooting-l4",
+    "objectiveId": "netplus-5.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -809,6 +841,7 @@
   },
   {
     "id": "netplus-troubleshooting-l5",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -834,6 +867,7 @@
   },
   {
     "id": "netplus-troubleshooting-l6",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -858,6 +892,7 @@
   },
   {
     "id": "netplus-troubleshooting-l7",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -882,6 +917,7 @@
   },
   {
     "id": "netplus-troubleshooting-l8",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -901,6 +937,146 @@
           "Weak signal far from the AP → reposition, adjust antennas/power.",
           "A Wi-Fi analyzer reveals overlap and dead spots."
         ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l9",
+    "objectiveId": "netplus-1.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "Networking appliances, applications, and functions",
+    "order": 9,
+    "estMinutes": 6,
+    "objectives": ["Compare and contrast networking appliances, applications, and functions"],
+    "sections": [
+      {
+        "body": "A network is more than cables and switches — it is a set of appliances and services that each do a job. Knowing what each one is for helps you design, secure, and troubleshoot."
+      },
+      {
+        "heading": "Common appliances",
+        "body": "Match the device to its function.",
+        "bullets": [
+          "Router (Layer 3) and switch (Layer 2): forward between and within networks.",
+          "Firewall and IDS/IPS: filter and inspect traffic.",
+          "Load balancer and proxy: distribute and mediate connections.",
+          "Network-attached storage (NAS) and access points: serve files and Wi-Fi."
+        ]
+      },
+      {
+        "heading": "Physical, virtual, and cloud",
+        "body": "These functions can be a physical box, a virtual appliance, or a cloud service (e.g., a content delivery network). The function is the same; only the form factor changes."
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l10",
+    "objectiveId": "netplus-1.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "Cloud concepts and connectivity",
+    "order": 10,
+    "estMinutes": 6,
+    "objectives": ["Summarize cloud concepts and connectivity options"],
+    "sections": [
+      {
+        "body": "Networks increasingly extend into the cloud, so technicians need the vocabulary for cloud service and deployment models and how to connect to them securely."
+      },
+      {
+        "heading": "Service and deployment models",
+        "body": "Two dimensions to know.",
+        "bullets": [
+          "Service models: IaaS (infrastructure), PaaS (platform), SaaS (software).",
+          "Deployment models: public, private, hybrid, and community.",
+          "Elasticity and scalability let capacity grow and shrink on demand."
+        ]
+      },
+      {
+        "heading": "Connecting to the cloud",
+        "body": "Organizations reach cloud resources over VPNs, dedicated direct connections, or the public internet. Concepts like the virtual private cloud (VPC), cloud gateways, and software-defined networking shape how that traffic is segmented and secured."
+      }
+    ]
+  },
+  {
+    "id": "netplus-concepts-l11",
+    "objectiveId": "netplus-1.8",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "title": "Evolving use cases for modern networks",
+    "order": 11,
+    "estMinutes": 5,
+    "objectives": ["Summarize evolving use cases for modern network environments"],
+    "sections": [
+      {
+        "body": "Modern networks are increasingly software-driven and automated. A few trends show up across the exam and the field."
+      },
+      {
+        "heading": "Key trends",
+        "body": "Software is eating the network.",
+        "bullets": [
+          "SDN and SD-WAN: separate control from forwarding for central, policy-driven management.",
+          "VXLAN and overlays: stretch Layer 2 across large or cloud environments.",
+          "Zero trust: verify every request rather than trusting the internal network.",
+          "Infrastructure as code (IaC): define and deploy network config programmatically."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-implementation-l8",
+    "objectiveId": "netplus-2.4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "title": "Physical installation factors",
+    "order": 8,
+    "estMinutes": 5,
+    "objectives": ["Explain important factors of physical installations"],
+    "sections": [
+      {
+        "body": "Reliable networks depend on the room as much as the gear. Power, cooling, and physical layout decisions keep equipment running and serviceable."
+      },
+      {
+        "heading": "What to plan for",
+        "body": "The facility fundamentals.",
+        "bullets": [
+          "Power: UPS for ride-through, PDUs for distribution, and adequate circuits.",
+          "Environment: temperature and humidity control, plus airflow (hot/cold aisles).",
+          "Cable management: labeling, trays, and bend-radius limits.",
+          "Fire suppression and physical access control for the space."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "netplus-operations-l8",
+    "objectiveId": "netplus-3.5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "title": "Network access and management methods",
+    "order": 8,
+    "estMinutes": 5,
+    "objectives": ["Compare and contrast network access and management methods"],
+    "sections": [
+      {
+        "body": "Administrators need to reach devices to manage them — securely. How you connect matters as much as what you change."
+      },
+      {
+        "heading": "In-band vs out-of-band",
+        "body": "Two paths to manage devices.",
+        "bullets": [
+          "In-band: manage over the production network (e.g., SSH); convenient but shares the data path.",
+          "Out-of-band: a separate console/management port or network, available even when the data path is down.",
+          "Jump boxes/bastion hosts provide a controlled entry point."
+        ]
+      },
+      {
+        "heading": "Do it securely",
+        "body": "Prefer encrypted methods (SSH over Telnet, HTTPS over HTTP, SNMPv3 over v1/v2c), require strong authentication, and log management access."
       }
     ]
   }

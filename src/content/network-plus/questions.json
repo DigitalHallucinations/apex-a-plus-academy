@@ -1,6 +1,7 @@
 [
   {
     "id": "netplus-q001",
+    "objectiveId": "netplus-1.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -13,6 +14,7 @@
   },
   {
     "id": "netplus-q002",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -25,6 +27,7 @@
   },
   {
     "id": "netplus-q003",
+    "objectiveId": "netplus-1.7",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -37,6 +40,7 @@
   },
   {
     "id": "netplus-q004",
+    "objectiveId": "netplus-1.7",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -49,6 +53,7 @@
   },
   {
     "id": "netplus-q019",
+    "objectiveId": "netplus-1.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -61,6 +66,7 @@
   },
   {
     "id": "netplus-q020",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -78,6 +84,7 @@
   },
   {
     "id": "netplus-q021",
+    "objectiveId": "netplus-1.7",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -90,9 +97,10 @@
   },
   {
     "id": "netplus-q022",
+    "objectiveId": "netplus-3.4",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-concepts",
+    "domain": "netplus-operations",
     "difficulty": "Intermediate",
     "prompt": "How many bits long is an IPv6 address?",
     "options": ["32 bits", "64 bits", "128 bits", "256 bits"],
@@ -102,6 +110,7 @@
   },
   {
     "id": "netplus-q023",
+    "objectiveId": "netplus-1.7",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -119,6 +128,7 @@
   },
   {
     "id": "netplus-q024",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -131,6 +141,7 @@
   },
   {
     "id": "netplus-q025",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -143,6 +154,7 @@
   },
   {
     "id": "netplus-q005",
+    "objectiveId": "netplus-2.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -160,6 +172,7 @@
   },
   {
     "id": "netplus-q006",
+    "objectiveId": "netplus-2.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -172,6 +185,7 @@
   },
   {
     "id": "netplus-q007",
+    "objectiveId": "netplus-2.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -184,9 +198,10 @@
   },
   {
     "id": "netplus-q008",
+    "objectiveId": "netplus-1.5",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Advanced",
     "prompt": "A technician needs to run a 10 Gbps link about 200 meters between two buildings. Which cabling choice is most appropriate?",
     "options": ["Cat 5e UTP", "Cat 6 UTP", "Multimode fiber", "Coaxial RG-6"],
@@ -196,9 +211,10 @@
   },
   {
     "id": "netplus-q026",
+    "objectiveId": "netplus-1.5",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Intermediate",
     "prompt": "Modern switches with auto-MDI-X aside, which cable type was traditionally required to directly connect two switches?",
     "options": ["Crossover cable", "Straight-through cable", "Rollover (console) cable", "Coaxial cable"],
@@ -208,6 +224,7 @@
   },
   {
     "id": "netplus-q027",
+    "objectiveId": "netplus-2.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -220,6 +237,7 @@
   },
   {
     "id": "netplus-q028",
+    "objectiveId": "netplus-2.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -232,6 +250,7 @@
   },
   {
     "id": "netplus-q029",
+    "objectiveId": "netplus-2.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -244,9 +263,10 @@
   },
   {
     "id": "netplus-q030",
+    "objectiveId": "netplus-1.2",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Foundation",
     "prompt": "How does a switch improve on a legacy hub?",
     "options": [
@@ -261,6 +281,7 @@
   },
   {
     "id": "netplus-q031",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -278,6 +299,7 @@
   },
   {
     "id": "netplus-q032",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -295,6 +317,7 @@
   },
   {
     "id": "netplus-q009",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -307,6 +330,7 @@
   },
   {
     "id": "netplus-q010",
+    "objectiveId": "netplus-3.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -324,6 +348,7 @@
   },
   {
     "id": "netplus-q011",
+    "objectiveId": "netplus-3.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -336,6 +361,7 @@
   },
   {
     "id": "netplus-q033",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -348,6 +374,7 @@
   },
   {
     "id": "netplus-q034",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -360,6 +387,7 @@
   },
   {
     "id": "netplus-q035",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -377,6 +405,7 @@
   },
   {
     "id": "netplus-q036",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -394,6 +423,7 @@
   },
   {
     "id": "netplus-q037",
+    "objectiveId": "netplus-3.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -406,6 +436,7 @@
   },
   {
     "id": "netplus-q038",
+    "objectiveId": "netplus-3.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -418,6 +449,7 @@
   },
   {
     "id": "netplus-q012",
+    "objectiveId": "netplus-4.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -430,6 +462,7 @@
   },
   {
     "id": "netplus-q013",
+    "objectiveId": "netplus-4.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -442,6 +475,7 @@
   },
   {
     "id": "netplus-q014",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -454,6 +488,7 @@
   },
   {
     "id": "netplus-q040",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -466,6 +501,7 @@
   },
   {
     "id": "netplus-q041",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -478,6 +514,7 @@
   },
   {
     "id": "netplus-q042",
+    "objectiveId": "netplus-4.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -490,6 +527,7 @@
   },
   {
     "id": "netplus-q043",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -502,6 +540,7 @@
   },
   {
     "id": "netplus-q044",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -514,6 +553,7 @@
   },
   {
     "id": "netplus-q045",
+    "objectiveId": "netplus-4.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -531,6 +571,7 @@
   },
   {
     "id": "netplus-q015",
+    "objectiveId": "netplus-5.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -548,6 +589,7 @@
   },
   {
     "id": "netplus-q016",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -560,6 +602,7 @@
   },
   {
     "id": "netplus-q017",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -572,6 +615,7 @@
   },
   {
     "id": "netplus-q018",
+    "objectiveId": "netplus-5.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -589,6 +633,7 @@
   },
   {
     "id": "netplus-q047",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -601,6 +646,7 @@
   },
   {
     "id": "netplus-q048",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -613,6 +659,7 @@
   },
   {
     "id": "netplus-q049",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -630,6 +677,7 @@
   },
   {
     "id": "netplus-q050",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -647,6 +695,7 @@
   },
   {
     "id": "netplus-q051",
+    "objectiveId": "netplus-5.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -659,6 +708,7 @@
   },
   {
     "id": "netplus-q052",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -671,6 +721,7 @@
   },
   {
     "id": "netplus-q053",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -688,6 +739,7 @@
   },
   {
     "id": "netplus-q054",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -700,6 +752,7 @@
   },
   {
     "id": "netplus-q055",
+    "objectiveId": "netplus-1.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -712,6 +765,7 @@
   },
   {
     "id": "netplus-q056",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -724,6 +778,7 @@
   },
   {
     "id": "netplus-q057",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -736,6 +791,7 @@
   },
   {
     "id": "netplus-q058",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -748,6 +804,7 @@
   },
   {
     "id": "netplus-q059",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -760,6 +817,7 @@
   },
   {
     "id": "netplus-q060",
+    "objectiveId": "netplus-1.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -772,6 +830,7 @@
   },
   {
     "id": "netplus-q061",
+    "objectiveId": "netplus-1.6",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -784,6 +843,7 @@
   },
   {
     "id": "netplus-q062",
+    "objectiveId": "netplus-1.7",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -796,6 +856,7 @@
   },
   {
     "id": "netplus-q063",
+    "objectiveId": "netplus-1.7",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -808,9 +869,10 @@
   },
   {
     "id": "netplus-q064",
+    "objectiveId": "netplus-3.4",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-concepts",
+    "domain": "netplus-operations",
     "difficulty": "Advanced",
     "prompt": "Which IPv6 address type begins with fe80:: and is valid only on the local link?",
     "options": ["Link-local", "Global unicast", "Multicast", "Loopback"],
@@ -820,6 +882,7 @@
   },
   {
     "id": "netplus-q065",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -837,6 +900,7 @@
   },
   {
     "id": "netplus-q066",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -849,6 +913,7 @@
   },
   {
     "id": "netplus-q067",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -861,6 +926,7 @@
   },
   {
     "id": "netplus-q068",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -873,6 +939,7 @@
   },
   {
     "id": "netplus-q069",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -885,6 +952,7 @@
   },
   {
     "id": "netplus-q070",
+    "objectiveId": "netplus-1.6",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -897,6 +965,7 @@
   },
   {
     "id": "netplus-q071",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -914,6 +983,7 @@
   },
   {
     "id": "netplus-q072",
+    "objectiveId": "netplus-1.6",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -926,6 +996,7 @@
   },
   {
     "id": "netplus-q073",
+    "objectiveId": "netplus-1.7",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -938,6 +1009,7 @@
   },
   {
     "id": "netplus-q074",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-concepts",
@@ -950,6 +1022,7 @@
   },
   {
     "id": "netplus-q075",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -962,6 +1035,7 @@
   },
   {
     "id": "netplus-q076",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -974,6 +1048,7 @@
   },
   {
     "id": "netplus-q077",
+    "objectiveId": "netplus-2.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -986,9 +1061,10 @@
   },
   {
     "id": "netplus-q078",
+    "objectiveId": "netplus-1.5",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Intermediate",
     "prompt": "Which connector is most associated with terminating fiber-optic cables?",
     "options": ["LC", "RJ45", "RJ11", "BNC"],
@@ -998,9 +1074,10 @@
   },
   {
     "id": "netplus-q079",
+    "objectiveId": "netplus-1.5",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Foundation",
     "prompt": "Which media type is immune to electromagnetic interference and best for long high-speed runs?",
     "options": ["Fiber-optic", "Unshielded twisted pair", "Coaxial", "Telephone cable"],
@@ -1010,6 +1087,7 @@
   },
   {
     "id": "netplus-q080",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -1022,6 +1100,7 @@
   },
   {
     "id": "netplus-q081",
+    "objectiveId": "netplus-2.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -1034,6 +1113,7 @@
   },
   {
     "id": "netplus-q082",
+    "objectiveId": "netplus-2.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -1046,9 +1126,10 @@
   },
   {
     "id": "netplus-q083",
+    "objectiveId": "netplus-1.2",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Intermediate",
     "prompt": "Which device operates at Layer 3 and can both switch within VLANs and route between them at hardware speed?",
     "options": ["Layer 3 switch", "Unmanaged hub", "Media converter", "Patch panel"],
@@ -1058,6 +1139,7 @@
   },
   {
     "id": "netplus-q084",
+    "objectiveId": "netplus-2.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -1075,6 +1157,7 @@
   },
   {
     "id": "netplus-q085",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -1087,6 +1170,7 @@
   },
   {
     "id": "netplus-q086",
+    "objectiveId": "netplus-2.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-implementation",
@@ -1099,9 +1183,10 @@
   },
   {
     "id": "netplus-q087",
+    "objectiveId": "netplus-1.5",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Intermediate",
     "prompt": "Which cabling standard defines the pin assignments commonly used to terminate RJ45 connectors?",
     "options": ["T568A/T568B", "RG-6", "MTRJ", "OM4"],
@@ -1111,9 +1196,10 @@
   },
   {
     "id": "netplus-q088",
+    "objectiveId": "netplus-1.8",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Advanced",
     "prompt": "An SDN architecture primarily separates which two planes?",
     "options": ["Control plane from the data (forwarding) plane", "Physical layer from the data link layer", "LAN from WAN", "DNS from DHCP"],
@@ -1123,9 +1209,10 @@
   },
   {
     "id": "netplus-q089",
+    "objectiveId": "netplus-1.2",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-concepts",
     "difficulty": "Foundation",
     "prompt": "Which device converts signals between two different media types, such as copper Ethernet and fiber?",
     "options": ["Media converter", "Repeater hub", "Patch panel", "KVM switch"],
@@ -1135,9 +1222,10 @@
   },
   {
     "id": "netplus-q090",
+    "objectiveId": "netplus-3.4",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-implementation",
+    "domain": "netplus-operations",
     "difficulty": "Intermediate",
     "prompt": "Which addressing approach assigns the same IP to a device every time using its MAC, via the DHCP server?",
     "options": ["DHCP reservation", "APIPA", "Anycast", "Multicast"],
@@ -1147,6 +1235,7 @@
   },
   {
     "id": "netplus-q091",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1159,6 +1248,7 @@
   },
   {
     "id": "netplus-q092",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1171,9 +1261,10 @@
   },
   {
     "id": "netplus-q093",
+    "objectiveId": "netplus-1.4",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-operations",
+    "domain": "netplus-concepts",
     "difficulty": "Intermediate",
     "prompt": "Prioritizing voice and video traffic over bulk downloads on a congested link is achieved with what?",
     "options": ["Quality of Service (QoS)", "Spanning tree", "Port security", "APIPA"],
@@ -1183,6 +1274,7 @@
   },
   {
     "id": "netplus-q094",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1200,6 +1292,7 @@
   },
   {
     "id": "netplus-q095",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1212,6 +1305,7 @@
   },
   {
     "id": "netplus-q096",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1229,6 +1323,7 @@
   },
   {
     "id": "netplus-q097",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1241,6 +1336,7 @@
   },
   {
     "id": "netplus-q098",
+    "objectiveId": "netplus-3.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1253,6 +1349,7 @@
   },
   {
     "id": "netplus-q099",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1265,9 +1362,10 @@
   },
   {
     "id": "netplus-q100",
+    "objectiveId": "netplus-2.4",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-operations",
+    "domain": "netplus-implementation",
     "difficulty": "Advanced",
     "prompt": "Which environmental control is most important to monitor in a server room to protect equipment?",
     "options": ["Temperature and humidity", "Wi-Fi channel width", "DNS suffix", "Cable color"],
@@ -1277,9 +1375,10 @@
   },
   {
     "id": "netplus-q101",
+    "objectiveId": "netplus-2.4",
     "certId": "network-plus",
     "exam": "N10-009",
-    "domain": "netplus-operations",
+    "domain": "netplus-implementation",
     "difficulty": "Foundation",
     "prompt": "Which device keeps networking equipment running briefly during a power loss for a clean shutdown or failover?",
     "options": ["UPS", "PDU only", "KVM", "Patch panel"],
@@ -1289,6 +1388,7 @@
   },
   {
     "id": "netplus-q102",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1306,6 +1406,7 @@
   },
   {
     "id": "netplus-q103",
+    "objectiveId": "netplus-3.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1318,6 +1419,7 @@
   },
   {
     "id": "netplus-q104",
+    "objectiveId": "netplus-3.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1335,6 +1437,7 @@
   },
   {
     "id": "netplus-q105",
+    "objectiveId": "netplus-3.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1347,6 +1450,7 @@
   },
   {
     "id": "netplus-q106",
+    "objectiveId": "netplus-3.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-operations",
@@ -1364,6 +1468,7 @@
   },
   {
     "id": "netplus-q107",
+    "objectiveId": "netplus-4.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1376,6 +1481,7 @@
   },
   {
     "id": "netplus-q108",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1388,6 +1494,7 @@
   },
   {
     "id": "netplus-q109",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1400,6 +1507,7 @@
   },
   {
     "id": "netplus-q110",
+    "objectiveId": "netplus-4.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1412,6 +1520,7 @@
   },
   {
     "id": "netplus-q111",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1424,6 +1533,7 @@
   },
   {
     "id": "netplus-q112",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1436,6 +1546,7 @@
   },
   {
     "id": "netplus-q113",
+    "objectiveId": "netplus-4.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1448,6 +1559,7 @@
   },
   {
     "id": "netplus-q114",
+    "objectiveId": "netplus-4.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1460,6 +1572,7 @@
   },
   {
     "id": "netplus-q115",
+    "objectiveId": "netplus-4.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-security",
@@ -1472,6 +1585,7 @@
   },
   {
     "id": "netplus-q116",
+    "objectiveId": "netplus-5.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1489,6 +1603,7 @@
   },
   {
     "id": "netplus-q117",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1506,6 +1621,7 @@
   },
   {
     "id": "netplus-q118",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1523,6 +1639,7 @@
   },
   {
     "id": "netplus-q119",
+    "objectiveId": "netplus-5.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1535,6 +1652,7 @@
   },
   {
     "id": "netplus-q120",
+    "objectiveId": "netplus-5.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1547,6 +1665,7 @@
   },
   {
     "id": "netplus-q121",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1559,6 +1678,7 @@
   },
   {
     "id": "netplus-q122",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1576,6 +1696,7 @@
   },
   {
     "id": "netplus-q123",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1593,6 +1714,7 @@
   },
   {
     "id": "netplus-q124",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1610,6 +1732,7 @@
   },
   {
     "id": "netplus-q125",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1622,6 +1745,7 @@
   },
   {
     "id": "netplus-q126",
+    "objectiveId": "netplus-5.5",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1634,6 +1758,7 @@
   },
   {
     "id": "netplus-q127",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1646,6 +1771,7 @@
   },
   {
     "id": "netplus-q128",
+    "objectiveId": "netplus-5.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1658,6 +1784,7 @@
   },
   {
     "id": "netplus-q129",
+    "objectiveId": "netplus-5.2",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1670,6 +1797,7 @@
   },
   {
     "id": "netplus-q130",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1687,6 +1815,7 @@
   },
   {
     "id": "netplus-q131",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1704,6 +1833,7 @@
   },
   {
     "id": "netplus-q132",
+    "objectiveId": "netplus-5.4",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1721,6 +1851,7 @@
   },
   {
     "id": "netplus-q133",
+    "objectiveId": "netplus-5.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1738,6 +1869,7 @@
   },
   {
     "id": "netplus-q134",
+    "objectiveId": "netplus-5.3",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1755,6 +1887,7 @@
   },
   {
     "id": "netplus-q135",
+    "objectiveId": "netplus-5.1",
     "certId": "network-plus",
     "exam": "N10-009",
     "domain": "netplus-troubleshooting",
@@ -1769,5 +1902,550 @@
     "answer": 0,
     "explanation": "Asking what changed often points straight at the cause, saving time. It does not replace testing the theory or documenting the outcome.",
     "objective": "Apply the troubleshooting methodology"
+  },
+  {
+    "id": "netplus-q136",
+    "objectiveId": "netplus-1.1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Encryption and data formatting for an application occur at which OSI layer?",
+    "options": ["Layer 6 (Presentation)", "Layer 4 (Transport)", "Layer 2 (Data Link)", "Layer 1 (Physical)"],
+    "answer": 0,
+    "explanation": "The Presentation layer (6) handles translation, formatting, and encryption of data for the Application layer.",
+    "objective": "Map functions to OSI layers"
+  },
+  {
+    "id": "netplus-q137",
+    "objectiveId": "netplus-1.1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "Which OSI layer establishes, manages, and terminates sessions between applications?",
+    "options": ["Layer 5 (Session)", "Layer 3 (Network)", "Layer 7 (Application)", "Layer 1 (Physical)"],
+    "answer": 0,
+    "explanation": "The Session layer (5) sets up, maintains, and tears down communication sessions between hosts.",
+    "objective": "Map functions to OSI layers"
+  },
+  {
+    "id": "netplus-q138",
+    "objectiveId": "netplus-1.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which appliance distributes incoming requests across several servers to improve performance and availability?",
+    "options": ["Load balancer", "Repeater", "Patch panel", "Media converter"],
+    "answer": 0,
+    "explanation": "A load balancer spreads traffic across multiple servers, improving responsiveness and tolerating the loss of a server.",
+    "objective": "Compare networking appliances and functions"
+  },
+  {
+    "id": "netplus-q139",
+    "objectiveId": "netplus-1.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "A device that sits between clients and the internet to filter and cache web requests is which appliance?",
+    "options": ["Proxy server", "DHCP server", "Patch panel", "UPS"],
+    "answer": 0,
+    "explanation": "A proxy mediates client requests, enabling filtering, caching, and anonymization. The others serve unrelated roles.",
+    "objective": "Compare networking appliances and functions"
+  },
+  {
+    "id": "netplus-q140",
+    "objectiveId": "netplus-1.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "Which appliance provides centralized file storage accessible to clients over the network?",
+    "options": ["Network-attached storage (NAS)", "Load balancer", "Access point", "Toner probe"],
+    "answer": 0,
+    "explanation": "A NAS serves shared files over the network. A load balancer distributes traffic and an access point bridges Wi-Fi clients.",
+    "objective": "Compare networking appliances and functions"
+  },
+  {
+    "id": "netplus-q141",
+    "objectiveId": "netplus-1.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "Which cloud service model provides virtualized compute, storage, and networking that the customer manages?",
+    "options": ["IaaS", "SaaS", "PaaS", "On-premises"],
+    "answer": 0,
+    "explanation": "Infrastructure as a Service provides raw infrastructure the customer configures. SaaS delivers finished apps; PaaS a development platform.",
+    "objective": "Summarize cloud service models"
+  },
+  {
+    "id": "netplus-q142",
+    "objectiveId": "netplus-1.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "An isolated, logically separated section of a public cloud dedicated to one customer is called what?",
+    "options": ["Virtual private cloud (VPC)", "Public subnet only", "Broadcast domain", "Default gateway"],
+    "answer": 0,
+    "explanation": "A VPC gives a customer a logically isolated network within a public cloud, with control over addressing and segmentation.",
+    "objective": "Explain cloud connectivity"
+  },
+  {
+    "id": "netplus-q143",
+    "objectiveId": "netplus-1.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "Which cloud characteristic lets capacity automatically grow and shrink with demand?",
+    "options": ["Elasticity/scalability", "Latency", "Attenuation", "Crosstalk"],
+    "answer": 0,
+    "explanation": "Elasticity (scalability) adjusts resources to match demand, a defining benefit of cloud computing.",
+    "objective": "Summarize cloud concepts"
+  },
+  {
+    "id": "netplus-q144",
+    "objectiveId": "netplus-1.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which deployment model combines on-premises infrastructure with public cloud resources?",
+    "options": ["Hybrid cloud", "Public cloud", "Private cloud", "Community cloud"],
+    "answer": 0,
+    "explanation": "A hybrid cloud links private/on-prem and public cloud, allowing workloads to span both.",
+    "objective": "Summarize cloud deployment models"
+  },
+  {
+    "id": "netplus-q145",
+    "objectiveId": "netplus-1.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which connection option provides a dedicated, private link from a data center to a cloud provider?",
+    "options": ["Direct/private cloud interconnect", "Public internet only", "APIPA", "A loopback"],
+    "answer": 0,
+    "explanation": "A direct (private) interconnect offers predictable, private connectivity to the cloud, unlike traversing the public internet.",
+    "objective": "Explain cloud connectivity options"
+  },
+  {
+    "id": "netplus-q146",
+    "objectiveId": "netplus-1.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Advanced",
+    "prompt": "In the cloud shared responsibility model, who secures the customer's data and access configuration?",
+    "options": ["The customer", "The cloud provider", "Neither party", "The ISP"],
+    "answer": 0,
+    "explanation": "Customers always remain responsible for their data and how they configure access, regardless of service model.",
+    "objective": "Explain cloud responsibility"
+  },
+  {
+    "id": "netplus-q147",
+    "objectiveId": "netplus-1.5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which transceiver form factor supports a single high-speed (e.g., 10G+) fiber connection in a small pluggable module?",
+    "options": ["SFP+", "RJ45 keystone", "BNC", "DB-9"],
+    "answer": 0,
+    "explanation": "SFP+ is a common small form-factor pluggable transceiver for 10 Gbps links. RJ45/BNC/DB-9 are connector types, not high-speed transceivers.",
+    "objective": "Compare transmission media and transceivers"
+  },
+  {
+    "id": "netplus-q148",
+    "objectiveId": "netplus-1.6",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which topology connects every node directly to every other node for maximum redundancy?",
+    "options": ["Full mesh", "Star", "Bus", "Point-to-point"],
+    "answer": 0,
+    "explanation": "A full mesh links all nodes directly, maximizing redundancy at high cabling cost. A star centers on one device.",
+    "objective": "Compare network topologies"
+  },
+  {
+    "id": "netplus-q149",
+    "objectiveId": "netplus-1.6",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "Which network type spans a single building or campus and is privately owned?",
+    "options": ["LAN", "WAN", "PAN", "MAN"],
+    "answer": 0,
+    "explanation": "A local area network (LAN) covers a limited area like a building or campus. A WAN spans large distances; a PAN is personal-range.",
+    "objective": "Compare network types"
+  },
+  {
+    "id": "netplus-q150",
+    "objectiveId": "netplus-1.6",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "A three-tier datacenter architecture is typically composed of which layers?",
+    "options": ["Core, distribution (aggregation), and access", "Physical, data link, network", "Public, private, hybrid", "Hot, warm, cold"],
+    "answer": 0,
+    "explanation": "The classic three-tier model has core, distribution/aggregation, and access layers, organizing traffic and scaling.",
+    "objective": "Compare network architectures"
+  },
+  {
+    "id": "netplus-q151",
+    "objectiveId": "netplus-1.8",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "What does SD-WAN primarily improve over traditional WAN connectivity?",
+    "options": [
+      "Centralized, policy-based control over multiple WAN links",
+      "Physical cable length limits",
+      "The number of switch ports",
+      "Wi-Fi channel width"
+    ],
+    "answer": 0,
+    "explanation": "SD-WAN centrally manages and steers traffic across multiple WAN transports by policy, improving flexibility and cost over static WANs.",
+    "objective": "Summarize evolving use cases"
+  },
+  {
+    "id": "netplus-q152",
+    "objectiveId": "netplus-1.8",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Advanced",
+    "prompt": "Which technology stretches Layer 2 segments across a Layer 3 network, common in large data centers?",
+    "options": ["VXLAN", "APIPA", "STP", "NAT"],
+    "answer": 0,
+    "explanation": "VXLAN tunnels Layer 2 over Layer 3, enabling large, flexible overlay networks beyond traditional VLAN limits.",
+    "objective": "Summarize overlay networking"
+  },
+  {
+    "id": "netplus-q153",
+    "objectiveId": "netplus-1.8",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Defining and deploying network configuration through version-controlled code is known as what?",
+    "options": ["Infrastructure as code (IaC)", "Spanning tree", "Port mirroring", "Subnetting"],
+    "answer": 0,
+    "explanation": "IaC manages configuration as code, enabling consistent, repeatable, and auditable network deployments.",
+    "objective": "Summarize evolving use cases"
+  },
+  {
+    "id": "netplus-q154",
+    "objectiveId": "netplus-1.8",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "Zero trust network access is based on which core principle?",
+    "options": [
+      "Never trust by default; verify every request continuously",
+      "Trust everything inside the perimeter",
+      "Disable authentication for speed",
+      "Allow all traffic between VLANs"
+    ],
+    "answer": 0,
+    "explanation": "Zero trust removes implicit trust based on location and verifies each request, granting least privilege.",
+    "objective": "Summarize zero trust"
+  },
+  {
+    "id": "netplus-q155",
+    "objectiveId": "netplus-1.8",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Advanced",
+    "prompt": "Which use case best describes IoT in a modern network environment?",
+    "options": [
+      "Many low-power sensors/devices needing segmentation and monitoring",
+      "A single high-power core router",
+      "A replacement for all cabling",
+      "A type of subnet mask"
+    ],
+    "answer": 0,
+    "explanation": "IoT introduces many constrained, hard-to-patch devices, driving the need for segmentation and monitoring of that traffic.",
+    "objective": "Summarize evolving use cases"
+  },
+  {
+    "id": "netplus-q156",
+    "objectiveId": "netplus-2.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Intermediate",
+    "prompt": "Which switch feature assigns a device to a VLAN automatically based on its identity or traffic?",
+    "options": ["Dynamic VLAN assignment", "Spanning tree", "Port mirroring", "Jumbo frames"],
+    "answer": 0,
+    "explanation": "Dynamic VLAN assignment places devices into VLANs based on criteria (often via 802.1X/RADIUS), versus static per-port VLANs.",
+    "objective": "Configure switching features"
+  },
+  {
+    "id": "netplus-q157",
+    "objectiveId": "netplus-2.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Advanced",
+    "prompt": "Which feature protects against a rogue switch becoming the spanning-tree root?",
+    "options": ["Root guard", "DHCP snooping", "NAT", "QoS"],
+    "answer": 0,
+    "explanation": "Root guard prevents designated ports from accepting superior BPDUs, stopping an unauthorized switch from becoming root.",
+    "objective": "Configure switching features"
+  },
+  {
+    "id": "netplus-q158",
+    "objectiveId": "netplus-2.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Intermediate",
+    "prompt": "Which wireless deployment uses lightweight access points centrally managed by a controller?",
+    "options": ["Controller-based (WLC) deployment", "Ad hoc network", "A single autonomous AP", "A wired-only LAN"],
+    "answer": 0,
+    "explanation": "A wireless LAN controller centrally manages many lightweight APs, simplifying configuration, roaming, and security at scale.",
+    "objective": "Configure wireless technologies"
+  },
+  {
+    "id": "netplus-q159",
+    "objectiveId": "netplus-2.4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Foundation",
+    "prompt": "Which device keeps networking equipment running during a brief power outage for a clean shutdown or failover?",
+    "options": ["UPS", "PDU only", "KVM", "Patch panel"],
+    "answer": 0,
+    "explanation": "An uninterruptible power supply provides battery power to ride through outages. A PDU distributes power but does not store it.",
+    "objective": "Explain physical installation power factors"
+  },
+  {
+    "id": "netplus-q160",
+    "objectiveId": "netplus-2.4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Intermediate",
+    "prompt": "Arranging server-room racks into hot and cold aisles primarily improves what?",
+    "options": ["Cooling efficiency and airflow", "IP address allocation", "DNS resolution", "VLAN tagging"],
+    "answer": 0,
+    "explanation": "Hot/cold aisle layout separates intake and exhaust air, improving cooling efficiency and protecting equipment.",
+    "objective": "Explain physical installation environment factors"
+  },
+  {
+    "id": "netplus-q161",
+    "objectiveId": "netplus-2.4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Intermediate",
+    "prompt": "Why does structured cabling specify a bend-radius limit for fiber runs?",
+    "options": [
+      "Exceeding the bend radius causes signal loss or damage",
+      "It increases the IP range",
+      "It changes the VLAN ID",
+      "It boosts Wi-Fi range"
+    ],
+    "answer": 0,
+    "explanation": "Bending fiber too tightly causes attenuation or breakage, so installations respect minimum bend-radius limits.",
+    "objective": "Explain physical installation cabling factors"
+  },
+  {
+    "id": "netplus-q162",
+    "objectiveId": "netplus-3.3",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "Which metric expresses the average time to repair a failed component and restore service?",
+    "options": ["MTTR (mean time to repair)", "MTBF", "RPO", "Jitter"],
+    "answer": 0,
+    "explanation": "MTTR measures average repair/restore time. MTBF is mean time between failures, and RPO is acceptable data loss in time.",
+    "objective": "Interpret disaster-recovery metrics"
+  },
+  {
+    "id": "netplus-q163",
+    "objectiveId": "netplus-3.4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "Which service automatically assigns IPv6 addresses without a DHCP server using router advertisements?",
+    "options": ["SLAAC (stateless address autoconfiguration)", "APIPA", "NAT", "STP"],
+    "answer": 0,
+    "explanation": "SLAAC lets IPv6 hosts self-configure addresses from router advertisements, a core IPv6 network service.",
+    "objective": "Implement IPv6 network services"
+  },
+  {
+    "id": "netplus-q164",
+    "objectiveId": "netplus-3.4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Foundation",
+    "prompt": "Which service translates internal names and is commonly deployed for both IPv4 and IPv6 networks?",
+    "options": ["DNS", "STP", "PoE", "QoS"],
+    "answer": 0,
+    "explanation": "DNS resolves names to addresses for IPv4 (A) and IPv6 (AAAA), a fundamental network service.",
+    "objective": "Implement IPv4 and IPv6 services"
+  },
+  {
+    "id": "netplus-q165",
+    "objectiveId": "netplus-3.5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "Managing a device through a dedicated console port separate from the production network is which method?",
+    "options": ["Out-of-band management", "In-band management", "Port mirroring", "Link aggregation"],
+    "answer": 0,
+    "explanation": "Out-of-band management uses a separate path (console/management port or network), so devices stay reachable even when the data path is down.",
+    "objective": "Compare network management methods"
+  },
+  {
+    "id": "netplus-q166",
+    "objectiveId": "netplus-3.5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Foundation",
+    "prompt": "Which protocol provides secure, encrypted command-line access to manage a device?",
+    "options": ["SSH", "Telnet", "HTTP", "FTP"],
+    "answer": 0,
+    "explanation": "SSH encrypts the management session. Telnet, HTTP, and FTP send data (including credentials) in clear text.",
+    "objective": "Apply secure access methods"
+  },
+  {
+    "id": "netplus-q167",
+    "objectiveId": "netplus-3.5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "A hardened host used as a single controlled entry point for administering internal devices is called what?",
+    "options": ["Jump box / bastion host", "Load balancer", "Honeypot", "Media converter"],
+    "answer": 0,
+    "explanation": "A jump box (bastion host) is the controlled gateway through which admins reach internal systems, concentrating and logging access.",
+    "objective": "Compare network access methods"
+  },
+  {
+    "id": "netplus-q168",
+    "objectiveId": "netplus-3.5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Advanced",
+    "prompt": "Which protocol centrally authenticates and authorizes administrators logging into network devices?",
+    "options": ["RADIUS/TACACS+", "ICMP", "ARP", "NTP"],
+    "answer": 0,
+    "explanation": "RADIUS and TACACS+ provide centralized AAA for device administration, replacing local accounts on each device.",
+    "objective": "Apply centralized management authentication"
+  },
+  {
+    "id": "netplus-q169",
+    "objectiveId": "netplus-3.5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Foundation",
+    "prompt": "Which version of SNMP should be used to manage devices securely?",
+    "options": ["SNMPv3", "SNMPv1", "SNMPv2c", "SNMPv0"],
+    "answer": 0,
+    "explanation": "SNMPv3 adds authentication and encryption; v1 and v2c use plaintext community strings.",
+    "objective": "Apply secure management protocols"
+  },
+  {
+    "id": "netplus-q170",
+    "objectiveId": "netplus-4.1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "difficulty": "Foundation",
+    "prompt": "Granting users only the access required for their role is which principle?",
+    "options": ["Least privilege", "Implicit allow", "Defense in depth", "Redundancy"],
+    "answer": 0,
+    "explanation": "Least privilege limits each user to the minimum access needed, reducing the impact of compromised accounts.",
+    "objective": "Explain basic network security concepts"
+  },
+  {
+    "id": "netplus-q171",
+    "objectiveId": "netplus-4.1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "difficulty": "Intermediate",
+    "prompt": "Requiring more than one form of authentication before access is granted is called what?",
+    "options": ["Multifactor authentication", "Single sign-on", "Port mirroring", "Spanning tree"],
+    "answer": 0,
+    "explanation": "MFA combines factors (know/have/are) so a stolen password alone is not enough, a basic but powerful security concept.",
+    "objective": "Explain basic network security concepts"
+  },
+  {
+    "id": "netplus-q172",
+    "objectiveId": "netplus-4.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "difficulty": "Intermediate",
+    "prompt": "An attacker floods a link with traffic so legitimate users cannot connect. Which attack is this?",
+    "options": ["Denial-of-service (DoS)", "ARP spoofing", "Phishing", "VLAN hopping"],
+    "answer": 0,
+    "explanation": "A DoS attack overwhelms a resource to deny availability; a distributed version (DDoS) uses many sources.",
+    "objective": "Summarize network attacks"
+  },
+  {
+    "id": "netplus-q173",
+    "objectiveId": "netplus-4.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-security",
+    "difficulty": "Advanced",
+    "prompt": "Forged DNS responses send users to a malicious site even when they type the correct name. Which attack is this?",
+    "options": ["DNS poisoning/spoofing", "MAC flooding", "Tailgating", "Port scanning"],
+    "answer": 0,
+    "explanation": "DNS poisoning corrupts resolution so correct names resolve to attacker-controlled addresses. DNSSEC and trusted resolvers mitigate it.",
+    "objective": "Summarize network attacks"
+  },
+  {
+    "id": "netplus-q174",
+    "objectiveId": "netplus-5.1",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "difficulty": "Intermediate",
+    "prompt": "When a fix could affect many users, what should you do before implementing it?",
+    "options": [
+      "Consider impact and have a backout plan (and approval if required)",
+      "Skip testing to save time",
+      "Delete the logs first",
+      "Disable monitoring"
+    ],
+    "answer": 0,
+    "explanation": "Part of the methodology is weighing impact and preparing a rollback before implementing, especially for changes affecting many users.",
+    "objective": "Apply the troubleshooting methodology"
+  },
+  {
+    "id": "netplus-q175",
+    "objectiveId": "netplus-5.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "difficulty": "Advanced",
+    "prompt": "A long copper run shows errors that worsen with cable length and nearby motors. Which physical issue is most likely?",
+    "options": ["EMI/attenuation on an out-of-spec run", "A DNS misconfiguration", "An expired DHCP scope", "A wrong default gateway"],
+    "answer": 0,
+    "explanation": "Length-dependent errors near electrical equipment point to attenuation and electromagnetic interference; shorten the run, reroute, or use shielded cable or fiber.",
+    "objective": "Troubleshoot cabling and physical interface issues"
   }
 ]
