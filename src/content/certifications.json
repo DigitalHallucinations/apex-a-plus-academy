@@ -31,7 +31,7 @@
     "shortName": "Network+",
     "vendor": "CompTIA",
     "idPrefix": "netplus",
-    "description": "Vendor-neutral networking certification covering network concepts, implementation, operations, security, and troubleshooting. This starter track is a small, original sample built to exercise the multi-track platform — not full exam coverage.",
+    "description": "Vendor-neutral networking certification covering network concepts, implementation, operations, security, and troubleshooting. Original content with a dedicated lesson and practice set for every N10-009 exam objective.",
     "passThreshold": 0.8,
     "order": 2,
     "exams": [
@@ -50,7 +50,7 @@
     "shortName": "Security+",
     "vendor": "CompTIA",
     "idPrefix": "secplus",
-    "description": "Vendor-neutral baseline cybersecurity certification covering security concepts, threats and mitigations, security architecture, security operations, and governance. This starter track is a small, original sample built to exercise the multi-track platform — not full exam coverage.",
+    "description": "Vendor-neutral baseline cybersecurity certification covering security concepts, threats and mitigations, security architecture, security operations, and governance. Original content with a dedicated lesson and practice set for every SY0-701 exam objective.",
     "passThreshold": 0.83,
     "order": 3,
     "exams": [

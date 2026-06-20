@@ -30,8 +30,8 @@
     "resources": {
       "../src/content": "content"
     },
-    "shortDescription": "Offline-first certification learning and exam-prep desktop app, starting with CompTIA A+.",
-    "longDescription": "Offline-first certification learning and exam-prep desktop app, starting with CompTIA A+. A focused desktop learning environment with objective tracking, practice exams, spaced repetition, notes, bookmarks, and detailed analytics.",
+    "shortDescription": "Offline-first certification learning and exam-prep desktop app for CompTIA A+, Network+, and Security+.",
+    "longDescription": "Offline-first certification learning and exam-prep desktop app with tracks for CompTIA A+, Network+, and Security+. A focused desktop learning environment with per-track objective tracking, practice exams, spaced repetition, notes, bookmarks, and detailed analytics.",
     "category": "Education",
     "copyright": "Copyright 2026 ForgeWire Labs",
     "windows": {

@@ -2,7 +2,7 @@
 
 Offline-first certification learning and exam-preparation software.
 
-Current track: CompTIA A+.
+Tracks: CompTIA A+ · CompTIA Network+ · CompTIA Security+.
 
 > SkillForge Academy was previously developed under the working name Apex A+ Academy.
 
@@ -16,13 +16,14 @@ Current track: CompTIA A+.
 
 ## Why SkillForge Academy?
 
-CompTIA A+ preparation often means jumping between notes, flashcard sites, video courses, and generic quiz tools. SkillForge Academy brings those workflows together in a fast desktop application designed around active recall and measurable progress.
+CompTIA certification prep often means jumping between notes, flashcard sites, video courses, and generic quiz tools. SkillForge Academy brings those workflows together in a fast desktop application designed around active recall and measurable progress, with separate progress for each certification track you study.
 
 - **Study offline** with local-first learner data and no required account.
+- **Switch tracks** between CompTIA A+, Network+, and Security+ — each with its own progress, streaks, and analytics.
 - **Practice real decisions** through original troubleshooting and support scenarios.
 - **Target weak domains** with objective-level accuracy and readiness analytics.
 - **Remember more** using a spaced-repetition recall deck.
-- **Stay focused** in a polished environment built specifically for A+ preparation.
+- **Stay focused** in a polished environment built specifically for certification preparation.
 
 ## Screenshots
 
@@ -65,7 +66,7 @@ Build custom sessions for `220-1201`, `220-1202`, or both cores. Each original q
 
 ### Mock Exams
 
-Sit a full-length, timed, domain-weighted exam for `220-1201` or `220-1202`. Questions are drawn in proportion to the real objective weights, the timer counts down and auto-submits at zero, and there is no feedback until you finish — then you get a pass/fail result against a 75% line, a per-domain breakdown, and a full review.
+Sit a full-length, timed, domain-weighted exam for any track's exam. Questions are drawn in proportion to the real objective weights, the timer counts down and auto-submits at zero, and there is no feedback until you finish — then you get a pass/fail result against that track's official pass line (A+ 75%, Network+ 80%, Security+ 83%), a per-domain breakdown, and a full review.
 
 ### Performance-Based Questions
 
@@ -95,16 +96,24 @@ Export learner progress, notes, bookmarks, settings, daily activity, and spaced-
 
 Progress is stored locally through the Rust backend. The app does not require a cloud account or send learner activity to an external service.
 
-## Exam Coverage
+## Certification Tracks
 
-SkillForge Academy is organized around the current CompTIA A+ V15 exam series:
+SkillForge Academy ships three CompTIA tracks. Every published exam objective in each track has a dedicated lesson and a mapped practice set, and each track keeps its own progress, streaks, and analytics.
+
+| Track | Exam(s) | Objective coverage |
+| --- | --- | --- |
+| **CompTIA A+** | Core 1 `220-1201`, Core 2 `220-1202` (V15) | 63/63 objectives — 386 questions, 68 lessons |
+| **CompTIA Network+** | `N10-009` | 25/25 objectives — 173 questions, 41 lessons |
+| **CompTIA Security+** | `SY0-701` | 28/28 objectives — 193 questions, 41 lessons |
+
+The A+ track is organized around the current V15 series:
 
 | Exam | Domains covered |
 | --- | --- |
 | **Core 1: 220-1201** | Mobile Devices, Networking, Hardware, Virtualization and Cloud Computing, Hardware and Network Troubleshooting |
 | **Core 2: 220-1202** | Operating Systems, Security, Software Troubleshooting, Operational Procedures |
 
-The included practice material is original educational content. It does not contain exam dumps, recalled live exam questions, or proprietary CompTIA assessment content.
+All practice material across every track is original educational content. It does not contain exam dumps, recalled live exam questions, or proprietary CompTIA assessment content.
 
 ## Technology
 
@@ -230,17 +239,19 @@ The rename to SkillForge Academy **does not move or reset existing learner data*
 
 ## Project status
 
-SkillForge Academy is an active desktop MVP. The CompTIA A+ track is usable today, while content depth, accessibility testing, installer trust, and additional certification tracks remain ongoing work.
+SkillForge Academy is an active desktop MVP. Three CompTIA tracks — A+, Network+, and Security+ — are usable today with full objective coverage, while content depth, accessibility testing, installer trust, and additional certification tracks remain ongoing work.
 
 ## Roadmap
 
 Shipped:
 
+- Multi-certification platform: a content factory, per-track content directories, and a sidebar track switcher with per-track progress, streaks, and analytics
+- Three CompTIA tracks — A+ (V15), Network+ (N10-009), and Security+ (SY0-701) — each objective-complete with a lesson and a mapped practice set for every published exam objective
+- Per-track mock-exam pass thresholds derived from each exam's official scaled score
 - Objective/command search with a `Ctrl K` command palette
 - Encrypted backup restore and cross-device transfer with legacy JSON import support
 - Content banks moved to validated JSON loaded by the desktop backend
 - Spaced repetition upgraded to an SM-2 scheduler
-- Expanded original banks with 88 questions, 36 flashcards, and 8 PBQs
 - Dedicated PBQ simulations with matching, ordering, scoring, and explanations
 - Configurable full-length mock exams with custom question, PBQ, and time limits
 - Automated tagged Windows release builds and SHA-256 checksum publishing
@@ -249,6 +260,7 @@ Shipped:
 Next:
 
 - Continue expanding original assessment content and simulation formats
+- Add stable public screenshots and onboarding documentation
 - Add installer code signing when a trusted Windows certificate is available
 - Continue usability testing with keyboard-only and assistive-technology users
 
@@ -269,7 +281,7 @@ Licensed under the [Apache License, Version 2.0](LICENSE).
 
 ## Trademark Notice
 
-CompTIA, A+, and related marks are trademarks of CompTIA, Inc. SkillForge Academy is an independent educational project and is not affiliated with, sponsored by, or endorsed by CompTIA. Exam objectives and certification requirements may change; always compare your study plan with the official CompTIA materials.
+CompTIA, A+, Network+, Security+, and related marks are trademarks of CompTIA, Inc. SkillForge Academy is an independent educational project and is not affiliated with, sponsored by, or endorsed by CompTIA. Exam objectives and certification requirements may change; always compare your study plan with the official CompTIA materials.
 
 ---
 

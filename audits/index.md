@@ -1,6 +1,6 @@
 # Audit Index
 
-Last updated: 2026-06-18
+Last updated: 2026-06-20
 
 | ID | Title | Type | Status | Related Todo | Date |
 | --- | --- | --- | --- | --- | --- |
@@ -10,15 +10,15 @@ Last updated: 2026-06-18
 | [AUDIT-2026-06-17-network-plus-starter](AUDIT-2026-06-17-network-plus-starter.md) | Network+ Starter Track | content / implementation | passed-with-notes | [003](../work/completed/003-network-plus-starter-track/README.md) | 2026-06-17 |
 | [AUDIT-2026-06-17-security-plus-starter](AUDIT-2026-06-17-security-plus-starter.md) | Security+ Starter Track | content / implementation | passed-with-notes | [004](../work/completed/004-security-plus-starter-track/README.md) | 2026-06-17 |
 | [AUDIT-2026-06-18-objective-coverage](AUDIT-2026-06-18-objective-coverage.md) | Objective-by-Objective Curriculum Coverage | content / implementation | passed | [215](../work/completed/215-course-lessons-and-real-world-class-content/README.md) | 2026-06-18 |
+| [AUDIT-2026-06-20-multi-cert-release-readiness](AUDIT-2026-06-20-multi-cert-release-readiness.md) | Multi-Cert Brand, Docs, And Release Readiness | release / documentation | passed | [006](../work/completed/006-multi-cert-brand-docs-and-release-readiness/README.md) | 2026-06-20 |
 
 ## Next Recommended Audit
 
-A+, Network+, and Security+ starter tracks are all live. The next audits are the
-multi-cert release-readiness pass (`006`) and the plan-reconciliation audit
-(`007`):
+The multi-cert release-readiness pass (`006`) is complete. The remaining queued
+audit is the plan-reconciliation audit (`007`):
 
 ```text
-AUDIT-YYYY-MM-DD-multi-cert-release-readiness
+AUDIT-YYYY-MM-DD-multi-cert-plan-reconciliation
 ```
 
-Type: `release` plus `documentation`.
+Type: `audit` plus `architecture`.
