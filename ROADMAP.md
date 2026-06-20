@@ -19,6 +19,8 @@ progress, streaks, and analytics.
 - Course lessons and real-world class content alongside the assessment layer
 - Structured learning paths, objective search, and per-objective coverage analytics
 - Original practice questions, flashcards, and PBQs
+- Multi-select ("choose two/three") questions alongside single-answer MCQs and
+  matching/ordering PBQs
 - SM-2 spaced repetition
 - Configurable timed mock exams
 - Local analytics, notes, bookmarks, and progress tracking
@@ -28,7 +30,8 @@ progress, streaks, and analytics.
 
 ## Next
 
-- Expand original assessment content and simulation formats
+- Add further simulation formats (categorization, fill-in/CLI, hotspot) and
+  expand multi-select content
 - Add stable public screenshots and onboarding documentation
 - Add installer code signing when a trusted certificate is available
 - Continue keyboard-only and assistive-technology testing

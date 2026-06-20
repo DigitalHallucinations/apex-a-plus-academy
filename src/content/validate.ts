@@ -14,6 +14,26 @@ export interface ContentBundle {
 const DIFFICULTIES = ["Foundation", "Intermediate", "Advanced"];
 
 /**
+ * Validates an MCQ `answer`, which is a single option index or — for a
+ * multi-select ("choose TWO/THREE") question — an array of distinct indices.
+ * A multi-select must name at least two options and leave at least one wrong,
+ * so the set is meaningfully gradable. Returns any error strings found.
+ */
+function validateMcqAnswer(id: string, answer: unknown, optionCount: number): string[] {
+  const inRange = (n: unknown): n is number => Number.isInteger(n) && (n as number) >= 0 && (n as number) < optionCount;
+  if (Array.isArray(answer)) {
+    if (answer.length < 2) return [`Question ${id}: multi-select answer needs at least 2 indices`];
+    if (answer.length >= optionCount) return [`Question ${id}: multi-select answer cannot include every option`];
+    if (new Set(answer).size !== answer.length) return [`Question ${id}: multi-select answer has duplicate indices`];
+    const bad = answer.find(n => !inRange(n));
+    if (bad !== undefined) return [`Question ${id}: answer index ${bad} is out of range`];
+    return [];
+  }
+  if (!inRange(answer)) return [`Question ${id}: answer index ${answer} is out of range`];
+  return [];
+}
+
+/**
  * Validates a content bundle and returns a list of human-readable errors.
  * An empty array means the content is structurally sound. Shared by the
  * runtime loader (to reject malformed backend content) and the
@@ -120,8 +140,7 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
     else if (domainToCert.get(q.domain) !== q.certId) errors.push(`Question ${q.id}: domain "${q.domain}" does not belong to cert "${q.certId}"`);
     if (!DIFFICULTIES.includes(q.difficulty)) errors.push(`Question ${q.id}: invalid difficulty "${q.difficulty}"`);
     if (!Array.isArray(q.options) || q.options.length < 2) errors.push(`Question ${q.id}: needs at least 2 options`);
-    else if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= q.options.length)
-      errors.push(`Question ${q.id}: answer index ${q.answer} is out of range`);
+    else errors.push(...validateMcqAnswer(q.id, q.answer, q.options.length));
     if (!q.prompt?.trim()) errors.push(`Question ${q.id}: empty prompt`);
     if (!q.explanation?.trim()) errors.push(`Question ${q.id}: empty explanation`);
     if (!q.objective?.trim()) errors.push(`Question ${q.id}: empty objective`);

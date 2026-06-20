@@ -28,6 +28,23 @@ const readBank = (certId, file, required, errors) => {
 
 const DIFFICULTIES = ["Foundation", "Intermediate", "Advanced"];
 
+// Mirrors validateMcqAnswer in src/content/validate.ts: an MCQ answer is a single
+// option index, or an array of >= 2 distinct in-range indices that leaves at least
+// one wrong option (a multi-select "choose TWO/THREE" question).
+function validateMcqAnswer(id, answer, optionCount) {
+  const inRange = n => Number.isInteger(n) && n >= 0 && n < optionCount;
+  if (Array.isArray(answer)) {
+    if (answer.length < 2) return [`Question ${id}: multi-select answer needs at least 2 indices`];
+    if (answer.length >= optionCount) return [`Question ${id}: multi-select answer cannot include every option`];
+    if (new Set(answer).size !== answer.length) return [`Question ${id}: multi-select answer has duplicate indices`];
+    const bad = answer.find(n => !inRange(n));
+    if (bad !== undefined) return [`Question ${id}: answer index ${bad} out of range`];
+    return [];
+  }
+  if (!inRange(answer)) return [`Question ${id}: answer index ${answer} out of range`];
+  return [];
+}
+
 function validate(certifications, domains, questions, flashcards, pbqs, lessons, objectives) {
   const errors = [];
 
@@ -103,8 +120,7 @@ function validate(certifications, domains, questions, flashcards, pbqs, lessons,
     else if (domainToCert.get(q.domain) !== q.certId) errors.push(`Question ${q.id}: domain "${q.domain}" does not belong to cert "${q.certId}"`);
     if (!DIFFICULTIES.includes(q.difficulty)) errors.push(`Question ${q.id}: invalid difficulty "${q.difficulty}"`);
     if (!Array.isArray(q.options) || q.options.length < 2) errors.push(`Question ${q.id}: needs >= 2 options`);
-    else if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= q.options.length)
-      errors.push(`Question ${q.id}: answer index ${q.answer} out of range`);
+    else errors.push(...validateMcqAnswer(q.id, q.answer, q.options.length));
     for (const field of ["prompt", "explanation", "objective"])
       if (!q[field]?.trim()) errors.push(`Question ${q.id}: empty ${field}`);
   }

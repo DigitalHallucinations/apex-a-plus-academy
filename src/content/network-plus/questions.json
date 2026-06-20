@@ -2447,5 +2447,93 @@
     "answer": 0,
     "explanation": "Length-dependent errors near electrical equipment point to attenuation and electromagnetic interference; shorten the run, reroute, or use shielded cable or fiber.",
     "objective": "Troubleshoot cabling and physical interface issues"
+  },
+  {
+    "id": "netplus-q176",
+    "objectiveId": "netplus-1.4",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which protocols rely on UDP by default? (Choose TWO.)",
+    "options": [
+      "DHCP",
+      "DNS queries",
+      "HTTPS",
+      "SSH",
+      "FTP control"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "DHCP and standard DNS queries use UDP for speed. HTTPS, SSH, and FTP control rely on TCP for reliable, ordered delivery.",
+    "objective": "Explain common networking ports, protocols, services, and traffic types"
+  },
+  {
+    "id": "netplus-q177",
+    "objectiveId": "netplus-1.7",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which address ranges are RFC 1918 private IPv4 ranges? (Choose TWO.)",
+    "options": [
+      "10.0.0.0/8",
+      "172.16.0.0/12",
+      "8.8.8.0/24",
+      "1.1.1.0/24",
+      "100.64.0.0/10"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "10.0.0.0/8 and 172.16.0.0/12 (along with 192.168.0.0/16) are private ranges. 8.8.8.0/24 and 1.1.1.0/24 are public; 100.64.0.0/10 is CGNAT shared space.",
+    "objective": "Given a scenario, use appropriate IPv4 network addressing"
+  },
+  {
+    "id": "netplus-q178",
+    "objectiveId": "netplus-1.5",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Advanced",
+    "prompt": "Which transmission media are immune to electromagnetic interference? (Choose TWO.)",
+    "options": [
+      "Single-mode fiber",
+      "Multimode fiber",
+      "Unshielded twisted pair",
+      "Coaxial copper",
+      "Shielded twisted pair"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Fiber carries light, so single-mode and multimode fiber are unaffected by EMI. All copper media (UTP, coax, STP) remain susceptible to some degree.",
+    "objective": "Compare and contrast transmission media and transceivers"
+  },
+  {
+    "id": "netplus-q179",
+    "objectiveId": "netplus-1.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which devices primarily operate at Layer 2 of the OSI model? (Choose TWO.)",
+    "options": [
+      "Switch",
+      "Bridge",
+      "Router",
+      "Layer 3 firewall",
+      "DNS server"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Switches and bridges forward frames using MAC addresses at Layer 2. Routers and Layer 3 firewalls work at Layer 3; a DNS server is an application-layer service.",
+    "objective": "Compare and contrast networking appliances, applications, and functions"
   }
 ]

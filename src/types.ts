@@ -82,7 +82,12 @@ export interface Question {
   difficulty: Difficulty;
   prompt: string;
   options: string[];
-  answer: number;
+  /**
+   * The correct option index for a single-answer question, or an array of
+   * indices for a multi-select ("choose TWO/THREE") question. Multi-select is
+   * graded all-or-nothing: the selected set must match exactly.
+   */
+  answer: number | number[];
   explanation: string;
   /** Human-readable objective label shown in the UI. */
   objective: string;

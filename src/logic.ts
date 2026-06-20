@@ -273,6 +273,28 @@ export function buildMockExam(questions: Question[], pbqs: Pbq[], domains: Domai
 }
 
 /** Fractional score (0..1) for a PBQ response, supporting partial credit. */
+/** True if a question expects more than one selected option. */
+export function isMultiSelect(question: Pick<Question, "answer">): boolean {
+  return Array.isArray(question.answer);
+}
+
+/**
+ * Grades a multiple-choice answer, all-or-nothing. Single-answer questions
+ * compare the selected index; multi-select questions require the selected set
+ * to match the answer set exactly (order-independent).
+ */
+export function gradeMcq(question: Pick<Question, "answer">, response: unknown): boolean {
+  if (Array.isArray(question.answer)) {
+    if (!Array.isArray(response)) return false;
+    const want = new Set(question.answer);
+    const got = new Set(response as number[]);
+    if (want.size !== got.size) return false;
+    for (const i of want) if (!got.has(i)) return false;
+    return true;
+  }
+  return response === question.answer;
+}
+
 export function gradePbq(pbq: Pbq, response: unknown): number {
   if (pbq.kind === "matching") {
     const r = (response && typeof response === "object" ? response : {}) as Record<string, string>;
@@ -301,7 +323,7 @@ export interface MockGrade {
 /** Grades a finished mock exam. MCQs score 1/0; PBQs award partial credit. */
 export function scoreMock(
   items: MockItem[],
-  mcqAnswers: Record<string, number>,
+  mcqAnswers: Record<string, number | number[]>,
   pbqResponses: Record<string, unknown>,
   passThreshold = MOCK_PASS
 ): MockGrade {
@@ -311,7 +333,7 @@ export function scoreMock(
   for (const it of items) {
     const domain = it.type === "mcq" ? it.question.domain : it.pbq.domain;
     const frac = it.type === "mcq"
-      ? (mcqAnswers[it.question.id] === it.question.answer ? 1 : 0)
+      ? (gradeMcq(it.question, mcqAnswers[it.question.id]) ? 1 : 0)
       : gradePbq(it.pbq, pbqResponses[it.pbq.id]);
     earned += frac;
     domainScores[domain] ||= { correct: 0, total: 0 };

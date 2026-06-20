@@ -15,7 +15,7 @@ import {
   initialState, pct, shuffle, formatTime, dateKey, questionsToday, applyStudyActivity,
   recordAnswer, scheduleCard, isCardDue, domainMastery, migrateState,
   activeProgress, patchProgress, isCertAvailable, sortCertifications, resolveActiveCert,
-  buildNotifications, buildMockExam, scoreMock, gradePbq, MOCK_PASS, MOCK_DEFAULT_QUESTIONS,
+  buildNotifications, buildMockExam, scoreMock, gradePbq, gradeMcq, isMultiSelect, MOCK_PASS, MOCK_DEFAULT_QUESTIONS,
   MOCK_DEFAULT_MINUTES, type MockItem
 } from "./logic";
 
@@ -326,6 +326,28 @@ function Learn({ state, setState, setView }: { state:LearnerState; setState:Reac
   </>;
 }
 
+type McqSelection = number | number[];
+/** True if an option index is part of the current selection (single or multi). */
+const isOptionSelected = (sel: McqSelection | undefined, oi: number) => Array.isArray(sel) ? sel.includes(oi) : sel === oi;
+/** True if an option index is (one of) the correct answer(s). */
+const isOptionCorrect = (q: Question, oi: number) => Array.isArray(q.answer) ? q.answer.includes(oi) : q.answer === oi;
+/** True if the learner has made any selection for this question. */
+const hasMcqSelection = (sel: McqSelection | undefined) => Array.isArray(sel) ? sel.length > 0 : sel !== undefined;
+/** Next selection after clicking option `oi`: replace for single, toggle for multi. */
+const nextMcqSelection = (sel: McqSelection | undefined, oi: number, multi: boolean): McqSelection => {
+  if (!multi) return oi;
+  const arr = Array.isArray(sel) ? sel : [];
+  return arr.includes(oi) ? arr.filter(x => x !== oi) : [...arr, oi];
+};
+/** Comma-joined option text for a learner's selection. */
+const formatMcqSelection = (q: Question, sel: McqSelection | undefined) => {
+  const idxs = sel === undefined ? [] : Array.isArray(sel) ? sel : [sel];
+  const text = idxs.map(i => q.options[i]).filter(Boolean).join(", ");
+  return text || "Unanswered";
+};
+/** Comma-joined option text for the correct answer(s). */
+const formatMcqCorrect = (q: Question) => (Array.isArray(q.answer) ? q.answer : [q.answer]).map(i => q.options[i]).join(", ");
+
 function Practice({ state, setState }: { state:LearnerState; setState:React.Dispatch<React.SetStateAction<LearnerState>> }) {
   const { certifications, domains, questions } = useContent();
   const cert = certifications.find(c => c.id === state.activeCertId) ?? certifications[0];
@@ -335,7 +357,7 @@ function Practice({ state, setState }: { state:LearnerState; setState:React.Disp
   const [count, setCount] = useState(10);
   const [session, setSession] = useState<Question[]>([]);
   const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string,number>>({});
+  const [answers, setAnswers] = useState<Record<string,McqSelection>>({});
   const [order, setOrder] = useState<Record<string,number[]>>({});
   const [revealed, setRevealed] = useState(false);
   const [elapsed, setElapsed] = useState(0);
@@ -347,12 +369,12 @@ function Practice({ state, setState }: { state:LearnerState; setState:React.Disp
     setSession(picked);setOrder(ord);setIndex(0);setAnswers({});setElapsed(0);setRevealed(false);setMode("active");
   };
   const finish = () => {
-    const score=session.filter(q=>answers[q.id]===q.answer).length;
-    const ds:Attempt["domainScores"]={}; session.forEach(q=>{ds[q.domain] ||= {correct:0,total:0};ds[q.domain].total++;if(answers[q.id]===q.answer)ds[q.domain].correct++;});
+    const score=session.filter(q=>gradeMcq(q,answers[q.id])).length;
+    const ds:Attempt["domainScores"]={}; session.forEach(q=>{ds[q.domain] ||= {correct:0,total:0};ds[q.domain].total++;if(gradeMcq(q,answers[q.id]))ds[q.domain].correct++;});
     const attempt:Attempt={id:crypto.randomUUID(),certId:state.activeCertId,date:new Date().toISOString(),exam,score,total:session.length,durationSec:elapsed,domainScores:ds};
     setState(s=>{
       const answered={...s.answered};
-      session.forEach(q=>{answered[q.id]=recordAnswer(answered[q.id],answers[q.id]===q.answer);});
+      session.forEach(q=>{answered[q.id]=recordAnswer(answered[q.id],gradeMcq(q,answers[q.id]));});
       const next=patchProgress(s,applyStudyActivity(activeProgress(s),session.length));
       return {...next,answered,attempts:[...s.attempts,attempt]};
     });
@@ -360,9 +382,9 @@ function Practice({ state, setState }: { state:LearnerState; setState:React.Disp
   };
   if(!certQuestions.length) return <><PageHead eyebrow="ADAPTIVE PRACTICE" title="Practice lab" subtitle="Choose a target, enter focus mode, and learn from every explanation."/><Empty message="No practice questions are available for this track yet."/></>;
   if(mode==="setup") return <><PageHead eyebrow="ADAPTIVE PRACTICE" title="Practice lab" subtitle="Choose a target, enter focus mode, and learn from every explanation."/><div className="setup-grid"><div className="panel setup-main"><h3>Build your session</h3><label>Exam track</label><div className="option-grid">{[...cert.exams.map(e=>e.id), "Mixed"].map(x=>{const meta=cert.exams.find(e=>e.id===x);return <button key={x} className={exam===x?"selected":""} onClick={()=>setExam(x)}><span>{x==="Mixed"?<Brain/>:<Activity/>}</span><b>{x==="Mixed"?"Mixed":(meta?.name||x)}</b><small>{x==="Mixed"?"All exams":x}</small></button>})}</div><label>Question count</label><div className="count-picker">{[5,10,15,20].map(x=><button key={x} className={count===x?"selected":""} onClick={()=>setCount(x)}>{x}</button>)}</div><button className="primary wide launch" onClick={start}><Play/> Launch session</button></div><div className="panel setup-side"><span className="pill purple"><Sparkles/> SESSION PREVIEW</span><h2>{Math.min(count,exam==="Mixed"?certQuestions.length:certQuestions.filter(q=>q.exam===exam).length)} questions</h2><div className="preview-row"><Clock3/><div><b>Estimated time</b><small>{Math.min(count,20)*1.5} minutes</small></div></div><div className="preview-row"><Target/><div><b>Coverage</b><small>{exam === "Mixed" ? `All ${cert.shortName} domains` : `Weighted ${exam} mix`}</small></div></div><div className="preview-row"><CircleHelp/><div><b>Learning mode</b><small>Explanations available after answering</small></div></div></div></div></>;
-  if(mode==="results") { const score=session.filter(q=>answers[q.id]===q.answer).length; return <><PageHead eyebrow="SESSION COMPLETE" title="Your results" subtitle="Review what clicked and turn misses into your next study plan."/><div className="results panel"><div className={`result-ring ${pct(score,session.length)>=75?"pass":""}`}><b>{pct(score,session.length)}%</b><span>{score} of {session.length}</span></div><h2>{pct(score,session.length)>=75?"Strong work.":"Good baseline. Keep sharpening."}</h2><p>{pct(score,session.length)>=75?"Your decisions are trending toward exam readiness.":"Review the explanations below, then run a focused domain drill."}</p><div className="result-actions"><button className="primary" onClick={()=>setMode("setup")}><RotateCcw/> New session</button></div></div><div className="review-list">{session.map((q,i)=>{const ok=answers[q.id]===q.answer;return <div className={`panel review ${ok?"correct":"wrong"}`} key={q.id}><span>{ok?<Check/>:<X/>}</span><div><small>QUESTION {i+1} · {q.objective}</small><b>{q.prompt}</b><p><strong>Your answer:</strong> {q.options[answers[q.id]] || "Unanswered"}</p>{!ok&&<p><strong>Correct:</strong> {q.options[q.answer]}</p>}<em>{q.explanation}</em></div></div>})}</div></>; }
-  const q=session[index]; const selected=answers[q.id]; const isLast=index===session.length-1;
-  return <div className="exam-shell"><div className="exam-top"><button className="ghost" onClick={()=>setMode("setup")}><X/> Exit</button><div><span>QUESTION {index+1} OF {session.length}</span><div className="exam-progress"><i style={{width:`${pct(index+1,session.length)}%`}}/></div></div><div className="timer"><Clock3/>{formatTime(elapsed)}</div></div><div className="question-card panel"><div className="question-meta"><span>{q.exam}</span><span>{domains.find(d=>d.id===q.domain)?.name}</span><span>{q.difficulty}</span><button className={state.bookmarks.includes(q.id)?"saved":""} aria-label={state.bookmarks.includes(q.id)?"Remove bookmark":"Bookmark this question"} aria-pressed={state.bookmarks.includes(q.id)} onClick={()=>setState(s=>({...s,bookmarks:s.bookmarks.includes(q.id)?s.bookmarks.filter(x=>x!==q.id):[...s.bookmarks,q.id]}))}><Bookmark/></button></div><h2>{q.prompt}</h2><div className="answers">{(order[q.id]||q.options.map((_,i)=>i)).map((oi,k)=>{const opt=q.options[oi];const cls=revealed?(oi===q.answer?"correct":selected===oi?"wrong":""):selected===oi?"selected":"";return <button key={oi} className={cls} disabled={revealed} aria-label={`Option ${String.fromCharCode(65+k)}: ${opt}`} onClick={()=>setAnswers(a=>({...a,[q.id]:oi}))}><span>{String.fromCharCode(65+k)}</span><b>{opt}</b>{revealed&&oi===q.answer&&<Check/>}{revealed&&selected===oi&&oi!==q.answer&&<X/>}</button>})}</div>{revealed&&<div className="explanation"><Sparkles/><div><b>{selected===q.answer?"Exactly right":"Key takeaway"}</b><p>{q.explanation}</p><small>OBJECTIVE · {q.objective}</small></div></div>}<div className="question-actions"><button className="ghost" disabled={index===0} onClick={()=>{setIndex(i=>i-1);setRevealed(false)}}><ChevronLeft/> Previous</button>{!revealed?<button className="primary" disabled={selected===undefined} onClick={()=>setRevealed(true)}>Check answer</button>:<button className="primary" onClick={()=>{if(isLast)finish();else{setIndex(i=>i+1);setRevealed(false)}}}>{isLast?"Finish session":"Next question"}<ChevronRight/></button>}</div></div></div>;
+  if(mode==="results") { const score=session.filter(q=>gradeMcq(q,answers[q.id])).length; return <><PageHead eyebrow="SESSION COMPLETE" title="Your results" subtitle="Review what clicked and turn misses into your next study plan."/><div className="results panel"><div className={`result-ring ${pct(score,session.length)>=75?"pass":""}`}><b>{pct(score,session.length)}%</b><span>{score} of {session.length}</span></div><h2>{pct(score,session.length)>=75?"Strong work.":"Good baseline. Keep sharpening."}</h2><p>{pct(score,session.length)>=75?"Your decisions are trending toward exam readiness.":"Review the explanations below, then run a focused domain drill."}</p><div className="result-actions"><button className="primary" onClick={()=>setMode("setup")}><RotateCcw/> New session</button></div></div><div className="review-list">{session.map((q,i)=>{const ok=gradeMcq(q,answers[q.id]);return <div className={`panel review ${ok?"correct":"wrong"}`} key={q.id}><span>{ok?<Check/>:<X/>}</span><div><small>QUESTION {i+1} · {q.objective}</small><b>{q.prompt}</b><p><strong>Your answer:</strong> {formatMcqSelection(q,answers[q.id])}</p>{!ok&&<p><strong>Correct:</strong> {formatMcqCorrect(q)}</p>}<em>{q.explanation}</em></div></div>})}</div></>; }
+  const q=session[index]; const selected=answers[q.id]; const multi=isMultiSelect(q); const isLast=index===session.length-1;
+  return <div className="exam-shell"><div className="exam-top"><button className="ghost" onClick={()=>setMode("setup")}><X/> Exit</button><div><span>QUESTION {index+1} OF {session.length}</span><div className="exam-progress"><i style={{width:`${pct(index+1,session.length)}%`}}/></div></div><div className="timer"><Clock3/>{formatTime(elapsed)}</div></div><div className="question-card panel"><div className="question-meta"><span>{q.exam}</span><span>{domains.find(d=>d.id===q.domain)?.name}</span><span>{q.difficulty}</span><button className={state.bookmarks.includes(q.id)?"saved":""} aria-label={state.bookmarks.includes(q.id)?"Remove bookmark":"Bookmark this question"} aria-pressed={state.bookmarks.includes(q.id)} onClick={()=>setState(s=>({...s,bookmarks:s.bookmarks.includes(q.id)?s.bookmarks.filter(x=>x!==q.id):[...s.bookmarks,q.id]}))}><Bookmark/></button></div><h2>{q.prompt}</h2>{multi&&<p className="mcq-hint">Select {(q.answer as number[]).length} answers.</p>}<div className="answers">{(order[q.id]||q.options.map((_,i)=>i)).map((oi,k)=>{const opt=q.options[oi];const sel=isOptionSelected(selected,oi);const corr=isOptionCorrect(q,oi);const cls=revealed?(corr?"correct":sel?"wrong":""):sel?"selected":"";return <button key={oi} className={cls} disabled={revealed} role={multi?"checkbox":undefined} aria-checked={multi?sel:undefined} aria-label={`Option ${String.fromCharCode(65+k)}: ${opt}`} onClick={()=>setAnswers(a=>({...a,[q.id]:nextMcqSelection(a[q.id],oi,multi)}))}><span>{String.fromCharCode(65+k)}</span><b>{opt}</b>{revealed&&corr&&<Check/>}{revealed&&sel&&!corr&&<X/>}</button>})}</div>{revealed&&<div className="explanation"><Sparkles/><div><b>{gradeMcq(q,selected)?"Exactly right":"Key takeaway"}</b><p>{q.explanation}</p><small>OBJECTIVE · {q.objective}</small></div></div>}<div className="question-actions"><button className="ghost" disabled={index===0} onClick={()=>{setIndex(i=>i-1);setRevealed(false)}}><ChevronLeft/> Previous</button>{!revealed?<button className="primary" disabled={!hasMcqSelection(selected)} onClick={()=>setRevealed(true)}>Check answer</button>:<button className="primary" onClick={()=>{if(isLast)finish();else{setIndex(i=>i+1);setRevealed(false)}}}>{isLast?"Finish session":"Next question"}<ChevronRight/></button>}</div></div></div>;
 }
 
 type PbqResponse = Record<string, string> | string[];
@@ -439,7 +461,7 @@ function MockExam({ state, setState }: { state:LearnerState; setState:React.Disp
   const [requestedPbqs, setRequestedPbqs] = useState(3);
   const [items, setItems] = useState<MockItem[]>([]);
   const [index, setIndex] = useState(0);
-  const [mcqAnswers, setMcqAnswers] = useState<Record<string,number>>({});
+  const [mcqAnswers, setMcqAnswers] = useState<Record<string,McqSelection>>({});
   const [responses, setResponses] = useState<Record<string,PbqResponse>>({});
   const [order, setOrder] = useState<Record<string,number[]>>({});
   const [remaining, setRemaining] = useState(0);
@@ -456,7 +478,7 @@ function MockExam({ state, setState }: { state:LearnerState; setState:React.Disp
     const attempt: Attempt = { id: crypto.randomUUID(), certId: state.activeCertId, date: new Date().toISOString(), exam, score: Math.round(g.earned), total: g.total, durationSec: minutes*60 - remaining, domainScores: g.domainScores, kind: "mock", passed: g.passed };
     setState(s=>{
       const answered={...s.answered};
-      mcqItems.forEach(it=>{ if(it.type==="mcq") answered[it.question.id]=recordAnswer(answered[it.question.id], mcqAnswers[it.question.id]===it.question.answer); });
+      mcqItems.forEach(it=>{ if(it.type==="mcq") answered[it.question.id]=recordAnswer(answered[it.question.id], gradeMcq(it.question, mcqAnswers[it.question.id])); });
       const next=patchProgress(s,applyStudyActivity(activeProgress(s), mcqItems.length));
       return {...next, answered, attempts:[...s.attempts, attempt]};
     });
@@ -478,7 +500,7 @@ function MockExam({ state, setState }: { state:LearnerState; setState:React.Disp
     setItems(built); setOrder(ord); setResponses(resp); setMcqAnswers({}); setIndex(0); setRemaining(minutes*60); setGrade(null); setPhase("active");
   };
 
-  const answeredCount = items.filter(it=> it.type==="mcq" ? mcqAnswers[it.question.id]!==undefined : true).length;
+  const answeredCount = items.filter(it=> it.type==="mcq" ? hasMcqSelection(mcqAnswers[it.question.id]) : true).length;
 
   if(!certQuestions.length) return <><PageHead eyebrow="EXAM SIMULATION" title="Mock exam" subtitle="A full-length, timed, domain-weighted exam. No feedback until you submit — just like the real thing."/><Empty message="No mock-exam questions are available for this track yet."/></>;
   if(phase==="setup") return <>
@@ -508,7 +530,7 @@ function MockExam({ state, setState }: { state:LearnerState; setState:React.Disp
       </div>
       <div className="panel chart-panel"><div className="panel-title"><div><span>DOMAIN BREAKDOWN</span><h3>Score by domain</h3></div></div><ResponsiveContainer width="100%" height={Math.max(160, rows.length*42)}><BarChart data={rows} layout="vertical" margin={{left:15}}><CartesianGrid strokeDasharray="3 3" stroke="var(--line)"/><XAxis type="number" domain={[0,100]} stroke="var(--muted)"/><YAxis dataKey="name" type="category" width={80} stroke="var(--muted)"/><Tooltip contentStyle={{background:"var(--panel)",border:"1px solid var(--line)"}}/><Bar dataKey="score" radius={[0,6,6,0]}>{rows.map(r=><Cell key={r.name} fill={r.color}/>)}</Bar></BarChart></ResponsiveContainer></div>
       <div className="review-list">{items.map((it,i)=>{
-        if(it.type==="mcq"){ const q=it.question; const ok=mcqAnswers[q.id]===q.answer; return <div className={`panel review ${ok?"correct":"wrong"}`} key={q.id}><span>{ok?<Check/>:<X/>}</span><div><small>QUESTION {i+1} · {q.objective}</small><b>{q.prompt}</b><p><strong>Your answer:</strong> {q.options[mcqAnswers[q.id]]||"Unanswered"}</p>{!ok&&<p><strong>Correct:</strong> {q.options[q.answer]}</p>}<em>{q.explanation}</em></div></div>; }
+        if(it.type==="mcq"){ const q=it.question; const ok=gradeMcq(q,mcqAnswers[q.id]); return <div className={`panel review ${ok?"correct":"wrong"}`} key={q.id}><span>{ok?<Check/>:<X/>}</span><div><small>QUESTION {i+1} · {q.objective}</small><b>{q.prompt}</b><p><strong>Your answer:</strong> {formatMcqSelection(q,mcqAnswers[q.id])}</p>{!ok&&<p><strong>Correct:</strong> {formatMcqCorrect(q)}</p>}<em>{q.explanation}</em></div></div>; }
         const p=it.pbq; const frac=gradePbq(p, responses[p.id]); const ok=frac===1; return <div className={`panel review ${ok?"correct":"wrong"}`} key={p.id}><span>{ok?<Check/>:<X/>}</span><div><small>PBQ {i+1} · {p.objective} · {Math.round(frac*100)}% credit</small><b>{p.prompt}</b><PbqView pbq={p} response={responses[p.id]} onChange={()=>{}} revealed/><em>{p.explanation}</em></div></div>;
       })}</div>
     </>;
@@ -521,10 +543,10 @@ function MockExam({ state, setState }: { state:LearnerState; setState:React.Disp
     <div className={`timer ${remaining<=60?"low":""}`}><Clock3/>{formatTime(remaining)}</div>
   </div>
   <div className="question-card panel">
-    {item.type==="mcq" ? (()=>{ const q=item.question; const selected=mcqAnswers[q.id]; return <>
+    {item.type==="mcq" ? (()=>{ const q=item.question; const selected=mcqAnswers[q.id]; const multi=isMultiSelect(q); return <>
       <div className="question-meta"><span>{q.exam}</span><span>{domains.find(d=>d.id===q.domain)?.name}</span><span>{q.difficulty}</span></div>
-      <h2>{q.prompt}</h2>
-      <div className="answers">{(order[q.id]||q.options.map((_,i)=>i)).map((oi,k)=>{const cls=selected===oi?"selected":"";return <button key={oi} className={cls} aria-label={`Option ${String.fromCharCode(65+k)}: ${q.options[oi]}`} onClick={()=>setMcqAnswers(a=>({...a,[q.id]:oi}))}><span>{String.fromCharCode(65+k)}</span><b>{q.options[oi]}</b></button>})}</div>
+      <h2>{q.prompt}</h2>{multi&&<p className="mcq-hint">Select {(q.answer as number[]).length} answers.</p>}
+      <div className="answers">{(order[q.id]||q.options.map((_,i)=>i)).map((oi,k)=>{const sel=isOptionSelected(selected,oi);const cls=sel?"selected":"";return <button key={oi} className={cls} role={multi?"checkbox":undefined} aria-checked={multi?sel:undefined} aria-label={`Option ${String.fromCharCode(65+k)}: ${q.options[oi]}`} onClick={()=>setMcqAnswers(a=>({...a,[q.id]:nextMcqSelection(a[q.id],oi,multi)}))}><span>{String.fromCharCode(65+k)}</span><b>{q.options[oi]}</b></button>})}</div>
     </>; })() : <>
       <div className="question-meta"><span>{item.pbq.exam}</span><span>{domains.find(d=>d.id===item.pbq.domain)?.name}</span><span className="pbq-tag">PBQ</span></div>
       <h2>{item.pbq.prompt}</h2>

@@ -3,7 +3,7 @@ import {
   pct, formatTime, shuffle, dateKey, questionsToday, applyStudyActivity, recordAnswer,
   scheduleCard, isCardDue, domainMastery, masteredCount, objectiveStats, migrateState,
   buildNotifications, initialState, SCHEMA_VERSION,
-  buildWeightedQuestionSet, buildMockExam, gradePbq, scoreMock, type MockItem,
+  buildWeightedQuestionSet, buildMockExam, gradePbq, gradeMcq, isMultiSelect, scoreMock, type MockItem,
   isCertAvailable, sortCertifications, resolveActiveCert
 } from "./logic";
 import type { AnsweredStat, Certification, CertProgress, Domain, LearnerState, Pbq, Question } from "./types";
@@ -289,6 +289,29 @@ describe("PBQ grading (partial credit)", () => {
   });
 });
 
+describe("MCQ grading (single and multi-select)", () => {
+  const single: Question = { ...q("s", "net", "obj"), options: ["a", "b", "c", "d"], answer: 2 };
+  const multi: Question = { ...q("m", "net", "obj"), options: ["a", "b", "c", "d"], answer: [0, 2] };
+  it("identifies multi-select questions", () => {
+    expect(isMultiSelect(single)).toBe(false);
+    expect(isMultiSelect(multi)).toBe(true);
+  });
+  it("grades a single-answer question by index match", () => {
+    expect(gradeMcq(single, 2)).toBe(true);
+    expect(gradeMcq(single, 1)).toBe(false);
+    expect(gradeMcq(single, undefined)).toBe(false);
+  });
+  it("grades multi-select all-or-nothing, order-independent", () => {
+    expect(gradeMcq(multi, [0, 2])).toBe(true);
+    expect(gradeMcq(multi, [2, 0])).toBe(true);
+    expect(gradeMcq(multi, [0])).toBe(false);      // too few
+    expect(gradeMcq(multi, [0, 2, 1])).toBe(false); // too many
+    expect(gradeMcq(multi, [0, 1])).toBe(false);    // wrong member
+    expect(gradeMcq(multi, undefined)).toBe(false);
+    expect(gradeMcq(multi, 0)).toBe(false);          // non-array against multi
+  });
+});
+
 describe("mock exam: scoring and assembly", () => {
   const pbq: Pbq = {
     id: "p1", certId: "a-plus", kind: "ordering", exam: "220-1201", domain: "net", difficulty: "Foundation", prompt: "", objective: "", explanation: "",
@@ -316,6 +339,12 @@ describe("mock exam: scoring and assembly", () => {
     const g = scoreMock(items, { q1: 0, q2: 1 }, { p1: ["s1", "s2"] }, 0.6);
     expect(g.pct).toBe(67);
     expect(g.passed).toBe(true);
+  });
+  it("scores a multi-select MCQ all-or-nothing within a mock", () => {
+    const ms: Question = { ...q("ms", "net", "obj"), options: ["a", "b", "c", "d"], answer: [1, 3] };
+    const msItems: MockItem[] = [{ type: "mcq", question: ms }];
+    expect(scoreMock(msItems, { ms: [1, 3] }, {}).earned).toBe(1);
+    expect(scoreMock(msItems, { ms: [1] }, {}).earned).toBe(0);
   });
   it("places PBQs before MCQs in a built exam", () => {
     const domains: Domain[] = [{ id: "net", certId: "a-plus", exam: "220-1201", name: "Networking", weight: 100, color: "#000", description: "", topics: [] }];

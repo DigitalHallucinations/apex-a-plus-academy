@@ -2770,5 +2770,93 @@
     "answer": 0,
     "explanation": "Trained users who report anomalies extend detection beyond tooling, helping incidents get caught and escalated sooner.",
     "objective": "Implement security awareness practices"
+  },
+  {
+    "id": "secplus-q194",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "objectiveId": "secplus-1.2",
+    "domain": "secplus-concepts",
+    "difficulty": "Foundation",
+    "prompt": "Which goals make up the classic CIA triad? (Choose TWO.)",
+    "options": [
+      "Confidentiality",
+      "Integrity",
+      "Authentication",
+      "Accounting",
+      "Non-repudiation"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "The CIA triad is Confidentiality, Integrity, and Availability. Authentication, accounting, and non-repudiation are important but are not part of the triad itself.",
+    "objective": "Summarize fundamental security concepts"
+  },
+  {
+    "id": "secplus-q195",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "objectiveId": "secplus-1.4",
+    "domain": "secplus-concepts",
+    "difficulty": "Intermediate",
+    "prompt": "Which algorithms are symmetric (use a single shared key)? (Choose TWO.)",
+    "options": [
+      "AES",
+      "3DES",
+      "RSA",
+      "ECC",
+      "Diffie-Hellman"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "AES and 3DES are symmetric block ciphers using one shared key. RSA and ECC are asymmetric, and Diffie-Hellman is an asymmetric key-exchange method.",
+    "objective": "Explain the importance of using appropriate cryptographic solutions"
+  },
+  {
+    "id": "secplus-q196",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "objectiveId": "secplus-2.2",
+    "domain": "secplus-threats",
+    "difficulty": "Intermediate",
+    "prompt": "Which of the following are message-based threat vectors? (Choose TWO.)",
+    "options": [
+      "Phishing email",
+      "Smishing (SMS)",
+      "Unpatched firmware",
+      "Open service port",
+      "Default credentials"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Phishing email and smishing deliver attacks through messages. Unpatched firmware, open ports, and default credentials are attack surfaces, not message vectors.",
+    "objective": "Explain common threat vectors and attack surfaces"
+  },
+  {
+    "id": "secplus-q197",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "objectiveId": "secplus-2.4",
+    "domain": "secplus-threats",
+    "difficulty": "Advanced",
+    "prompt": "Which indicators most directly suggest a possible account compromise? (Choose TWO.)",
+    "options": [
+      "Impossible-travel logins",
+      "Repeated failed logins followed by a success",
+      "Higher monitor brightness",
+      "A scheduled OS update",
+      "A new desktop wallpaper"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Impossible-travel sign-ins and a burst of failed logins ending in success are classic compromise indicators. The remaining options are benign.",
+    "objective": "Given a scenario, analyze indicators of malicious activity"
   }
 ]
