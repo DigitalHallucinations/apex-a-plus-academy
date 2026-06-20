@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "007",
+  "title": "TODO-007: Multi-Certification Plan Reconciliation Audit",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Deliver the outcome described in the imported plan narrative (`todos/TODO-007-multi-cert-plan-reconciliation-audit.md`).",
+      "state": "met",
+      "evidence": [
+        "audits/AUDIT-2026-06-20-multi-cert-plan-reconciliation.md: per-section reconciliation table, stale-reference findings, status passed",
+        "docs/multi-certification-plan.md: marked HISTORICAL with pointer banner; Phase 3 row marked DONE; design-only intro softened",
+        "Verified against code: ExamCode retired (0 refs), banks moved to src/content/<cert>/, SCHEMA_VERSION=3, lib.rs loader/title reconciled",
+        "No uncovered plan item needs a new todo; forward work covered by 303/304/305 + 210/214",
+        "Recorded that tracking/* is archived; work/ + audits/ are the live record"
+      ]
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-20",
+  "source": "todos/TODO-007-multi-cert-plan-reconciliation-audit.md"
+}

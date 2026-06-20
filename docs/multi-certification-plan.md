@@ -1,5 +1,19 @@
 # SkillForge Academy — Multi-Certification Architecture Plan
 
+> **Status: HISTORICAL — implemented and superseded.** This is the original
+> design document (2026-06-14). All five phases, including Phase 3 (Network+ and
+> Security+ content + brand pass), have shipped, and all three tracks are
+> objective-complete. It is preserved for design rationale, not as current
+> state. For the implemented reality see: `CHANGELOG.md` (shipped behavior),
+> `docs/certification-authoring.md` (how to add a track), `ROADMAP.md` (current
+> tracks), the `work/` queue (live work), and `audits/` (verification —
+> including `AUDIT-2026-06-20-multi-cert-plan-reconciliation.md`, which records
+> this reconciliation). Note: several inline file paths and line numbers below
+> reflect the pre-split layout (A+ banks at `src/content/*.json`, the `ExamCode`
+> union, original `lib.rs`/`App.tsx` lines) and are stale — content now lives
+> under `src/content/<cert>/`, `ExamCode` was retired for `ExamId`, and the type
+> manifest gained `idPrefix`/`order`/`status` fields not shown in §2.1.
+
 **Status:** Draft for review · **Date:** 2026-06-14
 **Decisions locked in:** (1) single app with a track picker, not separate editions;
 (2) CompTIA stack first — A+ → Network+ → Security+; (3) **per-cert** progress
@@ -12,7 +26,7 @@ progress. See §2.3.
 
 This document defines the **target data model** and a **lossless migration** that turns
 "Apex A+ Academy" into "SkillForge Academy," with A+ as the first of several certification
-*tracks*. It is design-only; no call sites change until this is approved.
+*tracks*. (Originally design-only; since implemented across all phases — see the historical banner above.)
 
 ---
 
@@ -232,10 +246,12 @@ if (!progress["a-plus"]) progress["a-plus"] = {
 | **0 — Scaffold** ✅ **DONE** | Added manifest + cert types; moved A+ banks into `a-plus/` (stamped `certId`); Rust loader walks cert dirs; bundled fallback imports per-cert; validation is manifest-driven (cert/exam refs + prefix + uniqueness). A+ is still the only track and the app behaves identically. | `types.ts`, `content/index.ts`, `content/validate.ts`, `lib.rs`, `scripts/validate-content.mjs`, `certifications.json`, `tauri.conf.json` |
 | **1 — State** ✅ **DONE** | Migrated to schema v3 `progress` buckets + `activeCertId`; `Attempt.certId`; per-cert `applyStudyActivity`/`questionsToday`; cert-scoped dashboard, notifications, analytics; all-tracks overview panel. A+ still the only track. | `logic.ts`, `App.tsx`, `Analytics.tsx`, `logic.test.ts`, `types.ts` |
 | **2 — UI** ✅ **DONE** | Sidebar track switcher sets `activeCertId` (cert-stateful views keyed to remount on switch); Learn/Practice/PbqLab/Mock exam toggles and mock defaults read from `cert.exams`; Practice/Mock/PbqLab/Flashcards/CommandPalette pools scoped by active track. `ExamCode` retired in favor of `ExamId`. `View` type unchanged. | `App.tsx`, `styles.css`, `types.ts`, `logic.ts` |
-| **3 — Content + brand** | Author Network+ (`N10-009`) and Security+ (`SY0-701`) banks; brand pass: product name, window title ([lib.rs:97](../src-tauri/src/lib.rs)), `tauri.conf.json`, README, icon. | `content/network-plus/*`, `content/security-plus/*`, README, Tauri config |
+| **3 — Content + brand** ✅ **DONE** | Authored Network+ (`N10-009`) and Security+ (`SY0-701`) banks — both objective-complete; brand pass shipped: product name, window title, `tauri.conf.json`, README, icon all read "SkillForge Academy". | `content/network-plus/*`, `content/security-plus/*`, README, Tauri config |
 
-Phases 0–2 ship with A+ only and zero user-visible change beyond the track picker — they're
-pure de-risking. Phase 3 is where "SkillForge Academy" actually becomes multi-cert.
+Phases 0–2 shipped with A+ only and zero user-visible change beyond the track picker — they were
+pure de-risking. Phase 3 is where "SkillForge Academy" became multi-cert; it has shipped, and the
+content depth went beyond the original "starter track" intent — all three tracks are now
+objective-complete (every published exam objective has a lesson and a mapped practice set).
 
 ---
 
