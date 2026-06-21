@@ -51,7 +51,11 @@ Add one entry to `src/content/certifications.json`.
 Rules:
 
 - `id` is kebab-case and matches the folder under `src/content/`.
-- `idPrefix` is lowercase letters/numbers and prefixes every content ID.
+- `idPrefix` is lowercase letters/numbers and prefixes every content ID. It must
+  be **unique across tracks** — validation rejects a duplicate, since content ids
+  from two tracks would otherwise collide.
+- `vendor` is the certifying body (e.g. `"CompTIA"`, `"AWS"`, `"Microsoft"`,
+  `"Cisco"`). It is data, not code — see [Other Vendors](#other-vendors-non-comptia-tracks).
 - `passThreshold` is a fraction from `> 0` through `1`.
 - Every exam object repeats the parent `certId`.
 - Single-exam certs still use the same `exams` array shape.
@@ -78,6 +82,34 @@ When the content is ready, author the banks and remove `"status": "coming-soon"`
 (or set it to `"available"`); validation then enforces the required banks again.
 The app guards `activeCertId`: if a learner's focused track is removed or flipped
 to coming-soon, the workspace falls back to the first available track.
+
+## Other Vendors (Non-CompTIA Tracks)
+
+The content model is **vendor-agnostic** — nothing in the app hardcodes CompTIA.
+A track for any vendor (AWS, Microsoft, Cisco, Linux Foundation, …) is added the
+same way, as data. No code changes are required.
+
+- **Set the real vendor.** Pass `--vendor` to the scaffold (it defaults to
+  `CompTIA`) or set `"vendor"` in the manifest. The track switcher, the all-tracks
+  analytics overview, and the in-app **trademark disclaimer** all read `vendor`
+  automatically and adjust their wording per track.
+- **Pick a passing score.** `passThreshold` is a fraction. For vendors that
+  publish a scaled score (e.g. a 700/1000 pass), convert it to the equivalent
+  fraction (`0.70`). For a straight percentage, use it directly (e.g. `0.72`).
+- **One or many exams.** Use one `exams` entry for a single-exam cert, or several
+  (like A+'s two cores). `defaultQuestions`/`defaultMinutes` seed that exam's
+  full-length mock.
+- **Objectives are the vendor's.** The objective registry mirrors that vendor's
+  official exam objectives — see [Objective Mapping](#objective-mapping-and-coverage).
+
+Example — a non-CompTIA roadmap track scaffolded as coming-soon:
+
+```powershell
+npm run scaffold:cert -- --id aws-ccp --prefix awsccp --name "AWS Certified Cloud Practitioner" --shortName "Cloud Practitioner" --vendor "AWS" --exam CLF-C02 --passThreshold 0.70 --status coming-soon --order 4
+```
+
+Then author its banks and flip it to `available`. Everything else — per-track
+progress, streaks, analytics, mock thresholds, search — works unchanged.
 
 ## Required Banks
 
@@ -122,14 +154,15 @@ Rules:
 - `id` is cert-prefixed and globally unique (A+ ids include the core, e.g. `aplus-c1-2.1`).
 - `domain` and `exam` must belong to the same cert.
 - `verified` records whether the objective number/title has been confirmed against
-  CompTIA's **official objectives PDF** for that exam version. Registries are
-  seeded from the public structure as `false`; confirm and flip to `true`.
+  the **vendor's official exam objectives** for that exam version (e.g. CompTIA's
+  objectives PDF, an AWS exam guide). Registries are seeded from the public
+  structure as `false`; confirm and flip to `true`.
 
 Lessons, questions, flashcards, and PBQs may carry an optional `objectiveId` that
 references a registry entry in the same track. The validator rejects any
 `objectiveId` that does not resolve, **and requires the content item's `domain`
 to match the referenced objective's `domain`** — so content is always filed under
-the same domain CompTIA assigns the objective. When you tag an item to an
+the same domain the vendor assigns the objective. When you tag an item to an
 objective, set its `domain` to that objective's domain too.
 
 ### Coverage

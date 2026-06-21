@@ -38,6 +38,13 @@ describe("validateContent — track availability and ordering", () => {
     expect(validateContent(bundle({ certifications: [bad] })).some(e => e.includes("status must be"))).toBe(true);
   });
 
+  it("rejects two tracks sharing an idPrefix", () => {
+    // A second track reusing A+'s prefix would make content ids ambiguous across tracks.
+    const clash: Certification = { ...aPlus, id: "network-plus", shortName: "Network+", status: "coming-soon", exams: [{ id: "n10-009", certId: "network-plus", name: "", defaultQuestions: 90, defaultMinutes: 90 }] };
+    const errors = validateContent(bundle({ certifications: [aPlus, clash] }));
+    expect(errors.some(e => e.includes("idPrefix") && e.includes("already used by"))).toBe(true);
+  });
+
   it("rejects a non-numeric order", () => {
     const bad = { ...aPlus, order: "first" } as unknown as Certification;
     expect(validateContent(bundle({ certifications: [bad] })).some(e => e.includes("order must be a number"))).toBe(true);

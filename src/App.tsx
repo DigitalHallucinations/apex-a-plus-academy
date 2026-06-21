@@ -152,7 +152,7 @@ export default function App() {
       </section>
     </main>
     {palette && <CommandPalette activeCertId={state.activeCertId} onClose={() => setPalette(false)} onPick={v => { selectView(v); setPalette(false); }} />}
-    {onboarding && <Onboarding name={state.name} onClose={dismissOnboarding} />}
+    {onboarding && <Onboarding name={state.name} tracks={sortCertifications(content.certifications).filter(isCertAvailable).map(c => c.shortName)} onClose={dismissOnboarding} />}
   </div></ContentProvider>;
 }
 
@@ -173,11 +173,19 @@ function useReturnFocus() {
 
 const ONBOARDED_KEY = "skillforge-onboarded";
 
+/** Joins names into a readable list: "A+", "A+ and Network+", "A+, Network+, and Security+". */
+function andList(items: string[]): string {
+  if (items.length <= 1) return items[0] ?? "";
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+}
+
 /** A short, dismissible first-run walkthrough of the study loop. */
-function Onboarding({ name, onClose }: { name: string; onClose: () => void }) {
+function Onboarding({ name, tracks, onClose }: { name: string; tracks: string[]; onClose: () => void }) {
+  const trackList = tracks.length ? andList(tracks.map(t => `${t} Track`)) : "your certification tracks";
   const steps = [
-    { icon: Zap, title: `Welcome, ${name.split(" ")[0] || "there"}!`, body: "SkillForge Academy is your offline-first CompTIA study workspace. There's no account and no cloud — your progress, notes, and schedule stay on this computer." },
-    { icon: GraduationCap, title: "Pick your track", body: "Use the track switcher at the top of the sidebar to move between CompTIA A+, Network+, and Security+. Each track keeps its own progress, streaks, and analytics." },
+    { icon: Zap, title: `Welcome, ${name.split(" ")[0] || "there"}!`, body: "SkillForge Academy is your offline-first certification study workspace. There's no account and no cloud — your progress, notes, and schedule stay on this computer." },
+    { icon: GraduationCap, title: "Pick your track", body: `Use the track switcher at the top of the sidebar to move between ${trackList}. Each track keeps its own progress, streaks, and analytics.` },
     { icon: Play, title: "Build a study loop", body: "Read a lesson in Learning Paths, prove it in the Practice Lab, test yourself with a timed Mock Exam, and lock it in with the spaced-repetition Recall Deck." },
     { icon: Gauge, title: "Track readiness & stay safe", body: "Watch your readiness and the objective heatmap under Performance. Export an encrypted backup from Preferences before reinstalling or switching machines." }
   ];

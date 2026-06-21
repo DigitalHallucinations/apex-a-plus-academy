@@ -268,12 +268,14 @@ Shipped:
 - Automated tagged Windows release builds and SHA-256 checksum publishing
 - Skip navigation, visible keyboard focus, labelled landmarks, escape handling, and automated accessibility checks
 - Getting-started and contributor onboarding guides, an in-app first-run walkthrough, and refreshed multi-track screenshots with a repeatable capture process
+- Focus-trapped dialogs, keyboard-dismissable menus, and a vendor-agnostic content model ready for additional (non-CompTIA) tracks
 
 Next:
 
 - Add further simulation formats and expand original assessment content
 - Add installer code signing when a trusted Windows certificate is available
-- Continue usability testing with keyboard-only and assistive-technology users
+- Screen-reader (NVDA/VoiceOver) walkthrough of every view and the lesson reader
+- Author the next certification tracks on the content factory
 
 ## Contributing
 

@@ -30,13 +30,16 @@ progress, streaks, and analytics.
 - Getting-started and contributor onboarding guides, an in-app first-run
   walkthrough, and refreshed multi-track screenshots with a repeatable capture
   process
+- Focus-trapped dialogs, keyboard-dismissable menus, and expanded automated
+  accessibility checks
+- Vendor-agnostic content model ready for additional (non-CompTIA) tracks
 
 ## Next
 
 - Add further simulation formats (categorization, fill-in/CLI, hotspot) and
   expand multi-select content
 - Add installer code signing when a trusted certificate is available
-- Continue keyboard-only and assistive-technology testing
+- Screen-reader (NVDA/VoiceOver) walkthrough of every view and the lesson reader
 - Author the next certification tracks on the content factory
 
 Priorities may change as the multi-cert MVP is tested with real learners.

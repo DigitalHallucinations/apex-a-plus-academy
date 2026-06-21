@@ -51,12 +51,18 @@ function validate(certifications, domains, questions, flashcards, pbqs, lessons,
   // ---- Manifest ----
   const certIds = new Set();
   const prefixByCert = new Map();
+  const certByPrefix = new Map();
   const examToCert = new Map();
   for (const c of certifications) {
     if (certIds.has(c.id)) errors.push(`Duplicate certification id: ${c.id}`);
     certIds.add(c.id);
     if (!c.idPrefix?.trim()) errors.push(`Certification ${c.id}: empty idPrefix`);
-    else prefixByCert.set(c.id, c.idPrefix);
+    else {
+      const owner = certByPrefix.get(c.idPrefix);
+      if (owner) errors.push(`Certification ${c.id}: idPrefix "${c.idPrefix}" already used by "${owner}"`);
+      else certByPrefix.set(c.idPrefix, c.id);
+      prefixByCert.set(c.id, c.idPrefix);
+    }
     for (const field of ["name", "shortName", "vendor"])
       if (!c[field]?.trim()) errors.push(`Certification ${c.id}: empty ${field}`);
     if (typeof c.passThreshold !== "number" || c.passThreshold <= 0 || c.passThreshold > 1)

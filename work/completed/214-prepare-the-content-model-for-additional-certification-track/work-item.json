@@ -1,0 +1,51 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "214",
+  "title": "Prepare the content model for additional certification tracks",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Remove vendor coupling that would misrepresent additional (non-CompTIA) tracks, so shared UI is driven by the manifest rather than hardcoded track names.",
+      "state": "satisfied",
+      "evidence": [
+        "src/App.tsx: onboarding walkthrough copy derives the track list from the manifest (andList over available tracks); no longer hardcodes 'CompTIA' or A+/Network+/Security+",
+        "Verified live: step 2 reads 'move between A+ Track, Network+ Track, and Security+ Track' and updates as tracks change",
+        "Trademark disclaimer and track switcher already read vendor per-track (confirmed)"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "text": "Harden manifest validation for new-track safety: idPrefix must be unique across tracks (content ids are namespaced by prefix).",
+      "state": "satisfied",
+      "evidence": [
+        "src/content/validate.ts + scripts/validate-content.mjs: reject a duplicate idPrefix with the owning track named",
+        "src/content/validate.test.ts: 'rejects two tracks sharing an idPrefix' (57 tests pass)",
+        "npm run validate:content still green for the three real tracks"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "text": "Document how to add a track for any vendor (not just CompTIA).",
+      "state": "satisfied",
+      "evidence": [
+        "docs/certification-authoring.md: new 'Other Vendors (Non-CompTIA Tracks)' section (vendor flag, auto trademark/switcher, passThreshold guidance, single/multi exam, AWS example)",
+        "idPrefix-uniqueness rule documented; objective-mapping wording made vendor-neutral"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "text": "Authoring/advertising the first actual additional track is milestone 303's scope, not this preparation item.",
+      "state": "waived",
+      "evidence": [
+        "303-milestone-first-additional-certification covers choosing and authoring the first new track; 214 only makes the model/docs/validation ready."
+      ]
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-20",
+  "source": "ROADMAP.md"
+}
