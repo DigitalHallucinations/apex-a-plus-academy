@@ -12,7 +12,11 @@ const checks = [
   [app.includes('aria-label="Primary navigation"'), "Primary navigation is labelled"],
   [app.includes("aria-current={view===item.id"), "Current navigation destination is exposed"],
   [app.includes('e.key === "Escape"'), "Escape closes transient overlays"],
-  [styles.includes("*:focus-visible"), "Visible keyboard focus styling is present"]
+  [styles.includes("*:focus-visible"), "Visible keyboard focus styling is present"],
+  [app.includes("inert={modalOpen"), "Open dialogs make the background inert (focus trap)"],
+  [app.includes("useReturnFocus"), "Dialogs restore focus to their trigger on close"],
+  [app.includes("toggleRef.current?.focus()"), "Track switcher menu is keyboard-dismissable"],
+  [app.includes('role={multi?"checkbox"'), "Multi-select options expose checkbox semantics"]
 ];
 
 const failed = checks.filter(([ok]) => !ok);

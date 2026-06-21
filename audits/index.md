@@ -1,6 +1,6 @@
 # Audit Index
 
-Last updated: 2026-06-20
+Last updated: 2026-06-20 (keyboard/AT pass)
 
 | ID | Title | Type | Status | Related Todo | Date |
 | --- | --- | --- | --- | --- | --- |
@@ -12,10 +12,10 @@ Last updated: 2026-06-20
 | [AUDIT-2026-06-18-objective-coverage](AUDIT-2026-06-18-objective-coverage.md) | Objective-by-Objective Curriculum Coverage | content / implementation | passed | [215](../work/completed/215-course-lessons-and-real-world-class-content/README.md) | 2026-06-18 |
 | [AUDIT-2026-06-20-multi-cert-release-readiness](AUDIT-2026-06-20-multi-cert-release-readiness.md) | Multi-Cert Brand, Docs, And Release Readiness | release / documentation | passed | [006](../work/completed/006-multi-cert-brand-docs-and-release-readiness/README.md) | 2026-06-20 |
 | [AUDIT-2026-06-20-multi-cert-plan-reconciliation](AUDIT-2026-06-20-multi-cert-plan-reconciliation.md) | Multi-Certification Plan Reconciliation | audit / architecture | passed | [007](../work/completed/007-multi-cert-plan-reconciliation-audit/README.md) | 2026-06-20 |
+| [AUDIT-2026-06-20-keyboard-a11y](AUDIT-2026-06-20-keyboard-a11y.md) | Keyboard-Only And Assistive-Technology Pass | accessibility | passed | [213](../work/completed/213-continue-keyboard-only-and-assistive-technology-testing/README.md) | 2026-06-20 |
 
 ## Next Recommended Audit
 
-The multi-cert documentation/governance audits (`006`, `007`) are complete. No
-audit is currently queued. The next audits will follow the next build-out work —
-candidates: additional certification authoring (`303`/`304`/`305`) or an
-accessibility pass on the lesson reader.
+Candidates: additional certification authoring (`303`/`304`/`305`), or a deeper
+accessibility pass — a real screen-reader (NVDA/VoiceOver) walkthrough of every
+view and the lesson reader, building on the keyboard/AT overlay pass (`213`).

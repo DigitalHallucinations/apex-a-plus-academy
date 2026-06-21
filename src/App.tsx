@@ -111,9 +111,12 @@ export default function App() {
 
   if (!ready) return <div className="splash"><div className="brand-mark"><Zap /></div><h1>SkillForge Academy</h1><p>Preparing your workspace...</p></div>;
 
+  // While a modal dialog is open, make the rest of the app inert so keyboard and
+  // screen-reader users stay inside the dialog (no tabbing out, no AT bleed).
+  const modalOpen = palette || onboarding;
   return <ContentProvider value={content}><div className={`app ${sidebar ? "" : "collapsed"}`}>
     <a className="skip-link" href="#main-content">Skip to main content</a>
-    <aside className="sidebar">
+    <aside className="sidebar" inert={modalOpen || undefined}>
       <div className="brand"><div className="brand-mark"><Zap /></div><div><b>SKILLFORGE</b><span>ACADEMY</span></div></div>
       <button className="collapse" aria-label={sidebar ? "Collapse sidebar" : "Expand sidebar"} onClick={() => setSidebar(!sidebar)}>{sidebar ? <ChevronLeft /> : <ChevronRight />}</button>
       <TrackSwitcher certs={content.certifications} activeCertId={state.activeCertId} onSelect={id => { setState(s => ({ ...s, activeCertId: id })); setView("dashboard"); }} />
@@ -125,7 +128,7 @@ export default function App() {
       <div className="sidebar-foot"><ShieldCheck/><span>Private & offline</span></div>
     </aside>
 
-    <main>
+    <main inert={modalOpen || undefined}>
       <header>
         <button className="icon-btn mobile-menu" aria-label="Toggle navigation menu" onClick={() => setSidebar(!sidebar)}><Menu/></button>
         <button className="search" onClick={() => setPalette(true)} aria-label="Open search (Ctrl K)"><Search/><span>Search objectives, commands, ports...</span><kbd>Ctrl K</kbd></button>
@@ -153,6 +156,21 @@ export default function App() {
   </div></ContentProvider>;
 }
 
+/** Restores focus to the element that was focused before a dialog opened. */
+function useReturnFocus() {
+  const prev = useRef<HTMLElement | null>(null);
+  // Capture the trigger during the first render, before the dialog steals focus.
+  // (Doing this in an effect is unreliable under StrictMode's double-invocation.)
+  if (prev.current === null && typeof document !== "undefined") {
+    prev.current = document.activeElement as HTMLElement | null;
+  }
+  useEffect(() => {
+    // Defer with a macrotask so the restore runs after the dialog is removed and
+    // any `inert` is cleared from the background (otherwise the focus call is dropped).
+    return () => { const el = prev.current; if (el) setTimeout(() => el.focus?.(), 0); };
+  }, []);
+}
+
 const ONBOARDED_KEY = "skillforge-onboarded";
 
 /** A short, dismissible first-run walkthrough of the study loop. */
@@ -165,6 +183,7 @@ function Onboarding({ name, onClose }: { name: string; onClose: () => void }) {
   ];
   const [step, setStep] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+  useReturnFocus();
   useEffect(() => { ref.current?.focus(); }, []);
   const last = step === steps.length - 1;
   const s = steps[step];
@@ -194,6 +213,17 @@ function Onboarding({ name, onClose }: { name: string; onClose: () => void }) {
 
 function TrackSwitcher({ certs, activeCertId, onSelect }: { certs: Certification[]; activeCertId: CertId; onSelect: (id: CertId) => void }) {
   const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  // Dismiss the open menu on Escape (returning focus to the toggle) or an outside click.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") { setOpen(false); toggleRef.current?.focus(); } };
+    const onClick = (e: MouseEvent) => { if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => { document.removeEventListener("keydown", onKey); document.removeEventListener("mousedown", onClick); };
+  }, [open]);
   const ordered = useMemo(() => sortCertifications(certs), [certs]);
   const available = ordered.filter(isCertAvailable);
   const comingSoon = ordered.filter(c => !isCertAvailable(c));
@@ -202,8 +232,8 @@ function TrackSwitcher({ certs, activeCertId, onSelect }: { certs: Certification
   // Open the menu when there is more than one selectable track or any roadmap
   // track to advertise — a single track with nothing coming stays a static label.
   const expandable = available.length > 1 || comingSoon.length > 0;
-  return <div className={`track-switcher${open ? " open" : ""}`}>
-    <button className="track-current" aria-haspopup={expandable || undefined} aria-expanded={expandable ? open : undefined} disabled={!expandable} onClick={() => setOpen(o => !o)} title={`${active.name} (${active.vendor})`}>
+  return <div className={`track-switcher${open ? " open" : ""}`} ref={wrapRef}>
+    <button ref={toggleRef} className="track-current" aria-haspopup={expandable || undefined} aria-expanded={expandable ? open : undefined} disabled={!expandable} onClick={() => setOpen(o => !o)} title={`${active.name} (${active.vendor})`}>
       <GraduationCap/><div><b>{active.shortName} Track</b><small>{active.vendor}</small></div>{expandable && <ChevronDown/>}
     </button>
     {open && expandable && <div className="track-menu" role="menu" aria-label="Switch certification track">
@@ -221,6 +251,7 @@ function CommandPalette({ activeCertId, onClose, onPick }: { activeCertId: CertI
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  useReturnFocus();
   useEffect(() => { inputRef.current?.focus(); }, []);
 
   type Cmd = { id: string; label: string; hint: string; view: View; icon: typeof Home };

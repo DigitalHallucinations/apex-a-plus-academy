@@ -1,0 +1,50 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "213",
+  "title": "Continue keyboard-only and assistive-technology testing",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Run a keyboard-only/assistive-technology pass over the app's overlays and menus (including the surfaces added by 210/211) and record findings in an audit.",
+      "state": "satisfied",
+      "evidence": [
+        "audits/AUDIT-2026-06-20-keyboard-a11y.md (registered in audits/index.md)",
+        "Findings: modals didn't trap focus (16 reachable tabbables behind an open dialog), no focus restoration on close, track-switcher menu not keyboard-dismissable"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "text": "Fix the keyboard/AT gaps found and verify them in the live app.",
+      "state": "satisfied",
+      "evidence": [
+        "src/App.tsx: background marked inert while a modal is open; useReturnFocus restores focus to the trigger; track switcher closes on Escape (focus to toggle) and outside click",
+        "Verified live: tabbables outside an open dialog 16 -> 0; focus returns to trigger; switcher dismisses via Escape + outside click; no console errors"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "text": "Add regression coverage and keep the checks green.",
+      "state": "satisfied",
+      "evidence": [
+        "scripts/validate-accessibility.mjs: 6 -> 10 tripwire checks (inert background, focus return, switcher dismissal, multi-select checkbox semantics)",
+        "Test hygiene: vite.config.ts excludes Tauri build-copied test files under src-tauri/** (true count 56 tests, 3 files)",
+        "npm run validate:a11y (10 checks), npm test (56 passed), npm run build all pass"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "text": "A full real-screen-reader (NVDA/VoiceOver) walkthrough of every view and the lesson reader is recorded as the next accessibility pass.",
+      "state": "waived",
+      "evidence": [
+        "Out of scope for this overlay/menu iteration; captured as a follow-up in the audit and audits/index.md 'Next Recommended Audit'."
+      ]
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-20",
+  "source": "ROADMAP.md"
+}
