@@ -2,7 +2,7 @@
   "$schema": "../../../schemas/work-item.schema.json",
   "id": "212",
   "title": "Add installer code signing when a trusted certificate is available",
-  "status": "active",
+  "status": "blocked",
   "owner_scope": "governance",
   "affected_scopes": [],
   "depends_on": [],
