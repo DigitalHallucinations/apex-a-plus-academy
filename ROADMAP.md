@@ -27,12 +27,14 @@ progress, streaks, and analytics.
 - Passphrase-protected portable backups
 - Automated Windows release builds and checksums
 - Baseline keyboard and accessibility validation
+- Getting-started and contributor onboarding guides, an in-app first-run
+  walkthrough, and refreshed multi-track screenshots with a repeatable capture
+  process
 
 ## Next
 
 - Add further simulation formats (categorization, fill-in/CLI, hotspot) and
   expand multi-select content
-- Add stable public screenshots and onboarding documentation
 - Add installer code signing when a trusted certificate is available
 - Continue keyboard-only and assistive-technology testing
 - Author the next certification tracks on the content factory

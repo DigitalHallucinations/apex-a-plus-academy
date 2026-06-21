@@ -27,11 +27,11 @@ CompTIA certification prep often means jumping between notes, flashcard sites, v
 
 ## Screenshots
 
-**Study Command Center** — your readiness, daily mission, and the next best drill at a glance.
+**Study Command Center** — your readiness, daily mission, streaks, score trend, and the next best drill at a glance.
 
 ![SkillForge Academy — Study Command Center](docs/screenshots/01-command-center.png)
 
-**Learning Paths** — structured curriculum by exam domain, with lessons and knowledge checks.
+**Learning Paths** — structured curriculum by exam domain and objective, with lessons, progress, and knowledge checks.
 
 ![SkillForge Academy — Learning Paths](docs/screenshots/02-learning-paths.png)
 
@@ -39,9 +39,19 @@ CompTIA certification prep often means jumping between notes, flashcard sites, v
 |---|---|
 | ![Practice Lab](docs/screenshots/03-practice-lab.png) | ![Mock Exam](docs/screenshots/04-mock-exam.png) |
 
-**Recall Deck** — spaced-repetition flashcards that schedule themselves.
+**Multi-track switcher** — keep separate progress, streaks, and analytics for CompTIA A+, Network+, and Security+.
 
-![SkillForge Academy — Recall Deck](docs/screenshots/05-recall-deck.png)
+![SkillForge Academy — track switcher](docs/screenshots/08-track-switcher.png)
+
+**Performance analytics** — multi-track progress and an objective-level coverage heatmap that pinpoints weak spots.
+
+![SkillForge Academy — Performance analytics](docs/screenshots/06-performance.png)
+
+| Recall Deck | Multi-select questions |
+|---|---|
+| ![Recall Deck](docs/screenshots/05-recall-deck.png) | ![Multi-select question](docs/screenshots/07-multi-select.png) |
+
+> New to the app? See the [getting-started guide](docs/getting-started.md). Screenshots are regenerated from the live app — see [docs/screenshots/README.md](docs/screenshots/README.md).
 
 ## Features
 
@@ -55,7 +65,7 @@ Explore every Core 1 and Core 2 domain by exam weight, topic group, objective, a
 
 ### Practice Lab
 
-Build custom sessions for `220-1201`, `220-1202`, or both cores. Each original question includes:
+Build custom sessions for `220-1201`, `220-1202`, or both cores. Questions come in single-answer and multi-select ("choose TWO/THREE") formats, and each original question includes:
 
 - Difficulty and objective labels
 - Immediate answer feedback
@@ -253,14 +263,15 @@ Shipped:
 - Content banks moved to validated JSON loaded by the desktop backend
 - Spaced repetition upgraded to an SM-2 scheduler
 - Dedicated PBQ simulations with matching, ordering, scoring, and explanations
+- Multi-select ("choose two/three") questions alongside single-answer multiple choice
 - Configurable full-length mock exams with custom question, PBQ, and time limits
 - Automated tagged Windows release builds and SHA-256 checksum publishing
 - Skip navigation, visible keyboard focus, labelled landmarks, escape handling, and automated accessibility checks
+- Getting-started and contributor onboarding guides, an in-app first-run walkthrough, and refreshed multi-track screenshots with a repeatable capture process
 
 Next:
 
-- Continue expanding original assessment content and simulation formats
-- Add stable public screenshots and onboarding documentation
+- Add further simulation formats and expand original assessment content
 - Add installer code signing when a trusted Windows certificate is available
 - Continue usability testing with keyboard-only and assistive-technology users
 

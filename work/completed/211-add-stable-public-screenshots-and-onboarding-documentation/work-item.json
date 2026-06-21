@@ -1,0 +1,53 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "211",
+  "title": "Add stable public screenshots and onboarding documentation",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Provide a stable, repeatable screenshot process: a deterministic demo-state generator plus a headless capture script, documented so the images can be regenerated consistently.",
+      "state": "satisfied",
+      "evidence": [
+        "scripts/demo-state.mjs (npm run demo:state) — seeded LearnerState from real content; dates float, content selection stable",
+        "scripts/screenshots.mjs (npm run screenshots) — Playwright capture at 1440x900@2x, auto-generates demo state if missing",
+        "docs/screenshots/README.md documents the process and shot list; demo-state.json git-ignored as a regenerated intermediate"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "text": "Refresh the public screenshots to show the multi-track product (resolving the release-readiness audit follow-up) and the newer views, and reference them from the README.",
+      "state": "satisfied",
+      "evidence": [
+        "docs/screenshots/01..08 regenerated incl. track switcher, Performance objective heatmap, and the multi-select format",
+        "README screenshot section updated with multi-track switcher, performance, and multi-select shots",
+        "Addresses AUDIT-2026-06-20-multi-cert-release-readiness open item (multi-track screenshot refresh)"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "text": "Add onboarding documentation: an end-user getting-started guide and a contributor onboarding guide.",
+      "state": "satisfied",
+      "evidence": [
+        "docs/getting-started.md — install/first run, track choice, study loop, backups, first-week plan",
+        "docs/contributor-onboarding.md — repo map, dev loop, validation gates, adding content/tracks; linked from CONTRIBUTING.md"
+      ]
+    },
+    {
+      "id": "AC-4",
+      "text": "Add an in-app first-run onboarding walkthrough, shown once on a fresh install and replayable from Preferences.",
+      "state": "satisfied",
+      "evidence": [
+        "src/App.tsx Onboarding component: 4-step dialog, keyboard navigable, dismiss persists skillforge-onboarded flag",
+        "Shows only on a genuinely fresh install; replay button in Preferences",
+        "Browser-verified: steps navigate, Get started/Skip dismiss + persist, no reappear on reload, replay reopens"
+      ]
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-20",
+  "source": "ROADMAP.md"
+}

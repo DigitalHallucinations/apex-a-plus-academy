@@ -2,6 +2,8 @@
 
 Issues and focused pull requests are welcome. Useful contributions include original practice scenarios, accessibility improvements, test coverage, documentation, and corrections to technical explanations.
 
+New to the codebase? Start with the [contributor onboarding guide](docs/contributor-onboarding.md) for a full tour of the repo layout, dev loop, validation gates, and how to add content or a new track.
+
 ## Development
 
 1. Install Node.js LTS, Rust stable, and the Tauri prerequisites for Windows.

@@ -21,3 +21,6 @@ Thumbs.db
 learner-state.json
 *.exe
 *.msi
+
+# Generated demo state for documentation screenshots (regenerate with npm run demo:state)
+docs/screenshots/demo-state.json

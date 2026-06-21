@@ -70,10 +70,18 @@ export default function App() {
   const [sidebar, setSidebar] = useState(() => typeof window === "undefined" || window.innerWidth > 760);
   const [palette, setPalette] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
+  const [onboarding, setOnboarding] = useState(false);
 
   useEffect(() => {
     Promise.all([readState(), loadContent()]).then(([s, c]) => { setState(s); setContent(c); setReady(true); });
   }, []);
+  // Show the first-run walkthrough once, only on a genuinely fresh install.
+  useEffect(() => {
+    if (!ready) return;
+    const fresh = state.attempts.length === 0 && state.lessonsRead.length === 0 && Object.keys(state.answered).length === 0;
+    try { if (fresh && !localStorage.getItem(ONBOARDED_KEY)) setOnboarding(true); } catch { /* storage unavailable */ }
+  }, [ready]);
+  const dismissOnboarding = () => { try { localStorage.setItem(ONBOARDED_KEY, "1"); } catch { /* ignore */ } setOnboarding(false); };
   useEffect(() => { if (ready) writeState(state); }, [state, ready]);
   // Keep focus on a real, available track: if a saved activeCertId points at a
   // track that was removed or flipped to coming-soon, fall back deterministically.
@@ -137,11 +145,51 @@ export default function App() {
         {view === "flashcards" && <Flashcards key={state.activeCertId} state={state} setState={setState} />}
         {view === "analytics" && <Suspense fallback={<div className="panel analytics-loading" role="status">Loading analytics…</div>}><Analytics state={state} /></Suspense>}
         {view === "notes" && <Notes state={state} setState={setState} />}
-        {view === "settings" && <Preferences state={state} update={update} setState={setState} />}
+        {view === "settings" && <Preferences state={state} update={update} setState={setState} onReplayTour={() => setOnboarding(true)} />}
       </section>
     </main>
     {palette && <CommandPalette activeCertId={state.activeCertId} onClose={() => setPalette(false)} onPick={v => { selectView(v); setPalette(false); }} />}
+    {onboarding && <Onboarding name={state.name} onClose={dismissOnboarding} />}
   </div></ContentProvider>;
+}
+
+const ONBOARDED_KEY = "skillforge-onboarded";
+
+/** A short, dismissible first-run walkthrough of the study loop. */
+function Onboarding({ name, onClose }: { name: string; onClose: () => void }) {
+  const steps = [
+    { icon: Zap, title: `Welcome, ${name.split(" ")[0] || "there"}!`, body: "SkillForge Academy is your offline-first CompTIA study workspace. There's no account and no cloud — your progress, notes, and schedule stay on this computer." },
+    { icon: GraduationCap, title: "Pick your track", body: "Use the track switcher at the top of the sidebar to move between CompTIA A+, Network+, and Security+. Each track keeps its own progress, streaks, and analytics." },
+    { icon: Play, title: "Build a study loop", body: "Read a lesson in Learning Paths, prove it in the Practice Lab, test yourself with a timed Mock Exam, and lock it in with the spaced-repetition Recall Deck." },
+    { icon: Gauge, title: "Track readiness & stay safe", body: "Watch your readiness and the objective heatmap under Performance. Export an encrypted backup from Preferences before reinstalling or switching machines." }
+  ];
+  const [step, setStep] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => { ref.current?.focus(); }, []);
+  const last = step === steps.length - 1;
+  const s = steps[step];
+  const Icon = s.icon;
+  const onKey = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") { e.preventDefault(); onClose(); }
+    else if (e.key === "ArrowRight" && !last) setStep(x => x + 1);
+    else if (e.key === "ArrowLeft" && step > 0) setStep(x => x - 1);
+  };
+  return <div className="onboard-backdrop" onClick={onClose}>
+    <div className="onboard" role="dialog" aria-modal="true" aria-labelledby="onboard-title" tabIndex={-1} ref={ref} onClick={e => e.stopPropagation()} onKeyDown={onKey}>
+      <button className="onboard-skip" onClick={onClose} aria-label="Skip the walkthrough">Skip</button>
+      <div className="onboard-icon"><Icon/></div>
+      <span className="onboard-eyebrow">GETTING STARTED · {step + 1} OF {steps.length}</span>
+      <h2 id="onboard-title">{s.title}</h2>
+      <p>{s.body}</p>
+      <div className="onboard-dots" aria-hidden="true">{steps.map((_, i) => <span key={i} className={i === step ? "on" : ""}/>)}</div>
+      <div className="onboard-actions">
+        <button className="ghost" disabled={step === 0} onClick={() => setStep(x => x - 1)}><ChevronLeft/> Back</button>
+        {last
+          ? <button className="primary" onClick={onClose}>Get started <ChevronRight/></button>
+          : <button className="primary" onClick={() => setStep(x => x + 1)}>Next <ChevronRight/></button>}
+      </div>
+    </div>
+  </div>;
 }
 
 function TrackSwitcher({ certs, activeCertId, onSelect }: { certs: Certification[]; activeCertId: CertId; onSelect: (id: CertId) => void }) {
@@ -577,7 +625,7 @@ function Notes({ state, setState }: { state:LearnerState; setState:React.Dispatc
   return <><PageHead eyebrow="PERSONAL KNOWLEDGE BASE" title="Notes & saves" subtitle="Capture the details you tend to forget and keep difficult questions close."/><div className="notes-layout"><div className="panel notes-list"><div className="notes-head"><h3>Study notes</h3><button aria-label="Create a new note" onClick={create}><Plus/></button></div>{state.notes.map(n=><button className={active===n.id?"active":""} key={n.id} onClick={()=>open(n.id)}><NotebookPen/><div><b>{n.title}</b><small>{new Date(n.updatedAt).toLocaleDateString()}</small></div></button>)}{!state.notes.length&&<Empty message="Create your first note."/>}<h3 className="saved-heading">Saved questions</h3>{savedQs.map(q=><div className="saved-question" key={q.id}><Bookmark/><div><b>{q.objective}</b><small>{q.exam}</small></div></div>)}</div><div className="panel editor">{active?<><input value={title} onChange={e=>setTitle(e.target.value)} onBlur={save}/><textarea value={body} onChange={e=>setBody(e.target.value)} onBlur={save} placeholder="Write commands, mnemonics, troubleshooting steps, or explanations in your own words..."/><div className="editor-foot"><span>Saved automatically when you leave a field</span><button className="primary" onClick={save}><Check/> Save now</button></div></>:<Empty message="Select a note or create a new one to begin." action="New note" onClick={create}/>}</div></div></>;
 }
 
-function Preferences({ state, update, setState }: { state:LearnerState; update:(n:Partial<LearnerState>)=>void; setState:React.Dispatch<React.SetStateAction<LearnerState>> }) {
+function Preferences({ state, update, setState, onReplayTour }: { state:LearnerState; update:(n:Partial<LearnerState>)=>void; setState:React.Dispatch<React.SetStateAction<LearnerState>>; onReplayTour:()=>void }) {
   const { certifications } = useContent();
   const activeVendor = certifications.find(c => c.id === state.activeCertId)?.vendor;
   const fileRef = useRef<HTMLInputElement>(null);
@@ -613,7 +661,7 @@ function Preferences({ state, update, setState }: { state:LearnerState; update:(
     if (isTauri()) { try { await invoke("reset_state"); } catch { /* file may not exist yet */ } }
     setState(migrateState({}));
   };
-  return <><PageHead eyebrow="MAKE IT YOURS" title="Preferences" subtitle="Tune your study target, daily rhythm, and workspace."/><div className="settings-grid"><div className="panel settings-card"><div className="setting-icon"><GraduationCap/></div><div><h3>Learner profile</h3><p>This name appears throughout your workspace.</p><label>Display name<input value={state.name} onChange={e=>update({name:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><CalendarDays/></div><div><h3>Exam target</h3><p>Set a date to add a countdown to your dashboard.</p><label>Target date<input type="date" value={progress.targetDate} onChange={e=>setState(s=>patchProgress(s,{targetDate:e.target.value}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Target/></div><div><h3>Daily mission</h3><p>Choose a realistic question goal you can sustain.</p><label>Questions per day<input type="number" min="5" max="100" value={progress.dailyGoal} onChange={e=>setState(s=>patchProgress(s,{dailyGoal:Number(e.target.value)}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Moon/></div><div><h3>Appearance</h3><p>Switch the complete interface theme.</p><div className="theme-toggle"><button className={state.theme==="dark"?"active":""} aria-pressed={state.theme==="dark"} onClick={()=>update({theme:"dark"})}><Moon/> Dark</button><button className={state.theme==="light"?"active":""} aria-pressed={state.theme==="light"} onClick={()=>update({theme:"light"})}><Sun/> Light</button></div></div></div><div className="panel settings-card"><div className="setting-icon"><ShieldCheck/></div><div><h3>Encrypted backup</h3><p>Use the same passphrase to restore this portable backup on another device. Legacy plain JSON backups can still be imported.</p><label>Backup passphrase<input type="password" minLength={8} autoComplete="new-password" value={passphrase} onChange={e=>setPassphrase(e.target.value)} placeholder="At least 8 characters"/></label><div className="theme-toggle data-actions"><button onClick={onExport}><Download/> Export encrypted</button><button onClick={()=>fileRef.current?.click()}><Upload/> Import backup</button><button className="danger" onClick={onReset}><Trash2/> Reset progress</button></div>{backupNotice&&<span className="setting-notice" role="status">{backupNotice}</span>}<input ref={fileRef} type="file" accept="application/json,.json,.apexbackup" hidden onChange={onImport}/></div></div><div className="panel about-card"><div className="brand-mark"><Zap/></div><div><h3>SkillForge Academy</h3><p>Version 1.3.2 · Offline-first desktop edition</p><small>Your progress is stored locally on this computer. This independent educational app is not affiliated with or endorsed by {activeVendor || "the certification vendors"}.</small></div></div></div></>;
+  return <><PageHead eyebrow="MAKE IT YOURS" title="Preferences" subtitle="Tune your study target, daily rhythm, and workspace."/><div className="settings-grid"><div className="panel settings-card"><div className="setting-icon"><GraduationCap/></div><div><h3>Learner profile</h3><p>This name appears throughout your workspace.</p><label>Display name<input value={state.name} onChange={e=>update({name:e.target.value})}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><CalendarDays/></div><div><h3>Exam target</h3><p>Set a date to add a countdown to your dashboard.</p><label>Target date<input type="date" value={progress.targetDate} onChange={e=>setState(s=>patchProgress(s,{targetDate:e.target.value}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Target/></div><div><h3>Daily mission</h3><p>Choose a realistic question goal you can sustain.</p><label>Questions per day<input type="number" min="5" max="100" value={progress.dailyGoal} onChange={e=>setState(s=>patchProgress(s,{dailyGoal:Number(e.target.value)}))}/></label></div></div><div className="panel settings-card"><div className="setting-icon"><Moon/></div><div><h3>Appearance</h3><p>Switch the complete interface theme.</p><div className="theme-toggle"><button className={state.theme==="dark"?"active":""} aria-pressed={state.theme==="dark"} onClick={()=>update({theme:"dark"})}><Moon/> Dark</button><button className={state.theme==="light"?"active":""} aria-pressed={state.theme==="light"} onClick={()=>update({theme:"light"})}><Sun/> Light</button></div></div></div><div className="panel settings-card"><div className="setting-icon"><ShieldCheck/></div><div><h3>Encrypted backup</h3><p>Use the same passphrase to restore this portable backup on another device. Legacy plain JSON backups can still be imported.</p><label>Backup passphrase<input type="password" minLength={8} autoComplete="new-password" value={passphrase} onChange={e=>setPassphrase(e.target.value)} placeholder="At least 8 characters"/></label><div className="theme-toggle data-actions"><button onClick={onExport}><Download/> Export encrypted</button><button onClick={()=>fileRef.current?.click()}><Upload/> Import backup</button><button className="danger" onClick={onReset}><Trash2/> Reset progress</button></div>{backupNotice&&<span className="setting-notice" role="status">{backupNotice}</span>}<input ref={fileRef} type="file" accept="application/json,.json,.apexbackup" hidden onChange={onImport}/></div></div><div className="panel settings-card"><div className="setting-icon"><Sparkles/></div><div><h3>Product tour</h3><p>Replay the first-run walkthrough of the study loop.</p><div className="theme-toggle"><button onClick={onReplayTour}><Play/> Replay walkthrough</button></div></div></div><div className="panel about-card"><div className="brand-mark"><Zap/></div><div><h3>SkillForge Academy</h3><p>Version 1.3.2 · Offline-first desktop edition</p><small>Your progress is stored locally on this computer. This independent educational app is not affiliated with or endorsed by {activeVendor || "the certification vendors"}.</small></div></div></div></>;
 }
 
 function PageHead({eyebrow,title,subtitle}:{eyebrow:string;title:string;subtitle:string}) { return <div className="page-title"><div><span className="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{subtitle}</p></div></div>; }
