@@ -2535,5 +2535,49 @@
     ],
     "explanation": "Switches and bridges forward frames using MAC addresses at Layer 2. Routers and Layer 3 firewalls work at Layer 3; a DNS server is an application-layer service.",
     "objective": "Compare and contrast networking appliances, applications, and functions"
+  },
+  {
+    "id": "netplus-q180",
+    "objectiveId": "netplus-2.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-implementation",
+    "difficulty": "Intermediate",
+    "prompt": "Which switching features help segment or control Layer 2 network access? (Choose TWO.)",
+    "options": [
+      "VLAN assignment",
+      "Port security",
+      "Screen resolution",
+      "Printer duplexing",
+      "DNS recursion"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "VLANs segment broadcast domains and port security limits which devices can use a switchport. The other options are unrelated to Layer 2 access control.",
+    "objective": "Given a scenario, configure switching technologies and features"
+  },
+  {
+    "id": "netplus-q181",
+    "objectiveId": "netplus-3.2",
+    "certId": "network-plus",
+    "exam": "N10-009",
+    "domain": "netplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "Which monitoring outputs are most useful for spotting bandwidth saturation? (Choose TWO.)",
+    "options": [
+      "Interface utilization graphs",
+      "Dropped-packet counters",
+      "Rack unit labels",
+      "Keyboard layout",
+      "User wallpaper"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "High utilization trends and increasing drops are strong saturation signals. Physical labels and desktop settings do not measure network load.",
+    "objective": "Given a scenario, use network monitoring technologies"
   }
 ]

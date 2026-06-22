@@ -2858,5 +2858,49 @@
     ],
     "explanation": "Impossible-travel sign-ins and a burst of failed logins ending in success are classic compromise indicators. The remaining options are benign.",
     "objective": "Given a scenario, analyze indicators of malicious activity"
+  },
+  {
+    "id": "secplus-q198",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "objectiveId": "secplus-3.3",
+    "domain": "secplus-architecture",
+    "difficulty": "Intermediate",
+    "prompt": "Which safeguards best protect sensitive data at rest? (Choose TWO.)",
+    "options": [
+      "Database encryption",
+      "Full-disk encryption",
+      "Open file shares",
+      "Plaintext exports",
+      "Shared administrator accounts"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "Database and full-disk encryption protect stored data. Open shares, plaintext exports, and shared admin accounts increase exposure.",
+    "objective": "Compare and contrast concepts and strategies to protect data"
+  },
+  {
+    "id": "secplus-q199",
+    "certId": "security-plus",
+    "exam": "SY0-701",
+    "objectiveId": "secplus-4.6",
+    "domain": "secplus-operations",
+    "difficulty": "Intermediate",
+    "prompt": "Which IAM controls reduce the risk of stolen password reuse? (Choose TWO.)",
+    "options": [
+      "Multifactor authentication",
+      "Conditional access policies",
+      "Password hints on login pages",
+      "Shared service accounts for all users",
+      "Disabled audit logging"
+    ],
+    "answer": [
+      0,
+      1
+    ],
+    "explanation": "MFA adds a second proof and conditional access can challenge risky sessions. Hints, shared accounts, and disabled logs weaken identity controls.",
+    "objective": "Given a scenario, implement and maintain identity and access management"
   }
 ]

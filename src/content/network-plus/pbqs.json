@@ -175,5 +175,21 @@
     ],
     "answer": ["c-request", "c-assess", "c-test", "c-implement", "c-verify"],
     "explanation": "Changes are requested, assessed and approved, tested, implemented in a window, then verified and documented — with a rollback plan ready throughout."
+  },
+  {
+    "id": "netplus-p009",
+    "certId": "network-plus",
+    "kind": "fillin",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "objectiveId": "netplus-5.2",
+    "difficulty": "Foundation",
+    "prompt": "A host can ping an IP address but cannot resolve a hostname. Type one DNS lookup tool, then type the common ICMP reachability test command.",
+    "objective": "Given a scenario, troubleshoot common cable, connectivity, and software issues related to networking",
+    "blanks": [
+      { "id": "dns-tool", "label": "DNS lookup tool", "accept": ["nslookup", "dig"] },
+      { "id": "reachability", "label": "ICMP reachability command", "accept": ["ping"] }
+    ],
+    "explanation": "nslookup or dig tests DNS resolution. ping is a basic ICMP reachability test."
   }
 ]

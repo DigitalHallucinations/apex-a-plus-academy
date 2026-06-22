@@ -125,7 +125,18 @@ export interface OrderingPbq extends PbqBase {
   answer: string[];
 }
 
-export type Pbq = MatchingPbq | OrderingPbq;
+/** Type the correct value into one or more blanks (e.g. a port number or command). */
+export interface FillInPbq extends PbqBase {
+  kind: "fillin";
+  /**
+   * Each blank prompts for a value. `accept` lists the strings counted as
+   * correct, matched case-insensitively after trimming and collapsing inner
+   * whitespace — so authors enumerate the valid forms (e.g. ["443", "tcp 443"]).
+   */
+  blanks: { id: string; label: string; accept: string[] }[];
+}
+
+export type Pbq = MatchingPbq | OrderingPbq | FillInPbq;
 
 export interface Flashcard {
   id: string;

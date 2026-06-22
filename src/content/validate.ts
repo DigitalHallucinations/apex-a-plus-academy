@@ -190,6 +190,15 @@ export function validateContent(content: Partial<ContentBundle> | null | undefin
       if (!p.steps?.length) errors.push(`PBQ ${p.id}: ordering needs steps`);
       if (p.answer?.length !== p.steps?.length) errors.push(`PBQ ${p.id}: answer length must match steps`);
       for (const id of p.answer || []) if (!stepIds.has(id)) errors.push(`PBQ ${p.id}: answer references unknown step "${id}"`);
+    } else if (p.kind === "fillin") {
+      if (!p.blanks?.length) errors.push(`PBQ ${p.id}: fillin needs blanks`);
+      const blankIds = new Set<string>();
+      for (const b of p.blanks || []) {
+        if (!b.id || blankIds.has(b.id)) errors.push(`PBQ ${p.id}: blank ids must be present and unique`);
+        blankIds.add(b.id);
+        if (!b.label?.trim()) errors.push(`PBQ ${p.id}: blank "${b.id}" needs a label`);
+        if (!b.accept?.length || b.accept.some(a => !a?.trim())) errors.push(`PBQ ${p.id}: blank "${b.id}" needs non-empty accepted answers`);
+      }
     } else {
       const bad = p as { id: string; kind?: string };
       errors.push(`PBQ ${bad.id}: unknown kind "${bad.kind}"`);

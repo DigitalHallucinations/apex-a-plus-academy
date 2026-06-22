@@ -492,6 +492,21 @@ function PbqView({ pbq, response, onChange, revealed }: { pbq: Pbq; response: Pb
       </div>;
     })}</div>;
   }
+  if (pbq.kind === "fillin") {
+    const r = (response && !Array.isArray(response) ? response : {}) as Record<string, string>;
+    const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
+    return <div className="pbq-fillin">{pbq.blanks.map(b => {
+      const val = r[b.id] ?? "";
+      const ok = !!norm(val) && b.accept.some(a => norm(a) === norm(val));
+      const cls = revealed ? (ok ? "correct" : "wrong") : "";
+      return <div className={`pbq-blank ${cls}`} key={b.id}>
+        <label htmlFor={`fillin-${pbq.id}-${b.id}`}>{b.label}</label>
+        <input id={`fillin-${pbq.id}-${b.id}`} value={val} disabled={revealed} autoComplete="off" spellCheck={false}
+          onChange={e => onChange({ ...r, [b.id]: e.target.value })}/>
+        {revealed && !ok && <small>Correct: {b.accept[0]}</small>}
+      </div>;
+    })}</div>;
+  }
   const list = (Array.isArray(response) ? response : pbq.steps.map(s => s.id));
   const move = (i: number, dir: number) => { const j = i + dir; if (j < 0 || j >= list.length) return; const next = [...list]; [next[i], next[j]] = [next[j], next[i]]; onChange(next); };
   return <div className="pbq-ordering">{list.map((sid, i) => {

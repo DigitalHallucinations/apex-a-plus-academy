@@ -400,5 +400,29 @@
       "close"
     ],
     "explanation": "A controlled change is scoped, approved, tested, scheduled and communicated, implemented and validated, then documented and closed."
+  },
+  {
+    "certId": "a-plus",
+    "id": "aplus-p09",
+    "kind": "fillin",
+    "exam": "220-1202",
+    "domain": "aplus-os",
+    "objectiveId": "aplus-c2-1.4",
+    "difficulty": "Foundation",
+    "prompt": "A Windows user reports intermittent network drops. Type the command that displays the full IP configuration, then type the switch that releases the current DHCP lease.",
+    "objective": "Use Windows command-line tools",
+    "blanks": [
+      {
+        "id": "show-config",
+        "label": "Full IP configuration command",
+        "accept": ["ipconfig /all"]
+      },
+      {
+        "id": "release-lease",
+        "label": "DHCP release switch",
+        "accept": ["/release", "ipconfig /release"]
+      }
+    ],
+    "explanation": "ipconfig /all shows detailed adapter configuration. ipconfig /release releases the current DHCP lease."
   }
 ]

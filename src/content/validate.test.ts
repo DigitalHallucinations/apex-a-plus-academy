@@ -73,3 +73,30 @@ describe("validateContent — objective registry", () => {
     expect(validateContent(bundle({ objectives: [objective, objective] })).some(e => e.includes("Duplicate objective id"))).toBe(true);
   });
 });
+
+describe("validateContent — PBQ formats", () => {
+  it("accepts a valid fill-in PBQ", () => {
+    expect(validateContent(bundle({
+      pbqs: [{
+        id: "aplus-p1", certId: "a-plus", kind: "fillin", exam: "220-1201", domain: "aplus-net",
+        difficulty: "Foundation", prompt: "Type the HTTPS port.", objective: "o", explanation: "HTTPS uses 443.",
+        blanks: [{ id: "port", label: "HTTPS port", accept: ["443"] }]
+      }]
+    }))).toEqual([]);
+  });
+
+  it("rejects fill-in PBQs with duplicate or empty accepted answers", () => {
+    const errors = validateContent(bundle({
+      pbqs: [{
+        id: "aplus-p1", certId: "a-plus", kind: "fillin", exam: "220-1201", domain: "aplus-net",
+        difficulty: "Foundation", prompt: "Type values.", objective: "o", explanation: "x",
+        blanks: [
+          { id: "same", label: "One", accept: ["443"] },
+          { id: "same", label: "Two", accept: [""] }
+        ]
+      }]
+    }));
+    expect(errors.some(e => e.includes("blank ids must be present and unique"))).toBe(true);
+    expect(errors.some(e => e.includes("needs non-empty accepted answers"))).toBe(true);
+  });
+});

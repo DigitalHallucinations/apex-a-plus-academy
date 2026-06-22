@@ -181,5 +181,21 @@
     ],
     "answer": { "m-worm": "spread", "m-trojan": "disguise", "m-rootkit": "conceal", "m-logic": "trigger" },
     "explanation": "Worms self-propagate, trojans masquerade as useful software, rootkits hide to maintain access, and logic bombs fire on a trigger condition."
+  },
+  {
+    "id": "secplus-p009",
+    "certId": "security-plus",
+    "kind": "fillin",
+    "exam": "SY0-701",
+    "domain": "secplus-operations",
+    "objectiveId": "secplus-4.4",
+    "difficulty": "Intermediate",
+    "prompt": "A SIEM alert shows impossible travel followed by a successful login. Type the account-control action to stop active access, then type the authentication control that should be required before re-enabling the account.",
+    "objective": "Explain security alerting and monitoring concepts and tools",
+    "blanks": [
+      { "id": "containment", "label": "Immediate account action", "accept": ["disable account", "disable the account", "lock account", "lock the account"] },
+      { "id": "auth-control", "label": "Required authentication control", "accept": ["mfa", "multifactor authentication", "multi-factor authentication"] }
+    ],
+    "explanation": "Disabling or locking the account contains active misuse. MFA should be required before the account returns to service."
   }
 ]

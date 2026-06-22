@@ -295,6 +295,9 @@ export function gradeMcq(question: Pick<Question, "answer">, response: unknown):
   return response === question.answer;
 }
 
+/** Normalizes free-text answers for comparison: trim, lowercase, collapse spaces. */
+const normalizeText = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
+
 export function gradePbq(pbq: Pbq, response: unknown): number {
   if (pbq.kind === "matching") {
     const r = (response && typeof response === "object" ? response : {}) as Record<string, string>;
@@ -302,6 +305,17 @@ export function gradePbq(pbq: Pbq, response: unknown): number {
     if (!total) return 0;
     let correct = 0;
     for (const item of pbq.items) if (r[item.id] === pbq.answer[item.id]) correct++;
+    return correct / total;
+  }
+  if (pbq.kind === "fillin") {
+    const r = (response && typeof response === "object" && !Array.isArray(response) ? response : {}) as Record<string, string>;
+    const total = pbq.blanks.length;
+    if (!total) return 0;
+    let correct = 0;
+    for (const b of pbq.blanks) {
+      const got = normalizeText(r[b.id] ?? "");
+      if (got && b.accept.some(a => normalizeText(a) === got)) correct++;
+    }
     return correct / total;
   }
   const r = Array.isArray(response) ? (response as string[]) : [];

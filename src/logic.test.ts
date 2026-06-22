@@ -277,6 +277,13 @@ describe("PBQ grading (partial credit)", () => {
     steps: [{ id: "s1", text: "1" }, { id: "s2", text: "2" }, { id: "s3", text: "3" }, { id: "s4", text: "4" }],
     answer: ["s1", "s2", "s3", "s4"]
   };
+  const fillin: Pbq = {
+    id: "f", certId: "a-plus", kind: "fillin", exam: "220-1201", domain: "net", difficulty: "Foundation", prompt: "", objective: "", explanation: "",
+    blanks: [
+      { id: "port", label: "HTTPS port", accept: ["443"] },
+      { id: "cmd", label: "Show IP configuration", accept: ["ipconfig /all", "ipconfig"] }
+    ]
+  };
   it("scores matching by fraction correct", () => {
     expect(gradePbq(matching, { a: "1", b: "2", c: "3", d: "4" })).toBe(1);
     expect(gradePbq(matching, { a: "1", b: "2", c: "9", d: "9" })).toBe(0.5);
@@ -286,6 +293,11 @@ describe("PBQ grading (partial credit)", () => {
     expect(gradePbq(ordering, ["s1", "s2", "s3", "s4"])).toBe(1);
     expect(gradePbq(ordering, ["s2", "s1", "s3", "s4"])).toBe(0.5); // last two correct
     expect(gradePbq(ordering, [])).toBe(0);
+  });
+  it("scores fill-in blanks with normalized accepted text", () => {
+    expect(gradePbq(fillin, { port: " 443 ", cmd: "IPCONFIG   /ALL" })).toBe(1);
+    expect(gradePbq(fillin, { port: "443", cmd: "ipconfig /release" })).toBe(0.5);
+    expect(gradePbq(fillin, {})).toBe(0);
   });
 });
 
