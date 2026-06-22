@@ -20,7 +20,7 @@ progress, streaks, and analytics.
 - Structured learning paths, objective search, and per-objective coverage analytics
 - Original practice questions, flashcards, and PBQs
 - Multi-select ("choose two/three") questions alongside single-answer MCQs and
-  matching/ordering PBQs
+  matching, ordering, and fill-in / command-entry PBQs
 - SM-2 spaced repetition
 - Configurable timed mock exams
 - Local analytics, notes, bookmarks, and progress tracking
@@ -36,10 +36,10 @@ progress, streaks, and analytics.
 
 ## Next
 
-- Add further simulation formats (categorization, fill-in/CLI, hotspot) and
-  expand multi-select content
 - Add installer code signing when a trusted certificate is available
 - Screen-reader (NVDA/VoiceOver) walkthrough of every view and the lesson reader
 - Author the next certification tracks on the content factory
+- Continue expanding original assessment content and future simulation formats
+  such as categorization and hotspot interactions
 
 Priorities may change as the multi-cert MVP is tested with real learners.

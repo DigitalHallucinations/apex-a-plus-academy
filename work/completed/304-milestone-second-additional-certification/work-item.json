@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "304",
+  "title": "M4: Second Additional Certification",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Achieve the milestone described in the imported narrative (`tracking/milestones.md#M4`).",
+      "state": "satisfied",
+      "evidence": [
+        "Security+ (SY0-701) is present as the second additional certification track in src/content/certifications.json with order 3 and idPrefix secplus.",
+        "src/content/security-plus/ contains domains, objectives, lessons, questions, flashcards, and PBQs.",
+        "Prior implementation evidence: work/completed/004-security-plus-starter-track/ and audits/AUDIT-2026-06-17-security-plus-starter.md.",
+        "2026-06-22 validation: node scripts/validate-content.mjs --strict-coverage reports security-plus: 5 domains, 199 questions, 45 flashcards, 9 PBQs, 41 lessons; 28/28 objectives complete.",
+        "2026-06-22 current-target check: CompTIA's Security+ certification page still lists Security+ V7 / SY0-701 as the live exam series; Security+ V8 is currently a draft under development."
+      ]
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-22",
+  "source": "tracking/milestones.md#M4"
+}

@@ -80,7 +80,7 @@ Sit a full-length, timed, domain-weighted exam for any track's exam. Questions a
 
 ### Performance-Based Questions
 
-Beyond multiple choice, practice interactive **matching** (assign items to categories) and **ordering** (sequence steps) questions in a dedicated PBQ Lab or at the start of mock exams. Each simulation is graded with partial credit and includes an explanation.
+Beyond multiple choice, practice interactive **matching** (assign items to categories), **ordering** (sequence steps), and **fill-in / command-entry** questions in a dedicated PBQ Lab or at the start of mock exams. Each simulation is graded with partial credit and includes an explanation.
 
 ### Spaced-Repetition Flashcards
 
@@ -112,9 +112,9 @@ SkillForge Academy ships three CompTIA tracks. Every published exam objective in
 
 | Track | Exam(s) | Objective coverage |
 | --- | --- | --- |
-| **CompTIA A+** | Core 1 `220-1201`, Core 2 `220-1202` (V15) | 63/63 objectives — 386 questions, 68 lessons |
-| **CompTIA Network+** | `N10-009` | 25/25 objectives — 173 questions, 41 lessons |
-| **CompTIA Security+** | `SY0-701` | 28/28 objectives — 193 questions, 41 lessons |
+| **CompTIA A+** | Core 1 `220-1201`, Core 2 `220-1202` (V15) | 63/63 objectives — 392 questions, 68 lessons |
+| **CompTIA Network+** | `N10-009` | 25/25 objectives — 179 questions, 41 lessons |
+| **CompTIA Security+** | `SY0-701` | 28/28 objectives — 199 questions, 41 lessons |
 
 The A+ track is organized around the current V15 series:
 
@@ -262,7 +262,7 @@ Shipped:
 - Encrypted backup restore and cross-device transfer with legacy JSON import support
 - Content banks moved to validated JSON loaded by the desktop backend
 - Spaced repetition upgraded to an SM-2 scheduler
-- Dedicated PBQ simulations with matching, ordering, scoring, and explanations
+- Dedicated PBQ simulations with matching, ordering, fill-in / command-entry, scoring, and explanations
 - Multi-select ("choose two/three") questions alongside single-answer multiple choice
 - Configurable full-length mock exams with custom question, PBQ, and time limits
 - Automated tagged Windows release builds and SHA-256 checksum publishing
@@ -272,10 +272,10 @@ Shipped:
 
 Next:
 
-- Add further simulation formats and expand original assessment content
 - Add installer code signing when a trusted Windows certificate is available
 - Screen-reader (NVDA/VoiceOver) walkthrough of every view and the lesson reader
 - Author the next certification tracks on the content factory
+- Continue expanding original assessment content and future simulation formats such as hotspots
 
 ## Contributing
 

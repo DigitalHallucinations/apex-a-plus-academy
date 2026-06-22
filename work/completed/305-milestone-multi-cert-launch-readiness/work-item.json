@@ -1,0 +1,27 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "305",
+  "title": "M5: Multi-Cert Launch Readiness",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Achieve the milestone described in the imported narrative (`tracking/milestones.md#M5`).",
+      "state": "satisfied",
+      "evidence": [
+        "README.md, ROADMAP.md, and CHANGELOG.md updated to reflect current multi-cert content counts and fill-in / command-entry PBQs after item 216.",
+        "src-tauri/tauri.conf.json release descriptions already accurately list CompTIA A+, Network+, and Security+.",
+        "audits/AUDIT-2026-06-22-multi-cert-launch-readiness.md records release-readiness review and command evidence.",
+        "2026-06-22 gates passed: node scripts/validate-content.mjs --strict-coverage; npm test -- --run; npm run validate:a11y; npm run build; cargo fmt --check --manifest-path src-tauri/Cargo.toml; cargo check --manifest-path src-tauri/Cargo.toml; npm run desktop:build.",
+        "npm run desktop:build produced src-tauri/target/release/bundle/nsis/SkillForge Academy_1.4.0_x64-setup.exe.",
+        "Residual release risk recorded: installer code signing remains blocked by 212 until a trusted certificate is available."
+      ]
+    }
+  ],
+  "created": "2026-06-16",
+  "updated": "2026-06-22",
+  "source": "tracking/milestones.md#M5"
+}
