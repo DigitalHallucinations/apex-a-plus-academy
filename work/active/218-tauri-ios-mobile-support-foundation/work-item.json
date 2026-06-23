@@ -5,14 +5,12 @@
   "status": "active",
   "owner_scope": "governance",
   "affected_scopes": [
-    "src-tauri",
-    "src",
-    "package.json",
-    "README.md",
-    "ROADMAP.md",
+    "implementation",
     "docs"
   ],
-  "depends_on": ["217"],
+  "depends_on": [
+    "217"
+  ],
   "acceptance_criteria": [
     {
       "id": "AC-1",

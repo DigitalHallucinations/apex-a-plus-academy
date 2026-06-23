@@ -12,7 +12,7 @@
       "text": "Deliver the outcome described in the imported plan narrative (`todos/TODO-001-true-cert-factory.md`).",
       "state": "satisfied",
       "evidence": [
-        "audits/AUDIT-2026-06-16-true-cert-factory.md"
+        "20260616-001-migrated-evidence"
       ]
     }
   ],

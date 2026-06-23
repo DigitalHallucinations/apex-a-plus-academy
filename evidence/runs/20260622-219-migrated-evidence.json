@@ -1,0 +1,77 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260622-219-migrated-evidence",
+  "timestamp": "2026-06-22T12:00:00Z",
+  "work_item": "219",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] docs/release-candidate-1.4.0.md records version source of truth, release scope, publication plan, rollback plan, signing status, and required gates."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] VERSION corrected to 1.4.0; package.json, src-tauri/tauri.conf.json, and VERSION now align."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] README and CHANGELOG describe 1.4.0 as the current local release candidate, with GitHub publication pending external billing resolution."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] Silent smoke installed Apex A+ Academy 1.2.1, confirmed Apex uninstall entry, then installed SkillForge Academy 1.4.0."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] After SkillForge install, Apex HKLM/HKCU uninstall entries were absent, SkillForge registry version was 1.4.0, and %APPDATA%/com.apexlearning.aplusacademy still existed."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] README upgrade wording corrected to say the pre-install hook removes the old Apex installation while preserving shared app data."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] Noninteractive release smoke covered installed app launch, installer reinstall/upgrade path, legacy Apex removal, and app-data directory preservation."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] npm test -- src/backup.test.ts --run passed 4 backup-specific tests."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] Interactive manual UI smoke for track switching, answering content, and creating a backup was not performed in this noninteractive pass; deeper backup and real-learner workflow validation are tracked by 221 and 228."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] audits/AUDIT-2026-06-22-release-candidate-1.4.0.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] evidence/runs/20260622-102314-219-release-candidate.json"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] src-tauri/target/release/bundle/nsis/SHA256SUMS.txt contains checksum 85fc1c1cb33aa662748db6ab88148de3bd8863fda84f09143fa1ed8457179297."
+    }
+  ],
+  "artifacts": [
+    "work/completed/219-release-candidate-version-and-upgrade-audit"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

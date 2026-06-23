@@ -1,0 +1,72 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260620-211-migrated-evidence",
+  "timestamp": "2026-06-20T12:00:00Z",
+  "work_item": "211",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] scripts/demo-state.mjs (npm run demo:state) \u2014 seeded LearnerState from real content; dates float, content selection stable"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] scripts/screenshots.mjs (npm run screenshots) \u2014 Playwright capture at 1440x900@2x, auto-generates demo state if missing"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] docs/screenshots/README.md documents the process and shot list; demo-state.json git-ignored as a regenerated intermediate"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] docs/screenshots/01..08 regenerated incl. track switcher, Performance objective heatmap, and the multi-select format"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] README screenshot section updated with multi-track switcher, performance, and multi-select shots"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] Addresses AUDIT-2026-06-20-multi-cert-release-readiness open item (multi-track screenshot refresh)"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] docs/getting-started.md \u2014 install/first run, track choice, study loop, backups, first-week plan"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] docs/contributor-onboarding.md \u2014 repo map, dev loop, validation gates, adding content/tracks; linked from CONTRIBUTING.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] src/App.tsx Onboarding component: 4-step dialog, keyboard navigable, dismiss persists skillforge-onboarded flag"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] Shows only on a genuinely fresh install; replay button in Preferences"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] Browser-verified: steps navigate, Get started/Skip dismiss + persist, no reappear on reload, replay reopens"
+    }
+  ],
+  "artifacts": [
+    "work/completed/211-add-stable-public-screenshots-and-onboarding-documentation"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

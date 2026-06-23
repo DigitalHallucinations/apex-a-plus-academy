@@ -1,0 +1,67 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260620-210-migrated-evidence",
+  "timestamp": "2026-06-20T12:00:00Z",
+  "work_item": "210",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] src/types.ts: Question.answer is number | number[]"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] src/logic.ts: gradeMcq + isMultiSelect; scoreMock uses gradeMcq"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] src/App.tsx: shared MCQ helpers; Practice + Mock render role=checkbox with .mcq-hint"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] src/content/validate.ts + scripts/validate-content.mjs: validateMcqAnswer enforces >=2 distinct in-range indices that don't cover every option"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] 4 multi-select questions appended per track (aplus-q387..390, netplus-q176..179, secplus-q194..197)"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] npm run validate:content -> Content valid: 764 questions across 3 certifications"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] src/logic.test.ts: MCQ grading (single + multi-select) and a multi-select scoreMock case"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] npm test -> 65 passed; npm run build -> ok; npm run validate:a11y -> passed"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] Browser verification: Mock-exam multi-select renders checkboxes, hint, and holds 2 simultaneous selections with no console errors"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] Scope decision (2026-06-20): deliver multi-select MCQ + seed content this item; other formats and bulk authoring tracked separately."
+    }
+  ],
+  "artifacts": [
+    "work/completed/210-expand-original-assessment-content-and-simulation-formats"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

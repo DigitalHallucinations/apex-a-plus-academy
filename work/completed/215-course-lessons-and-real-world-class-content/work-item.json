@@ -4,16 +4,22 @@
   "title": "Build course lessons and real-world class content",
   "status": "completed",
   "owner_scope": "content",
-  "affected_scopes": ["content", "curriculum", "app-ui", "accessibility"],
-  "depends_on": ["210", "214"],
+  "affected_scopes": [
+    "content",
+    "implementation",
+    "accessibility"
+  ],
+  "depends_on": [
+    "210",
+    "214"
+  ],
   "acceptance_criteria": [
     {
       "id": "AC-1",
       "text": "Define a course content model that treats questions as assessment, not the primary lesson experience.",
       "state": "satisfied",
       "evidence": [
-        "docs/course-lesson-content-model.md",
-        "decisions/0005-adopt-course-first-content-architecture.md"
+        "20260618-215-migrated-evidence"
       ]
     },
     {
@@ -21,7 +27,7 @@
       "text": "Draft the complete A+ course architecture with domains, units, class-style lessons, real-world scenarios, checks for understanding, labs, review paths, and PBQ tie-ins.",
       "state": "satisfied",
       "evidence": [
-        "docs/a-plus-complete-course-map.md"
+        "20260618-215-migrated-evidence"
       ]
     },
     {
@@ -29,8 +35,7 @@
       "text": "Document authoring standards for original lesson content, field relevance, accessibility, objective mapping, and cert-id/id-prefix requirements.",
       "state": "satisfied",
       "evidence": [
-        "docs/course-lesson-content-model.md",
-        "docs/certification-authoring.md"
+        "20260618-215-migrated-evidence"
       ]
     },
     {
@@ -38,7 +43,7 @@
       "text": "Identify required app changes for browsing lessons, tracking lesson completion, and connecting lessons to practice questions, labs, flashcards, and mock readiness.",
       "state": "satisfied",
       "evidence": [
-        "docs/course-lesson-content-model.md"
+        "20260618-215-migrated-evidence"
       ]
     },
     {
@@ -46,9 +51,7 @@
       "text": "Deliver verifiable objective-by-objective coverage: an objective registry per exam and, for every published sub-objective across all tracks, at least one lesson and six tagged questions, enforced by validation.",
       "state": "satisfied",
       "evidence": [
-        "decisions/0006-objective-mapped-curriculum.md",
-        "audits/AUDIT-2026-06-18-objective-coverage.md",
-        "evidence/runs/20260618-012803-215-complete.json"
+        "20260618-215-migrated-evidence"
       ]
     }
   ],

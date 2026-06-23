@@ -1,0 +1,37 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260621-303-migrated-evidence",
+  "timestamp": "2026-06-21T12:00:00Z",
+  "work_item": "303",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Network+ (N10-009) is present as the first additional certification track in src/content/certifications.json with order 2 and idPrefix netplus."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] src/content/network-plus/ contains domains, objectives, lessons, questions, flashcards, and PBQs."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Prior implementation evidence: work/completed/003-network-plus-starter-track/ and audits/AUDIT-2026-06-17-network-plus-starter.md."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] 2026-06-21 validation: node scripts/validate-content.mjs --strict-coverage reports network-plus: 5 domains, 179 questions, 45 flashcards, 9 PBQs, 41 lessons; 25/25 objectives complete."
+    }
+  ],
+  "artifacts": [
+    "work/completed/303-milestone-first-additional-certification"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

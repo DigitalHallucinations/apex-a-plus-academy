@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260622-221-migrated-evidence",
+  "timestamp": "2026-06-22T12:00:00Z",
+  "work_item": "221",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] docs/backup-restore.md compatibility matrix"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] src/backup.test.ts covers representative multi-track state, encrypted round-trip, legacy JSON import, and legacy schema migration."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] npm test -- --run"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] src/backup.ts rejects malformed JSON and unsupported encrypted envelopes safely."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] src/backup.test.ts covers malformed JSON, wrong passphrase, unsupported version, and truncated encrypted payloads."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] docs/backup-restore.md records Windows support plus Android blocker on 217 and iOS blocker on 218."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] audits/AUDIT-2026-06-22-cross-platform-backups.md platform status table"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] docs/backup-restore.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] README.md Progress Backup link"
+    }
+  ],
+  "artifacts": [
+    "work/completed/221-cross-platform-backup-import-export-hardening"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

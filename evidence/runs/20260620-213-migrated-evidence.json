@@ -1,0 +1,57 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260620-213-migrated-evidence",
+  "timestamp": "2026-06-20T12:00:00Z",
+  "work_item": "213",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] audits/AUDIT-2026-06-20-keyboard-a11y.md (registered in audits/index.md)"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Findings: modals didn't trap focus (16 reachable tabbables behind an open dialog), no focus restoration on close, track-switcher menu not keyboard-dismissable"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] src/App.tsx: background marked inert while a modal is open; useReturnFocus restores focus to the trigger; track switcher closes on Escape (focus to toggle) and outside click"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] Verified live: tabbables outside an open dialog 16 -> 0; focus returns to trigger; switcher dismisses via Escape + outside click; no console errors"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] scripts/validate-accessibility.mjs: 6 -> 10 tripwire checks (inert background, focus return, switcher dismissal, multi-select checkbox semantics)"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] Test hygiene: vite.config.ts excludes Tauri build-copied test files under src-tauri/** (true count 56 tests, 3 files)"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] npm run validate:a11y (10 checks), npm test (56 passed), npm run build all pass"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] Out of scope for this overlay/menu iteration; captured as a follow-up in the audit and audits/index.md 'Next Recommended Audit'."
+    }
+  ],
+  "artifacts": [
+    "work/completed/213-continue-keyboard-only-and-assistive-technology-testing"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

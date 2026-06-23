@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260620-006-migrated-evidence",
+  "timestamp": "2026-06-20T12:00:00Z",
+  "work_item": "006",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] README.md: multi-track tagline, Certification Tracks table, per-track mock pass lines, updated Project status/Roadmap, three-mark trademark notice"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] ROADMAP.md: Current tracks lists A+/Network+/Security+; multi-cert factory moved to Shipped"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] src-tauri/tauri.conf.json: short/long descriptions name all three tracks"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] src/content/certifications.json: Network+/Security+ descriptions de-staled (no longer 'small sample')"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] audits/AUDIT-2026-06-20-multi-cert-release-readiness.md: release audit, status passed"
+    }
+  ],
+  "artifacts": [
+    "work/completed/006-multi-cert-brand-docs-and-release-readiness"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

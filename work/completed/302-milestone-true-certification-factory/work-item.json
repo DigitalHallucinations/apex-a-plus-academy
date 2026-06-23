@@ -12,9 +12,7 @@
       "text": "Achieve the milestone described in the imported narrative (`tracking/milestones.md#M2`).",
       "state": "satisfied",
       "evidence": [
-        "work/completed/001-true-cert-factory/README.md",
-        "work/completed/002-cert-authoring-guide/README.md",
-        "audits/AUDIT-2026-06-16-true-cert-factory.md"
+        "20260616-302-migrated-evidence"
       ]
     }
   ],

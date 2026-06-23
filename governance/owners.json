@@ -9,14 +9,74 @@
         "schemas/**"
       ],
       "owner": "governance-owner"
+    },
+    {
+      "id": "foundation",
+      "paths": [
+        "work/**",
+        "audits/**",
+        "decisions/**",
+        "evidence/**"
+      ],
+      "owner": "governance-owner"
+    },
+    {
+      "id": "implementation",
+      "paths": [
+        "src/**",
+        "src-tauri/**",
+        "scripts/**",
+        "package.json"
+      ],
+      "owner": "governance-owner"
+    },
+    {
+      "id": "content",
+      "paths": [
+        "src/content/**",
+        "curriculum/**",
+        "content/**"
+      ],
+      "owner": "governance-owner"
+    },
+    {
+      "id": "accessibility",
+      "paths": [
+        "accessibility/**"
+      ],
+      "owner": "governance-owner"
+    },
+    {
+      "id": "release",
+      "paths": [
+        "VERSION",
+        "CHANGELOG.md",
+        "ROADMAP.md"
+      ],
+      "owner": "governance-owner"
+    },
+    {
+      "id": "docs",
+      "paths": [
+        "README.md",
+        "docs/**",
+        "SECURITY.md"
+      ],
+      "owner": "governance-owner"
     }
   ],
   "roles": [
     {
       "id": "governance-owner",
-      "description": "Maintains the pact and schemas.",
+      "description": "Maintains the pact, schemas, and project ledger.",
       "scopes": [
-        "governance"
+        "governance",
+        "foundation",
+        "implementation",
+        "content",
+        "accessibility",
+        "release",
+        "docs"
       ]
     }
   ],

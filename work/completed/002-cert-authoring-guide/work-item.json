@@ -12,8 +12,7 @@
       "text": "Deliver the outcome described in the imported plan narrative (`todos/TODO-002-cert-authoring-guide.md`).",
       "state": "satisfied",
       "evidence": [
-        "docs/certification-authoring.md",
-        "audits/AUDIT-2026-06-16-true-cert-factory.md"
+        "20260616-002-migrated-evidence"
       ]
     }
   ],

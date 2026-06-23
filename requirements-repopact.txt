@@ -1,0 +1,2 @@
+# RepoPact validator dependency (python scripts/validate_repo.py).
+jsonschema>=4.20

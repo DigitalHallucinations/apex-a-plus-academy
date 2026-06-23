@@ -1,0 +1,47 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260622-305-migrated-evidence",
+  "timestamp": "2026-06-22T12:00:00Z",
+  "work_item": "305",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] README.md, ROADMAP.md, and CHANGELOG.md updated to reflect current multi-cert content counts and fill-in / command-entry PBQs after item 216."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] src-tauri/tauri.conf.json release descriptions already accurately list CompTIA A+, Network+, and Security+."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] audits/AUDIT-2026-06-22-multi-cert-launch-readiness.md records release-readiness review and command evidence."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] 2026-06-22 gates passed: node scripts/validate-content.mjs --strict-coverage; npm test -- --run; npm run validate:a11y; npm run build; cargo fmt --check --manifest-path src-tauri/Cargo.toml; cargo check --manifest-path src-tauri/Cargo.toml; npm run desktop:build."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] npm run desktop:build produced src-tauri/target/release/bundle/nsis/SkillForge Academy_1.4.0_x64-setup.exe."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Residual release risk recorded: installer code signing remains blocked by 212 until a trusted certificate is available."
+    }
+  ],
+  "artifacts": [
+    "work/completed/305-milestone-multi-cert-launch-readiness"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

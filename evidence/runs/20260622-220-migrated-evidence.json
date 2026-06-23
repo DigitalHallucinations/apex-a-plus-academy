@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260622-220-migrated-evidence",
+  "timestamp": "2026-06-22T12:00:00Z",
+  "work_item": "220",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] NVDA was unavailable in this Windows environment; `Get-Command nvda` and running process checks found no local NVDA installation/session."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] audits/AUDIT-2026-06-22-screen-reader-a11y.md records the waiver and residual risk."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] audits/AUDIT-2026-06-22-screen-reader-a11y.md reports no P0/P1 blockers found in the source/automated review and records the NVDA residual risk."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] scripts/validate-accessibility.mjs checks landmarks, polite announcements, dialog semantics, focus handling, menu dismissal, PBQ labels, heatmap names, status messages, and keyboard flashcards."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] scripts/validate-accessibility.mjs expanded from 10 to 16 checks."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] npm run validate:a11y"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] audits/AUDIT-2026-06-22-screen-reader-a11y.md"
+    }
+  ],
+  "artifacts": [
+    "work/completed/220-real-screen-reader-walkthrough"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

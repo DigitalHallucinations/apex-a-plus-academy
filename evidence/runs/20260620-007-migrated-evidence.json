@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260620-007-migrated-evidence",
+  "timestamp": "2026-06-20T12:00:00Z",
+  "work_item": "007",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] audits/AUDIT-2026-06-20-multi-cert-plan-reconciliation.md: per-section reconciliation table, stale-reference findings, status passed"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] docs/multi-certification-plan.md: marked HISTORICAL with pointer banner; Phase 3 row marked DONE; design-only intro softened"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Verified against code: ExamCode retired (0 refs), banks moved to src/content/<cert>/, SCHEMA_VERSION=3, lib.rs loader/title reconciled"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] No uncovered plan item needs a new todo; forward work covered by 303/304/305 + 210/214"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Recorded that tracking/* is archived; work/ + audits/ are the live record"
+    }
+  ],
+  "artifacts": [
+    "work/completed/007-multi-cert-plan-reconciliation-audit"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

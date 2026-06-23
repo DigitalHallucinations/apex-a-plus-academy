@@ -4,15 +4,22 @@
   "title": "Release candidate, version, installer, and upgrade audit",
   "status": "completed",
   "owner_scope": "governance",
-  "affected_scopes": ["README.md", "CHANGELOG.md", "VERSION", "package.json", "src-tauri", "docs", "audits"],
-  "depends_on": ["305"],
+  "affected_scopes": [
+    "docs",
+    "release",
+    "implementation",
+    "foundation"
+  ],
+  "depends_on": [
+    "305"
+  ],
   "acceptance_criteria": [
     {
       "id": "AC-1",
       "text": "Cut a release-candidate checklist for the next desktop release, including version source of truth, changelog cut, tag plan, installer artifact, checksum artifact, and rollback note.",
       "state": "satisfied",
       "evidence": [
-        "docs/release-candidate-1.4.0.md records version source of truth, release scope, publication plan, rollback plan, signing status, and required gates."
+        "20260622-219-migrated-evidence"
       ]
     },
     {
@@ -20,8 +27,7 @@
       "text": "Resolve the current stable/latest-release documentation mismatch so README, CHANGELOG, package version, Tauri version, VERSION, and release artifacts tell one consistent story.",
       "state": "satisfied",
       "evidence": [
-        "VERSION corrected to 1.4.0; package.json, src-tauri/tauri.conf.json, and VERSION now align.",
-        "README and CHANGELOG describe 1.4.0 as the current local release candidate, with GitHub publication pending external billing resolution."
+        "20260622-219-migrated-evidence"
       ]
     },
     {
@@ -29,9 +35,7 @@
       "text": "Verify installer upgrade behavior from the old Apex A+ naming line and current SkillForge line, documenting whether installs replace, coexist, or migrate.",
       "state": "satisfied",
       "evidence": [
-        "Silent smoke installed Apex A+ Academy 1.2.1, confirmed Apex uninstall entry, then installed SkillForge Academy 1.4.0.",
-        "After SkillForge install, Apex HKLM/HKCU uninstall entries were absent, SkillForge registry version was 1.4.0, and %APPDATA%/com.apexlearning.aplusacademy still existed.",
-        "README upgrade wording corrected to say the pre-install hook removes the old Apex installation while preserving shared app data."
+        "20260622-219-migrated-evidence"
       ]
     },
     {
@@ -39,9 +43,7 @@
       "text": "Run a Windows release smoke test: install, launch, switch tracks, answer content, create backup, close/reopen, uninstall/reinstall or upgrade, and confirm learner data behavior.",
       "state": "satisfied",
       "evidence": [
-        "Noninteractive release smoke covered installed app launch, installer reinstall/upgrade path, legacy Apex removal, and app-data directory preservation.",
-        "npm test -- src/backup.test.ts --run passed 4 backup-specific tests.",
-        "Interactive manual UI smoke for track switching, answering content, and creating a backup was not performed in this noninteractive pass; deeper backup and real-learner workflow validation are tracked by 221 and 228."
+        "20260622-219-migrated-evidence"
       ]
     },
     {
@@ -49,9 +51,7 @@
       "text": "Record a release audit with commands, installer paths, checksum evidence, signing status, SmartScreen expectation, and residual risks.",
       "state": "satisfied",
       "evidence": [
-        "audits/AUDIT-2026-06-22-release-candidate-1.4.0.md",
-        "evidence/runs/20260622-102314-219-release-candidate.json",
-        "src-tauri/target/release/bundle/nsis/SHA256SUMS.txt contains checksum 85fc1c1cb33aa662748db6ab88148de3bd8863fda84f09143fa1ed8457179297."
+        "20260622-219-migrated-evidence"
       ]
     }
   ],

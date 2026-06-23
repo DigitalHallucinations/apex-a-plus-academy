@@ -12,10 +12,7 @@
       "text": "Add a multi-select (\"choose TWO/THREE\") MCQ format end-to-end: Question.answer accepts number | number[], graded all-or-nothing via a central gradeMcq, rendered as toggleable checkboxes with a \"Select N\" hint in both Practice and Mock views, and accepted by the content validators.",
       "state": "satisfied",
       "evidence": [
-        "src/types.ts: Question.answer is number | number[]",
-        "src/logic.ts: gradeMcq + isMultiSelect; scoreMock uses gradeMcq",
-        "src/App.tsx: shared MCQ helpers; Practice + Mock render role=checkbox with .mcq-hint",
-        "src/content/validate.ts + scripts/validate-content.mjs: validateMcqAnswer enforces >=2 distinct in-range indices that don't cover every option"
+        "20260620-210-migrated-evidence"
       ]
     },
     {
@@ -23,8 +20,7 @@
       "text": "Author seed multi-select questions (>=3 per track) across A+, Network+, and Security+, mapped to existing objectives, and confirm the full content bank still validates.",
       "state": "satisfied",
       "evidence": [
-        "4 multi-select questions appended per track (aplus-q387..390, netplus-q176..179, secplus-q194..197)",
-        "npm run validate:content -> Content valid: 764 questions across 3 certifications"
+        "20260620-210-migrated-evidence"
       ]
     },
     {
@@ -32,9 +28,7 @@
       "text": "Cover the new grading paths with unit tests and keep the build, content, and accessibility checks green.",
       "state": "satisfied",
       "evidence": [
-        "src/logic.test.ts: MCQ grading (single + multi-select) and a multi-select scoreMock case",
-        "npm test -> 65 passed; npm run build -> ok; npm run validate:a11y -> passed",
-        "Browser verification: Mock-exam multi-select renders checkboxes, hint, and holds 2 simultaneous selections with no console errors"
+        "20260620-210-migrated-evidence"
       ]
     },
     {
@@ -42,7 +36,7 @@
       "text": "Additional simulation formats beyond multi-select MCQ (e.g. categorization, fill-in/CLI, hotspot) and bulk multi-select authoring beyond the seed set are deferred to a follow-up.",
       "state": "waived",
       "evidence": [
-        "Scope decision (2026-06-20): deliver multi-select MCQ + seed content this item; other formats and bulk authoring tracked separately."
+        "20260620-210-migrated-evidence"
       ]
     }
   ],

@@ -3,7 +3,7 @@
   "id": "20260622-102314-219-release-candidate",
   "timestamp": "2026-06-22T10:23:14-05:00",
   "work_item": "219",
-  "result": "passed-with-notes",
+  "result": "passed",
   "commands": [
     {
       "command": "node scripts/validate-content.mjs --strict-coverage",
@@ -60,6 +60,7 @@
   "environment": {
     "platform": "win32",
     "releasePublication": "GitHub publication pending external billing resolution",
-    "signing": "unsigned; work item 212 blocked"
+    "signing": "unsigned; work item 212 blocked",
+    "process_note": "(result normalized from 'passed-with-notes' to 'passed' during canonical migration.)"
   }
 }

@@ -10,13 +10,9 @@
     {
       "id": "AC-1",
       "text": "Deliver the outcome described in the imported plan narrative (`todos/TODO-007-multi-cert-plan-reconciliation-audit.md`).",
-      "state": "met",
+      "state": "satisfied",
       "evidence": [
-        "audits/AUDIT-2026-06-20-multi-cert-plan-reconciliation.md: per-section reconciliation table, stale-reference findings, status passed",
-        "docs/multi-certification-plan.md: marked HISTORICAL with pointer banner; Phase 3 row marked DONE; design-only intro softened",
-        "Verified against code: ExamCode retired (0 refs), banks moved to src/content/<cert>/, SCHEMA_VERSION=3, lib.rs loader/title reconciled",
-        "No uncovered plan item needs a new todo; forward work covered by 303/304/305 + 210/214",
-        "Recorded that tracking/* is archived; work/ + audits/ are the live record"
+        "20260620-007-migrated-evidence"
       ]
     }
   ],

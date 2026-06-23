@@ -1,0 +1,42 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260621-216-migrated-evidence",
+  "timestamp": "2026-06-21T12:00:00Z",
+  "work_item": "216",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Added fill-in PBQ support end-to-end: src/types.ts model, src/logic.ts normalized grading, src/App.tsx Practice/Mock rendering, src/styles.css UI states, src/content/validate.ts and scripts/validate-content.mjs validation."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Added one fill-in PBQ per available track: aplus-p09, netplus-p009, secplus-p009."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] Tests: src/logic.test.ts covers normalized fill-in grading; src/content/validate.test.ts covers valid and invalid fill-in PBQ structures."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] Expanded multi-select MCQ coverage from the item 210 seed set by adding aplus-q391/aplus-q392, netplus-q180/netplus-q181, and secplus-q198/secplus-q199."
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] npm run validate:content confirms 770 questions and all objective coverage targets remain satisfied."
+    }
+  ],
+  "artifacts": [
+    "work/completed/216-add-further-simulation-formats-and-expand-multi-select-content"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260618-215-migrated-evidence",
+  "timestamp": "2026-06-18T12:00:00Z",
+  "work_item": "215",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] docs/course-lesson-content-model.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] decisions/0005-adopt-course-first-content-architecture.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-2] docs/a-plus-complete-course-map.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] docs/course-lesson-content-model.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-3] docs/certification-authoring.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-4] docs/course-lesson-content-model.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] decisions/0006-objective-mapped-curriculum.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] audits/AUDIT-2026-06-18-objective-coverage.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-5] evidence/runs/20260618-012803-215-complete.json"
+    }
+  ],
+  "artifacts": [
+    "work/completed/215-course-lessons-and-real-world-class-content"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

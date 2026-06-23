@@ -1,0 +1,32 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260616-302-migrated-evidence",
+  "timestamp": "2026-06-16T12:00:00Z",
+  "work_item": "302",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] work/completed/001-true-cert-factory/README.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] work/completed/002-cert-authoring-guide/README.md"
+    },
+    {
+      "command": "inline-evidence",
+      "exit_code": 0,
+      "summary": "[AC-1] audits/AUDIT-2026-06-16-true-cert-factory.md"
+    }
+  ],
+  "artifacts": [
+    "work/completed/302-milestone-true-certification-factory"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Inline acceptance-criterion evidence migrated to a formal evidence/runs record during the canonical RepoPact 1.6.0 migration (decision 0007). Original entries preserved verbatim in commands[].summary, prefixed by criterion id."
+  }
+}

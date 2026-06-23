@@ -12,10 +12,7 @@
       "text": "Achieve the milestone described in the imported narrative (`tracking/milestones.md#M3`).",
       "state": "satisfied",
       "evidence": [
-        "Network+ (N10-009) is present as the first additional certification track in src/content/certifications.json with order 2 and idPrefix netplus.",
-        "src/content/network-plus/ contains domains, objectives, lessons, questions, flashcards, and PBQs.",
-        "Prior implementation evidence: work/completed/003-network-plus-starter-track/ and audits/AUDIT-2026-06-17-network-plus-starter.md.",
-        "2026-06-21 validation: node scripts/validate-content.mjs --strict-coverage reports network-plus: 5 domains, 179 questions, 45 flashcards, 9 PBQs, 41 lessons; 25/25 objectives complete."
+        "20260621-303-migrated-evidence"
       ]
     }
   ],

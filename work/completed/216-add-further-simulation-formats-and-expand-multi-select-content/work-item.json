@@ -5,16 +5,16 @@
   "status": "completed",
   "owner_scope": "governance",
   "affected_scopes": [],
-  "depends_on": ["210"],
+  "depends_on": [
+    "210"
+  ],
   "acceptance_criteria": [
     {
       "id": "AC-1",
       "text": "Add at least one additional CompTIA-style simulation format beyond multi-select MCQ (candidates: categorization/drag-to-bucket, fill-in / CLI command entry, hotspot/diagram click) end-to-end: type, grading, Practice + Mock rendering, validators, and tests.",
       "state": "satisfied",
       "evidence": [
-        "Added fill-in PBQ support end-to-end: src/types.ts model, src/logic.ts normalized grading, src/App.tsx Practice/Mock rendering, src/styles.css UI states, src/content/validate.ts and scripts/validate-content.mjs validation.",
-        "Added one fill-in PBQ per available track: aplus-p09, netplus-p009, secplus-p009.",
-        "Tests: src/logic.test.ts covers normalized fill-in grading; src/content/validate.test.ts covers valid and invalid fill-in PBQ structures."
+        "20260621-216-migrated-evidence"
       ]
     },
     {
@@ -22,8 +22,7 @@
       "text": "Grow multi-select MCQ coverage beyond the item 210 seed set toward a target density per domain/objective, keeping the content bank valid.",
       "state": "satisfied",
       "evidence": [
-        "Expanded multi-select MCQ coverage from the item 210 seed set by adding aplus-q391/aplus-q392, netplus-q180/netplus-q181, and secplus-q198/secplus-q199.",
-        "npm run validate:content confirms 770 questions and all objective coverage targets remain satisfied."
+        "20260621-216-migrated-evidence"
       ]
     }
   ],
