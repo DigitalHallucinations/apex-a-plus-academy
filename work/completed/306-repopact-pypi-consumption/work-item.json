@@ -1,0 +1,37 @@
+{
+  "$schema": "../../../schemas/work-item.schema.json",
+  "id": "306",
+  "title": "Consume RepoPact from PyPI (repopact==1.8.0)",
+  "status": "completed",
+  "owner_scope": "governance",
+  "affected_scopes": [],
+  "depends_on": [],
+  "acceptance_criteria": [
+    {
+      "id": "AC-1",
+      "text": "Pin repopact==1.8.0 in requirements-repopact.txt and remove the vendored RepoPact modules (scripts/validate_repo.py, scripts/frontmatter.py, scripts/repo_model.py); governance validation runs via `python -m repopact_cli validate`.",
+      "state": "satisfied",
+      "evidence": [
+        "20260624-306-repopact-pypi-migration"
+      ]
+    },
+    {
+      "id": "AC-2",
+      "text": "Update schemas/record-frontmatter.schema.json to the 1.8.0 decision status vocabulary (adds rejected and deferred); schemas remain in-repo as the repository's own contracts.",
+      "state": "satisfied",
+      "evidence": [
+        "20260624-306-repopact-pypi-migration"
+      ]
+    },
+    {
+      "id": "AC-3",
+      "text": "`python -m repopact_cli validate` passes on the repository with RepoPact consumed from PyPI (decision 0008).",
+      "state": "satisfied",
+      "evidence": [
+        "20260624-306-repopact-pypi-migration"
+      ]
+    }
+  ],
+  "created": "2026-06-24",
+  "updated": "2026-06-24"
+}

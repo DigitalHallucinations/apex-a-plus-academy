@@ -1,2 +1,5 @@
-# RepoPact validator dependency (python scripts/validate_repo.py).
-jsonschema>=4.20
+# RepoPact governance tooling, consumed from PyPI instead of vendored (decision 0008).
+# Validate with:  python -m repopact_cli validate   (or `repopact validate` if on PATH).
+# Note: schemas/ stay in-repo — RepoPact validates against this repository's own
+# schema files (root/schemas/*.json), not the package copy. repopact pulls in jsonschema.
+repopact==1.8.0

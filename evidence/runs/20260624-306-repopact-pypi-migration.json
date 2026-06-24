@@ -1,0 +1,35 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260624-306-repopact-pypi-migration",
+  "timestamp": "2026-06-24T16:00:00Z",
+  "work_item": "306",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "pip install repopact==1.8.0",
+      "exit_code": 0,
+      "summary": "[AC-1] Installed the published RepoPact 1.8.0 from PyPI; provides the repopact CLI and validate_repo/frontmatter/repo_model modules."
+    },
+    {
+      "command": "git rm scripts/validate_repo.py scripts/frontmatter.py scripts/repo_model.py",
+      "exit_code": 0,
+      "summary": "[AC-1] Removed the vendored RepoPact modules; SkillForge's own scripts (*.mjs, sign-windows.ps1) remain."
+    },
+    {
+      "command": "python -m repopact_cli validate",
+      "exit_code": 0,
+      "summary": "[AC-3] Repository governance validation passed using RepoPact consumed from PyPI; the validator read the repo's own schemas/ and records."
+    }
+  ],
+  "artifacts": [
+    "requirements-repopact.txt",
+    "schemas/record-frontmatter.schema.json",
+    "decisions/0008-consume-repopact-from-pypi.md",
+    "work/completed/306-repopact-pypi-consumption"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Migrated RepoPact consumption from a vendored validator to a pinned PyPI dependency (decision 0008). schemas/ remain in-repo; record-frontmatter status enum updated to the 1.8.0 vocabulary (rejected, deferred)."
+  }
+}

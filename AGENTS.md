@@ -160,6 +160,7 @@ Use the smallest command set that proves the change.
 
 Common gates:
 
+- Governance/record changes (decisions, work items, evidence, schemas): `python -m repopact_cli validate` (RepoPact is a pinned PyPI dependency — `pip install -r requirements-repopact.txt` first; decision 0008).
 - Content changes: `npm run validate:content`
 - Accessibility-affecting UI changes: `npm run validate:a11y`
 - TypeScript or app behavior changes: `npm test -- --run` and `npm run build`
