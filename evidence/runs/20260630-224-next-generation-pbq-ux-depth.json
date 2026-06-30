@@ -1,0 +1,70 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260630-224-next-generation-pbq-ux-depth",
+  "timestamp": "2026-06-30T19:23:14Z",
+  "work_item": "224",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "npm run validate:content",
+      "exit_code": 0,
+      "summary": "[AC-2, AC-4] Content validation passed with categorization PBQ schema and original Network+ PBQ netplus-p010."
+    },
+    {
+      "command": "node scripts/validate-content.mjs --strict-coverage",
+      "exit_code": 0,
+      "summary": "[AC-2, AC-4] Strict objective coverage validation passed after adding the new Network+ categorization PBQ."
+    },
+    {
+      "command": "npm run validate:a11y",
+      "exit_code": 0,
+      "summary": "[AC-3, AC-5] Accessibility validator passed including categorization select labels and labelled PBQ feedback."
+    },
+    {
+      "command": "npm test -- --run",
+      "exit_code": 0,
+      "summary": "[AC-2, AC-3] Unit tests passed for categorization grading and content validation."
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "summary": "[AC-2] TypeScript and Vite production build passed with the existing chunk-size warning."
+    },
+    {
+      "command": "in-app browser smoke at 1280x900",
+      "exit_code": 0,
+      "summary": "[AC-5] Desktop PBQ Lab smoke reached netplus-p010, verified five categorization selects, selected one answer, and confirmed labelled partial-credit feedback with no console errors."
+    },
+    {
+      "command": "in-app browser smoke at 390x844",
+      "exit_code": 0,
+      "summary": "[AC-5] Mobile PBQ Lab smoke reached netplus-p010, verified five categorization selects, one-column rows, full-width controls, and 44px minimum select height."
+    },
+    {
+      "command": "python -m repopact_cli validate",
+      "exit_code": 1,
+      "summary": "[AC-2] Governance validation still fails on the repo-wide preflight-marker requirement affecting existing work items."
+    }
+  ],
+  "artifacts": [
+    "src/types.ts",
+    "src/logic.ts",
+    "src/App.tsx",
+    "src/styles.css",
+    "src/content/network-plus/pbqs.json",
+    "src/content/validate.ts",
+    "src/content/validate.test.ts",
+    "scripts/validate-content.mjs",
+    "scripts/validate-accessibility.mjs",
+    "docs/certification-authoring.md",
+    "docs/content-quality-rubric.md",
+    "docs/contributor-onboarding.md",
+    "audits/AUDIT-2026-06-30-next-generation-pbq-ux-depth.md",
+    "work/completed/224-next-generation-pbq-ux-depth"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Categorization PBQs shipped as the next-generation PBQ depth slice; browser smoke used the in-app browser because the standalone Playwright Chromium executable was unavailable."
+  }
+}

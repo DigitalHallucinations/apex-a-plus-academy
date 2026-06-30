@@ -158,6 +158,21 @@ function validate(certifications, domains, questions, flashcards, pbqs, lessons,
         if (!itemIds.has(item)) errors.push(`PBQ ${p.id}: answer references unknown item "${item}"`);
         if (!targetIds.has(target)) errors.push(`PBQ ${p.id}: answer references unknown target "${target}"`);
       }
+    } else if (p.kind === "categorization") {
+      const itemIds = new Set((p.items || []).map(i => i.id));
+      const categoryIds = new Set((p.categories || []).map(c => c.id));
+      if (!(p.items || []).length || !(p.categories || []).length) errors.push(`PBQ ${p.id}: categorization needs items and categories`);
+      for (const c of p.categories || []) {
+        if (!c.id?.trim() || !c.label?.trim()) errors.push(`PBQ ${p.id}: categories need id and label`);
+      }
+      for (const item of p.items || []) {
+        if (!item.id?.trim() || !item.text?.trim()) errors.push(`PBQ ${p.id}: categorization items need id and text`);
+        if (!(item.id in (p.answer || {}))) errors.push(`PBQ ${p.id}: item "${item.id}" has no answer`);
+      }
+      for (const [item, category] of Object.entries(p.answer || {})) {
+        if (!itemIds.has(item)) errors.push(`PBQ ${p.id}: answer references unknown item "${item}"`);
+        if (!categoryIds.has(category)) errors.push(`PBQ ${p.id}: answer references unknown category "${category}"`);
+      }
     } else if (p.kind === "ordering") {
       const stepIds = new Set((p.steps || []).map(s => s.id));
       if (!(p.steps || []).length) errors.push(`PBQ ${p.id}: ordering needs steps`);

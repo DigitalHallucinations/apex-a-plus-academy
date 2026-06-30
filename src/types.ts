@@ -136,7 +136,16 @@ export interface FillInPbq extends PbqBase {
   blanks: { id: string; label: string; accept: string[] }[];
 }
 
-export type Pbq = MatchingPbq | OrderingPbq | FillInPbq;
+/** Assign scenario evidence/items into broader buckets with partial credit. */
+export interface CategorizationPbq extends PbqBase {
+  kind: "categorization";
+  categories: { id: string; label: string; description?: string }[];
+  items: { id: string; text: string; detail?: string }[];
+  /** itemId -> correct categoryId */
+  answer: Record<string, string>;
+}
+
+export type Pbq = MatchingPbq | OrderingPbq | FillInPbq | CategorizationPbq;
 
 export interface Flashcard {
   id: string;

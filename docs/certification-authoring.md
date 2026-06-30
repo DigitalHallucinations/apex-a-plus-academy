@@ -264,12 +264,17 @@ PBQs are optional. Supported types:
 
 - `matching`: assign items to targets.
 - `ordering`: sequence steps.
+- `categorization`: sort scenario observations into shared buckets.
+- `fillin`: type commands, ports, or short values.
 
 Quality rubric:
 
 - Simulate technician tasks, not trivia.
 - Keep nested item IDs unique within the PBQ.
 - Include an explanation that teaches the pattern.
+- For categorization PBQs, every item must have exactly one answer, categories
+  must have clear labels, and the review feedback should teach why an item
+  belongs in that bucket.
 
 ## Lessons
 

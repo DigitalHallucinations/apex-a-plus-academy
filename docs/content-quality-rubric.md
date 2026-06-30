@@ -32,7 +32,7 @@ Multi-select extras:
 | Criterion | Release-ready expectation |
 | --- | --- |
 | Task authenticity | Feels like a technician/security/networking task, not a disguised vocabulary quiz. |
-| Interaction fit | Matching, ordering, or fill-in is the right interaction for the skill being tested. |
+| Interaction fit | Matching, ordering, categorization, or fill-in is the right interaction for the skill being tested. |
 | Partial credit | Sub-parts are independently meaningful and gradeable. |
 | Feedback | Explanation helps learners diagnose the specific pattern, order, or command. |
 | Accessibility | Keyboard users can complete the task; labels and prompts are explicit. |

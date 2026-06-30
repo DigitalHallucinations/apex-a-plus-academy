@@ -191,5 +191,68 @@
       { "id": "reachability", "label": "ICMP reachability command", "accept": ["ping"] }
     ],
     "explanation": "nslookup or dig tests DNS resolution. ping is a basic ICMP reachability test."
+  },
+  {
+    "id": "netplus-p010",
+    "certId": "network-plus",
+    "kind": "categorization",
+    "exam": "N10-009",
+    "domain": "netplus-troubleshooting",
+    "objectiveId": "netplus-5.2",
+    "difficulty": "Advanced",
+    "prompt": "A conference room switch port is down after a furniture move. Categorize each observation by the most likely fault area.",
+    "objective": "Given a scenario, troubleshoot common cabling and physical interface issues",
+    "categories": [
+      {
+        "id": "cabling",
+        "label": "Cabling or termination",
+        "description": "Copper/fiber media, connector, pinout, or patch lead fault."
+      },
+      {
+        "id": "interface",
+        "label": "Interface configuration",
+        "description": "Switch port setting, VLAN, speed/duplex, or administratively disabled port."
+      },
+      {
+        "id": "environment",
+        "label": "Physical environment",
+        "description": "Power, damage, labeling, rack, or workspace condition."
+      }
+    ],
+    "items": [
+      {
+        "id": "obs-link",
+        "text": "Link LED stays dark with two known-good laptops",
+        "detail": "The same patch cable fails at this wall jack but works elsewhere."
+      },
+      {
+        "id": "obs-disabled",
+        "text": "Switch log says the port is administratively down",
+        "detail": "No errors increment while the interface is disabled."
+      },
+      {
+        "id": "obs-crushed",
+        "text": "The cable run is pinched under a table leg",
+        "detail": "The drop was moved during room rearrangement."
+      },
+      {
+        "id": "obs-vlan",
+        "text": "The port comes up but clients receive the wrong subnet",
+        "detail": "The switchport is assigned to the guest VLAN."
+      },
+      {
+        "id": "obs-label",
+        "text": "Patch panel labels no longer match the room map",
+        "detail": "Technicians cannot identify the correct drop without toning."
+      }
+    ],
+    "answer": {
+      "obs-link": "cabling",
+      "obs-disabled": "interface",
+      "obs-crushed": "environment",
+      "obs-vlan": "interface",
+      "obs-label": "environment"
+    },
+    "explanation": "Dark links with known-good devices point to cabling or termination, disabled ports and wrong VLANs are interface configuration issues, and crushed cables or bad labels are physical-environment problems that must be corrected before deeper protocol troubleshooting."
   }
 ]

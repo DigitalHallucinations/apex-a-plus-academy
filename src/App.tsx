@@ -479,7 +479,7 @@ type PbqResponse = Record<string, string> | string[];
 function PbqView({ pbq, response, onChange, revealed }: { pbq: Pbq; response: PbqResponse | undefined; onChange: (r: PbqResponse) => void; revealed?: boolean }) {
   if (pbq.kind === "matching") {
     const r = (response && !Array.isArray(response) ? response : {}) as Record<string, string>;
-    return <div className="pbq-matching">{pbq.items.map(item => {
+    return <><div className="pbq-matching">{pbq.items.map(item => {
       const sel = r[item.id]; const correct = pbq.answer[item.id];
       const cls = revealed ? (sel === correct ? "correct" : "wrong") : "";
       return <div className={`pbq-row ${cls}`} key={item.id}>
@@ -490,12 +490,33 @@ function PbqView({ pbq, response, onChange, revealed }: { pbq: Pbq; response: Pb
         </select>
         {revealed && sel !== correct && <small>Correct: {pbq.targets.find(t => t.id === correct)?.label}</small>}
       </div>;
-    })}</div>;
+    })}</div>{revealed && <div className="pbq-feedback" aria-label="PBQ item feedback">{pbq.items.map(item => {
+      const correct = pbq.answer[item.id]; const sel = r[item.id];
+      return <span key={item.id} className={sel === correct ? "ok" : "miss"}>{item.text}: {sel === correct ? "correct" : `expected ${pbq.targets.find(t => t.id === correct)?.label}`}</span>;
+    })}</div>}</>;
+  }
+  if (pbq.kind === "categorization") {
+    const r = (response && !Array.isArray(response) ? response : {}) as Record<string, string>;
+    return <><div className="pbq-categorization">{pbq.items.map(item => {
+      const sel = r[item.id]; const correct = pbq.answer[item.id];
+      const cls = revealed ? (sel === correct ? "correct" : "wrong") : "";
+      return <div className={`pbq-category-item ${cls}`} key={item.id}>
+        <div><b>{item.text}</b>{item.detail && <small>{item.detail}</small>}</div>
+        <select value={sel || ""} disabled={revealed} aria-label={`Categorize ${item.text}`} onChange={e => onChange({ ...r, [item.id]: e.target.value })}>
+          <option value="" disabled>Choose category...</option>
+          {pbq.categories.map(c => <option key={c.id} value={c.id}>{c.label}</option>)}
+        </select>
+        {revealed && sel !== correct && <small>Correct: {pbq.categories.find(c => c.id === correct)?.label}</small>}
+      </div>;
+    })}</div><div className="pbq-category-key" aria-label="Category guide">{pbq.categories.map(c => <span key={c.id}><b>{c.label}</b>{c.description && <small>{c.description}</small>}</span>)}</div>{revealed && <div className="pbq-feedback" aria-label="PBQ item feedback">{pbq.items.map(item => {
+      const correct = pbq.answer[item.id]; const sel = r[item.id];
+      return <span key={item.id} className={sel === correct ? "ok" : "miss"}>{item.text}: {sel === correct ? "correct" : `expected ${pbq.categories.find(c => c.id === correct)?.label}`}</span>;
+    })}</div>}</>;
   }
   if (pbq.kind === "fillin") {
     const r = (response && !Array.isArray(response) ? response : {}) as Record<string, string>;
     const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, " ");
-    return <div className="pbq-fillin">{pbq.blanks.map(b => {
+    return <><div className="pbq-fillin">{pbq.blanks.map(b => {
       const val = r[b.id] ?? "";
       const ok = !!norm(val) && b.accept.some(a => norm(a) === norm(val));
       const cls = revealed ? (ok ? "correct" : "wrong") : "";
@@ -505,18 +526,24 @@ function PbqView({ pbq, response, onChange, revealed }: { pbq: Pbq; response: Pb
           onChange={e => onChange({ ...r, [b.id]: e.target.value })}/>
         {revealed && !ok && <small>Correct: {b.accept[0]}</small>}
       </div>;
-    })}</div>;
+    })}</div>{revealed && <div className="pbq-feedback" aria-label="PBQ item feedback">{pbq.blanks.map(b => {
+      const val = r[b.id] ?? ""; const ok = !!norm(val) && b.accept.some(a => norm(a) === norm(val));
+      return <span key={b.id} className={ok ? "ok" : "miss"}>{b.label}: {ok ? "correct" : `expected ${b.accept[0]}`}</span>;
+    })}</div>}</>;
   }
   const list = (Array.isArray(response) ? response : pbq.steps.map(s => s.id));
   const move = (i: number, dir: number) => { const j = i + dir; if (j < 0 || j >= list.length) return; const next = [...list]; [next[i], next[j]] = [next[j], next[i]]; onChange(next); };
-  return <div className="pbq-ordering">{list.map((sid, i) => {
+  return <><div className="pbq-ordering">{list.map((sid, i) => {
     const step = pbq.steps.find(s => s.id === sid);
     const cls = revealed ? (pbq.answer[i] === sid ? "correct" : "wrong") : "";
     return <div className={`pbq-step ${cls}`} key={sid}>
       <span className="pbq-num">{i + 1}</span><b>{step?.text}</b>
       {!revealed && <span className="pbq-move"><button aria-label={`Move "${step?.text}" up`} disabled={i === 0} onClick={() => move(i, -1)}><ChevronUp/></button><button aria-label={`Move "${step?.text}" down`} disabled={i === list.length - 1} onClick={() => move(i, 1)}><ChevronDown/></button></span>}
     </div>;
-  })}{revealed && <small className="pbq-correct-order">Correct order: {pbq.answer.map(id => pbq.steps.find(s => s.id === id)?.text).join(" → ")}</small>}</div>;
+  })}{revealed && <small className="pbq-correct-order">Correct order: {pbq.answer.map(id => pbq.steps.find(s => s.id === id)?.text).join(" -> ")}</small>}</div>{revealed && <div className="pbq-feedback" aria-label="PBQ item feedback">{pbq.answer.map((sid, i) => {
+    const got = list[i]; const ok = got === sid;
+    return <span key={sid} className={ok ? "ok" : "miss"}>Position {i + 1}: {ok ? "correct" : `expected ${pbq.steps.find(s => s.id === sid)?.text}`}</span>;
+  })}</div>}</>;
 }
 
 function PbqLab({ activeCertId }: { activeCertId: CertId }) {

@@ -85,6 +85,18 @@ describe("validateContent — PBQ formats", () => {
     }))).toEqual([]);
   });
 
+  it("accepts a valid categorization PBQ", () => {
+    expect(validateContent(bundle({
+      pbqs: [{
+        id: "aplus-p2", certId: "a-plus", kind: "categorization", exam: "220-1201", domain: "aplus-net",
+        difficulty: "Intermediate", prompt: "Sort the symptoms.", objective: "o", explanation: "Physical symptoms differ from DNS symptoms.",
+        categories: [{ id: "physical", label: "Physical" }, { id: "dns", label: "DNS" }],
+        items: [{ id: "link", text: "Link light is dark" }, { id: "lookup", text: "Name lookup fails" }],
+        answer: { link: "physical", lookup: "dns" }
+      }]
+    }))).toEqual([]);
+  });
+
   it("rejects fill-in PBQs with duplicate or empty accepted answers", () => {
     const errors = validateContent(bundle({
       pbqs: [{
@@ -98,5 +110,19 @@ describe("validateContent — PBQ formats", () => {
     }));
     expect(errors.some(e => e.includes("blank ids must be present and unique"))).toBe(true);
     expect(errors.some(e => e.includes("needs non-empty accepted answers"))).toBe(true);
+  });
+
+  it("rejects categorization PBQs with bad category references", () => {
+    const errors = validateContent(bundle({
+      pbqs: [{
+        id: "aplus-p2", certId: "a-plus", kind: "categorization", exam: "220-1201", domain: "aplus-net",
+        difficulty: "Intermediate", prompt: "Sort the symptoms.", objective: "o", explanation: "x",
+        categories: [{ id: "physical", label: "Physical" }],
+        items: [{ id: "link", text: "Link light is dark" }],
+        answer: { link: "dns", ghost: "physical" }
+      }]
+    }));
+    expect(errors.some(e => e.includes("unknown category"))).toBe(true);
+    expect(errors.some(e => e.includes("unknown item"))).toBe(true);
   });
 });

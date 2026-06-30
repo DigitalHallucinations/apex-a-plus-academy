@@ -1,6 +1,6 @@
 # Audit Index
 
-Last updated: 2026-06-30 (Android blocker, content calibration, and objective drift)
+Last updated: 2026-06-30 (Android blocker, content calibration, objective drift, and PBQ depth)
 
 | ID | Title | Type | Status | Related Todo | Date |
 | --- | --- | --- | --- | --- | --- |
@@ -20,6 +20,7 @@ Last updated: 2026-06-30 (Android blocker, content calibration, and objective dr
 | [AUDIT-2026-06-30-android-mobile-foundation](AUDIT-2026-06-30-android-mobile-foundation.md) | Android Mobile Foundation | implementation / mobile readiness | blocked-with-repo-foundation | [217](../work/blocked/217-tauri-android-mobile-support-foundation/README.md) | 2026-06-30 |
 | [AUDIT-2026-06-30-content-quality-calibration](AUDIT-2026-06-30-content-quality-calibration.md) | Content Quality And Assessment Calibration | content / assessment calibration | passed-with-notes | [222](../work/completed/222-content-quality-and-assessment-calibration-audit/README.md) | 2026-06-30 |
 | [AUDIT-2026-06-30-objective-drift-watch](AUDIT-2026-06-30-objective-drift-watch.md) | Official Objective Drift Watch | content / release governance | passed-with-notes | [223](../work/completed/223-official-objective-drift-watch/README.md) | 2026-06-30 |
+| [AUDIT-2026-06-30-next-generation-pbq-ux-depth](AUDIT-2026-06-30-next-generation-pbq-ux-depth.md) | Next-Generation PBQ UX Depth | implementation / content / accessibility | passed-with-notes | [224](../work/completed/224-next-generation-pbq-ux-depth/README.md) | 2026-06-30 |
 
 ## Next Recommended Audit
 

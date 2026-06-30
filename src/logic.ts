@@ -318,6 +318,14 @@ export function gradePbq(pbq: Pbq, response: unknown): number {
     }
     return correct / total;
   }
+  if (pbq.kind === "categorization") {
+    const r = (response && typeof response === "object" && !Array.isArray(response) ? response : {}) as Record<string, string>;
+    const total = pbq.items.length;
+    if (!total) return 0;
+    let correct = 0;
+    for (const item of pbq.items) if (r[item.id] === pbq.answer[item.id]) correct++;
+    return correct / total;
+  }
   const r = Array.isArray(response) ? (response as string[]) : [];
   const total = pbq.steps.length;
   if (!total) return 0;

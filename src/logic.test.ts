@@ -284,6 +284,12 @@ describe("PBQ grading (partial credit)", () => {
       { id: "cmd", label: "Show IP configuration", accept: ["ipconfig /all", "ipconfig"] }
     ]
   };
+  const categorization: Pbq = {
+    id: "c", certId: "a-plus", kind: "categorization", exam: "220-1201", domain: "net", difficulty: "Foundation", prompt: "", objective: "", explanation: "",
+    categories: [{ id: "physical", label: "Physical" }, { id: "dns", label: "DNS" }],
+    items: [{ id: "link", text: "Link light is dark" }, { id: "lookup", text: "Name lookup fails" }],
+    answer: { link: "physical", lookup: "dns" }
+  };
   it("scores matching by fraction correct", () => {
     expect(gradePbq(matching, { a: "1", b: "2", c: "3", d: "4" })).toBe(1);
     expect(gradePbq(matching, { a: "1", b: "2", c: "9", d: "9" })).toBe(0.5);
@@ -298,6 +304,11 @@ describe("PBQ grading (partial credit)", () => {
     expect(gradePbq(fillin, { port: " 443 ", cmd: "IPCONFIG   /ALL" })).toBe(1);
     expect(gradePbq(fillin, { port: "443", cmd: "ipconfig /release" })).toBe(0.5);
     expect(gradePbq(fillin, {})).toBe(0);
+  });
+  it("scores categorization by fraction of items in the right bucket", () => {
+    expect(gradePbq(categorization, { link: "physical", lookup: "dns" })).toBe(1);
+    expect(gradePbq(categorization, { link: "physical", lookup: "physical" })).toBe(0.5);
+    expect(gradePbq(categorization, {})).toBe(0);
   });
 });
 

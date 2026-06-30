@@ -95,7 +95,8 @@ and a rationale. The banks live under `src/content/<track>/`:
 
 - `questions.json` — MCQs. `answer` is a single index, or an array of indices for
   a multi-select ("choose TWO/THREE") question.
-- `pbqs.json` — performance-based questions (`matching`, `ordering`).
+- `pbqs.json` — performance-based questions (`matching`, `ordering`,
+  `categorization`, `fillin`).
 - `flashcards.json`, `lessons.json`, `objectives.json`, `domains.json`.
 
 After editing, run `npm run validate:content`. The full rules — id format, lesson
