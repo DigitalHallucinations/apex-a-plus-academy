@@ -1,6 +1,6 @@
 # Audit Index
 
-Last updated: 2026-06-22 (accessibility and backup hardening)
+Last updated: 2026-06-30 (Android blocker and content calibration)
 
 | ID | Title | Type | Status | Related Todo | Date |
 | --- | --- | --- | --- | --- | --- |
@@ -18,9 +18,10 @@ Last updated: 2026-06-22 (accessibility and backup hardening)
 | [AUDIT-2026-06-22-screen-reader-a11y](AUDIT-2026-06-22-screen-reader-a11y.md) | Screen-Reader Accessibility Baseline | accessibility | passed-with-notes | [220](../work/completed/220-real-screen-reader-walkthrough/README.md) | 2026-06-22 |
 | [AUDIT-2026-06-22-cross-platform-backups](AUDIT-2026-06-22-cross-platform-backups.md) | Cross-Platform Backup, Import, And Export Hardening | data migration / QA | passed-with-notes | [221](../work/completed/221-cross-platform-backup-import-export-hardening/README.md) | 2026-06-22 |
 | [AUDIT-2026-06-30-android-mobile-foundation](AUDIT-2026-06-30-android-mobile-foundation.md) | Android Mobile Foundation | implementation / mobile readiness | blocked-with-repo-foundation | [217](../work/blocked/217-tauri-android-mobile-support-foundation/README.md) | 2026-06-30 |
+| [AUDIT-2026-06-30-content-quality-calibration](AUDIT-2026-06-30-content-quality-calibration.md) | Content Quality And Assessment Calibration | content / assessment calibration | passed-with-notes | [222](../work/completed/222-content-quality-and-assessment-calibration-audit/README.md) | 2026-06-30 |
 
 ## Next Recommended Audit
 
-Candidate: content calibration (`222`) and official objective drift watch
-(`223`), followed by a true NVDA/VoiceOver walkthrough when those assistive
-technology environments are available.
+Candidate: official objective drift watch (`223`), followed by a true
+NVDA/VoiceOver walkthrough when those assistive technology environments are
+available.

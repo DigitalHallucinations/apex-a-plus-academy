@@ -2778,17 +2778,18 @@
     "objectiveId": "secplus-1.2",
     "domain": "secplus-concepts",
     "difficulty": "Foundation",
-    "prompt": "Which goals make up the classic CIA triad? (Choose TWO.)",
+    "prompt": "Which goals make up the classic CIA triad? (Choose THREE.)",
     "options": [
       "Confidentiality",
       "Integrity",
+      "Availability",
       "Authentication",
-      "Accounting",
       "Non-repudiation"
     ],
     "answer": [
       0,
-      1
+      1,
+      2
     ],
     "explanation": "The CIA triad is Confidentiality, Integrity, and Availability. Authentication, accounting, and non-repudiation are important but are not part of the triad itself.",
     "objective": "Summarize fundamental security concepts"

@@ -1,0 +1,55 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260630-222-content-quality-calibration",
+  "timestamp": "2026-06-30T20:00:00Z",
+  "work_item": "222",
+  "result": "passed",
+  "commands": [
+    {
+      "command": "content metrics pass over src/content/* banks",
+      "exit_code": 0,
+      "summary": "[AC-1] Reviewed representative samples and computed whole-bank metrics for all three shipped tracks."
+    },
+    {
+      "command": "multi-select prompt/answer count scan",
+      "exit_code": 0,
+      "summary": "[AC-4] Scanned all 770 questions for Choose TWO/THREE prompt count mismatches; no broad mismatch pattern found."
+    },
+    {
+      "command": "manual content review sample",
+      "exit_code": 0,
+      "summary": "[AC-1] Reviewed 39 sampled items: 12 questions, 9 PBQs, 9 flashcards, and 9 lessons."
+    },
+    {
+      "command": "node scripts/validate-content.mjs --strict-coverage",
+      "exit_code": 0,
+      "summary": "[AC-2] Strict objective coverage validation passed after the Security+ multi-select fix."
+    },
+    {
+      "command": "npm run validate:content",
+      "exit_code": 0,
+      "summary": "[AC-4] Content validation passed after the high-confidence content fix."
+    },
+    {
+      "command": "npm test -- --run",
+      "exit_code": 0,
+      "summary": "[AC-4] Unit tests passed after the content fix and audit artifacts."
+    },
+    {
+      "command": "python -m repopact_cli validate",
+      "exit_code": 1,
+      "summary": "[AC-5] Governance validation still fails on the repo-wide preflight-marker requirement affecting existing work items."
+    }
+  ],
+  "artifacts": [
+    "src/content/security-plus/questions.json",
+    "docs/content-quality-rubric.md",
+    "audits/AUDIT-2026-06-30-content-quality-calibration.md",
+    "work/completed/222-content-quality-and-assessment-calibration-audit"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "process_note": "Content quality and calibration audit completed with one high-confidence Security+ multi-select fix and release-ready-with-notes recommendation."
+  }
+}
