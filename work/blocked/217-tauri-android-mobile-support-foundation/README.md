@@ -1,6 +1,6 @@
 # 217 - Add Tauri Android mobile support foundation
 
-> **Status**: Active
+> **Status**: Blocked
 > **Owners**: Desktop/Mobile Specialist lead; QA Specialist support.
 > **Depends on**: none.
 
@@ -131,3 +131,41 @@ Close only when Android is a real Tauri mobile target in the repo, the app has
 launched on an Android emulator or device, content and learner state work
 offline, core study flows are touch-usable, and the Android build path is either
 green or blocked by a precisely documented external prerequisite.
+
+## Work Log
+
+### 2026-06-30 - Repository foundation complete; host NDK blocker
+
+- Added Tauri Android npm scripts for init, dev, Android Studio handoff, and APK
+  build.
+- Updated Vite dev-server configuration to honor `TAURI_DEV_HOST` for mobile
+  device access and HMR.
+- Added `docs/android-mobile.md` with Android prerequisites, commands,
+  small-screen information architecture, storage/backup stance, and validation
+  checklist.
+- Updated `docs/backup-restore.md` and `README.md` with Android status and
+  mobile development entry points.
+- Added phone-width CSS rules for core study flows, PBQ controls, mock review,
+  flashcards, notes, settings, and dialogs.
+- Created `audits/AUDIT-2026-06-30-android-mobile-foundation.md`.
+
+Host evidence:
+
+- `npm run tauri -- info` passed.
+- `java -version` reported OpenJDK 17.0.19.
+- `ANDROID_HOME` and `ANDROID_SDK_ROOT` were both `C:\Android\Sdk`.
+- `sdkmanager --list_installed` reported emulator, platform-tools, and Android
+  35 system image only.
+- `npm run tauri -- android init --ci` failed because Android NDK was not found.
+- Retried SDK installation for NDK 27.2/CMake and NDK 26.3; both failed to
+  complete cleanly. Tauri now finds the partial NDK 26.3 directory but fails
+  because `C:\Android\Sdk\ndk\26.3.11579264\source.properties` is missing.
+- `npm run validate:content`, `npm run validate:a11y`, `npm test -- --run`,
+  `npm run build`, `cargo fmt --check --manifest-path src-tauri/Cargo.toml`,
+  and `cargo check --manifest-path src-tauri/Cargo.toml` passed.
+- `python -m repopact_cli validate` still fails on a repo-wide preflight-marker
+  requirement affecting existing active, blocked, and completed work items.
+
+Status: blocked, not done. Android launch, offline content proof, persistence
+proof, backup document/share handoff, and APK output still require a complete
+Android NDK install followed by `npm run mobile:android:init`.

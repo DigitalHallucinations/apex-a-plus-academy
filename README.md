@@ -131,7 +131,7 @@ All practice material across every track is original educational content. It doe
 
 | Layer | Technology | Purpose |
 | --- | --- | --- |
-| Desktop shell | Tauri 2 | Native Windows application and installer packaging |
+| Desktop/mobile shell | Tauri 2 | Native Windows packaging plus the planned Android mobile target |
 | Backend | Rust | Durable local JSON persistence and desktop commands |
 | Interface | React 19 + TypeScript | Responsive study, testing, and analytics workflows |
 | Build system | Vite 8 | Fast development and optimized production builds |
@@ -216,6 +216,19 @@ The optimized executable and NSIS installer are generated under:
 ```text
 src-tauri/target/release/
 src-tauri/target/release/bundle/nsis/
+```
+
+### Android Mobile Development
+
+Android support follows the Tauri mobile CLI path from the same app codebase.
+See [docs/android-mobile.md](docs/android-mobile.md) for prerequisites, the
+current local NDK blocker, mobile information architecture, storage stance, and
+the Android validation checklist.
+
+```powershell
+npm run mobile:android:init
+npm run mobile:android:dev
+npm run mobile:android:build
 ```
 
 ### Validation

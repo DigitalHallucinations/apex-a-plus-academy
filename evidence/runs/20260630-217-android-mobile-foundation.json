@@ -1,0 +1,96 @@
+{
+  "$schema": "../../schemas/evidence-run.schema.json",
+  "id": "20260630-217-android-mobile-foundation",
+  "timestamp": "2026-06-30T18:30:00Z",
+  "work_item": "217",
+  "result": "blocked",
+  "commands": [
+    {
+      "command": "npm run tauri -- info",
+      "exit_code": 0,
+      "summary": "[AC-1] Confirmed current Tauri 2 app environment before Android initialization attempt."
+    },
+    {
+      "command": "java -version",
+      "exit_code": 0,
+      "summary": "[AC-8] Confirmed OpenJDK 17.0.19 is available on the host."
+    },
+    {
+      "command": "sdkmanager --list_installed",
+      "exit_code": 0,
+      "summary": "[AC-8] Confirmed Android SDK has emulator, platform-tools, and Android 35 system image, but no registered NDK."
+    },
+    {
+      "command": "npm run tauri -- android init --ci",
+      "exit_code": 1,
+      "summary": "[AC-1] Android initialization blocked because Tauri reported the Android NDK was not found."
+    },
+    {
+      "command": "sdkmanager \"platforms;android-35\" \"build-tools;35.0.0\" \"ndk;27.2.12479018\" \"cmake;3.22.1\"",
+      "exit_code": 1,
+      "summary": "[AC-8] SDK package install failed after a connection reset while preparing CMake."
+    },
+    {
+      "command": "sdkmanager \"ndk;26.3.11579264\"",
+      "exit_code": 1,
+      "summary": "[AC-8] Retry created a partial NDK directory but did not register an installed package or produce source.properties."
+    },
+    {
+      "command": "npm run mobile:android:init",
+      "exit_code": 1,
+      "summary": "[AC-1] Android init script now finds the partial NDK directory but fails because source.properties is missing."
+    },
+    {
+      "command": "npm run validate:content",
+      "exit_code": 0,
+      "summary": "[AC-4] Content validation passed for A+, Network+, and Security+ bundled banks before Android runtime proof."
+    },
+    {
+      "command": "npm run validate:a11y",
+      "exit_code": 0,
+      "summary": "[AC-6] Accessibility validation passed after phone-width CSS changes."
+    },
+    {
+      "command": "npm test -- --run",
+      "exit_code": 0,
+      "summary": "[AC-8] Unit tests passed: 65 tests across 3 files."
+    },
+    {
+      "command": "npm run build",
+      "exit_code": 0,
+      "summary": "[AC-8] TypeScript and Vite production build passed."
+    },
+    {
+      "command": "cargo fmt --check --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "summary": "[AC-8] Rust formatting check passed."
+    },
+    {
+      "command": "cargo check --manifest-path src-tauri/Cargo.toml",
+      "exit_code": 0,
+      "summary": "[AC-8] Rust backend check passed."
+    },
+    {
+      "command": "python -m repopact_cli validate",
+      "exit_code": 1,
+      "summary": "[AC-8] Governance validation still fails on a repo-wide preflight-marker requirement affecting active, blocked, and completed work items; no unknown-evidence errors remain for 217."
+    }
+  ],
+  "artifacts": [
+    "package.json",
+    "vite.config.ts",
+    "src/styles.css",
+    "docs/android-mobile.md",
+    "docs/backup-restore.md",
+    "README.md",
+    "audits/AUDIT-2026-06-30-android-mobile-foundation.md",
+    "work/blocked/217-tauri-android-mobile-support-foundation"
+  ],
+  "environment": {
+    "repository": "ForgeWireLabs/skillforge-academy",
+    "platform": "Windows",
+    "android_sdk_root": "C:\\Android\\Sdk",
+    "java": "OpenJDK 17.0.19",
+    "process_note": "Repository-side Android foundation is present; Android target initialization, launch, persistence, offline-content runtime proof, backup document/share handoff, and APK output remain blocked by incomplete local Android NDK installation."
+  }
+}

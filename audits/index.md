@@ -17,6 +17,7 @@ Last updated: 2026-06-22 (accessibility and backup hardening)
 | [AUDIT-2026-06-22-release-candidate-1.4.0](AUDIT-2026-06-22-release-candidate-1.4.0.md) | Release Candidate, Version, Installer, And Upgrade Audit | release | passed-with-notes | [219](../work/completed/219-release-candidate-version-and-upgrade-audit/README.md) | 2026-06-22 |
 | [AUDIT-2026-06-22-screen-reader-a11y](AUDIT-2026-06-22-screen-reader-a11y.md) | Screen-Reader Accessibility Baseline | accessibility | passed-with-notes | [220](../work/completed/220-real-screen-reader-walkthrough/README.md) | 2026-06-22 |
 | [AUDIT-2026-06-22-cross-platform-backups](AUDIT-2026-06-22-cross-platform-backups.md) | Cross-Platform Backup, Import, And Export Hardening | data migration / QA | passed-with-notes | [221](../work/completed/221-cross-platform-backup-import-export-hardening/README.md) | 2026-06-22 |
+| [AUDIT-2026-06-30-android-mobile-foundation](AUDIT-2026-06-30-android-mobile-foundation.md) | Android Mobile Foundation | implementation / mobile readiness | blocked-with-repo-foundation | [217](../work/blocked/217-tauri-android-mobile-support-foundation/README.md) | 2026-06-30 |
 
 ## Next Recommended Audit
 
